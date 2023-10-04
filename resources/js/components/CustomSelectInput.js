@@ -1,12 +1,12 @@
 import { InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const CustomSelectInput = ({ label, options, value, onChange }) => {
+const CustomSelectInput = ({ label, options, value, onChange, id }) => {
     return (
         <>
-            <InputLabel id="1">{label}</InputLabel>
+            <InputLabel id={id}>{label}</InputLabel>
             <Select
-                labelId={`1`}
+                labelId={id}
                 value={value}
                 label={label}
                 onChange={onChange}
