@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\modules\EquipmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
 
@@ -24,4 +25,8 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('scheduling', SchedulingController::class);
+
+    // EQUIPMENT
+    Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
+    Route::get('AddEquipment', [EquipmentController::class, 'AddEquipment'])->name('AddEquipment');
 });

@@ -412,7 +412,7 @@
                                         Collections
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="#"
                                         class="flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         <span class="flex items-center">
@@ -430,7 +430,7 @@
                                                 stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                                         </svg>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                                 <li>
