@@ -29,4 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
     // EQUIPMENT
     Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
     Route::get('AddEquipment', [EquipmentController::class, 'AddEquipment'])->name('AddEquipment');
+    Route::post('CreateEquipment', [EquipmentController::class, 'CreateEquipment'])->name('CreateEquipment');
+    Route::get('/editEquipment/{id}', [EquipmentController::class, 'editEquipment'])->name('editEquipment');
+    Route::post('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment'])->name('updateEquipment');
+    Route::post('/deleteEquipment', [EquipmentController::class, 'deleteEquipment'])->name('deteleEquipment');
 });
