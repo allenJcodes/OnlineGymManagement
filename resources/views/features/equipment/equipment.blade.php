@@ -15,21 +15,48 @@
             @forelse ($equipment as $item)
                 <div class="col-span-1 pb-5 ml-2 mr-2">
                     <div
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <a href="/editEquipment/{{ $item->id }}">
+                        class="hover:bg-gray-200 hover:drop-shadow-lg max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flex justify-end px-4 pt-4">
+                            <button id="ss" data-dropdown-toggle="ds"
+                                class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                                type="button">
+                                <span class="sr-only">Open dropdown</span>
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 16 3">
+                                    <path
+                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                </svg>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div id="ds"
+                                class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2" aria-labelledby="ss">
+
+                                    <li>
+                                        <a href="/editEquipment/{{ $item->id }}"
+                                            class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a id="delete{{ $item->id }}"
+                                            class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="/editEquipment/{{ $item->id }}" class="MT-3">
                             @if ($item->status == 'Available')
                                 <span
-                                    class="absolute bg-green-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Available</span>
+                                    class="absolute bg-green-200 text-green-800 text-xs font-medium ml-2 mt-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Available</span>
                             @elseif ($item->status == 'Not Available')
                                 <span
-                                    class="absolute bg-red-200 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Not
+                                    class="absolute bg-red-200 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Not
                                     Available</span>
                             @elseif ($item->status == 'Under Maintenance')
                                 <span
-                                    class="absolute bg-yellow-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Under
+                                    class="absolute bg-yellow-100 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Under
                                     Maintenance </span>
                             @endif
-                            <div class="flex justify-center items-center">
+                            <div class="flex justify-center items-center pt-8">
 
                                 <img src="{{ asset('image/equipment/' . $item->image_path) }}" class="h-36"
                                     alt="" />
@@ -52,11 +79,11 @@
                             </div>
                         </a>
 
-                        <span class="text-red-500 p-2">
+                        {{-- <span class="text-red-500 p-2">
 
                             <button id="delete{{ $item->id }}" type="button"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">DELETE</button>
-                        </span>
+                        </span> --}}
 
                     </div>
                 </div>

@@ -49,7 +49,7 @@ class EquipmentController extends Controller
                 'status' => $request->status,
                 'image_path' => $newImageName,
             ]);
-        return redirect('/AddEquipment');
+        return redirect('/equipment');
     }
 
     public function editEquipment($id)
