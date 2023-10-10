@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MembershipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
 
@@ -24,4 +25,5 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('scheduling', SchedulingController::class);
+    Route::get('membership', [MembershipController::class, 'index']);
 });
