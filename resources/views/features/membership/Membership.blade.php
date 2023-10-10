@@ -151,28 +151,57 @@
 
                                             <div class="flex justify-center "> <img src="{{ asset('images/logo.png') }}"
                                                     alt="" width="250" height="250"></div>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400 pt-10">
-                                                Name: {{ $user->name }}</h3>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                User Email: {{ $user->email }}</h3>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                Start Date:
-                                                @if ($user->membership == null)
-                                                    --
-                                                @else
-                                                    {{ $user->membership->date_started }}
-                                                @endif
-                                            </h3>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                End Date:
-                                                @if ($user->membership == null)
-                                                    --
-                                                @else
-                                                    {{ $user->membership->date_ended }}
-                                                @endif
+                                            <h3
+                                                class="mb-5 text-lg font-medium text-gray-900 dark:text-white pt-10 flex justify-Center">
+                                                Name: {{ $user->name }}</h4>
+
+
+                                                <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
+                                                    Subscription
+                                                    Details:</h3>
+                                                <ul class="grid w-full gap-6 md:grid-cols-2">
+                                                    <li>
+                                                        <input type="radio" id="hosting-small" name="hosting"
+                                                            value="hosting-small" class="hidden peer" required>
+                                                        <label for="hosting-small"
+                                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                                            <div class="block">
+                                                                <div class="w-full text-lg font-semibold">0-6 Months</div>
+                                                                <div class="w-full">Good for small websites</div>
+                                                            </div>
+                                                            <svg class="w-5 h-5 ml-3" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 14 10">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                                            </svg>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" id="hosting-big" name="hosting"
+                                                            value="hosting-big" class="hidden peer">
+                                                        <label for="hosting-big"
+                                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                                            <div class="block">
+                                                                <div class="w-full text-lg font-semibold">6-12 Months</div>
+                                                                <div class="w-full">Good for large websites</div>
+                                                            </div>
+                                                            <svg class="w-5 h-5 ml-3" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 14 10">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                                            </svg>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+
+
                                             </h3>
                                             <button data-modal-hide="popup-modal" type="button"
-                                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mt-10">
                                                 Submit
                                             </button>
                                             <button data-modal-hide="popup-modal{{ $user->id }}" type="button"
