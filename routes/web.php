@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('scheduling', SchedulingController::class);
+    Route::get('membership', [MembershipController::class, 'index']);
 
     // EQUIPMENT
     Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
