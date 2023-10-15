@@ -1,4 +1,4 @@
-@extends('layouts.app')
+$@extends('layouts.app')
 
 @section('content')
     <div class="container pt-14">
@@ -9,32 +9,32 @@
                     Item</button>
             </a>
         </div>
-        <div class="">
-            <table id="inventoryTable" class="display" style="width: 100%">
+        <div class="relative overflow-x-auto shadow-md rounded-md" style="background-color: rgb(247, 247, 247)">
+            <table id="inventoryTable" class="display" style="width: 100%; ">
                 <thead class="">
                     <tr>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Item name
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Quantity
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Equipment Type
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Purchase Date
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Warranty Information
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Maintenance History
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Status
                         </th>
-                        <th class="px-6 py-3">
+                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
                             Actions
                         </th>
 
@@ -93,8 +93,10 @@
             $('#inventoryTable').DataTable({
                 dom: "Bfrltip",
                 lengthMenu: [5, 10, 20, 50],
-                pageLength: 4,
-                ordering: true
+
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '450px'
             });
         })
     </script>
