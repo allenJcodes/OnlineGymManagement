@@ -35,4 +35,44 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
+
+
+    public function editUser($id)
+    {
+        $users = DB::table('users')
+            ->where('id', $id)
+            ->first();
+
+        return view('features.users.editUsers', [
+            'users' => $users,
+        ]);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+
+        $user = DB::table('users')
+            ->where('id', $id)
+            ->update([
+
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'user_role' => $request->user_role,
+
+            ]);
+
+
+
+        return redirect('/users');
+    }
+
+    public function deleteUser(Request $request)
+    {
+        DB::table('users')
+            ->where('id', $request->id)
+            ->delete();
+
+        return redirect('/users');
+    }
 }

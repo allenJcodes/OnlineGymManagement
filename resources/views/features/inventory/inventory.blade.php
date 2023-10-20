@@ -1,7 +1,7 @@
 $@extends('layouts.app')
 
 @section('content')
-    <div class="container pt-14">
+    <div class="container pt-10">
         <div class="flex justify-end pr-4">
             <a href="{{ route('addItem') }}">
                 <button type="button"
@@ -9,75 +9,120 @@ $@extends('layouts.app')
                     Item</button>
             </a>
         </div>
-        <div class="relative overflow-x-auto shadow-md rounded-md" style="background-color: rgb(247, 247, 247)">
-            <table id="inventoryTable" class="display" style="width: 100%; ">
-                <thead class="">
+        <div class="relative overflow-x-auto shadow-md rounded-md"
+            style="background-color: rgb(247, 247, 247); max-height: 79vh">
+
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" style="height: 20vh">
+                <thead class="text-xs text-white uppercase  dark:bg-gray-700 dark:text-gray-400"
+                    style="background-color: #0F172A">
                     <tr>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+
+                        <th class="px-6 py-3  text-center text-white ">
                             Item name
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Quantity
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Equipment Type
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Purchase Date
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Warranty Information
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Maintenance History
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Status
                         </th>
-                        <th class="px-6 py-3 bg-blue-600 text-center text-white ">
+                        <th class="px-6 py-3  text-center text-white ">
                             Actions
                         </th>
-
                     </tr>
                 </thead>
-
                 <tbody>
-                    @forelse ($item as $items)
-                        <tr>
-                            <td>
-                                {{ $items->item_name }}
+                    @forelse ($item as $item)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $item->item_name }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $item->quantity }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $items->quantity }}
+                                {{ $item->equipment_type }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $items->equipment_type }}
+                                {{ $item->purchase_date }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $items->purchase_date }}
+                                {{ $item->warranty_information }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $items->warranty_information }}
+                                {{ $item->maintenance_history }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $items->maintenance_history }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $items->status }}
+                                {{ $item->status }}
                             </td>
 
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+
+
+                            <td>
+                                <div class="text-right pr-5"style="">
+                                    <button id="dropdownButton" data-dropdown-toggle="toggle{{ $item->id }}"
+                                        class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                                        type="button">
+                                        <span class="sr-only">Open dropdown</span>
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 16 3">
+                                            <path
+                                                d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div id="toggle{{ $item->id }}"
+                                    class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    <ul class="py-2" aria-labelledby="dropdownButton">
+
+                                        <li>
+                                            <a href="/editItem/{{ $item->id }}"
+                                                class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                                        </li>
+                                        <li>
+                                            <a id="delete{{ $item->id }}"
+                                                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
-
+                        <script>
+                            $("#delete{{ $item->id }}").click(function() {
+                                const formdata = new FormData()
+                                formdata.append("id", "{{ $item->id }}")
+                                axios.post("/deleteItem", formdata)
+                                    .then(() => {
+                                        swal({
+                                            icon: "success",
+                                            title: "Item Deleted!",
+                                            text: "Item has been deleted successfully!",
+                                            buttons: false
+                                        }).then(() => {
+                                            location.reload()
+                                        })
+                                    })
+                            })
+                        </script>
+                    @empty
+                    @endforelse
                 </tbody>
-
-            @empty
-                @endforelse
             </table>
-
 
         </div>
 

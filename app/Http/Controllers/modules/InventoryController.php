@@ -36,4 +36,46 @@ class InventoryController extends Controller
 
         return redirect('/inventory');
     }
+
+    public function editItem($id)
+    {
+        $item = DB::table('inventory')
+            ->where('id', $id)
+            ->first();
+
+        return view('features.inventory.editItem', [
+            'item' => $item,
+        ]);
+    }
+
+
+    public function updateItem(Request $request, $id)
+    {
+
+        $item = DB::table('inventory')
+            ->where('id', $id)
+            ->update([
+
+                'item_name' => $request->item_name,
+                'quantity' => $request->quantity,
+                'equipment_type' => $request->equipment_type,
+                'purchase_date' => $request->purchase_date,
+                'warranty_information' => $request->warranty_information,
+                'maintenance_history' => $request->maintenance_history,
+                'status' => $request->status,
+            ]);
+
+
+
+        return redirect('/inventory');
+    }
+
+    public function deleteItem(Request $request)
+    {
+        DB::table('inventory')
+            ->where('id', $request->id)
+            ->delete();
+
+        return redirect('/inventory');
+    }
 }

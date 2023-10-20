@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-20">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-20" style="max-height: 85vh">
         <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
             <div>
                 <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
