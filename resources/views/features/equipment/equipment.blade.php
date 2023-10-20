@@ -18,7 +18,7 @@
                         class="transition delay-50 duration-800 ease-in-out hover:bg-gray-200 hover:drop-shadow-lg max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div class="px-4  ">
                             <div class="pt-2"style="z-index: 1;  float: right; postion: absolute">
-                                <button id="dropdownButton" data-dropdown-toggle="toggle"
+                                <button id="dropdownButton" data-dropdown-toggle="toggle{{ $item->id }}"
                                     class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                                     type="button">
                                     <span class="sr-only">Open dropdown</span>
@@ -30,7 +30,7 @@
                                 </button>
                             </div>
                             <!-- Dropdown menu -->
-                            <div id="toggle"
+                            <div id="toggle{{ $item->id }}"
                                 class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2" aria-labelledby="dropdownButton">
 
@@ -45,7 +45,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <a href="/editEquipment/{{ $item->id }}" class="MT-3">
+                        <div href="/editEquipment/{{ $item->id }}" class="MT-3">
                             @if ($item->status == 'Available')
                                 <span
                                     class="absolute  bg-green-200 text-green-800 text-xs font-medium ml-2 mt-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Available</span>
@@ -58,9 +58,9 @@
                                     class="absolute bg-yellow-100 text-yellow-800 text-xs font-medium ml-2 mt-2  px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Under
                                     Maintenance </span>
                             @endif
-                            <div class="flex justify-center items-center pt-8">
+                            <div class="flex justify-center items-center pt-8 pl-12">
 
-                                <img src="{{ asset('image/equipment/' . $item->image_path) }}" class="h-36"
+                                <img src="{{ asset('image/equipment/' . $item->image_path) }}" class="h-36 justify-center"
                                     alt="" />
                             </div>
 
@@ -79,7 +79,7 @@
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
                                     {{ $item->description }}</p>
                             </div>
-                        </a>
+                        </div>
 
                         {{-- <span class="text-red-500 p-2">
 

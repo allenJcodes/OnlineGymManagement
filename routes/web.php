@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
+use App\Http\Controllers\modules\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
 use App\Models\Equipment;
@@ -27,7 +29,15 @@ Auth::routes();
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    // USERS
+    Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::get('addUsers', [UsersController::class, 'addUsers'])->name('addUsers');
+    Route::post('registerUser', [UsersController::class, 'registerUser'])->name('registerUser');
+
+
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::resource('scheduling', SchedulingController::class);
     Route::get('membership', [MembershipController::class, 'index']);
 
