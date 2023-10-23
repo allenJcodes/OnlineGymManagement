@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('scheduling', SchedulingController::class);
     Route::get('membership', [MembershipController::class, 'index'])->name('membership');
+    Route::post('membership', [MembershipController::class, 'createMembership']);
 
     // EQUIPMENT
     Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
