@@ -55,13 +55,16 @@
                             </td>
                             <td class="px-6 py-4">
                                 @if ($user->user_role == 1)
-                                    <div class="text-blue-700">Admin</div>
+                                    <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span
+                                            class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>Admin</span>
                                 @endif
                                 @if ($user->user_role == 2)
-                                    <div class="text-green-700">Staff</div>
+                                    <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span
+                                            class="flex w-2.5 h-2.5 bg-green-500  rounded-full mr-1.5 flex-shrink-0"></span>Staff</span>
                                 @endif
                                 @if ($user->user_role == 3)
-                                    <div class="text-red-700">User</div>
+                                    <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span
+                                            class="flex w-2.5 h-2.5 bg-yellow-300  rounded-full mr-1.5 flex-shrink-0"></span>Customer</span>
                                 @endif
                             </td>
                             <td>

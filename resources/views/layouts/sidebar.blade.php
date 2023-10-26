@@ -79,7 +79,7 @@
                 </li>
             @endif
 
-            @if (Auth::user()->user_role == '2')
+            @if (Auth::user()->user_role == '3')
                 <li>
                     <a href="/home"
                         class="{{ Route::is('home') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
