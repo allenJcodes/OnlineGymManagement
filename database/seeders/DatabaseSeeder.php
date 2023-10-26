@@ -36,14 +36,14 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         // ROLE SEEDER (COMMENT OUT PAG MERON NA)
-        // UserRoles::create([
-        //     'role_name' => 'Admin'
-        // ]);
-        // UserRoles::create([
-        //     'role_name' => 'Staff'
-        // ]);
-        // UserRoles::create([
-        //     'role_name' => 'Customer'
-        // ]);
+        UserRoles::create([
+            'role_name' => 'Admin'
+        ]);
+        UserRoles::create([
+            'role_name' => 'Staff'
+        ]);
+        UserRoles::create([
+            'role_name' => 'Customer'
+        ]);
     }
 }
