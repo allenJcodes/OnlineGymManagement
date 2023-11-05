@@ -47,11 +47,6 @@ const CustomTextInput = ({
                 value={value}
                 onChange={onChangeValue}
                 style={{ marginTop: my, marginBottom: my }}
-                InputProps={{
-                    style: {
-                        border: "none",
-                    },
-                }}
             />
             {errorValues.length > 0 &&
                 errorValues.map((item, index) => {
