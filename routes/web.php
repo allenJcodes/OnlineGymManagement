@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\modules\EquipmentController;
+use App\Http\Controllers\modules\InventoryController;
+use App\Http\Controllers\modules\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
+use App\Models\Equipment;
+use App\Models\Inventory;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +29,34 @@ Auth::routes();
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    // USERS
+    Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::get('addUsers', [UsersController::class, 'addUsers'])->name('addUsers');
+    Route::post('registerUser', [UsersController::class, 'registerUser'])->name('registerUser');
+    Route::get('/editUser/{id}', [UsersController::class, 'editUser'])->name('editUser');
+    Route::post('/updateUser/{id}', [UsersController::class, 'updateUser'])->name('updateUser');
+    Route::post('/deleteUser', [UsersController::class, 'deleteUser'])->name('deleteUser');
+
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::resource('scheduling', SchedulingController::class);
+    Route::get('membership', [MembershipController::class, 'index'])->name('membership');
+    Route::post('membership', [MembershipController::class, 'createMembership']);
+
+    // EQUIPMENT
+    Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
+    Route::get('AddEquipment', [EquipmentController::class, 'AddEquipment'])->name('AddEquipment');
+    Route::post('CreateEquipment', [EquipmentController::class, 'CreateEquipment'])->name('CreateEquipment');
+    Route::get('/editEquipment/{id}', [EquipmentController::class, 'editEquipment'])->name('editEquipment');
+    Route::post('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment'])->name('updateEquipment');
+    Route::post('/deleteEquipment', [EquipmentController::class, 'deleteEquipment'])->name('deteleEquipment');
+
+    // INVENTORY
+    Route::get('inventory', [InventoryController::class, 'index'])->name('inventory');
+    Route::get('addItem', [InventoryController::class, 'addItem'])->name('addItem');
+    Route::post('createItem', [InventoryController::class, 'createItem'])->name('createItem');
+    Route::get('/editItem/{id}', [InventoryController::class, 'editItem'])->name('editItem');
+    Route::post('/updateItem/{id}', [InventoryController::class, 'updateItem'])->name('updateItem');
+    Route::post('/deleteItem', [InventoryController::class, 'deleteItem'])->name('deleteItem');
 });
