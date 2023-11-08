@@ -83,6 +83,13 @@
                                         </a>
                                     @endif
                                 </div>
+                                <div class="flex justify-center pt-2">
+                                    <a class="btn btn-link" href="{{ route('register') }}">
+                                        <span class="hover:text-gray-400 text-center">
+                                            Register
+                                            here!</span>
+                                    </a>
+                                </div>
                             </form>
 
                         </div>

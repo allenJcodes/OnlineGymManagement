@@ -29,6 +29,13 @@ const CustomTextInput = ({
             } else {
                 setErrorValues(false);
             }
+        } else if (errors?.letters) {
+            const numbers = /[0-9]/g;
+            if (numbers.test(value)) {
+                setErrorValues(true);
+            } else {
+                setErrorValues(false);
+            }
         }
         console.log(errorValues);
     }, [value]);

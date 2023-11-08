@@ -349,6 +349,7 @@
                     // console.log([...formdata])
                     axios.post('/membership', formdata)
                         .then((response) => {
+                            console.log(response.data)
                             swal({
                                 icon: "success",
                                 title: "Subscribed!",

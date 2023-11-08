@@ -195,6 +195,33 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Equipments</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('reservation') }}"
+                        class=" {{ Route::is('reservation') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-calendar-check" viewBox="0 0 16 16">
+                            <path
+                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+
+                        <span class="flex-1 ml-3 whitespace-nowrap">Reservations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('payments') }}"
+                        class=" {{ Route::is('payments') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-credit-card" viewBox="0 0 16 16">
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                        </svg>
+
+                        <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
+                    </a>
+                </li>
             @endif
 
 

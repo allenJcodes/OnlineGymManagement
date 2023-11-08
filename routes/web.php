@@ -5,6 +5,8 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\modules\UsersController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
 use App\Models\Equipment;
@@ -41,8 +43,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('scheduling', SchedulingController::class);
+    Route::get('getallschedules', [SchedulingController::class, 'getAllSchedules']);
+    Route::get('getspecificschedule', [SchedulingController::class, 'getSpecificSchedule']);
+    Route::get('editschedule/{id}', [SchedulingController::class, 'editSchedule']);
+    Route::post('deleteschedule', [SchedulingController::class, 'deleteSchedule']);
+
+    //RESERVATION
+    Route::get('reservation', [ReservationController::class, 'index'])->name('reservation');
+    Route::post('reserve', [ReservationController::class, 'reserve']);
+    Route::get('getuserreservations', [ReservationController::class, 'userReservations']);
+
     Route::get('membership', [MembershipController::class, 'index'])->name('membership');
     Route::post('membership', [MembershipController::class, 'createMembership']);
+
+    // PAYMENTS
+    Route::get("payments", [PaymentsController::class, 'index'])->name('payments');
+    Route::get("getuserpayments", [PaymentsController::class, 'getUserPayments']);
+    Route::post("updatereferencenumber", [PaymentsController::class, 'updateReferenceNumber']);
 
     // EQUIPMENT
     Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
