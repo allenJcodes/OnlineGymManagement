@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\modules\EquipmentController;
@@ -76,4 +77,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/editItem/{id}', [InventoryController::class, 'editItem'])->name('editItem');
     Route::post('/updateItem/{id}', [InventoryController::class, 'updateItem'])->name('updateItem');
     Route::post('/deleteItem', [InventoryController::class, 'deleteItem'])->name('deleteItem');
+
+    // ATTENDANCE
+    Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');
+    Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
+    Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
+    Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
 });

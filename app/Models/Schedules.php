@@ -22,4 +22,9 @@ class Schedules extends Model
     {
         return $this->hasOne(User::class, 'id', 'staff_id');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Reservation::class, 'schedule_id', 'id');
+    }
 }

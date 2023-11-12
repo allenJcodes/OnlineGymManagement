@@ -29,8 +29,7 @@
     {{-- TOAST --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -496,6 +495,32 @@
             @yield('content')
         </div>
     </div>
+    <script>
+        $(document).ready(() => {
+            let dates = []
+            axios.get('/usernotification/{{ Auth::user()->id }}')
+                .then(response => {
+                    dates = response.data
+                    dates.map((item, index) => {
+                        console.log(moment(item).subtract(1, 'day'))
+                        console.log(moment().utcOffset(0))
+                        console.log(moment(item).isSame(moment(), 'day'))
+                        console.log(item)
+                        if (moment(item).subtract(1, 'day').isSame(moment(), 'day')) {
+                            swal({
+                                icon: "info",
+                                title: "Schedule Today!",
+                                text: "You have a schedule for today!",
+                                buttons: false
+                            })
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
+        })
+    </script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> --}}
 </body>
 

@@ -20,7 +20,8 @@ class ReservationController extends Controller
             if ((int)$schedule->number_of_attendees < (int)$schedule->max_clients) {
                 Reservation::create([
                     'user_id' => $request->user_id,
-                    'schedule_id' => $request->schedule_id
+                    'schedule_id' => $request->schedule_id,
+                    'attended' => '0',
                 ]);
                 Schedules::where('id', $request->schedule_id)->update([
                     'number_of_attendees' => (int)$schedule->number_of_attendees + 1

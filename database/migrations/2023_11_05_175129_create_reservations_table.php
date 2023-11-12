@@ -17,6 +17,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('schedule_id');
+            $table->string('attended');
             $table->timestamps();
         });
     }
