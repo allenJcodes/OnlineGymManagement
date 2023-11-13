@@ -438,7 +438,7 @@
                                     aria-current="page"><span class="text-white hover:text-yellow-300">Learn</span></a>
                             </li>
                             <li>
-                                <a href="/"
+                                <a href="#faq"
                                     class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                                     aria-current="page"><span class="text-white hover:text-yellow-300">FAQ</span></a>
                             </li>
@@ -549,8 +549,9 @@
                                 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white text-center">
                                 Virtual</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline
-                            process on how to certify for your weekly benefits:</p>
+                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Virtual gym classes enable
+                            individuals to engage in workouts remotely using video streaming platforms or fitness apps,
+                            offering convenience and flexibility for participants to exercie from any location</p>
                         <span class="flex justify-center">
                             <button type="button"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 text-sm ">Read
@@ -572,8 +573,9 @@
                                 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white text-center">
                                 Hybrid</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline
-                            process on how to certify for your weekly benefits:</p>
+                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Hybrid gym classes provide a
+                            combination of virtual and in-person options, allowing participants to choose between remote
+                            or physical attendance, catering to diverse preferences and cirumstances.</p>
                         <span class="flex justify-center">
                             <button type="button"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 text-sm ">Read
@@ -595,8 +597,10 @@
                                 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white text-center">
                                 In Person</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline
-                            process on how to certify for your weekly benefits:</p>
+                        <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">In-person gym classes takes place
+                            at physical fitness facilities, providing participants with real-time guidance from
+                            qualified instructors, a motivating workout environment, and the opportunity to interact
+                            with fellow attendees.</p>
                         <span class="flex justify-center">
                             <button type="button"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 text-sm ">Read
@@ -782,6 +786,124 @@
         </div>
     </section>
 
+    {{-- FAQ --}}
+    <section id="faq">
+        <div class="pl-36 pr-36 pb-36" style="background-color:#ffffff ">
+            <div class="pt-20">
+                <legend class="text-center  text-4xl pb-10">Frequently Asked Questions</legend>
+
+            </div>
+
+            <div id="accordion-collapse" data-accordion="collapse">
+                <h2 id="accordion-collapse-heading-1">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
+                        aria-controls="accordion-collapse-body-1">
+                        <span>Where exactly are you located?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Olympus Road Athena St. in Phase 3 of North
+                            Olympus
+                            Subdivision, Quezon
+                            City</p>
+
+                    </div>
+                </div>
+                <h2 id="accordion-collapse-heading-2">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-2" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-2">
+                        <span>What are the membership options available?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">There are 3 membership options, 1 is the
+                            walk-in session, 2 is the monthly , 3 is the yearly </p>
+
+                    </div>
+                </div>
+                <h2 id="accordion-collapse-heading-3">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-3">
+                        <span>Are they any age restriction to join the gym?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Similarly, you have to judge your stamina
+                            before joining a gym. Most people stop their kids to join a gym at an early age as they know
+                            it’s not their time to do it. The muscles of a 17-18 years man are stronger than a 13-14
+                            years boy.</p>
+
+
+                    </div>
+                </div>
+                <h2 id="accordion-collapse-heading-4">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-4" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-3">
+                        <span>What are your gym hours?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-4" class="hidden" aria-labelledby="accordion-collapse-heading-4">
+                    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Our gym is open to 7:00 AM to 9:00 PM both
+                            weekends and weekdays.</p>
+
+                    </div>
+                </div>
+                <h2 id="accordion-collapse-heading-5">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                        data-accordion-target="#accordion-collapse-body-5" aria-expanded="false"
+                        aria-controls="accordion-collapse-body-5">
+                        <span>Do you offer personal training services?</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-collapse-body-5" class="hidden" aria-labelledby="accordion-collapse-heading-5">
+                    <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Yes, we have a different tpye of gym
+                            instructor that can help anyone.</p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     {{-- INSTRUCTOR --}}
     <section id="instructor">
@@ -854,22 +976,24 @@
                     </div>
                     <hr>
                     <div class="pb-2 pt-2">
-                        <span class="font-bold">Gym Phone: </span><span>123 123 123
+                        <span class="font-bold">Gym Phone: </span><span>0928 302 0910
                         </span>
                     </div>
                     <hr>
                     <div class="pb-2 pt-2">
-                        <span class="font-bold">Owners's contact number: </span><span>555 555 555</span>
+                        <span class="font-bold">Owners's contact number: </span><span>0928 302 0910</span>
                     </div>
                     <hr>
                     <div class="pb-2 pt-2">
-                        <span class="font-bold">Email: </span><span>sample@gmail.com</span>
+                        <span class="font-bold">Email: </span><span>Japsgymfitness@gmail.com</span>
                     </div>
                     <hr>
 
                 </div>
                 <div class="col-span-1">
-                    <legend class="text-center">MAP</legend>
+                    <legend class="text-center"><a
+                            href="https://www.google.com/maps/place/Jap's+Gym/@14.7396675,121.0414033,19.5z/data=!4m6!3m5!1s0x3397b04ee536f761:0x6d38876c38c72454!8m2!3d14.7396424!4d121.0414953!16s%2Fg%2F11d_8hc8_d?entry=ttu">LOCATION</a>
+                    </legend>
                 </div>
             </div>
         </div>

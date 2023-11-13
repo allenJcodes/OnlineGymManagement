@@ -111,5 +111,65 @@
                 </div>
             </div>
         @endif
+
+        @if (Auth::user()->user_role == '2')
+            <div class="pl-10 pr-10 pt-5">
+
+                <div class="grid grid-cols-2">
+                    <div class="col-span-1">
+                        <legend class="text-center pb-5 text-xl">Daily</legend>
+                        <div class="grid grid-cols-2">
+                            <div class="col-span-1 pl-4 pr-4">
+                                <div
+                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
+                                        Customer
+                                    </h5>
+                                    <p class="text-4xl text-gray-600">{{ $payment }}</p>
+
+                                </div>
+
+                            </div>
+                            <div class="col-span-1 pl-4 pr-4">
+                                <div
+                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
+                                        Sales
+                                    </h5>
+                                    <p class="text-4xl text-gray-600">₱{{ $payment_price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1">
+                        <legend class="text-center pb-5 text-xl">Monthly</legend>
+                        <div class="grid grid-cols-2">
+                            <div class="col-span-1 pl-4 pr-4">
+                                <div
+                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
+                                        Customer
+                                    </h5>
+                                    <p class="text-4xl text-gray-600">{{ $payment_month }}</p>
+
+                                </div>
+
+                            </div>
+                            <div class="col-span-1 pl-4 pr-4">
+                                <div
+                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
+                                        Sales
+                                    </h5>
+                                    <p class="text-4xl text-gray-600">₱{{ $payment_price_month }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
