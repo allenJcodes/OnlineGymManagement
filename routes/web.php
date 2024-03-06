@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
+use App\Http\Controllers\WelcomeController;
 use App\Models\Equipment;
 use App\Models\Inventory;
 
@@ -24,9 +25,9 @@ use App\Models\Inventory;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// TODO: create controller for welcome page
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
 

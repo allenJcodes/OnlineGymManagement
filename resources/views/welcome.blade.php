@@ -616,7 +616,28 @@
 
     {{-- LEARN PAGE --}}
     <section id="learn">
-        <div class="bg-white pl-36 pr-36">
+        <div class="flex flex-col">
+            @foreach ($learnContent as $index => $learn_content)
+                @php
+                    $flipped = ($index+1) % 2 == 0;
+                @endphp
+   
+                <div @class(['pl-36 pr-36', 'bg-white' => !$flipped])>
+
+                    <div @class(['flex py-20 gap-10', 'flex-row-reverse' => $flipped, 'flex-row' => !$flipped]) >
+                        <div class="flex-1"><img src="{{ asset($learn_content->image) }}" class="rounded-xl"></div>
+                        <div class="flex-1 pl-10 pt-4">
+                            <legend @class(['text-4xl pb-5 font-bold', 'text-white' => $flipped])>{{$learn_content->title}}</legend>
+                            <legend class="pb-5 text-gray-400 text-lg">{{$learn_content->subtitle}}</legend>
+                            <legend @class(['text-xs pb-5', 'text-gray-400' => $flipped])>{{$learn_content->content}}</legend>
+                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 text-sm ">Read More</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{-- <x-learn-content flipped={{true}} title="{{$}}" subtitle="" content=""/> --}}
+        {{-- <div class="bg-white pl-36 pr-36">
             <div class="grid grid-cols-2 pt-52 pb-20">
                 <div class="col-span-1"><img src="{{ asset('images/home-logo-2.jpg') }}" class="rounded-xl"></div>
                 <div class="col-span-1 pl-10 pt-4">
@@ -659,7 +680,7 @@
                         class="rounded-xl" style="height: 90%" width="95%">
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 
     {{-- PRICING PAGE --}}
@@ -795,31 +816,35 @@
             </div>
 
             <div id="accordion-collapse" data-accordion="collapse">
-                <h2 id="accordion-collapse-heading-1">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                        data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
-                        aria-controls="accordion-collapse-body-1">
-                        <span>Where exactly are you located?</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M9 5 5 1 1 5" />
-                        </svg>
-                    </button>
-                </h2>
-                <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
-                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Olympus Road Athena St. in Phase 3 of North
-                            Olympus
-                            Subdivision, Quezon
-                            City</p>
 
+                @foreach ($FAQs as $index => $faq)
+                    <h2 id="accordion-collapse-heading-{{$index+1}}">
+                        <button type="button" 
+                        @class([
+                            'flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3' => $index==0, 
+                            'flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3' => $index>0 && $index != count($FAQs)-1 ,
+                            'flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3' => $index == count($FAQs)-1
+                        ])
+                            data-accordion-target="#accordion-collapse-body-{{$index+1}}" aria-expanded="true"
+                            aria-controls="accordion-collapse-body-{{$index+1}}">
+                            <span>{{$faq->title}}</span>
+                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M9 5 5 1 1 5" />
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-collapse-body-{{$index+1}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$index+1}}">
+                        <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                            <p class="mb-2 text-gray-500 dark:text-gray-400">{{$faq->content}}</p>
+                        </div>
                     </div>
-                </div>
+                @endforeach
+
+{{-- 
                 <h2 id="accordion-collapse-heading-2">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                         data-accordion-target="#accordion-collapse-body-2" aria-expanded="false"
                         aria-controls="accordion-collapse-body-2">
                         <span>What are the membership options available?</span>
@@ -899,7 +924,7 @@
                             instructor that can help anyone.</p>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
 
         </div>
