@@ -25,9 +25,9 @@ use App\Http\Controllers\modules\InventoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// TODO: create controller for welcome page
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
 

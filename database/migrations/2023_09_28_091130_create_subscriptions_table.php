@@ -15,11 +15,10 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("user_id");
-            $table->string("subscription_type");
-            $table->string("subscription_price");
-            $table->string("subscription_start");
-            $table->string("subscription_end");
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('subscription_type_id')->nullable()->constrained('subscription_types')->nullOnDelete();
+            $table->date("start_date");
+            $table->date("end_date");
             $table->timestamps();
         });
     }

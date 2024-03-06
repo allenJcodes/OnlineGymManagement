@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        User::create([
+            'name' => "admin",
+            'email' => "admin@email.com",
+            'user_role' => 1,
+            'password' => Hash::make("password"),
+        ]);
 
         // STAFF SEEDER (COMMENT OUT PAG MERON NA)
         User::create([
@@ -25,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'user_role' => 2,
             'password' => Hash::make("password"),
         ]);
+
         User::create([
             'name' => "Roldan",
             'email' => "teyow@email.com",
@@ -44,6 +51,13 @@ class DatabaseSeeder extends Seeder
         ]);
         UserRoles::create([
             'role_name' => 'Customer'
+        ]);
+
+        $this->call([
+            LearnSeeder::class,
+            FAQSeeder::class,
+            ContactDetailTypeSeeder::class,
+            ContactDetailSeeder::class
         ]);
     }
 }
