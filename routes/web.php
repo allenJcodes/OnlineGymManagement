@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Equipment;
-use App\Models\Inventory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\MembershipController;
@@ -13,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
+
 
 /*
 |--------------------------------------------------------------------------
