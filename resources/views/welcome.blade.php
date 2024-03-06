@@ -992,27 +992,15 @@
             <div class="grid grid-cols-2">
                 <div class="col-span-1">
                     <legend class="text-center text-4xl pb-10">Contact Information</legend>
-                    <div class="pb-2">
-                        <span class="font-bold">Main Location: </span><span>Olympus Road Athena St. in Phase 3 of North
-                            Olympus
-                            Subdivision, Quezon
-                            City</span>
 
-                    </div>
-                    <hr>
-                    <div class="pb-2 pt-2">
-                        <span class="font-bold">Gym Phone: </span><span>0928 302 0910
-                        </span>
-                    </div>
-                    <hr>
-                    <div class="pb-2 pt-2">
-                        <span class="font-bold">Owners's contact number: </span><span>0928 302 0910</span>
-                    </div>
-                    <hr>
-                    <div class="pb-2 pt-2">
-                        <span class="font-bold">Email: </span><span>Japsgymfitness@gmail.com</span>
-                    </div>
-                    <hr>
+                    @foreach ($contactDetails as $contactDetail)
+
+                        <div class="pb-2">
+                            <span class="font-bold">{{$contactDetail->label}}: </span><span>{{$contactDetail->content}}</span>
+                        </div>
+                        <hr>
+                        
+                    @endforeach
 
                 </div>
                 <div class="col-span-1">

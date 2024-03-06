@@ -15,7 +15,7 @@ class CreateContactDetailsTable extends Migration
     {
         Schema::create('contact_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contact_details_type_id');
+            $table->foreignId('contact_detail_type_id')->nullable()->constrained('contact_detail_types')->nullOnDelete();
             $table->string('label');
             $table->text('content');
             $table->timestamps();

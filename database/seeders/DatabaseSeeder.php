@@ -56,6 +56,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LearnSeeder::class,
             FAQSeeder::class,
+            ContactDetailTypeSeeder::class,
+            ContactDetailSeeder::class
         ]);
     }
 }
