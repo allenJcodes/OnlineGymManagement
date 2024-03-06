@@ -59,7 +59,7 @@
                 class="text-xs text-white uppercase  dark:bg-gray-700 dark:text-gray-400"style="background-color: #0F172A">
 
                 <th scope="col" class="px-6 py-3">
-                    Membership Name
+                    Subscription Name
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Price
