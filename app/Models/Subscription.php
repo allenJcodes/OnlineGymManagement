@@ -12,10 +12,9 @@ class Subscription extends Model
 
     protected $fillable = [
         "user_id",
-        "subscription_type",
-        "subscription_price",
-        "subscription_start",
-        "subscription_end",
+        "subscription_type_id",
+        "start_date",
+        "end_date",
     ];
 
     public function subscribedBy()

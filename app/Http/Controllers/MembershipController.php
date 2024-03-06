@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Membership;
 use App\Models\Payments;
+use App\Models\Subscription;
+use App\Models\SubscriptionType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,9 +18,9 @@ class MembershipController extends Controller
     public function index()
     {
         $users = User::where('user_role', 3)->get();
+        $subscriptions = SubscriptionType::all();
         // $users = User::all();
-        return view('features.membership.Membership')
-            ->with('users', $users);
+        return view('features.membership.Membership', compact('users', 'subscriptions'));
     }
 
     public function createMembership(Request $request)

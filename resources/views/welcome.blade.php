@@ -457,7 +457,7 @@
                             <li>
                                 <a href="{{ route('login') }}"
                                     class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><span
-                                        class="text-black bg-yellow-400 p-2 rounded-xl hover:bg-gray-400">Login</span></a>
+                                        class="text-black bg-yellow-400 p-2 rounded-xl hover:bg-gray-400">{{auth()->check() ? 'My Dashboard' : 'Login'}} </span></a>
                             </li>
 
 
@@ -995,7 +995,7 @@
 
                     @foreach ($contactDetails as $contactDetail)
 
-                        <div class="pb-2">
+                        <div class="py-3">
                             <span class="font-bold">{{$contactDetail->label}}: </span><span>{{$contactDetail->content}}</span>
                         </div>
                         <hr>
