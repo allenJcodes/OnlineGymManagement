@@ -102,6 +102,9 @@
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </button> --}}
+                        <span class="text-sm font-semibold whitespace-nowrap text-white">
+                            {{ date('D, M-d-Y h:i A') }}</span>
+
                         <!-- Notifications -->
                         <button type="button" data-dropdown-toggle="notification-dropdown"
                             class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
@@ -411,6 +414,12 @@
 
 
                             <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+                                <li>
+                                    <a href="{{ route('profile.show') }}"
+                                        class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        <button class="w-full">Edit Profile</button>
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="#"
                                         class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">

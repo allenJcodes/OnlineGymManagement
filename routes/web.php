@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\MembershipController;
-use App\Http\Controllers\modules\EquipmentController;
-use App\Http\Controllers\modules\InventoryController;
-use App\Http\Controllers\modules\UsersController;
-use App\Http\Controllers\PaymentsController;
-use App\Http\Controllers\ReservationController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SchedulingController;
-use App\Http\Controllers\WelcomeController;
 use App\Models\Equipment;
 use App\Models\Inventory;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\SchedulingController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\modules\UsersController;
+use App\Http\Controllers\modules\EquipmentController;
+use App\Http\Controllers\modules\InventoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,10 @@ Auth::routes();
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    // PROFILE
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // USERS
     Route::get('users', [UsersController::class, 'index'])->name('users');
