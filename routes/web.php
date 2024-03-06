@@ -9,6 +9,7 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SchedulingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
@@ -30,7 +31,6 @@ use App\Http\Controllers\modules\InventoryController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
-
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -54,13 +54,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('editschedule/{id}', [SchedulingController::class, 'editSchedule']);
     Route::post('deleteschedule', [SchedulingController::class, 'deleteSchedule']);
 
-    //RESERVATION
+    // RESERVATION
     Route::get('reservation', [ReservationController::class, 'index'])->name('reservation');
     Route::post('reserve', [ReservationController::class, 'reserve']);
     Route::get('getuserreservations', [ReservationController::class, 'userReservations']);
 
+    // MEMBERSHIP
     Route::get('membership', [MembershipController::class, 'index'])->name('membership');
     Route::post('membership', [MembershipController::class, 'createMembership']);
+
+    // MANAGE MEMBERSHIP
+
+    Route::prefix('manage')->name('manage.')->group(function() {
+        Route::resource('subscription', ManageSubscriptionController::class);
+    });
 
     // PAYMENTS
     Route::get("payments", [PaymentsController::class, 'index'])->name('payments');
