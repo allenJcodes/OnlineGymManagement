@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
 
         // STAFF SEEDER (COMMENT OUT PAG MERON NA)
         User::create([
+            'name' => "admin",
+            'email' => "admin@email.com",
+            'user_role' => 1,
+            'password' => Hash::make("password"),
+        ]);
+        User::create([
             'name' => "Joel",
             'email' => "JmigsGarcia@email.com",
             'user_role' => 2,

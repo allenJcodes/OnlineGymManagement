@@ -2,16 +2,21 @@
 
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\FAQController;
+use App\Http\Controllers\LearnController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReservationController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchedulingController;
 use App\Models\Equipment;
 use App\Models\Inventory;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,4 +88,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
     Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
     Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
+
+    // CONTENTS
+    Route::prefix('contents')->name('contents.')->group(function () {
+        Route::resource('', ContentController::class);
+        Route::resource('learn', LearnController::class);
+        Route::resource('FAQ', FAQController::class);
+        Route::resource('contact', ContactController::class);
+    });
 });

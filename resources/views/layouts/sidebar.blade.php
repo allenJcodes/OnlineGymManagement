@@ -77,6 +77,18 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('contents.index') }}"
+                        class="{{ Route::is('contents') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
+                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" 
+                            viewBox="0 0 20 18">
+                            <path d="M19 10H5c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-8c0-1.103-.897-2-2-2zM5 6h14v2H5zm2-4h10v2H7z"></path>
+                        </svg>
+                        
+                        <span class="flex-1 ml-3 whitespace-nowrap">Contents</span>
+                    </a>
+                </li>
             @endif
 
             @if (Auth::user()->user_role == '2')
