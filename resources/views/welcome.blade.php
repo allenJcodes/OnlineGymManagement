@@ -1004,9 +1004,7 @@
 
                 </div>
                 <div class="col-span-1">
-                    <legend class="text-center"><a
-                            href="https://www.google.com/maps/place/Jap's+Gym/@14.7396675,121.0414033,19.5z/data=!4m6!3m5!1s0x3397b04ee536f761:0x6d38876c38c72454!8m2!3d14.7396424!4d121.0414953!16s%2Fg%2F11d_8hc8_d?entry=ttu">LOCATION</a>
-                    </legend>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d964.6301823017375!2d121.0414033!3d14.7396675!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b04ee536f761%3A0x6d38876c38c72454!2sJap&#39;s%20Gym!5e0!3m2!1sen!2sph!4v1709828678153!5m2!1sen!2sph" width="600" height="300" style="border:0; padding-left: 2rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
