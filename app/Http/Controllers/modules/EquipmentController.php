@@ -6,25 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Equipment;
-
+use App\Models\EquipmentType;
 
 class EquipmentController extends Controller
 {
 
     public function index()
     {
-        $equipment = DB::table('equipment')
-            ->get();
+        $equipment = DB::table('equipment')->get();
 
         return view('features.equipment.equipment', [
             'equipment' => $equipment,
         ]);
     }
 
-    public function AddEquipment(Request $request)
+    public function AddEquipment()
     {
-
-        return view('features.equipment.AddEquipment');
+        $equipmentType = EquipmentType::all();
+        return view('features.equipment.AddEquipment', [ 
+            'types' => $equipmentType
+        ]);
     }
 
     public function CreateEquipment(Request $request)
@@ -45,7 +46,7 @@ class EquipmentController extends Controller
                 // 'id' => $request->id,
                 'equipment_name' => $request->equipment_name,
                 'description' => $request->description,
-                'equipment_type' => $request->equipment_type,
+                'equipment_type_id' => $request->equipment_type,
                 'status' => $request->status,
                 'image_path' => $newImageName,
             ]);
@@ -57,9 +58,11 @@ class EquipmentController extends Controller
         $equipment = DB::table('equipment')
             ->where('id', $id)
             ->first();
-
+        $equipmentType = EquipmentType::all();
+        
         return view('features.equipment.editEquipment', [
             'equipment' => $equipment,
+            'types' => $equipmentType
         ]);
     }
 
@@ -74,7 +77,7 @@ class EquipmentController extends Controller
 
                     'equipment_name' => $request->equipment_name,
                     'description' => $request->description,
-                    'equipment_type' => $request->equipment_type,
+                    'equipment_type_id' => $request->equipment_type,
                     'status' => $request->status,
                     'image_path' => $newImageName,
                 ]);
@@ -85,7 +88,7 @@ class EquipmentController extends Controller
                     // 'image' => $request->image,
                     'equipment_name' => $request->equipment_name,
                     'description' => $request->description,
-                    'equipment_type' => $request->equipment_type,
+                    'equipment_type_id' => $request->equipment_type,
                     'status' => $request->status,
                 ]);
         }

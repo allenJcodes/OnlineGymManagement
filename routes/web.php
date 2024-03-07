@@ -14,6 +14,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\ManageSubscriptionController;
+use App\Http\Controllers\EquipmentTypeController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
@@ -107,4 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('FAQ', FAQController::class);
         Route::resource('contact', ContactController::class);
     });
+
+    // EQUIPMENT TYPES
+    Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
 });

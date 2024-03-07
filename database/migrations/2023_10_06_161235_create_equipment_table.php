@@ -16,8 +16,8 @@ class CreateEquipmentTable extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('equipment_name');
-            $table->string('description');
-            $table->string('equipment_type');
+            $table->string('description'); 
+            $table->foreignId('equipment_type_id')->nullable()->constrained('equipment_types')->nullOnDelete();
             $table->string('status');
             $table->string('image_path');
             $table->timestamps();

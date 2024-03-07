@@ -27,40 +27,39 @@
                 <div class="relative z-0 w-full mb-6 group">
 
                     <label for="message"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                        class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                     <input id="description" rows="4" type="text" name="description"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Description of an equipment">
 
+                    <label for="countries" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Equipment
+                        Type</label>
+                    <select id="countries" name="equipment_type"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" selected disabled>Select type of equipment</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for="status"
+                        class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                    <select id="status" name="status"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" selected disabled>Select status</option>
+                        <option>Available</option>
+                        <option>Not Available</option>
+                        <option>Under Maintenance</option>
+                    </select>
+
+                    <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload
+                        multiple files</label>
+                    <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        type="file" name="image" />
+                    {{-- <img id="blah" src="http://placehold.it/180" alt="your image" style="max-width:180px;" /> --}}
+
                 </div>
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Equipment
-                    Type</label>
-                <select id="countries" name="equipment_type"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose a type of equipment</option>
-                    <option>Treadmill</option>
-                    <option>Stationary bicycle</option>
-                    <option>Bench</option>
-                    <option>Power rack</option>
-                </select>
-
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                <select id="countries" name="status"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose a status</option>
-                    <option>Available</option>
-                    <option>Not Available</option>
-                    <option>Under Maintenance</option>
-
-                </select>
-
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload
-                    multiple files</label>
-                <input
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    type="file" name="image" />
-                {{-- <img id="blah" src="http://placehold.it/180" alt="your image" style="max-width:180px;" /> --}}
-
 
                 <div class="flex justify-center items-center pt-2">
                     <button type="submit"
