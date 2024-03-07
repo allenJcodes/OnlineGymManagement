@@ -74,7 +74,6 @@
                                         class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                 </li>
 
-                                {{-- di pa nagana --}}
                                 <li>
                                     <form class="w-full" action="{{route('manage.subscription.destroy', ['subscription' => $subscription])}}" method="POST">
                                         @csrf

@@ -9,6 +9,7 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SchedulingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
@@ -61,7 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // MEMBERSHIP
     Route::get('membership', [MembershipController::class, 'index'])->name('membership');
-    Route::post('membership', [MembershipController::class, 'createMembership']);
+    Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP
 
@@ -95,4 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
     Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
     Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
+
+    // INSTRUCTOR
+    Route::resource('instructor', InstructorController::class);
 });

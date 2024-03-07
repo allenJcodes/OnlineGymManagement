@@ -152,26 +152,18 @@
                                         </button>
 
                                         <div class="p-6 text-center">
-
-                                            <div class="flex justify-center "> <img src="{{ asset('images/logo.png') }}"
-                                                    alt="" width="250" height="250"></div>
-                                            <h3
-                                                class="mb-5 text-lg font-medium text-gray-900 dark:text-white pt-10 flex justify-center">
-                                                Name: {{ $user->name }}</h4>
+                                            <div class="flex justify-center "> <img src="{{ asset('images/logo.png') }}" alt="" width="250" height="250"></div>
+                                            <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white pt-10 flex justify-center">Name: {{ $user->name }}</h4>
 
 
-                                                <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
-                                                    Subscription
-                                                    Details:</h3>
-                                                <ul class="grid w-full gap-6 md:grid-cols-2">
+                                                <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white"> Subscription Details:</h3>
+                                                <form id="subscription-form" action="{{route('membership.store')}}" method="POST" class="grid w-full gap-6 md:grid-cols-2">
+                                                    @csrf
                                                     @foreach ($subscriptions as $subscription)
                                                         
-                                                        <li class="flex justify-center items-center space-x-4">
-                                                            <input type="radio" id="hosting-small"
-                                                                name="membership{{ $user->id }}" value="6 months"
-                                                                class=" peer" required>
-                                                            <label for="hosting-small"
-                                                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                                        <div class="flex justify-center items-center space-x-4">
+                                                            <input type="radio" id="membership-{{$subscription->id}}" name="subscription" value="{{$subscription->id}}" class=" peer" required>
+                                                            <label for="membership-{{$subscription->id}}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                                                 <div class="block">
                                                                     <div class="w-full text-lg font-semibold">{{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}
                                                                     </div>
@@ -186,7 +178,7 @@
                                                                         d="M1 5h12m0 0L9 1m4 4L9 9" />
                                                                 </svg>
                                                             </label>
-                                                        </li>
+                                                        </div>
                                                     @endforeach
 
 {{-- 
@@ -211,22 +203,20 @@
                                                             </svg>
                                                         </label>
                                                     </li> --}}
-                                                </ul>
+                                                </form>
 
 
                                             </h3>
-                                            <button data-modal-hide="popup-modal" type="button"
-                                                id="submitMembership{{ $user->id }}"
-                                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mt-10">
+                                            <button form="subscription-form" data-modal-hide="popup-modal" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mt-10">
                                                 Submit
                                             </button>
-                                            <button data-modal-hide="popup-modal{{ $user->id }}" type="button"
-                                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                            <button data-modal-hide="popup-modal{{ $user->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                                                 Cancel</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             {{-- Unsubscribe modal --}}
                             <div id="popup-modal2{{ $user->id }}" tabindex="-1"
                                 class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -313,7 +303,8 @@
                         </td>
                     </tr>
 
-                    <script>
+                    {{-- removed script, changed to form --}}
+                    {{-- <script>
                         $('#submitMembership{{ $user->id }}').click(function() {
                             const membershipValue = $("input[name='membership{{ $user->id }}']:checked").val()
                             var currentDate = moment();
@@ -373,7 +364,7 @@
 
 
                         })
-                    </script>
+                    </script> --}}
                 @endforeach
 
             </tbody>

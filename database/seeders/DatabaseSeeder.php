@@ -58,7 +58,8 @@ class DatabaseSeeder extends Seeder
             FAQSeeder::class,
             ContactDetailTypeSeeder::class,
             ContactDetailSeeder::class,
-            SubscriptionTypeSeeder::class
+            SubscriptionTypeSeeder::class,
+            InstructorSeeder::class
         ]);
     }
 }
