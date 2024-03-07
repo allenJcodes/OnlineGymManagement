@@ -17,7 +17,7 @@ use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
