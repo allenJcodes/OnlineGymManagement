@@ -11,7 +11,7 @@ class SubscriptionType extends Model
 
     protected $table = 'subscription_types';
 
-    protected $fillables = [
+    protected $fillable = [
         'name',
         'price',
         'number_of_months',

@@ -59,7 +59,8 @@ class DatabaseSeeder extends Seeder
             ContactDetailTypeSeeder::class,
             ContactDetailSeeder::class,
             SubscriptionTypeSeeder::class,
-            EquipmentTypeSeeder::class,
+            EquipmentTypeSeeder::class,,
+            InstructorSeeder::class
         ]);
     }
 }

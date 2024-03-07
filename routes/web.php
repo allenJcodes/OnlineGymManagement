@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\LearnController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\EquipmentTypeController;
 use App\Http\Controllers\modules\UsersController;
@@ -66,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // MEMBERSHIP
     Route::get('membership', [MembershipController::class, 'index'])->name('membership');
-    Route::post('membership', [MembershipController::class, 'createMembership']);
+    Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP
 
@@ -111,4 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // EQUIPMENT TYPES
     Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
+
+    // INSTRUCTOR
+    Route::resource('instructor', InstructorController::class);
 });

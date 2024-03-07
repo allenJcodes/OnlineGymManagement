@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactDetailType extends Model
+class Instructor extends Model
 {
     use HasFactory;
-    
-    protected $table = 'contact_detail_types';
 
     protected $fillable = [
-        'name'
+        'first_name',
+        'last_name',
+        'description',
     ];
 }
-
