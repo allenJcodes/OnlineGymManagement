@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManageSubscriptionStoreRequest;
 use App\Models\SubscriptionType;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class ManageSubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('features.manage_subscriptions.AddSubscription');
     }
 
     /**
@@ -34,9 +35,12 @@ class ManageSubscriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ManageSubscriptionStoreRequest $request)
     {
-        //
+        // dd($request->validated());
+        SubscriptionType::create($request->validated());
+
+        return redirect()->route('manage.subscription.index');
     }
 
     /**
@@ -56,9 +60,9 @@ class ManageSubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SubscriptionType $subscription)
     {
-        //
+        return view('features.manage_subscriptions.EditSubscription', compact('subscription'));
     }
 
     /**
@@ -68,9 +72,11 @@ class ManageSubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ManageSubscriptionStoreRequest $request, SubscriptionType $subscription)
     {
-        //
+        $subscription->update($request->validated());
+
+        return redirect()->route('manage.subscription.edit', ['subscription' => $subscription]);
     }
 
     /**
@@ -79,8 +85,10 @@ class ManageSubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubscriptionType $subscription)
     {
-        //
+        $subscription->delete();
+
+        return redirect()->route('manage.subscription.index');
     }
 }

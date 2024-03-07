@@ -11,7 +11,7 @@ class ContactDetailType extends Model
     
     protected $table = 'contact_detail_types';
 
-    protected $fillables = [
+    protected $fillable = [
         'name'
     ];
 }
