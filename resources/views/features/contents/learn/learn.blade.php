@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="flex flex-col pt-16 gap-2">
-        <div class="flex justify-end">
+        <div class="flex justify-between">
+            <h1 class="text-xl">Contact</h1>
             <a href="{{ route('contents.learn.create') }}">
                 <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
@@ -70,15 +71,15 @@
                             <div id="toggle{{ $learnContent->id }}"
                                 class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2" aria-labelledby="dropdownButton">
-
                                     <li>
                                         <a href="{{route('contents.learn.edit', ['learn' => $learnContent])}}"
                                             class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                     </li>
-                                    <li>
-                                        <a id="delete{{ $learnContent->id }}"
-                                            class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                                    </li>
+                                    <form class="w-full" action="{{route('contents.learn.destroy', ['learn' => $learnContent])}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                    </form>
                                 </ul>
                             </div>
                         </td>
