@@ -123,12 +123,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // EQUIPMENT TYPES
-<<<<<<< HEAD
-    Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
+    // Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
 
     // INSTRUCTOR
     Route::resource('instructor', InstructorController::class);
-=======
-    // Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
->>>>>>> allen
 });
