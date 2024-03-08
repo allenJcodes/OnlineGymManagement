@@ -51,8 +51,8 @@
                         Profile Picture</label>
 
                     @if (auth()->user()->profile_image != '')
-                        <img src="{{ url('storage/' . auth()->user()->profile_image) }}" alt="Profile Image"
-                            {{-- width="50px" height="50px" class="img-thumbnail img-fluid" --}}>
+                        <img src="{{ url('storage/' . auth()->user()->profile_image) }}" alt="Profile Image" width="140px"
+                            height="140px">
                     @endif
                     <input id="profile_image" type="file" name="profile_image" accept=".png, .jpg, .jpeg"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
@@ -63,7 +63,13 @@
                 </div>
 
             </form>
-
+            @if ($errors->any())
+                <div class="flex flex-col gap-1">
+                    @foreach ($errors->all() as $error)
+                        <p class="text-red-500 text-xs">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @endsection

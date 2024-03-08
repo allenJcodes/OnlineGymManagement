@@ -19,15 +19,16 @@ class ProfileController extends Controller
             auth()->user()->update(['password' => Hash::make($request->password)]);
         }
 
+        if ($request->profile_image) {
+            $extension = $request->profile_image->extension();
+            $newImage = $request->profile_image->storeAs('images/user/', auth()->user()->id . '.' . $extension, 'public');
+        }
+
         auth()->user()->update([
             'name' => $request->name,
             'email' => $request->email,
+            'profile_image' => $newImage ?? ''
         ]);
-
-        if ($request->hasFile('profile_image')){
-            $profile_image = Storage::disk('public')->put('/profile' . '/' . auth()->user()->id, $request->file('profile_image'));
-            auth()->user()->update(['profile_image' => $profile_image]);
-        } 
 
         return redirect()->back()->with('success', 'Your profile has been updated');
     }
