@@ -16,6 +16,7 @@ class LearnController extends Controller
     public function index()
     {
         $learnContents = LearnContent::all();
+        
         return view('features.contents.learn.learn', compact('learnContents'));
     }
 
@@ -46,7 +47,7 @@ class LearnController extends Controller
 
         LearnContent::create([...$request->validated(), 'image' => $newImage ?? '']);
 
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully added a content.');
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully added learn content.');
     }
 
     /**
@@ -89,7 +90,7 @@ class LearnController extends Controller
 
         $learn->update([...$request->validated(), 'image' => $newImage ?? '']);
         
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully added a content.');
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully updated learn content.');
     }
 
     /**
@@ -100,6 +101,8 @@ class LearnController extends Controller
      */
     public function destroy(LearnContent $learn)
     {
-        //
+        $learn->delete();
+
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully deleted learn content.');
     }
 }

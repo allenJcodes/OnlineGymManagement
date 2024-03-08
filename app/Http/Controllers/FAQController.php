@@ -16,6 +16,7 @@ class FAQController extends Controller
     public function index()
     {
         $faqs = FAQ::all();
+        
         return view('features.contents.faq.faq', compact('faqs'));
     }
 
@@ -38,6 +39,7 @@ class FAQController extends Controller
     public function store(FAQStoreRequest $faq)
     {
         FAQ::create($faq->validated());
+
         return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
     }
 
@@ -73,7 +75,8 @@ class FAQController extends Controller
     public function update(FAQStoreRequest $request, FAQ $faq)
     {
         $faq->update($request->validated());
-        return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
+
+        return redirect()->route('contents.faq.index')->with('success', 'Successfully updated FAQ.');
     }
 
     /**
@@ -82,8 +85,10 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FAQ $faq)
     {
-        //
+        $faq->delete();
+
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully deleted FAQ.');
     }
 }
