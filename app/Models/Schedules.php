@@ -9,6 +9,8 @@ class Schedules extends Model
 {
     use HasFactory;
 
+    protected $table = 'schedules';
+    
     protected $fillable = [
         'staff_id',
         'class_name',
