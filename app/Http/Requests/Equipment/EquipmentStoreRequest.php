@@ -14,7 +14,7 @@ class EquipmentStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -29,7 +29,7 @@ class EquipmentStoreRequest extends FormRequest
             'description' => 'required|string|max:255',
             'equipment_type_id' => 'required|integer',
             'status' => 'required|string|max:255',
-            'image' => 'required|mimes:png,jpg,jpeg|max:5048',
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:5048',
         ];
     }
 

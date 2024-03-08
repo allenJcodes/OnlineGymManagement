@@ -1,8 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="addSchedule" data-trainers="{{ $trainers }}"
-        @isset($isEdit)
-        data-isEdit='{{ $isEdit }}'
-    @endisset></div>
+    <div class="flex flex-col pt-14 gap-8">
+        <h1 class="text-xl">Add Schedule</h1>
+
+        <form action="{{route('scheduling.store')}}" method="POST" class="flex flex-col gap-5">
+            @csrf
+
+            <div class="form-field-container">
+                <label for="class_name" class="form-label">Name of Class</label>
+                <input id="class_name" type="text" name="class_name" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="staff_id" class="form-label">Instructor</label>
+            
+                <select name="staff_id" id="staff_id" class="form-input">
+                    @foreach ($instructors as $instructor)
+                        <option value="{{$instructor->id}}">{{$instructor->first_name}} {{$instructor->last_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-field-container">
+                <label for="date_time_start" class="form-label">Date and Time Start</label>
+                <input id="date_time_start" type="datetime-local" name="date_time_start" class="form-input">
+            </div>
+            
+            <div class="form-field-container">
+                <label for="date_time_end" class="form-label">Date and Time End</label>
+                <input id="date_time_end" type="datetime-local" name="date_time_end" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="number_of_attendees" class="form-label">Number of Attendees</label>
+                <input id="number_of_attendees" type="text" name="number_of_attendees" class="form-input">
+            </div>
+
+            @if ($errors->any())
+                <div class="flex flex-col gap-1">
+                    @foreach ($errors->all() as $error)
+                        <p class="text-red-500 text-xs">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <button type="submit">Add Schedule</button>
+        </form>
+
+
+    </div>
 @endsection

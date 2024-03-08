@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Scheduling\SchedulingStoreRequest;
+use App\Models\Instructor;
 use App\Models\Schedules;
 use App\Models\User;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 
 class SchedulingController extends Controller
@@ -25,10 +28,8 @@ class SchedulingController extends Controller
      */
     public function create()
     {
-        $trainers = User::where('user_role', 2)->get();
-        return view('features.scheduling.AddSchedule', [
-            'trainers' => $trainers
-        ]);
+        $instructors = Instructor::get();
+        return view('features.scheduling.AddSchedule', compact('instructors'));
     }
 
     /**
@@ -37,16 +38,10 @@ class SchedulingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchedulingStoreRequest $request)
     {
-        Schedules::create([
-            'staff_id' => $request->staff_id,
-            'class_name' => $request->class_name,
-            'date_time_start' => $request->date_time_start,
-            'date_time_end' => $request->date_time_end,
-            'max_clients' => $request->number_of_attendees,
-            'number_of_attendees' => $request->max_clients,
-        ]);
+        Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
+        return redirect()->route('scheduling.index');
     }
 
     /**
