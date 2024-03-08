@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearnContent;
 use Illuminate\Http\Request;
 
 class LearnController extends Controller
@@ -13,7 +14,8 @@ class LearnController extends Controller
      */
     public function index()
     {
-        return view('features.contents.learn.learn');
+        $learnContents = LearnContent::all();
+        return view('features.contents.learn.learn', compact('learnContents'));
     }
 
     /**
@@ -23,7 +25,7 @@ class LearnController extends Controller
      */
     public function create()
     {
-        //
+        return view('features.contents.learn.add');
     }
 
     /**
@@ -33,8 +35,16 @@ class LearnController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $learnContent = $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'content' => 'required|string',
+            // 'image' => 'required|max:2048'
+        ]);
+
+        LearnContent::create($learnContent);
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully added a content.');
     }
 
     /**
@@ -45,7 +55,7 @@ class LearnController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -56,7 +66,8 @@ class LearnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $learnContent = LearnContent::find($id);
+        return view('features.contents.learn.edit', compact('learnContent'));
     }
 
     /**

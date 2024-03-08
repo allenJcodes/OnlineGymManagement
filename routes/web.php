@@ -104,11 +104,23 @@ Route::group(['middleware' => ['auth']], function () {
     // CONTENTS
     Route::prefix('contents')->name('contents.')->group(function () {
         Route::resource('', ContentController::class);
-        Route::resource('learn', LearnController::class);
-        Route::resource('FAQ', FAQController::class);
-        Route::resource('contact', ContactController::class);
+
+        Route::resource('learn', LearnController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::get('learn/add', [LearnController::class, 'create'])->name('learn.create');
+        Route::get('learn/{id}', [LearnController::class, 'show'])->name('learn.show');
+        Route::get('learn/edit/{id}', [LearnController::class, 'edit'])->name('learn.edit');
+
+        Route::resource('faq', FAQController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::get('faq/add', [FAQController::class, 'create'])->name('faq.create');
+        Route::get('faq/{id}', [LearnController::class, 'show'])->name('faq.show');
+        Route::get('faq/edit/{id}', [FAQController::class, 'edit'])->name('faq.edit');
+
+        Route::resource('contact', ContactController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::get('contact/add', [ContactController::class, 'create'])->name('contact.create');
+        Route::get('contact/{id}', [LearnController::class, 'show'])->name('contact.show');
+        Route::get('contact/edit/{id}', [ContactController::class, 'edit'])->name('contact.edit');
     });
 
     // EQUIPMENT TYPES
-    Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
+    // Route::resource('equipment_types', EquipmentTypeController::class)->except('show');
 });

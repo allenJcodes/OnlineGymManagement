@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FAQ;
 use Illuminate\Http\Request;
 
 class FAQController extends Controller
@@ -13,7 +14,8 @@ class FAQController extends Controller
      */
     public function index()
     {
-        return view('features.contents.faq.faq');
+        $faqs = FAQ::all();
+        return view('features.contents.faq.faq', compact('faqs'));
     }
 
     /**
@@ -23,7 +25,7 @@ class FAQController extends Controller
      */
     public function create()
     {
-        //
+        return view('features.contents.faq.add');
     }
 
     /**
@@ -34,7 +36,13 @@ class FAQController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faq = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        FAQ::create($faq);
+        return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
     }
 
     /**
@@ -56,7 +64,8 @@ class FAQController extends Controller
      */
     public function edit($id)
     {
-        //
+        $faq = FAQ::find($id);
+        return view('features.contents.faq.edit', compact('faq'));
     }
 
     /**
