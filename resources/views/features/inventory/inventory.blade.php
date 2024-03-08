@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-10">
+    <div class="container pt-16">
         <div class="flex justify-end pr-4">
             <a href="{{ route('addItem') }}">
                 <button type="button"

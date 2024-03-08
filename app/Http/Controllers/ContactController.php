@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactDetail;
+use App\Models\ContactDetailType;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,7 +15,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = ContactDetail::with('ContactDetailType')->get();
+        return view('features.contents.contact.contact', compact('contacts'));
     }
 
     /**
@@ -23,7 +26,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        $contactDetailTypes = ContactDetailType::all();
+        return view('features.contents.contact.add', compact('contactDetailTypes'));
     }
 
     /**
