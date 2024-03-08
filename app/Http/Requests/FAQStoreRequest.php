@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Content;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LearnStoreRequest extends FormRequest
+class FAQStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class LearnStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return false;
     }
 
     /**
@@ -24,10 +24,7 @@ class LearnStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,pdf|max:2048'
+            //
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Content;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LearnStoreRequest extends FormRequest
+class ContactStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class LearnStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
+            'contact_detail_type_id' => 'required',
+            'label' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,pdf|max:2048'
         ];
     }
 }
