@@ -11,9 +11,20 @@ class LearnContent extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $title;
+    public $subtitle;
+    public $content;
+    public $flipped;
+    public $image;
+
+    public function __construct($title, $subtitle, $content, $flipped, $image)
     {
-        //
+        $this->title = $title;
+        $this->subtitle = $subtitle;
+        $this->content = $content;
+        $this->image = $image;
+        $this->flipped = $flipped;
     }
 
     /**
