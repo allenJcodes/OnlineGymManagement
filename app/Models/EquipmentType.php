@@ -9,7 +9,7 @@ class EquipmentType extends Model
 {
     use HasFactory;
 
-     protected $fillables = [
+    protected $fillable = [
         'name'
     ];
 }
