@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Content\LearnStoreRequest;
 use App\Models\LearnContent;
 use Illuminate\Http\Request;
 
@@ -34,16 +35,17 @@ class LearnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LearnStoreRequest $request)
     {   
-        $learnContent = $request->validate([
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
-            'content' => 'required|string',
-            // 'image' => 'required|max:2048'
-        ]);
+        $image = $request->image;
+ 
+        if (isset($image)) {
+            $extension = $image->extension();
+            $newImage = $request->image->storeAs('images/content/learn', "$request->title.$extension", 'public');
+        }
 
-        LearnContent::create($learnContent);
+        LearnContent::create([...$request->validated(), 'image' => $newImage ?? '']);
+
         return redirect()->route('contents.learn.index')->with('success', 'Successfully added a content.');
     }
 
@@ -64,10 +66,9 @@ class LearnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(LearnContent $learn)
     {
-        $learnContent = LearnContent::find($id);
-        return view('features.contents.learn.edit', compact('learnContent'));
+        return view('features.contents.learn.edit', compact('learn'));
     }
 
     /**
@@ -77,9 +78,9 @@ class LearnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LearnStoreRequest $request, LearnContent $learn)
     {
-        //
+        dd('learnUp');
     }
 
     /**
@@ -88,7 +89,7 @@ class LearnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(LearnContent $learn)
     {
         //
     }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ManageSubscriptionStoreRequest;
+use App\Http\Requests\ManageSubscription\ManageSubscriptionStoreRequest;
 use App\Models\SubscriptionType;
+use App\Models\SubscriptionTypeInclusion;
 use Illuminate\Http\Request;
 
 class ManageSubscriptionController extends Controller
@@ -15,7 +16,7 @@ class ManageSubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = SubscriptionType::all();
+        $subscriptions = SubscriptionType::with('inclusions')->get();
         return view('features.manage_subscriptions.ManageSubscriptions', compact('subscriptions'));
     }
 
@@ -37,8 +38,11 @@ class ManageSubscriptionController extends Controller
      */
     public function store(ManageSubscriptionStoreRequest $request)
     {
-        // dd($request->validated());
-        SubscriptionType::create($request->validated());
+        $inclusions = collect($request->inclusions)->map(function($inclusion) {
+            return (new SubscriptionTypeInclusion(['name' => $inclusion]));
+        });
+
+        SubscriptionType::create($request->validated())->inclusions()->saveMany($inclusions);
 
         return redirect()->route('manage.subscription.index');
     }
@@ -62,6 +66,7 @@ class ManageSubscriptionController extends Controller
      */
     public function edit(SubscriptionType $subscription)
     {
+        $_subscription = SubscriptionType::find($subscription->id)->with('inclusions')->first();
         return view('features.manage_subscriptions.EditSubscription', compact('subscription'));
     }
 
@@ -74,7 +79,15 @@ class ManageSubscriptionController extends Controller
      */
     public function update(ManageSubscriptionStoreRequest $request, SubscriptionType $subscription)
     {
+
+        SubscriptionTypeInclusion::where('subscription_type_id', $subscription->id)->delete();
         $subscription->update($request->validated());
+
+        $inclusions = collect($request->inclusions)->map(function($inclusion) {
+            return (new SubscriptionTypeInclusion(['name' => $inclusion]));
+        });
+
+        $subscription->inclusions()->saveMany($inclusions);
 
         return redirect()->route('manage.subscription.edit', ['subscription' => $subscription]);
     }

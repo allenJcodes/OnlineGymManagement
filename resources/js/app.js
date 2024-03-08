@@ -21,3 +21,4 @@ require("./Reservation/Reservation");
 require("./Payments/Payments");
 require("./Attendance/Attendance");
 require("./components/CustomQRCode");
+require("./Subscription/Inclusions");
