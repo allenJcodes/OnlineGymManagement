@@ -2,70 +2,58 @@
 
 namespace App\Http\Controllers\modules;
 
-use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
+use App\Models\EquipmentType;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Inventory\InventoryStoreRequest;
 
 class InventoryController extends Controller
 {
     public function index()
     {
-        $item = DB::table('inventory')
-            ->get();
-        return view('features.inventory.inventory', [
-            'item' => $item,
-        ]);
+        $item = Inventory::all();
+
+        return view('features.inventory.inventory', compact('item'));
     }
 
     public function addItem()
     {
-        return view('features.inventory.addItem');
+        $equipmentType = EquipmentType::all();
+
+        return view('features.inventory.addItem', [
+            'types' => $equipmentType
+        ]);
     }
 
-    public function createItem(Request $request)
+    public function createItem(InventoryStoreRequest $request)
     {
-        DB::table('inventory')->insert([
-            'item_name' => $request->item_name,
-            'quantity' => $request->quantity,
-            'equipment_type' => $request->equipment_type,
-            'purchase_date' => $request->purchase_date,
-            'warranty_information' => $request->warranty_information,
-            'maintenance_history' => $request->maintenance_history,
-            'status' => $request->status,
-        ]);
+        Inventory::create($request->validated());
 
         return redirect('/inventory');
     }
 
     public function editItem($id)
     {
-        $item = DB::table('inventory')
-            ->where('id', $id)
-            ->first();
+        $item = Inventory::find($id);
+        $equipmentType = EquipmentType::all();
 
         return view('features.inventory.editItem', [
             'item' => $item,
+            'types' => $equipmentType
         ]);
     }
 
-
-    public function updateItem(Request $request, $id)
+    public function updateItem(InventoryStoreRequest $request, $id)
     {
+        $inventory = Inventory::find($id);
 
-        $item = DB::table('inventory')
-            ->where('id', $id)
-            ->update([
-
-                'item_name' => $request->item_name,
-                'quantity' => $request->quantity,
-                'equipment_type' => $request->equipment_type,
-                'purchase_date' => $request->purchase_date,
-                'warranty_information' => $request->warranty_information,
-                'maintenance_history' => $request->maintenance_history,
-                'status' => $request->status,
-            ]);
-
-
+        if (!$inventory) {
+            abort(404, 'Inventory item not found');
+        } else {
+            $inventory->update($request->validated());
+        }
 
         return redirect('/inventory');
     }

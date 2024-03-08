@@ -17,7 +17,7 @@ class CreateInventoryTable extends Migration
             $table->id();
             $table->string('item_name');
             $table->string('quantity');
-            $table->string('equipment_type');
+            $table->foreignId('equipment_type_id')->nullable()->constrained('equipment_types')->nullOnDelete();
             $table->string('purchase_date');
             $table->string('warranty_information');
             $table->string('maintenance_history');
