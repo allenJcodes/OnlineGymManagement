@@ -4,7 +4,7 @@
     <div class="container pt-16">
         <div
             class="block p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <form action="{{ route('contents.learn.store') }}" method="POST">
+            <form enctype="multipart/form-data" action="{{ route('contents.learn.store') }}" method="POST">
                 @csrf
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="title" id="title"

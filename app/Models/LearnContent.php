@@ -15,5 +15,6 @@ class LearnContent extends Model
         'title',
         'subtitle',
         'content',
+        'image'
     ];
 }

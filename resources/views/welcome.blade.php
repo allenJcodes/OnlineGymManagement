@@ -11,19 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     {{-- FLOWBITE --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-
-
-    <style>
-        body {
-            /* background-color: #212529; */
-        }
-    </style>
 </head>
 
 <body class="font-red-hat-display bg-background">
@@ -172,7 +164,7 @@
 
                 <x-gym-session-card 
                     title="In Person" 
-                    content="eal-time guidance from
+                    content="Real-time guidance from
                     qualified instructors, a motivating workout environment, and the opportunity to interact
                     with fellow attendees."
                 >
@@ -191,8 +183,6 @@
     {{-- LEARN PAGE --}}
     <section id="learn">
         <div class="py-20 px-64 gap-8 bg-off-white flex flex-col items-center justify-center">
-
-
             @foreach ($learnContent as $index => $learn_content)
 
                 <x-learn-content 

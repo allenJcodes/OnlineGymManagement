@@ -72,7 +72,7 @@
                                 <ul class="py-2" aria-labelledby="dropdownButton">
 
                                     <li>
-                                        <a href="{{route('contents.learn.edit', $learnContent->id)}}"
+                                        <a href="{{route('contents.learn.edit', ['learn' => $learnContent])}}"
                                             class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                     </li>
                                     <li>

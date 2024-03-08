@@ -105,11 +105,11 @@ Route::group(['middleware' => ['auth']], function () {
     // CONTENTS
     Route::prefix('contents')->name('contents.')->group(function () {
         Route::resource('', ContentController::class);
-
-        Route::resource('learn', LearnController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::get('learn/add', [LearnController::class, 'create'])->name('learn.create');
-        Route::get('learn/{id}', [LearnController::class, 'show'])->name('learn.show');
-        Route::get('learn/edit/{id}', [LearnController::class, 'edit'])->name('learn.edit');
+        
+        Route::resource('learn', LearnController::class);
+        // Route::get('learn/add', [LearnController::class, 'create'])->name('learn.create');
+        // Route::get('learn/{id}', [LearnController::class, 'show'])->name('learn.show');
+        // Route::get('learn/edit/{id}', [LearnController::class, 'edit'])->name('learn.edit');
 
         Route::resource('faq', FAQController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::get('faq/add', [FAQController::class, 'create'])->name('faq.create');
