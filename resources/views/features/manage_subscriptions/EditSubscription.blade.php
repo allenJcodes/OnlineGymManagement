@@ -7,33 +7,25 @@
             @method('PUT')
             @csrf
 
-            <div class="relative z-0 w-full mb-6 group">
-                <input value="{{$subscription->name}}" type="text" name="name" id="floating_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
-                <label for="floating_name"class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Subscription Name
-                </label>
+            <div class="form-field-container">
+                <label for="name" class="form-label">Subscription Name</label>
+                <input value="{{$subscription->name}}" id="name" type="text" name="name" class="form-input">
             </div>
 
-            <div class="relative z-0 w-full mb-6 group">
-                <input value="{{$subscription->price}}" type="text" name="price" id="floating_price" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
-                <label for="floating_price"class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Subscription Price
-                </label>
+            <div class="form-field-container">
+                <label for="price" class="form-label">Subscription Price</label>
+                <input value="{{$subscription->price}}" id="price" type="text" name="price" class="form-input">
             </div>
 
-            <div class="relative z-0 w-full mb-6 group">
-                <input value="{{$subscription->number_of_months}}" type="text" name="number_of_months" id="floating_number_of_months" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
-                <label for="floating_number_of_months"class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Duration (Months)
-                </label>
+            <div class="form-field-container">
+                <label for="number_of_months" class="form-label">Duration (Months)</label>
+                <input value="{{$subscription->number_of_months}}" id="number_of_months" type="text" name="number_of_months" class="form-input">
             </div>
 
-            <div class="relative z-0 w-full mb-6 group">
-                <input value="{{$subscription->description}}" type="text" name="description" id="floating_description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
-                <label for="floating_description"class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    Description
-                </label>
-            </div>  
+            <div class="form-field-container">
+                <label for="description" class="form-label">Description</label>
+                <input value="{{$subscription->description}}" id="description" type="text" name="description" class="form-input">
+            </div>
 
             <div id="add-inclusions" class="flex flex-col gap-3" data-_inclusions="{{ $subscription->inclusions }}">
             </div>

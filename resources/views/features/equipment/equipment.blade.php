@@ -46,7 +46,7 @@
                                     <ul class="py-2" aria-labelledby="dropdownButton">
 
                                         <li>
-                                            <a href="/editEquipment/{{ $equipment->id }}"
+                                            <a href="{{route('equipment.edit', ['equipment' => $equipment])}}"
                                                 class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                         </li>
                                         <li>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         @endif
-                        <div href="/editEquipment/{{ $equipment->id }}" class="MT-3">
+                        <div href="{{route('equipment.edit', ['equipment' => $equipment])}}" class="MT-3">
                             @if ($equipment->status == 'available')
                                 <span
                                     class="absolute  bg-green-200 text-green-800 text-xs font-medium ml-2 mt-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Available</span>

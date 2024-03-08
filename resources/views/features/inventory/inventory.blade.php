@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col pt-16 gap-2">
         <div class="flex justify-end">
-            <a href="{{ route('addItem') }}">
+            <a href="{{ route('inventory.create') }}">
                 <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
                     Item</button>
@@ -44,35 +44,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($item as $item)
+                    @foreach ($inventories as $inventory)
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row"
                                 class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $item->item_name }}
+                                {{ $inventory->item_name }}
                             </th>
                             <td class="px-6 py-3">
-                                {{ $item->quantity }}
+                                {{ $inventory->quantity }}
                             </td>
                             <td class="px-6 py-3">
-                                {{ $item->equipmentType->name }}
+                                {{ $inventory->equipmentType->name }}
                             </td>
                             <td class="px-6 py-3">
-                                {{ $item->purchase_date }}
+                                {{ $inventory->purchase_date }}
                             </td>
                             <td class="px-6 py-3">
-                                {{ $item->warranty_information }}
+                                {{ $inventory->warranty_information }}
                             </td>
                             <td class="px-6 py-3">
-                                {{ $item->maintenance_history }}
+                                {{ $inventory->maintenance_history }}
                             </td>
                             <td class="px-6 py-3">
-                                {{ $item->status }}
+                                {{ $inventory->status }}
                             </td>
                             <td>
                                 <div class="text-left px-6 "style="">
-                                    <button id="dropdownButton" data-dropdown-toggle="toggle{{ $item->id }}"
+                                    <button id="dropdownButton" data-dropdown-toggle="toggle{{ $inventory->id }}"
                                         class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                                         type="button">
                                         <span class="sr-only">Open dropdown</span>
@@ -83,41 +83,23 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <div id="toggle{{ $item->id }}"
+                                <div id="toggle{{ $inventory->id }}"
                                     class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2" aria-labelledby="dropdownButton">
 
                                         <li>
-                                            <a href="/editItem/{{ $item->id }}"
+                                            <a href="{{route('inventory.edit', ['inventory' => $inventory])}}"
                                                 class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                         </li>
                                         <li>
-                                            <a id="delete{{ $item->id }}"
+                                            <a id="delete{{ $inventory->id }}"
                                                 class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-                        <script>
-                            $("#delete{{ $item->id }}").click(function() {
-                                const formdata = new FormData()
-                                formdata.append("id", "{{ $item->id }}")
-                                axios.post("/deleteItem", formdata)
-                                    .then(() => {
-                                        swal({
-                                            icon: "success",
-                                            title: "Item Deleted!",
-                                            text: "Item has been deleted successfully!",
-                                            buttons: false
-                                        }).then(() => {
-                                            location.reload()
-                                        })
-                                    })
-                            })
-                        </script>
-                    @empty
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
 

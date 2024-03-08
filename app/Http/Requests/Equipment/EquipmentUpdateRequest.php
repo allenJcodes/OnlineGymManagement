@@ -24,10 +24,8 @@ class EquipmentUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
-
         return [
-            'equipment_name' => ['required','string','max:255', Rule::unique('equipment', 'equipment_name')->ignore($id)],
+            'equipment_name' => ['required','string','max:255', Rule::unique('equipment', 'equipment_name')->ignore($this->equipment->id)],
             'description' => 'required|string|max:255',
             'equipment_type_id' => 'required|integer',
             'status' => 'required|string|max:255',
