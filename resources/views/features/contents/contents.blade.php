@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-20">
+    <div class="pt-16">
         <div class="flex gap-4 h-full">  
             <a href="{{ route('contents.learn.index') }}" class="flex border bg-white shadow-sm h-20 w-full items-end p-4 hover:bg-[#e1e1e1] rounded-lg">
                 <p class="text-lg font-medium">Learn</p>

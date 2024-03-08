@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container flex flex-col pt-16 gap-2">
+    <div class="flex flex-col pt-16 gap-2">
         <div class="flex justify-end"> 
             <a href="{{ route('contents.faq.create') }}">
                 <button type="button"
@@ -66,11 +66,11 @@
                                 <ul class="py-2" aria-labelledby="dropdownButton">
 
                                     <li>
-                                        <a href="{{route('contents.faq.edit', $faq->id)}}"
+                                        <a href="{{route('contents.faq.edit', ['faq' => $faq])}}"
                                             class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                     </li>
                                     <li>
-                                        <a id="{{route('contents.faq.destroy', $faq->id)}}"
+                                        <a id="{{route('contents.faq.destroy', ['faq' => $faq])}}"
                                             class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
                                     </li>
                                 </ul>

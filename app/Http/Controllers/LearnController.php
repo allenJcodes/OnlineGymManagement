@@ -26,7 +26,7 @@ class LearnController extends Controller
      */
     public function create()
     {
-        return view('features.contents.learn.add');
+        return view('features.contents.learn.addLearn');
     }
 
     /**
@@ -68,7 +68,7 @@ class LearnController extends Controller
      */
     public function edit(LearnContent $learn)
     {
-        return view('features.contents.learn.edit', compact('learn'));
+        return view('features.contents.learn.editLearn', compact('learn'));
     }
 
     /**
@@ -79,8 +79,17 @@ class LearnController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(LearnStoreRequest $request, LearnContent $learn)
-    {
-        dd('learnUp');
+    {   
+        $image = $request->image;
+
+        if (isset($image)) {
+            $extension = $image->extension();
+            $newImage = $request->image->storeAs('images/content/learn', "$request->title.$extension", 'public');
+        }
+
+        $learn->update([...$request->validated(), 'image' => $newImage ?? '']);
+        
+        return redirect()->route('contents.learn.index')->with('success', 'Successfully added a content.');
     }
 
     /**

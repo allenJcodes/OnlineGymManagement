@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Content\FAQStoreRequest;
 use App\Models\FAQ;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class FAQController extends Controller
      */
     public function create()
     {
-        return view('features.contents.faq.add');
+        return view('features.contents.faq.addFaq');
     }
 
     /**
@@ -34,14 +35,9 @@ class FAQController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FAQStoreRequest $faq)
     {
-        $faq = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
-
-        FAQ::create($faq);
+        FAQ::create($faq->validated());
         return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
     }
 
@@ -62,10 +58,9 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FAQ $faq)
     {
-        $faq = FAQ::find($id);
-        return view('features.contents.faq.edit', compact('faq'));
+        return view('features.contents.faq.editFaq', compact('faq'));
     }
 
     /**
@@ -75,9 +70,10 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FAQStoreRequest $request, FAQ $faq)
     {
-        //
+        $faq->update($request->validated());
+        return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
     }
 
     /**

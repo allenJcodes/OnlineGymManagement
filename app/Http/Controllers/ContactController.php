@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Content\ContactStoreRequest;
 use App\Models\ContactDetail;
 use App\Models\ContactDetailType;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ContactController extends Controller
     public function create()
     {
         $contactDetailTypes = ContactDetailType::all();
-        return view('features.contents.contact.add', compact('contactDetailTypes'));
+        return view('features.contents.contact.addContact', compact('contactDetailTypes'));
     }
 
     /**
@@ -36,9 +37,11 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactStoreRequest $contact)
     {
-        //
+        // dd($contact->validated());
+        ContactDetail::create($contact->validated());
+        return redirect()->route('contents.contact.index')->with('success', 'Successfully added a content.');
     }
 
     /**
@@ -58,9 +61,10 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ContactDetail $contact)
     {
-        //
+        $contactDetailTypes = ContactDetailType::all();
+        return view('features.contents.contact.editContact', compact(['contact', 'contactDetailTypes']));
     }
 
     /**
@@ -70,9 +74,10 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContactStoreRequest $request, ContactDetail $contact)
     {
-        //
+        $contact->update($request->validated());
+        return redirect()->route('contents.contact.index')->with('success', 'Successfully added a content.');
     }
 
     /**
