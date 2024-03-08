@@ -5,6 +5,7 @@ namespace App\Http\Controllers\modules;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Equipment\EquipmentStoreRequest;
 use App\Http\Requests\Equipment\EquipmentUpdateRequest;
+use App\Models\Equipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\EquipmentType;
