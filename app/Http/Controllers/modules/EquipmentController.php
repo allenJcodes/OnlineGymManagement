@@ -14,11 +14,37 @@ class EquipmentController extends Controller
 
     public function index()
     {
-        $equipment = DB::table('equipment')->get();
+        $equipments = Equipment::get();
+        return view('features.equipment.equipment', compact('equipments'));
+    }
 
-        return view('features.equipment.equipment', [
-            'equipment' => $equipment,
-        ]);
+    public function create() {
+        $equipmentTypes = EquipmentType::all();
+        return view('features.equipment.AddEquipment', compact('equipmentTypes'));
+    }
+
+    public function store(EquipmentStoreRequest $request) {
+        if($request->image){
+            $newImageName = time() . '-' . $request->equipment_name . '.';
+            $request->image->extension();
+            $request->image->move(public_path('image/equipment'), $newImageName);
+        }
+
+        Equipment::create([...$request->validated(), 'image_path' => $newImageName ?? '']);
+
+        return redirect()->route('equipment.index');
+    }
+
+    public function edit() {
+        
+    }
+
+    public function update() {
+        
+    }
+
+    public function destroy() {
+        
     }
 
     public function AddEquipment()
