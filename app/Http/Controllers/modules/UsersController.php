@@ -2,78 +2,72 @@
 
 namespace App\Http\Controllers\modules;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Users\UserStoreRequest;
+use App\Http\Requests\Users\UserUpdateRequest;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = DB::table('users')
-            ->get();
-        return view('features.users.Users', [
-            'users' => $users
-        ]);
+        $users = User::all();
+        return view('features.users.Users', compact('users'));
     }
 
-    public function addUsers()
+    public function addUser()
     {
         return view('features.users.addUsers');
     }
 
-    public function registerUser(Request $request)
+    public function registerUser(UserStoreRequest $request)
     {
-
-        DB::table('users')->insert([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => $request['password'],
-            'user_role' => $request['user_role'],
-        ]);
-
-
-        return redirect('/users');
+        User::create($request->validated());
+        return redirect()->route('users');
     }
-
 
     public function editUser($id)
     {
-        $users = DB::table('users')
-            ->where('id', $id)
-            ->first();
-
+        $user = User::find($id); 
         return view('features.users.editUsers', [
-            'users' => $users,
+            'user' => $user,
         ]);
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(UserUpdateRequest $request, $id)
     {
+        $user = User::find($id); 
 
-        $user = DB::table('users')
-            ->where('id', $id)
-            ->update([
+        if ($request->password) {
+            $user->update(['password' => Hash::make($request->password)]);
+        }
 
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'user_role' => $request->user_role,
+        // if ($request->profile_image) {
+        //     $extension = $request->profile_image->extension();
+        //     $newImage = $request->profile_image->storeAs('images/user/', $id . time() . '.' . $extension, 'public');
+        // }
 
-            ]);
+        $user->update([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name ?? '',
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            // 'profile_image' => $newImage ?? '',
+            'user_role' => $request->user_role,
+        ]);
 
-
-
-        return redirect('/users');
+        return redirect()->route('users');
     }
 
-    public function deleteUser(Request $request)
+    public function deleteUser($id)
     {
         DB::table('users')
-            ->where('id', $request->id)
+            ->where('id', $id)
             ->delete();
 
-        return redirect('/users');
+        return redirect()->route('users');
     }
 }

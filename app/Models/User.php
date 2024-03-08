@@ -18,12 +18,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'password',
         'user_role',
         'profile_image'
     ];
+
+    protected $appends = ['full_name'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -47,5 +51,9 @@ class User extends Authenticatable
     public function membership()
     {
         return $this->hasOne(Membership::class, 'user_id', "id");
+    }
+
+    public function getFullNameAttribute(){
+        return $this->first_name.' '. ($this->middle_name ?? '') .' '.$this->last_name;
     }
 }

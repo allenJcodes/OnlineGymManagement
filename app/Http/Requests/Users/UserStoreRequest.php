@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests\Users;
 
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileUpdateRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,16 +28,10 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255', 'min:2'],
             'middle_name' => ['nullable','string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255', 'min:2'],
-            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
-            'password' => ['nullable', 'string', 'confirmed'],
+            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')],
+            'password' => ['required', 'string'],
+            'user_role' => ['required'],
             'profile_image' => ['nullable']
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        if ($this->password == null) {
-            $this->request->remove('password');
-        }
     }
 }

@@ -12,16 +12,38 @@
 
                 <div class="relative z-0 w-full mb-6 group">
 
-                    <label for="name" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                    <input id="name" type="text" name="name" value="{{ old('name', auth()->user()->name) }}"
-                        required
+                    <label for="first_name" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">First
+                        Name</label>
+                    <input id="first_name" type="text" name="first_name"
+                        value="{{ old('first_name', auth()->user()->first_name) }}" required
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg borde border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                         placeholder="Name">
                     @error('name')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
 
-                    <label for="email" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <label for="middle_name" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Middle
+                        Name</label>
+                    <input id="middle_name" type="text" name="middle_name"
+                        value="{{ old('middle_name', auth()->user()->middle_name) }}" required
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg borde border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                        placeholder="Name">
+                    @error('name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+
+
+                    <label for="last_name" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                        Name</label>
+                    <input id="last_name" type="text" name="last_name"
+                        value="{{ old('last_name', auth()->user()->last_name) }}" required
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg borde border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                        placeholder="Name">
+                    @error('name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+                    <label for="email" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Email
+                        Address</label>
                     <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}"
                         required
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -46,11 +46,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // USERS
     Route::get('users', [UsersController::class, 'index'])->name('users');
-    Route::get('addUsers', [UsersController::class, 'addUsers'])->name('addUsers');
+    Route::get('addUser', [UsersController::class, 'addUser'])->name('addUser');
     Route::post('registerUser', [UsersController::class, 'registerUser'])->name('registerUser');
     Route::get('/editUser/{id}', [UsersController::class, 'editUser'])->name('editUser');
-    Route::post('/updateUser/{id}', [UsersController::class, 'updateUser'])->name('updateUser');
-    Route::post('/deleteUser', [UsersController::class, 'deleteUser'])->name('deleteUser');
+    Route::put('/updateUser/{id}', [UsersController::class, 'updateUser'])->name('updateUser');
+    Route::delete('/deleteUser/{id}', [UsersController::class, 'deleteUser'])->name('deleteUser');
 
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

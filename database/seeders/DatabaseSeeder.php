@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         User::create([
-            'name' => "admin",
+            'first_name' => "Admin",
+            'last_name' => "User",
             'email' => "admin@email.com",
             'user_role' => 1,
             'password' => Hash::make("password"),
@@ -26,14 +27,16 @@ class DatabaseSeeder extends Seeder
 
         // STAFF SEEDER (COMMENT OUT PAG MERON NA)
         User::create([
-            'name' => "Joel",
+            'first_name' => "Joel",
+            'last_name' => "Garcia",
             'email' => "JmigsGarcia@email.com",
             'user_role' => 2,
             'password' => Hash::make("password"),
         ]);
 
         User::create([
-            'name' => "Roldan",
+            'first_name' => "Roldan",
+            'last_name' => "Hernandez",
             'email' => "teyow@email.com",
             'user_role' => 2,
             'password' => Hash::make("password"),

@@ -25,7 +25,9 @@ class ProfileController extends Controller
         }
 
         auth()->user()->update([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name ?? '',
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'profile_image' => $newImage ?? ''
         ]);

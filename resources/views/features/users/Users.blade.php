@@ -1,26 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-14">
-        <div class="flex justify-end pr-4">
-            <a href="{{ route('addUsers') }}">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-20" style="max-height: 85vh">
+        <div class="flex justify-end ">
+            <a href="{{ route('addUser') }}">
                 <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
-                    Users</button>
+                    User</button>
             </a>
         </div>
-
-
-
-
         <div class="relative overflow-x-auto shadow-md rounded-md"
             style="background-color: rgb(247, 247, 247); max-height: 79vh">
 
-            <table class="w-full  text-sm text-left text-gray-500 dark:text-gray-400" style="max-height: 20vh">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" style="height: 20vh">
                 <thead class="text-xs text-white uppercase  dark:bg-gray-700 dark:text-gray-400"
                     style="background-color: #0F172A">
                     <tr>
-
                         <th scope="col" class="px-6 py-3">
                             Name
                         </th>
@@ -45,7 +40,7 @@
 
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $user->name }}
+                                {{ $user->full_name }}
                             </th>
                             <td class="px-6 py-4">
                                 {{ $user->email }}
@@ -83,14 +78,17 @@
                                 <div id="toggle{{ $user->id }}"
                                     class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2" aria-labelledby="dropdownButton">
-
                                         <li>
                                             <a href="/editUser/{{ $user->id }}"
                                                 class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
                                         </li>
                                         <li>
-                                            <a id="delete{{ $user->id }}"
-                                                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                            <form class="w-full" action="deleteUser/{{ $user->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>
@@ -119,7 +117,5 @@
             </table>
 
         </div>
-
-
     </div>
 @endsection
