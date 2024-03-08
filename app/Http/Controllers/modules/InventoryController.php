@@ -13,57 +13,33 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $item = Inventory::all();
-
-        return view('features.inventory.inventory', compact('item'));
+        $inventories = Inventory::all();
+        return view('features.inventory.inventory', compact('inventories'));
     }
 
-    public function addItem()
-    {
-        $equipmentType = EquipmentType::all();
-
-        return view('features.inventory.addItem', [
-            'types' => $equipmentType
-        ]);
+    public function create() {
+        $equipmentTypes = EquipmentType::all();
+        return view('features.inventory.addItem', compact('equipmentTypes'));
     }
 
-    public function createItem(InventoryStoreRequest $request)
-    {
+    public function store(InventoryStoreRequest $request) {
         Inventory::create($request->validated());
-
-        return redirect('/inventory');
+        return redirect()->route('inventory.index');
     }
 
-    public function editItem($id)
-    {
-        $item = Inventory::find($id);
-        $equipmentType = EquipmentType::all();
-
-        return view('features.inventory.editItem', [
-            'item' => $item,
-            'types' => $equipmentType
-        ]);
+    public function edit(Inventory $inventory) {
+        $equipmentTypes = EquipmentType::all();
+        return view('features.inventory.editItem', compact('inventory', 'equipmentTypes'));
     }
 
-    public function updateItem(InventoryStoreRequest $request, $id)
-    {
-        $inventory = Inventory::find($id);
-
-        if (!$inventory) {
-            abort(404, 'Inventory item not found');
-        } else {
-            $inventory->update($request->validated());
-        }
-
-        return redirect('/inventory');
+    public function update(InventoryStoreRequest $request, Inventory $inventory) {
+        $inventory->update($request->validated());
+        return redirect()->route('inventory.edit', ['inventory' => $inventory]);
     }
 
-    public function deleteItem(Request $request)
-    {
-        DB::table('inventory')
-            ->where('id', $request->id)
-            ->delete();
-
-        return redirect('/inventory');
+    public function destroy(Inventory $inventory) {
+        $inventory->delete();
+        return redirect()->route('inventory.index');
     }
+
 }

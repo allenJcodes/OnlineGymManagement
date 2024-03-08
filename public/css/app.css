@@ -527,6 +527,7 @@ video {
 }
 .form-field-container {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 0.25rem;
   --tw-text-opacity: 1;
@@ -569,9 +570,6 @@ video {
 }
 .pointer-events-none {
   pointer-events: none;
-}
-.invisible {
-  visibility: hidden;
 }
 .collapse {
   visibility: collapse;
@@ -816,14 +814,14 @@ video {
 .h-screen {
   height: 100vh;
 }
+.max-h-0 {
+  max-height: 0px;
+}
 .max-h-\[30vh\] {
   max-height: 30vh;
 }
 .max-h-full {
   max-height: 100%;
-}
-.max-h-0 {
-  max-height: 0px;
 }
 .w-1\/2 {
   width: 50%;
@@ -861,9 +859,6 @@ video {
 .w-56 {
   width: 14rem;
 }
-.w-60 {
-  width: 15rem;
-}
 .w-64 {
   width: 16rem;
 }
@@ -888,6 +883,9 @@ video {
 .w-full {
   width: 100%;
 }
+.max-w-0 {
+  max-width: 0px;
+}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -899,9 +897,6 @@ video {
 }
 .max-w-sm {
   max-width: 24rem;
-}
-.max-w-0 {
-  max-width: 0px;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1714,6 +1709,12 @@ textarea {
 }
 
 
+.hover\:bg-border:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(227 231 234 / var(--tw-bg-opacity));
+}
+
+
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1765,12 +1766,6 @@ textarea {
 .hover\:bg-slate-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
-}
-
-
-.hover\:bg-border:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(227 231 234 / var(--tw-bg-opacity));
 }
 
 

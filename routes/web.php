@@ -82,20 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     // EQUIPMENT
     Route::resource('equipment', EquipmentController::class);
-    // Route::get('equipment', [EquipmentController::class, 'index'])->name('equipment');
-    // Route::get('AddEquipment', [EquipmentController::class, 'AddEquipment'])->name('AddEquipment');
-    // Route::post('CreateEquipment', [EquipmentController::class, 'CreateEquipment'])->name('CreateEquipment');
-    // Route::get('/editEquipment/{id}', [EquipmentController::class, 'editEquipment'])->name('editEquipment');
-    // Route::post('/updateEquipment/{id}', [EquipmentController::class, 'updateEquipment'])->name('updateEquipment');
-    // Route::post('/deleteEquipment', [EquipmentController::class, 'deleteEquipment'])->name('deteleEquipment');
 
     // INVENTORY
-    Route::get('inventory', [InventoryController::class, 'index'])->name('inventory');
-    Route::get('addItem', [InventoryController::class, 'addItem'])->name('addItem');
-    Route::post('createItem', [InventoryController::class, 'createItem'])->name('createItem');
-    Route::get('/editItem/{id}', [InventoryController::class, 'editItem'])->name('editItem');
-    Route::post('/updateItem/{id}', [InventoryController::class, 'updateItem'])->name('updateItem');
-    Route::post('/deleteItem', [InventoryController::class, 'deleteItem'])->name('deleteItem');
+    Route::resource('inventory', InventoryController::class);
 
     // ATTENDANCE
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');

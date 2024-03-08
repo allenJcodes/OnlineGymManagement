@@ -14,7 +14,7 @@ textarea {
 @layer components {
   
   .form-field-container {
-    @apply flex flex-col gap-1 text-background
+    @apply flex flex-col gap-1 text-background w-full
   }
 
   .form-label {

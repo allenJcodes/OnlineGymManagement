@@ -1,94 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-14">
-        <div
-            class="block p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <form action="{{ route('createItem') }}" method="POST">
-                @csrf
-                <div class="relative z-0 w-full mb-6 group">
-                    <input type="text" name="item_name" id="floating_email"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
-                    <label for="floating_email"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Item
-                        Name</label>
+    <div class="pt-12 flex flex-col gap-8">
+
+        <h1 class="text-xl">Add Item</h1>
+
+        <form action="{{ route('inventory.store') }}" method="POST" class="flex flex-col gap-3">
+            @csrf
+
+            <div class="form-field-container">
+                <label for="item_name" class="form-label">Item Name</label>
+                <input id="item_name" type="text" name="item_name" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input id="quantity" type="text" name="quantity" class="form-input">
+            </div>
+
+            <div class="flex gap-3 w-full">
+                <div class="form-field-container">
+                    <label for="equipment_type_id" class="form-label">Equipment Type</label>
+                
+                    <select name="equipment_type_id" id="equipment_type_id" class="form-input">
+                        @foreach ($equipmentTypes as $equipmentType)
+                            <option value="{{ $equipmentType->id }}">{{ $equipmentType->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="relative z-0 w-full mb-6 group">
-                    <input type="number" name="quantity" id="floating_password"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" " required />
-                    <label for="floating_password"
-                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity</label>
+                <div class="form-field-container">
+                    <label for="purchase_date" class="form-label">Purchase Date</label>
+                    <input id="purchase_date" type="date" name="purchase_date" class="form-input">
                 </div>
+            </div>
 
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-6 group">
-                        {{-- <input type="text" name="equipment_type" id="floating_first_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required />
-                        <label for="floating_first_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Equipment
-                            Type
-                        </label> --}}
-
-                        <label for="countries"
-                            class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Equipment
-                            Type</label>
-                        <select id="countries" name="equipment_type_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="" selected disabled>Select type of equipment</option>
-                            @foreach ($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input type="date" name="purchase_date" id="floating_last_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required />
-                        <label for="floating_last_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Purchase
-                            Date
-                        </label>
-                    </div>
-
+            <div class="flex gap-3 w-full">
+                <div class="form-field-container">
+                    <label for="warranty_information" class="form-label">Warranty Information</label>
+                    <input id="warranty_information" type="text" name="warranty_information" class="form-input">
                 </div>
-                <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input type="text" name="warranty_information" id="floating_first_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required />
-                        <label for="floating_first_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Warranty
-                            Information
-
-                        </label>
-                    </div>
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input type="text" name="maintenance_history" id="floating_last_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required />
-                        <label for="floating_last_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Maintenance
-                            History
-
-                        </label>
-                    </div>
-                    <div class="relative z-0 w-full mb-6 group">
-                        <input type="text" name="status" id="floating_last_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required />
-                        <label for="floating_last_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Status
-                        </label>
-                    </div>
-
+                <div class="form-field-container">
+                    <label for="maintenance_history" class="form-label">Maintenance History</label>
+                    <input id="maintenance_history" type="text" name="maintenance_history" class="form-input">
                 </div>
+            </div>
 
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>
+            <div class="form-field-container">
+                <label for="status" class="form-label">Status</label>
+            
+                <select name="status" id="status" class="form-input">
+                    <option value="" selected disabled>Select status</option>
+                    <option value="available">Available</option>
+                    <option value="not_available">Not Available</option>
+                    <option value="under_maintenance">Under Maintenance</option>
+                </select>
+            </div>
 
             @if ($errors->any())
                 <div class="flex flex-col gap-1">
@@ -97,6 +63,10 @@
                     @endforeach
                 </div>
             @endif
-        </div>
+
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Add Item
+            </button>
+        </form>
     </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-12">
+    <div class="pt-12">
         <div class="pt-2 pb-12">
             <a href="{{ route('equipment.index') }}" class="">
                 <button type="submit"
