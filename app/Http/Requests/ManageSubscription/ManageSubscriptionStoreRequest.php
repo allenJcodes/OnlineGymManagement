@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\ManageSubscription;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,6 +28,7 @@ class ManageSubscriptionStoreRequest extends FormRequest
             'price' => 'required|numeric',
             'number_of_months' => 'required|numeric',
             'description' => 'required',
+            'inclusions' => 'required'
         ];
     }
 }
