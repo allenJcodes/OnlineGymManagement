@@ -1,13 +1,9 @@
-<aside id="default-sidebar"
-    class="fixed top-0 sm:top-14 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 "
-    aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+<aside id="default-sidebar" class="fixed top-0 sm:top-14 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-background">
         <ul class="space-y-2 font-medium">
-            @if (Auth::user()->user_role == '1')
                 <li>
-                    <a href="/home"
-                        class="{{ Route::is('home') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    <a href="{{route('home')}}" class="{{ request()->is('home*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                             <path
                                 d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
@@ -17,10 +13,11 @@
                         <span class="ml-3">Dashboard</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('scheduling.index') }}"
-                        class=" {{ Route::is('scheduling.index') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ request()->is('scheduling*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
@@ -29,10 +26,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Scheduling</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('equipment.index') }}"
-                        class=" {{ request()->is('equipment*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ request()->is('equipment*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
                             <path
@@ -41,10 +39,12 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Equipments</span>
                     </a>
                 </li>
+                @if (Auth::user()->user_role == '1')
+
                 <li>
                     <a href="{{ route('inventory.index') }}"
-                        class="{{ request()->is('inventory*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ request()->is('inventory*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path
@@ -53,10 +53,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Inventory</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('instructor.index') }}"
-                        class="{{ request()->is('instructor*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ request()->is('instructor*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path
@@ -65,10 +66,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Instructors</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('manage.subscription.index') }}"
-                        class="{{ request()->is('manage/subscription*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ request()->is('manage/subscription*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -77,10 +79,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Manage Subscriptions</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('membership') }}"
-                        class="{{ Route::is('membership') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('membership') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,10 +92,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Membership</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('users') }}"
-                        class="{{ Route::is('users', 'editUser', 'addUser') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('users', 'editUser', 'addUser') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -101,10 +105,11 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="{{ route('contents.index') }}"
-                        class="{{ request()->is('contents*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ request()->is('contents*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -118,8 +123,8 @@
 
                 <li>
                     <a href="{{ route('attendance') }}"
-                        class="{{ Route::is('attendance', 'editAttendance', 'addAttendance') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('attendance', 'editAttendance', 'addAttendance') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -130,11 +135,43 @@
                 </li>
             @endif
 
-            @if (Auth::user()->user_role == '2')
+            @if (Auth::user()->user_role != '1')
+
+                <li>
+                    <a href="{{ route('reservation') }}"
+                        class=" {{ Route::is('reservation') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-calendar-check" viewBox="0 0 16 16">
+                            <path
+                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+
+                        <span class="flex-1 ml-3 whitespace-nowrap">Reservations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('payments') }}"
+                        class=" {{ Route::is('payments') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-credit-card" viewBox="0 0 16 16">
+                            <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                        </svg>
+
+                        <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
+                    </a>
+                </li>
+            @endif
+
+            {{-- @if (Auth::user()->user_role == '2')
                 <li>
                     <a href="/home"
-                        class="{{ Route::is('home') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('home') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
                             <path
@@ -147,8 +184,8 @@
                 </li>
                 <li>
                     <a href="{{ route('scheduling.index') }}"
-                        class=" {{ Route::is('scheduling.index') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ Route::is('scheduling.index') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
@@ -159,8 +196,8 @@
                 </li>
                 <li>
                     <a href="{{ route('equipment') }}"
-                        class=" {{ Route::is('equipment', 'AddEquipment', 'editEquipment') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ Route::is('equipment', 'AddEquipment', 'editEquipment') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
                             <path
@@ -171,8 +208,8 @@
                 </li>
                 <li>
                     <a href="{{ route('inventory.index') }}"
-                        class="{{ request()->is('inventory*') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ request()->is('inventory*') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path
@@ -183,8 +220,8 @@
                 </li>
                 <li>
                     <a href="{{ route('membership') }}"
-                        class="{{ Route::is('membership') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('membership') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -196,8 +233,8 @@
                 </li>
                 <li>
                     <a href="{{ route('users') }}"
-                        class="{{ Route::is('users', 'editUser', 'addUser') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('users', 'editUser', 'addUser') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -208,8 +245,8 @@
                 </li>
                 <li>
                     <a href="{{ route('attendance') }}"
-                        class="{{ Route::is('attendance', 'editAttendance', 'addAttendance') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('attendance', 'editAttendance', 'addAttendance') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
@@ -223,8 +260,8 @@
             @if (Auth::user()->user_role == '3')
                 <li>
                     <a href="/home"
-                        class="{{ Route::is('home') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class="{{ Route::is('home') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
                             <path
@@ -237,8 +274,8 @@
                 </li>
                 <li>
                     <a href="{{ route('scheduling.index') }}"
-                        class=" {{ Route::is('scheduling.index') ? 'bg-blue-900 text-white' : '' }}  flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ Route::is('scheduling.index') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }}  flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
@@ -249,8 +286,8 @@
                 </li>
                 <li>
                     <a href="{{ route('equipment.index') }}"
-                        class=" {{ Route::is('equipment.index', 'equipment.create', 'equipment.edit') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        class=" {{ Route::is('equipment.index', 'equipment.create', 'equipment.edit') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
+                        <svg class="w-5 h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
                             <path
@@ -261,7 +298,7 @@
                 </li>
                 <li>
                     <a href="{{ route('reservation') }}"
-                        class=" {{ Route::is('reservation') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
+                        class=" {{ Route::is('reservation') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-calendar-check" viewBox="0 0 16 16">
                             <path
@@ -275,7 +312,7 @@
                 </li>
                 <li>
                     <a href="{{ route('payments') }}"
-                        class=" {{ Route::is('payments') ? 'bg-blue-900 text-white' : '' }} flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 group">
+                        class=" {{ Route::is('payments') ? 'bg-green-500 text-off-white fill-off-white' : 'text-gray-500 fill-gray-500' }} flex items-center p-2 hover:text-off-white rounded-lg dark:text-off-white hover:brightness-110 group">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-credit-card" viewBox="0 0 16 16">
                             <path
@@ -286,9 +323,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Payments</span>
                     </a>
                 </li>
-            @endif
-
-
+            @endif --}}
         </ul>
     </div>
 </aside>

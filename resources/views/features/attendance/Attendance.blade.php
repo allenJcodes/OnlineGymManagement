@@ -3,7 +3,7 @@
 @section('content')
     <div class="container pt-10">
         <div class="flex justify-end pr-4">
-            <a href="{{ route('addItem') }}">
+            <a href="#">
                 <button type="button"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
                     Item</button>

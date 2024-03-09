@@ -20,6 +20,10 @@ export default {
                     '950': '#212529',
                     '900': '#3E454C',
                     '800': '#515F69',
+                },
+
+                'light-gray' : {
+                    background: '#F5F5F5'
                 }
             }
         },

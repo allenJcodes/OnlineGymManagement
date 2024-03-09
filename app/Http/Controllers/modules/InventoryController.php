@@ -13,7 +13,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::all();
+        $inventories = Inventory::paginate(2);
         return view('features.inventory.inventory', compact('inventories'));
     }
 
