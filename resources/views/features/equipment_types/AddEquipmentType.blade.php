@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-12 flex flex-col gap-8">
-        <h1 class="text-xl">Add Equipment Type</h1>
+    <div class="flex flex-col pt-16 gap-5 text-background">
+        <h1 class="text-2xl font-bold">Add Equipment Type</h1>
 
-        <form action="{{ route('equipment_types.store') }}" method="POST">
+        <form action="{{ route('equipment_types.store') }}" method="POST" class="flex flex-col gap-3 card">
             @csrf
 
             <div class="form-field-container">
@@ -20,9 +20,12 @@
                 </div>
             @endif
 
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Add Type
-            </button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('equipment_types.index') }}" class="outline-button">
+                    Cancel
+                </a>
+                <button class="primary-button">Add Equipment Type</button>
+            </div>
         </form>
     </div>
 @endsection

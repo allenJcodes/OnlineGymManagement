@@ -24,6 +24,17 @@ export default {
 
                 'light-gray' : {
                     background: '#F5F5F5'
+                },
+
+                dashboard: {
+                    primary: '#FAFAFA',
+                    background: '#F2F5F9',
+                    accent: {
+                        light: '#FFF8F7',
+                        base: '#FF6F61'
+                    } 
+                    
+                    
                 }
             }
         },
