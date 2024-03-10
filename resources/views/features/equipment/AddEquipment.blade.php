@@ -38,7 +38,6 @@
                 </select>
             </div>
 
-
             <div class="form-field-container">
                 <label for="description" class="form-label">Description</label>
                 <input id="description" type="text" name="description" class="form-input">

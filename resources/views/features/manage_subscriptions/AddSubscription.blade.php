@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-14">
-        <form action="{{ route('manage.subscription.store') }}" method="POST" class="flex flex-col gap-3">
+    <div class="flex flex-col pt-16 gap-5 text-background">
+
+        <h1 class="text-2xl font-bold">Add Subscription</h1>
+
+        <form action="{{ route('manage.subscription.store') }}" method="POST" class="flex flex-col gap-3 card">
             @csrf
 
             <div class="form-field-container">
@@ -35,9 +38,16 @@
                     <p class="text-red-500 text-xs">{{$error}}</p>
                 @endforeach
             </div>
+
             @endif
 
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Subscription</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('manage.subscription.index') }}" class="outline-button">
+                    Cancel
+                </a>
+                <button class="primary-button">Add Subscription</button>
+            </div>
+
         </form>
     </div>
 @endsection

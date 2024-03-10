@@ -29,7 +29,7 @@ const Inclusions = ({_inclusions = '[]'}) => {
         inclusions && inclusions.map((inclusion, index) => <InclusionContainer key={index} index={index} inclusion={inclusion} handleInputChange={handleInputChange}/>)
       }
 
-      <button type='button' onClick={handleAddInclusion}>Add Inclusion +</button>
+      <button className='outline-button w-fit' type='button' onClick={handleAddInclusion}>Add Inclusion +</button>
     </>
   )
 }
