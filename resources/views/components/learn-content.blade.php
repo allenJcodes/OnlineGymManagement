@@ -12,6 +12,7 @@
 </div> --}}
 
 <div @class(['flex w-full bg-border/20 ring-1 ring-border rounded-lg overflow-clip max-h-[30vh]', 'flex-row-reverse' => $flipped])>
+    
     <div class="w-[55%]">
         <img class="h-full w-full object-cover object-left-top" src="{{ asset($image) }}" alt="image of {{$title}}">
     </div>
