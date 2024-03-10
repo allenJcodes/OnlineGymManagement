@@ -26,8 +26,7 @@ class EquipmentController extends Controller
 
     public function store(EquipmentStoreRequest $request) {
         if($request->image){
-            $newImageName = time() . '-' . $request->equipment_name . '.';
-            $request->image->extension();
+            $newImageName = time() . '-' . $request->equipment_name . '.' . $request->image->extension();
             $request->image->move(public_path('image/equipment'), $newImageName);
         }
 

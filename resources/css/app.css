@@ -44,6 +44,10 @@ textarea {
   }
 
   .primary-button {
-    @apply py-2 px-4 bg-green-500 text-off-white rounded-md hover:brightness-110 text-sm transition-[filter]
+    @apply py-2 px-4 bg-dashboard-accent-base text-off-white rounded-md hover:brightness-110 text-sm transition-[filter]
+  }
+
+  .outline-button {
+    @apply py-2 px-4 bg-transparent ring-1 ring-gray-400 text-gray-400 rounded-md hover:bg-gray-50 text-sm transition-[filter]
   }
 }

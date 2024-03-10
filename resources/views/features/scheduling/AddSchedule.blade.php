@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-14 gap-8">
-        <h1 class="text-xl">Add Schedule</h1>
+    <div class="flex flex-col pt-14 gap-5">
+        <h1 class="text-2xl font-bold">Add Schedule</h1>
 
-        <form action="{{route('scheduling.store')}}" method="POST" class="flex flex-col gap-5">
+        <form action="{{route('scheduling.store')}}" method="POST" class="flex flex-col gap-5 card">
             @csrf
 
             <div class="form-field-container">
@@ -45,7 +45,10 @@
                 </div>
             @endif
 
-            <button type="submit">Add Schedule</button>
+            <div class="flex gap-2 self-end">
+                <a href="{{route('scheduling.index')}}" class="w-fit outline-button">Cancel</a>
+                <button type="submit" class="primary-button w-fit">Add Schedule</button>
+            </div>
         </form>
 
 
