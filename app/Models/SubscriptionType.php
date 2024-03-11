@@ -19,6 +19,13 @@ class SubscriptionType extends Model
         'description',
     ];
 
+    public function getInclusionsStringAttribute(): string {
+        $inclusions = $this->inclusions->map(fn($inclusion) => $inclusion->name);
+
+        if(!count($inclusions)) return 'No Inclusions';
+
+        return count($inclusions) > 2 ? implode(', ', array_slice($inclusions->toArray(), 0, 2)) . ', +' . count($inclusions) - 2 . ' more.' : implode(', ', $inclusions->toArray());
+    }
     
     public function inclusions() : HasMany {
         return $this->hasMany(SubscriptionTypeInclusion::class);

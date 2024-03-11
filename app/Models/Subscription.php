@@ -20,6 +20,7 @@ class Subscription extends Model
         "end_date",
     ];
 
+
     public function subscribedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', "id");

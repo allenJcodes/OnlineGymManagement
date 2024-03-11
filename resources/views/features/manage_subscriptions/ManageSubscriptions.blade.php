@@ -41,6 +41,9 @@
                                 Description
                             </td>
                             <td class="py-2">
+                                Inclusions
+                            </td>
+                            <td class="py-2">
                                 Action
                             </td>
                         </tr>
@@ -55,7 +58,8 @@
                                     <td class="py-2">{{$subscription->name}}</td>
                                     <td class="py-2">{{$subscription->price}}</td>
                                     <td class="py-2">{{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}</td>
-                                    <td class="py-2">{{$subscription->description}}</td>
+                                    <td class="my-2 max-w-[25vw] line-clamp-1" title="{{$subscription->description}}">{{$subscription->description}}</td>
+                                    <td class="py-2" title="{{implode(', ', $subscription->inclusions->map(fn($inclusion) => $inclusion->name)->toArray()) }}">{{$subscription->getInclusionsStringAttribute()}}</td>
                                     <td>
                                         <div class="flex items-center w-full">
                                             <div class="text-left">
@@ -80,7 +84,7 @@
                                                         <form class="w-full py-2 px-4 hover:bg-off-white transition-all" action="{{route('manage.subscription.destroy', ['subscription' => $subscription])}}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="w-full">Delete</button>
+                                                            <button class="w-full text-left">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -95,7 +99,7 @@
                         @else
                             <tr>
                                 <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                    No items
+                                    No subscriptions
                                 </td>
                             </tr>
                         @endif

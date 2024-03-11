@@ -2,8 +2,10 @@
 
 @section('content')
     
-    <div class="container pt-14 text-background">
-        <form action="{{ route('manage.subscription.update', ['subscription' => $subscription]) }}" method="POST">
+    <div class="flex flex-col pt-16 gap-5 text-background">
+        <h1 class="text-2xl font-bold">Edit Subscription</h1>
+
+        <form action="{{ route('manage.subscription.update', ['subscription' => $subscription]) }}" method="POST" class="flex flex-col gap-3 card">
             @method('PUT')
             @csrf
 
@@ -38,11 +40,12 @@
                 </div>
             @endif
 
-            <a href="{{ route('manage.subscription.index') }}">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Back</button>
-            </a>
-
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Subscription</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('manage.subscription.index') }}" class="outline-button">
+                    Back
+                </a>
+                <button class="primary-button">Save Changes</button>
+            </div>
         </form>
     </div>
 @endsection

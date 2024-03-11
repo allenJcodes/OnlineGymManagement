@@ -65,9 +65,13 @@
                 </div>
             @endif
 
-            <button type="submit" class="primary-button">
-                Save Changes
-            </button>
+            
+            <div class="self-end flex gap-2">
+                <a href="{{ route('inventory.index') }}" class="outline-button">
+                    Back
+                </a>
+                <button type="submit" class="primary-button">Save Changes</button>
+            </div>
         </form>
     </div>
 @endsection

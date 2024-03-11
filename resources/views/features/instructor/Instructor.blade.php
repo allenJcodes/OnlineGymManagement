@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($instructors as $instructor)
+                        @forelse ($instructors as $instructor)
                             <tr class="table-row">
                                 <td class="py-2">
                                     {{ $instructor->first_name }} {{ $instructor->last_name }}
@@ -79,7 +79,13 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                                    No instructors
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

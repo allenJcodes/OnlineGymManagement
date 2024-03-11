@@ -50,9 +50,9 @@
 
             <div class="self-end flex gap-2">
                 <a href="{{ route('equipment.index') }}" class="outline-button">
-                    Cancel
+                    Back
                 </a>
-                <button class="primary-button">Edit Equipment</button>
+                <button class="primary-button">Save Changes</button>
             </div>
         </form>
 

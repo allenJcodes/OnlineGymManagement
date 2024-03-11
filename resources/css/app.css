@@ -32,7 +32,7 @@ textarea {
   }
 
   .table {
-    @apply w-full font-normal text-sm
+    @apply w-full font-normal text-sm table-auto
   }
 
   thead .table-row {

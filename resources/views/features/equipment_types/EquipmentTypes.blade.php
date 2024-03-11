@@ -44,7 +44,6 @@
     
                     <tbody>
                         @if (count($model))
-
                             @foreach ($model as $m)
                                 <tr class="table-row">
                                     <td class="py-2">{{ $m->id }}</td>
