@@ -16,7 +16,7 @@ require("./bootstrap");
 
 require("./components/Example");
 require("./Scheduling/Schedules");
-require("./Scheduling/AddSchedule");
+// require("./Scheduling/AddSchedule");
 require("./Reservation/Reservation");
 require("./Payments/Payments");
 require("./Attendance/Attendance");

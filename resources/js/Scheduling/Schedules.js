@@ -12,9 +12,11 @@ const Schedules = (props) => {
     const [events, setEvents] = useState([]);
     const [open, setOpen] = useState(false);
     const [event, setEvent] = useState(null);
+    
     const handleAddButton = () => {
         window.location.replace("/scheduling/create");
     };
+
     const handleClickEvent = (info) => {
         api.get(`getspecificschedule?id=${info.event.id}`)
             .then((response) => {
@@ -84,13 +86,14 @@ const Schedules = (props) => {
                         </Typography>
                         {props.user_role != 3 ? (
                             <div className="flex justify-end items-center mt-5">
+                                {/* <a href="{{route('scheduling.edit'. ['schedule' => ${event.id}])}}" className="primary-button">Edit</a> */}
                                 <Button
                                     variant="contained"
                                     color="warning"
                                     style={{ marginLeft: 8, marginRight: 8 }}
                                     onClick={() => {
                                         window.location.replace(
-                                            `/editschedule/${event.id}`
+                                            `/scheduling/${event.id}/edit`
                                         );
                                     }}
                                 >

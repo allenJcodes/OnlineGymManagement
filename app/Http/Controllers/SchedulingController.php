@@ -6,7 +6,6 @@ use App\Http\Requests\Scheduling\SchedulingStoreRequest;
 use App\Models\Instructor;
 use App\Models\Schedules;
 use App\Models\User;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 
 class SchedulingController extends Controller
@@ -40,6 +39,20 @@ class SchedulingController extends Controller
      */
     public function store(SchedulingStoreRequest $request)
     {
+        // dd($request->date_time_start);
+        $checkConflicts = Schedules::where(function($query) use ($request) {
+            $query->where('date_time_start', '<=', $request->date_time_start)
+            ->where('date_time_end', '>=', $request->date_time_end);
+        })
+        ->orWhere(function($query) use ($request) {
+            $query->whereBetween('date_time_start', [$request->date_time_start, $request->date_time_end])
+            ->orWhereBetween('date_time_end', [$request->date_time_start, $request->date_time_end]);
+        })->get();
+
+        if(count($checkConflicts)) {
+            return back()->with('message', 'Overlapping Schedule');
+        }
+        
         Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
         return redirect()->route('scheduling.index');
     }
@@ -62,12 +75,10 @@ class SchedulingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $trainers = User::where('user_role', 2)->get();
-        return view('features.scheduling.AddSchedule', [
-            'trainers' => $trainers,
-            'isEdit' => $id
-        ]);
+    {   
+        $schedule = Schedules::find($id);
+        $instructors = Instructor::get();
+        return view('features.scheduling.EditSchedule', compact('instructors', 'schedule'));
     }
 
     /**
@@ -77,9 +88,27 @@ class SchedulingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SchedulingStoreRequest $request, Schedules $scheduling)
     {
-        //
+        $checkConflicts = Schedules::where('id', '!=', $scheduling->id)
+        ->where(function($q) use ($request) {
+            $q->where(function($query) use ($request) {
+                $query->where('date_time_start', '<=', $request->date_time_start)
+                ->where('date_time_end', '>=', $request->date_time_end);
+            })
+            ->orWhere(function($query) use ($request) {
+                $query->whereBetween('date_time_start', [$request->date_time_start, $request->date_time_end])
+                ->orWhereBetween('date_time_end', [$request->date_time_start, $request->date_time_end]);
+            });
+        }) 
+        ->get();
+
+        if(count($checkConflicts)) {
+            return back()->with('message', 'Overlapping Schedule');
+        }
+
+        $scheduling->update([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
+        return redirect()->route('scheduling.index');
     }
 
     /**
