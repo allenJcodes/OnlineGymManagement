@@ -14,41 +14,27 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with('role')->paginate(10);
         return view('features.users.Users', compact('users'));
     }
 
-    public function addUser()
-    {
+    public function create() {
         return view('features.users.addUsers');
     }
 
-    public function registerUser(UserStoreRequest $request)
-    {
+    public function store(UserStoreRequest $request) {
         User::create($request->validated());
         return redirect()->route('users');
     }
 
-    public function editUser($id)
-    {
-        $user = User::find($id); 
-        return view('features.users.editUsers', [
-            'user' => $user,
-        ]);
+    public function edit(User $user) {
+        return view('features.users.editUsers', compact('user'));
     }
 
-    public function updateUser(UserUpdateRequest $request, $id)
-    {
-        $user = User::find($id); 
-
+    public function update(UserUpdateRequest $request, User $user) {
         if ($request->password) {
             $user->update(['password' => Hash::make($request->password)]);
         }
-
-        // if ($request->profile_image) {
-        //     $extension = $request->profile_image->extension();
-        //     $newImage = $request->profile_image->storeAs('images/user/', $id . time() . '.' . $extension, 'public');
-        // }
 
         $user->update([
             'first_name' => $request->first_name,
@@ -62,12 +48,11 @@ class UsersController extends Controller
         return redirect()->route('users');
     }
 
-    public function deleteUser($id)
-    {
-        DB::table('users')
-            ->where('id', $id)
-            ->delete();
-
+    public function destroy(User $user) {
+        $user->delete();
         return redirect()->route('users');
     }
+
+    // end
+
 }

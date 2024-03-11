@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-14 gap-8">
-        <h1 class="text-xl">Add Contact Detail</h1>
+    <div class="flex flex-col pt-14 gap-5 text-background">
+        <h1 class="text-2xl font-bold">Add Contact Detail</h1>
 
-        <form action="{{route('contents.contact.update', ['contact' => $contact])}}" method="POST" class="flex flex-col gap-5">
+        <form action="{{route('contents.contact.update', ['contact' => $contact])}}" method="POST" class="flex flex-col gap-3 card">
             @csrf
             @method('PUT')
 
@@ -36,7 +36,12 @@
                 </div>
             @endif
 
-            <button type="submit">Save Changes</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('contents.contact.index') }}" class="outline-button">
+                    Cancel
+                </a>
+                <button class="primary-button">Save Changes</button>
+            </div>
         </form>
 
     </div>

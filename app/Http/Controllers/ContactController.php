@@ -94,7 +94,6 @@ class ContactController extends Controller
     public function destroy(ContactDetail $contact)
     {
         $contact->delete();
-
         return redirect()->route('contents.contact.index')->with('success', 'Successfully deleted contact information.');
     }
 }

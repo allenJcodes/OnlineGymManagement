@@ -59,7 +59,7 @@
                                     <td class="py-2">{{$subscription->price}}</td>
                                     <td class="py-2">{{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}</td>
                                     <td class="my-2 max-w-[25vw] line-clamp-1" title="{{$subscription->description}}">{{$subscription->description}}</td>
-                                    <td class="py-2" title="{{implode(', ', $subscription->inclusions->map(fn($inclusion) => $inclusion->name)->toArray()) }}">{{$subscription->getInclusionsStringAttribute()}}</td>
+                                    <td class="py-2" title="{{implode(', ', $subscription->inclusions->map(fn($inclusion) => $inclusion->name)->toArray()) }}">{{$subscription->inclusions_string}}</td>
                                     <td>
                                         <div class="flex items-center w-full">
                                             <div class="text-left">

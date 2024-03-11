@@ -92,9 +92,10 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('users') }}"
-                        class="{{ Route::is('users', 'editUser', 'addUser') ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    <a href="{{ route('user.index') }}"
+                        class="{{ request()->is('user*') ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
+                        <svg class="w-5 h-5"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">
                             <path
                                 d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />

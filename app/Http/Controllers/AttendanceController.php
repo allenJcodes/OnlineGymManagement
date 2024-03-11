@@ -16,9 +16,7 @@ class AttendanceController extends Controller
         //     $query->get();
         // }])->with('instructor')->get();
         $allAttendances = Schedules::with('instructor')->get();
-        return view('features.attendance.Attendance', [
-            "item" => $allAttendances
-        ]);
+        return view('features.attendance.Attendance', compact('allAttendances'));
     }
 
     public function viewAttendance($id)

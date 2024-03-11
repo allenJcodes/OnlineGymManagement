@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-14">
+    <div class="pt-16 flex flex-col gap-5 text-background">
+        <h1 class="text-2xl font-bold">Edit User</h1>
 
-        <form method="POST" action="{{ route('updateUser', $user->id) }}" class="flex flex-col gap-3">
+        <form method="POST" action="{{ route('user.update', ['user' => $user]) }}" class="flex flex-col gap-3 card">
             @method('PUT')
             @csrf
-
 
             <div class="form-field-container">
                 <label for="first_name" class="form-label">First Name</label>
@@ -55,8 +55,15 @@
                 </div>
             @endif
 
-            <button type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('user.index') }}" class="outline-button">
+                    Back
+                </a>
+
+                <button type="submit" class="primary-button">
+                    Save Changes
+                </button>
+            </div>
         </form>
 
     </div>

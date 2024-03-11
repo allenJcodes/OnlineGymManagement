@@ -42,6 +42,7 @@
                                 <div id="toggle{{ $equipment->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
                                     <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
                                         <p class="text-background/70 text-sm pt-2 px-4 whitespace-nowrap">Actions - {{$equipment->equipment_name}}</p>
+                                        
                                         <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                             <a href="{{route('equipment.edit', ['equipment' => $equipment])}}" class="py-2 px-4 hover:bg-off-white transition-all text-sm">Edit</a>
                                             <a href="" id="delete{{ $equipment->id }}" class="py-2 px-4 hover:bg-off-white transition-all text-sm">Delete</a>
@@ -50,6 +51,18 @@
                                 </div>
                             </div>
                         @endif
+
+                        <div class="absolute top-2 left-2">
+                            <div @class([
+                                'flex py-1 px-2 text-xs text-off-white rounded-full ring-1', 
+                                'bg-green-100 ring-green-500 text-green-500' => $equipment->status == 'available',
+                                'bg-red-100 ring-red-500 text-red-500' => $equipment->status == 'not_available',
+                                'bg-orange-100 ring-orange-500 text-orange-500' => $equipment->status == 'under_maintenance',
+                            ])>
+                                {{str_replace('_', ' ', $equipment->status)}}
+                            </div>
+                        </div>
+
                         <div class="flex flex-col bg-white rounded-lg items-center overflow-clip border border-border">
                             <div class="h-[20vh] w-full flex items-center justify-center bg-dashboard-accent-light group overflow-clip">
                                 <img src="{{ asset('image/equipment/' . $equipment->image_path) }}" class="h-full object-cover group-hover:scale-110 transition-[transform] duration-[1000ms]" alt="" />
@@ -60,23 +73,6 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        $("#delete{{ $equipment->id }}").click(function() {
-                            const formdata = new FormData()
-                            formdata.append("id", "{{ $equipment->id }}")
-                            axios.post("/deleteEquipment", formdata)
-                                .then(() => {
-                                    swal({
-                                        icon: "success",
-                                        title: "Item Deleted!",
-                                        text: "Item has been deleted successfully!",
-                                        buttons: false
-                                    }).then(() => {
-                                        location.reload()
-                                    })
-                                })
-                        })
-                    </script>
                 @empty
                     <tr>
                         <td colspan="5" class="text-center">No Items yet</td>

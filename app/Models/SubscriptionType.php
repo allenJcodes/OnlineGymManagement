@@ -19,6 +19,8 @@ class SubscriptionType extends Model
         'description',
     ];
 
+    protected $appends = ['inclusions_string'];
+
     public function getInclusionsStringAttribute(): string {
         $inclusions = $this->inclusions->map(fn($inclusion) => $inclusion->name);
 

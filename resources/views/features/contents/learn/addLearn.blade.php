@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-14 gap-8">
-        <h1 class="text-xl">Add Learn Content</h1>
+    <div class="pt-16 flex flex-col gap-5 text-background">
+        <h1 class="text-2xl font-bold">Add Learn Content</h1>
 
-        <form action="{{route('contents.learn.store')}}" method="POST" class="flex flex-col gap-5">
+        <form enctype="multipart/form-data" action="{{route('contents.learn.store')}}" method="POST" class="flex flex-col gap-3 card">
             @csrf
 
             <div class="form-field-container">
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-field-container">
-                <label for="image" class="form-label">Content</label>
+                <label for="image" class="form-label">Image</label>
                 <input id="image" type="file" name="image" class="form-input" />
             </div>
 
@@ -35,7 +35,12 @@
                 </div>
             @endif
 
-            <button type="submit">Add Learn Content</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('contents.learn.index') }}" class="outline-button">
+                    Cancel
+                </a>
+                <button class="primary-button">Add Learn Content</button>
+            </div>
         </form>
 
     </div>
