@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="pt-16 flex flex-col gap-5">
+    <div class="pt-16 flex flex-col gap-5 text-background">
         <h1 class="text-2xl font-bold">Add Instructor</h1>
 
 

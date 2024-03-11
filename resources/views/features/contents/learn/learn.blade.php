@@ -1,92 +1,121 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-16 gap-2">
-        <div class="flex justify-between">
-            <h1 class="text-xl">Contact</h1>
-            <a href="{{ route('contents.learn.create') }}">
-                <button type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add
-                    Item</button>
+    <div class="flex flex-col pt-16 gap-5 text-background">
+
+        
+        <div class="flex items-start w-full justify-between ">
+            <h1 class="text-2xl font-bold">Learn Content</h1>
+
+            <a href="{{ route('contents.learn.create') }}" class="primary-button">
+                Add Learn Content +
             </a>
         </div>
+
+        <div class="flex flex-col gap-2">
+
+            <div class="card">
+
+                <div class="flex w-full justify-between">
+                    <h2 class="text-xl font-medium">Learn Contents List</h2>
+                    {{-- form actions here --}}
+                    <form class="w-[30%]">
+                        <input id="search" type="text" class="form-input text-sm w-full h-fit p-1.5" placeholder="Search something">
+                    </form>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr class="table-row">
+                            <td class="py-2">
+                                Title
+                            </td>
+                            <td class="py-2">
+                                Subtitle
+                            </td>
+                            <td class="py-2">
+                                Content
+                            </td>
+                            <td class="py-2">
+                                Created At
+                            </td>
+                            <td class="py-2">
+                                Updated At
+                            </td>
+                            <td class="py-2">
+                                Actions
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($learnContents as $learnContent)
+                        <tr class="table-row">
+                            <td class="py-2">
+                                {{ $learnContent->title }}
+                            </td>
+                            <td class="py-2">
+                                {{ $learnContent->subtitle }}
+                            </td>
+                            <td class="py-2">
+                                {{ $learnContent->content }}
+                            </td>
+                            <td class="py-2">
+                                {{ $learnContent->created_at }}
+                            </td>
+                            <td class="py-2">
+                                {{ $learnContent->updated_at }}
+                            </td> 
+                            <td>
+                                <div class="flex items-center w-full">
+                                    <div class="text-left">
+                                        <button id="dropdownButton" data-dropdown-toggle="toggle{{ $learnContent->id }}" class="" type="button">
+                                            <span class="sr-only">Open dropdown</span>
+                                            <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 16 3">
+                                                <path
+                                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div id="toggle{{ $learnContent->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
+
+                                        <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
+
+                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{ $learnContent->title }}</p>
+
+                                            <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
+                                                <a href="{{route('contents.learn.edit', ['learn' => $learnContent])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
+                                                <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0" action="{{route('contents.learn.destroy', ['learn' => $learnContent])}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="w-full text-left">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                                No instructors
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+
         <div class="relative overflow-x-auto shadow-md rounded-md"
             style="background-color: rgb(247, 247, 247); max-height: 79vh">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" style="height: 20vh">
-                <thead class="text-xs text-white uppercase  dark:bg-gray-700 dark:text-gray-400"
-                    style="background-color: #0F172A">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-white ">
-                            Title
-                        </th>
-                        <th class="px-6 py-3 text-left text-white ">
-                            Subtitle
-                        </th>
-                        <th class="px-6 py-3 text-left text-white ">
-                            Content
-                        </th>
-                        <th class="px-6 py-3 text-center text-white ">
-                            Created At
-                        </th>
-                        <th class="px-6 py-3 text-center text-white ">
-                            Updated At
-                        </th>
-                        <th class="px-6 py-3 text-center text-white ">
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($learnContents as $learnContent)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td scope="row"
-                            class="px-6 py-3 font-medium text-gray-900 dark:text-white align-top text-left">
-                            {{ $learnContent->title }}
-                        </td>
-                        <td class="px-6 py-3 align-top text-left">
-                            {{ $learnContent->subtitle }}
-                        </td>
-                        <td class="px-6 py-3 align-top text-left">
-                            {{ $learnContent->content }}
-                        </td>
-                        <td class="px-6 py-3 text-center">
-                            {{ $learnContent->created_at }}
-                        </td>
-                        <td class="px-6 py-3 text-center">
-                            {{ $learnContent->updated_at }}
-                        </td> 
-                        <td>
-                            <div class="text-right pr-5"style="">
-                                <button id="dropdownButton" data-dropdown-toggle="toggle{{ $learnContent->id }}"
-                                    class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                                    type="button">
-                                    <span class="sr-only">Open dropdown</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 16 3">
-                                        <path
-                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div id="toggle{{ $learnContent->id }}"
-                                class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2" aria-labelledby="dropdownButton">
-                                    <li>
-                                        <a href="{{route('contents.learn.edit', ['learn' => $learnContent])}}"
-                                            class="block px-4 py-2 text-sm text-green-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                                    </li>
-                                    <form class="w-full" action="{{route('contents.learn.destroy', ['learn' => $learnContent])}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
-                                    </form>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
         </div>
     </div>
 @endsection

@@ -89,6 +89,6 @@ class FAQController extends Controller
     {
         $faq->delete();
 
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully deleted FAQ.');
+        return redirect()->route('contents.faq.index')->with('success', 'Successfully deleted FAQ.');
     }
 }
