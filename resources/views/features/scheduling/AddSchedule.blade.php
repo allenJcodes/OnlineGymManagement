@@ -50,7 +50,15 @@
                 <button type="submit" class="primary-button w-fit">Add Schedule</button>
             </div>
         </form>
-
-
     </div>
+
+    <script>
+        const dateStartInput = document.querySelector('#date_time_start');
+        const dateEndInput = document.querySelector('#date_time_end');
+
+        dateStartInput.addEventListener('change', () => {
+            dateEndInput.min = dateStartInput.value;
+        })
+
+    </script>
 @endsection

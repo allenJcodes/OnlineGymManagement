@@ -46,20 +46,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // USERS
     Route::resource('user', UsersController::class);
-    // Route::get('users', [UsersController::class, 'index'])->name('users');
-    // Route::get('addUser', [UsersController::class, 'addUser'])->name('addUser');
-    // Route::post('registerUser', [UsersController::class, 'registerUser'])->name('registerUser');
-    // Route::get('/editUser/{id}', [UsersController::class, 'editUser'])->name('editUser');
-    // Route::put('/updateUser/{id}', [UsersController::class, 'updateUser'])->name('updateUser');
-    // Route::delete('/deleteUser/{id}', [UsersController::class, 'deleteUser'])->name('deleteUser');
+
 
     Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('scheduling', SchedulingController::class);
     Route::get('getallschedules', [SchedulingController::class, 'getAllSchedules']);
     Route::get('getspecificschedule', [SchedulingController::class, 'getSpecificSchedule']);
-    Route::get('editschedule/{id}', [SchedulingController::class, 'editSchedule']);
-    Route::post('deleteschedule', [SchedulingController::class, 'deleteSchedule']);
 
     // RESERVATION
     Route::get('reservation', [ReservationController::class, 'index'])->name('reservation');
@@ -71,7 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP
-
     Route::prefix('manage')->name('manage.')->group(function() {
         Route::resource('subscription', ManageSubscriptionController::class);
     });
