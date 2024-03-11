@@ -10,24 +10,19 @@
             @csrf
 
             <div class="form-field-container">
-                <label for="item_name" class="form-label">Item Name</label>
-                <input value="{{$inventory->item_name}}" id="item_name" type="text" name="item_name" class="form-input">
+                <label for="equipment_id" class="form-label">Item Name</label>
+                <input value="{{$inventory->equipment->equipment_name}}" id="equipment_id" type="text" name="equipment_id" class="form-input" readonly>
             </div>
 
             <div class="form-field-container">
                 <label for="quantity" class="form-label">Quantity</label>
-                <input value="{{$inventory->quantity}}" id="quantity" type="text" name="quantity" class="form-input">
+                <input value="{{$inventory->quantity}}" id="quantity" type="number" min="0" name="quantity" class="form-input">
             </div>
 
             <div class="flex gap-3 w-full">
                 <div class="form-field-container">
                     <label for="equipment_type_id" class="form-label">Equipment Type</label>
-                
-                    <select name="equipment_type_id" id="equipment_type_id" class="form-input">
-                        @foreach ($equipmentTypes as $equipmentType)
-                            <option {{$inventory->equipment_type_id == $equipmentType->id ? 'selected' : ''}} value="{{ $equipmentType->id }}">{{ $equipmentType->name }}</option>
-                        @endforeach
-                    </select>
+                    <input value="{{$inventory->equipment->equipmentType->name}}" id="equipment_type_id" type="text" name="equipment_type_id" class="form-input" readonly>
                 </div>
                 <div class="form-field-container">
                     <label for="purchase_date" class="form-label">Purchase Date</label>
@@ -42,20 +37,15 @@
                 </div>
                 <div class="form-field-container">
                     <label for="maintenance_history" class="form-label">Maintenance History</label>
-                    <input value="{{$inventory->maintenance_history}}" id="maintenance_history" type="text" name="maintenance_history" class="form-input">
-                </div>
-            </div>
 
-            <div class="form-field-container">
-                <label for="status" class="form-label">Status</label>
-            
-                <select name="status" id="status" class="form-input">
-                    <option value="" disabled>Select status</option>
-                    <option {{$inventory->equipment_type_id == 'available' ? 'selected' : ''}} value="available">Available</option>
-                    <option {{$inventory->equipment_type_id == 'not_available' ? 'selected' : ''}} value="not_available">Not Available</option>
-                    <option {{$inventory->equipment_type_id == 'under_maintenance' ? 'selected' : ''}} value="under_maintenance">Under Maintenance</option>
-                </select>
-            </div>
+                    <select name="maintenance_history" id="maintenance_history" class="form-input">
+                        <option {{$inventory->maintenance_history == '' ? 'selected' : ''}} value="" disabled>Select Maintenance History</option>
+                        <option {{$inventory->maintenance_history == 'monthly' ? 'selected' : ''}} value="monthly">Monthly</option>
+                        <option {{$inventory->maintenance_history == 'quarterly' ? 'selected' : ''}} value="quarterly">Quarterly</option>
+                        <option {{$inventory->maintenance_history == 'annually' ? 'selected' : ''}} value="annually">Annually</option>
+                    </select>
+                </div>
+            </div>        
 
             @if ($errors->any())
                 <div class="flex flex-col gap-1">

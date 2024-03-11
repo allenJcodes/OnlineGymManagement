@@ -4,7 +4,7 @@ namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InventoryStoreRequest extends FormRequest
+class InventoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class InventoryStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'equipment_id' => 'required',
             'quantity' => 'required|numeric',
             'purchase_date' => 'required',
             'warranty_information' => 'required|string|max:255',

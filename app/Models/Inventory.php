@@ -13,17 +13,15 @@ class Inventory extends Model
     protected $table = 'inventory';
 
     protected $fillable = [
-        "item_name",
+        'equipment_id',
         "quantity",
-        'equipment_type_id',
         'purchase_date',
         'warranty_information',
         'maintenance_history',
-        'status'
     ];
 
-    public function equipmentType(): BelongsTo
+    public function equipment(): BelongsTo
     {
-        return $this->belongsTo(EquipmentType::class, 'equipment_type_id');
+        return $this->belongsTo(Equipment::class, 'equipment_id');
     }
 }

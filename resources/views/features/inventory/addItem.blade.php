@@ -9,22 +9,27 @@
             @csrf
 
             <div class="form-field-container">
-                <label for="item_name" class="form-label">Item Name</label>
-                <input id="item_name" type="text" name="item_name" class="form-input">
+                <label for="equipment_id" class="form-label">Item Name</label>
+                <select name="equipment_id" id="equipment_id" class="form-input">
+                    <option value="" selected disabled>Select Equipment</option>
+                    @foreach ($equipments as $equipment)
+                        <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-field-container">
                 <label for="quantity" class="form-label">Quantity</label>
-                <input id="quantity" type="text" name="quantity" class="form-input">
+                <input id="quantity" type="number" min="0" name="quantity" class="form-input">
             </div>
 
             <div class="flex gap-3 w-full">
                 <div class="form-field-container">
                     <label for="equipment_type_id" class="form-label">Equipment Type</label>
-                
                     <select name="equipment_type_id" id="equipment_type_id" class="form-input">
+                        <option value="" selected disabled></option>
                         @foreach ($equipmentTypes as $equipmentType)
-                            <option value="{{ $equipmentType->id }}">{{ $equipmentType->name }}</option>
+                            <option value="{{ $equipmentType->id }}" disabled>{{ $equipmentType->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -41,19 +46,13 @@
                 </div>
                 <div class="form-field-container">
                     <label for="maintenance_history" class="form-label">Maintenance History</label>
-                    <input id="maintenance_history" type="text" name="maintenance_history" class="form-input">
+                    <select name="maintenance_history" id="maintenance_history" class="form-input">
+                        <option value="" selected disabled>Select Maintenance History</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="annually">Annually</option>
+                    </select>
                 </div>
-            </div>
-
-            <div class="form-field-container">
-                <label for="status" class="form-label">Status</label>
-            
-                <select name="status" id="status" class="form-input">
-                    <option value="" selected disabled>Select status</option>
-                    <option value="available">Available</option>
-                    <option value="not_available">Not Available</option>
-                    <option value="under_maintenance">Under Maintenance</option>
-                </select>
             </div>
 
             @if ($errors->any())
@@ -74,4 +73,27 @@
             
         </form>
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+    <script>
+          // Load Equipment Type when Item Name is changed
+          $('#equipment_id').on('change', function(e) {
+            e.preventDefault();
+
+            var id = $(this).val();
+
+            $.ajax({
+                url: '{{ route('getItemType') }}',
+                method: 'get',
+                data: {
+                    'id': id
+                },
+                success: function(res) {
+                    $("#equipment_type_id").val(res.equipment_type_id);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+    </script>
 @endsection

@@ -15,13 +15,11 @@ class CreateInventoryTable extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->string('item_name');
+            $table->foreignId('equipment_id')->nullable()->constrained('equipment')->nullOnDelete();
             $table->string('quantity');
-            $table->foreignId('equipment_type_id')->nullable()->constrained('equipment_types')->nullOnDelete();
             $table->string('purchase_date');
             $table->string('warranty_information');
             $table->string('maintenance_history');
-            $table->string('status');
             $table->timestamps();
         });
     }

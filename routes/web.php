@@ -84,7 +84,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('equipment', EquipmentController::class);
 
     // INVENTORY
-    Route::resource('inventory', InventoryController::class);
+    Route::resource('inventory', InventoryController::class)->except(['show']);
+    Route::get('/inventory/getItemType', [InventoryController::class, 'getItemType'])->name('getItemType');
 
     // ATTENDANCE
     Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');

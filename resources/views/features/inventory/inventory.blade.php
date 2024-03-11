@@ -45,9 +45,6 @@
                                 Maintenance History
                             </td>
                             <td class="py-2">
-                                Status
-                            </td>
-                            <td class="py-2">
                                 Actions
                             </td>
                         </tr>
@@ -57,13 +54,13 @@
                             @foreach ($inventories as $inventory)
                                 <tr class="table-row">
                                     <td class="py-2">
-                                        {{ $inventory->item_name }}
+                                        {{ $inventory->equipment->equipment_name }}
                                     </td>
                                     <td class="py-2">
                                         {{ $inventory->quantity }}
                                     </td>
                                     <td class="py-2">
-                                        {{ $inventory->equipmentType->name }}
+                                        {{ $inventory->equipment->equipmentType->name }}
                                     </td>
                                     <td class="py-2">
                                         {{ $inventory->purchase_date }}
@@ -73,9 +70,6 @@
                                     </td>
                                     <td class="py-2">
                                         {{ $inventory->maintenance_history }}
-                                    </td>
-                                    <td class="py-2">
-                                        {{ $inventory->status }}
                                     </td>
                                     <td class="py-2">
                                         <div class="flex items-center w-full">
