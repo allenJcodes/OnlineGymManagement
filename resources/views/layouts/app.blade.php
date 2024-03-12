@@ -300,33 +300,6 @@
         </div>
 
     </div>
-    <script>
-        $(document).ready(() => {
-            let dates = []
-            axios.get('/usernotification/{{ Auth::user()->id }}')
-                .then(response => {
-                    dates = response.data
-                    dates.map((item, index) => {
-                        console.log(moment(item).subtract(1, 'day'))
-                        console.log(moment().utcOffset(0))
-                        console.log(moment(item).isSame(moment(), 'day'))
-                        console.log(item)
-                        if (moment(item).subtract(1, 'day').isSame(moment(), 'day')) {
-                            swal({
-                                icon: "info",
-                                title: "Schedule Today!",
-                                text: "You have a schedule for today!",
-                                buttons: false
-                            })
-                        }
-                    })
-                })
-                .catch(err => {
-                    console.log(err.response)
-                })
-        })
-    </script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> --}}
 </body>
 
 </html>

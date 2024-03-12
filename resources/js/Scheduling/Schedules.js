@@ -4,18 +4,16 @@ import ReactDOM from "react-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from '@fullcalendar/timegrid'
 import { api } from "../../config/api";
 import moment from "moment";
 import { toast } from "react-toastify";
 import CustomToast from "../components/CustomToast";
+
 const Schedules = (props) => {
     const [events, setEvents] = useState([]);
     const [open, setOpen] = useState(false);
     const [event, setEvent] = useState(null);
-    
-    const handleAddButton = () => {
-        window.location.replace("/scheduling/create");
-    };
 
     const handleClickEvent = (info) => {
         api.get(`getspecificschedule?id=${info.event.id}`)
@@ -25,24 +23,25 @@ const Schedules = (props) => {
             .catch((err) => {
                 console.log(err.response);
             });
+
         setOpen(true);
     };
+
     useEffect(() => {
-        console.log(props.user_role);
         api.get("getallschedules")
             .then((response) => {
                 const tempEvents = response.data;
-                let eventsArr = [];
-                tempEvents.map((item, index) => {
-                    eventsArr.push(...eventsArr, {
+
+                const eventsArr = tempEvents.map((item) => (
+                    {
                         id: item.id,
                         title: item.class_name,
                         instructor: item.instructor,
                         start: item.date_time_start,
                         end: item.date_time_end,
-                        display: "block",
-                    });
-                });
+                    }
+                ));
+
                 setEvents(eventsArr);
             })
             .catch((err) => {
@@ -52,138 +51,62 @@ const Schedules = (props) => {
     return (
         <>
             <CustomToast />
-            <div className="flex flex-col pt-16 gap-5 text-background">
-                <Modal open={open} onClose={() => setOpen(false)}>
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            width: 550,
-                            bgcolor: "background.paper",
-                            border: "2px solid #000",
-                            boxShadow: 24,
-                            p: 4,
-                        }}
-                    >
-                        <Typography variant="h6" component="h2" fontWeight={700}>
-                            Class Title: {event && event.class_name}
-                        </Typography>
-                        <Typography variant="h6" component="h2">
-                            Instructor:{" "}
-                            {event && event.instructor && event.instructor.name}
-                        </Typography>
-                        <Typography variant="h6">
-                            Date Start:{" "}
-                            {event &&
-                                moment(event.date_time_start).format("LL | hh:mmA")}
-                        </Typography>
-                        <Typography variant="h6">
-                            Date End:{" "}
-                            {event &&
-                                moment(event.date_time_end).format("LL | hh:mmA")}
-                        </Typography>
-                        {props.user_role != 3 ? (
-                            <div className="flex justify-end items-center mt-5">
-                                {/* <a href="{{route('scheduling.edit'. ['schedule' => ${event.id}])}}" className="primary-button">Edit</a> */}
-                                <Button
-                                    variant="contained"
-                                    color="warning"
-                                    style={{ marginLeft: 8, marginRight: 8 }}
-                                    onClick={() => {
-                                        window.location.replace(
-                                            `/scheduling/${event.id}/edit`
-                                        );
-                                    }}
-                                >
-                                    Edit
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="error"
-                                    onClick={() => {
-                                        api.post("deleteschedule", {
-                                            id: event.id,
-                                        })
-                                            .then((response) => {
-                                                toast("Schedule deleted!", {
-                                                    type: "success",
-                                                });
-                                                window.location.reload();
-                                            })
-                                            .catch((err) => {
-                                                console.log(err.response);
-                                            });
-                                    }}
-                                >
-                                    Delete
-                                </Button>
-                            </div>
-                        ) : (
-                            <div className="flex justify-end items-center mt-5">
-                                <Button
-                                    variant="contained"
-                                    color="success"
-                                    style={{ marginLeft: 8, marginRight: 8 }}
-                                    onClick={() => {
-                                        api.post("reserve", {
-                                            user_id: props.user_id,
-                                            schedule_id: event.id,
-                                        })
-                                            .then((response) => {
-                                                console.log(response.data);
-                                                if (response.data == "created") {
-                                                    toast(
-                                                        "Reservation has been made!",
-                                                        {
-                                                            type: "success",
-                                                        }
-                                                    );
-                                                } else {
-                                                    toast(
-                                                        "You already reserved this spot",
-                                                        {
-                                                            type: "error",
-                                                        }
-                                                    );
-                                                }
-                                            })
-                                            .catch((err) => {
-                                                console.log(err.response);
-                                            });
-                                    }}
-                                >
-                                    Reserve
-                                </Button>
-                            </div>
-                        )}
-                    </Box>
-                </Modal>
-                <div class="flex items-start w-full justify-between ">
+            <NewModal isOpen={open} setOpen={setOpen}>
+                
+                <div className="flex flex-col text-background gap-3 flex-1">
+                    <h2 className="text-lg font-bold"> Class Schedule</h2>
 
-                    <h1 className="text-2xl font-bold">Scheduling</h1>
+                    <div className="flex flex-col">
+                        <p className="text-dark-gray-800 text-xs">Class Name</p>
+                        <h2>{event?.class_name}</h2>
+                    </div>
 
-                    <button onClick={handleAddButton} class="primary-button">
-                        Add Schedule +
-                    </button>
+                    <div className="flex flex-col">
+                        <p className="text-dark-gray-800 text-xs">Instructor</p>
+                        <h2>{event?.instructor?.user?.full_name}</h2>
+                    </div>
+                    
+                    <h2>
+                        {event && moment(event.date_time_start).format("LL | hh:mmA")}
+                    </h2>
 
+                    <h2>
+                        {event && moment(event.date_time_end).format("LL | hh:mmA")}
+                    </h2>
+
+                    <div className="flex self-end mt-auto gap-2">
+                        <button onClick={() => setOpen(false)} className="outline-button">Back</button>
+                        <a className="primary-button" href={`/scheduling/${event?.id}/edit`}>Edit Schedule</a>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <FullCalendar
-                        plugins={[dayGridPlugin]}
-                        initialView="dayGridMonth"
-                        headerToolbar={{ start: "", center: "title" }}
-                        titleFormat={{ year: "numeric", month: "short" }}
-                        events={events}
-                        eventClick={handleClickEvent}
-                    />
-                </div>
+            </NewModal>
+
+
+            <div className="card">
+                <FullCalendar
+                    plugins={[dayGridPlugin, timeGridPlugin]}
+                    initialView="dayGridMonth"
+                    headerToolbar={{ start: "title", center: "", right: "today,prev,next,dayGridMonth,timeGridDay" }}
+                    titleFormat={{ year: "numeric", month: "short" }}
+                    events={events}
+                    eventClick={handleClickEvent}
+                />
             </div>
         </>
     );
 };
+
+const NewModal = ({children, isOpen, setOpen}) => {
+    return(
+        <div className={`${isOpen ? 'flex' : 'hidden'} items-center justify-center fixed top-0 left-0 right-0 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm`} onClick={() => setOpen(false)}>
+            <div className='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[50vw] min-h-[30vh] max-h-[90vh] max-w-[80vw]' onClick={(e) => e.stopPropagation()}>
+                {children}
+
+            </div>
+        </div>
+    )
+}
 
 export default Schedules;
 

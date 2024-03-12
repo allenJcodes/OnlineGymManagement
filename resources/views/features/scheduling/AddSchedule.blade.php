@@ -17,7 +17,7 @@
                 {{-- @dd($instructors) --}}
                 <select name="instructor_id" id="instructor_id" class="form-input">
                     @foreach ($instructors as $instructor)
-                        <option value="{{$instructor->id}}">{{$instructor->user->first_name}} {{$instructor->user->last_name}}</option>
+                        <option value="{{$instructor->id}}">{{$instructor->user->full_name}}</option>
                     @endforeach
                 </select>
             </div>

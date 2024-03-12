@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Schedules extends Model
 {
@@ -20,9 +21,9 @@ class Schedules extends Model
         'number_of_attendees',
     ];
 
-    public function instructor()
+    public function instructor(): BelongsTo
     {
-        return $this->hasOne(Instructor::class);
+        return $this->belongsTo(Instructor::class);
     }
 
     public function attendances()

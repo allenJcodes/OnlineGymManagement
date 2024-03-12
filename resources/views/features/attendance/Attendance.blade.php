@@ -53,7 +53,7 @@
                                 {{ $item->class_name }}
                             </td>
                             <td class="py-2">
-                                {{ $item->instructor->name }}
+                                {{ $item->user->full_name }}
                             </td>
                             <td class="py-2">
                                 {{ $item->number_of_attendees }}

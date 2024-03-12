@@ -50,6 +50,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    
     public function membership()
     {
         return $this->hasOne(Membership::class, 'user_id', "id");

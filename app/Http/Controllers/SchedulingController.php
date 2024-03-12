@@ -27,7 +27,7 @@ class SchedulingController extends Controller
      */
     public function create()
     {
-        $instructors = Instructor::with('user')->get()->all();
+        $instructors = Instructor::with('user')->get();
         return view('features.scheduling.AddSchedule', compact('instructors'));
     }
 
@@ -78,7 +78,7 @@ class SchedulingController extends Controller
     public function edit($id)
     {   
         $schedule = Schedules::find($id);
-        $instructors = Instructor::get();
+        $instructors = Instructor::with('user')->get();
         return view('features.scheduling.EditSchedule', compact('instructors', 'schedule'));
     }
 
@@ -125,23 +125,15 @@ class SchedulingController extends Controller
 
     public function getAllSchedules()
     {
-        return Schedules::with('instructor')->get();
+        return Schedules::with('instructor.user')->get();
     }
 
     public function getSpecificSchedule(Request $request)
     {
-        return Schedules::with('instructor')->find($request->id);
+        return Schedules::with('instructor.user')->find($request->id);
     }
 
-    public function editSchedule($id)
-    {
-        $trainers = User::where('user_role', 2)->get();
-        $editValues = Schedules::with('instructor')->where('id', $id);
-        return view('features.scheduling.AddSchedule', [
-            'isEdit' => $id,
-            'trainers' => $trainers
-        ]);
-    }
+
 
     public function deleteSchedule(Request $request)
     {
