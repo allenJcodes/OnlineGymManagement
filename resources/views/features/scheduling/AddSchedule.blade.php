@@ -13,11 +13,11 @@
             </div>
 
             <div class="form-field-container">
-                <label for="staff_id" class="form-label">Instructor</label>
-            
-                <select name="staff_id" id="staff_id" class="form-input">
+                <label for="instructor_id" class="form-label">Instructor</label>
+                {{-- @dd($instructors) --}}
+                <select name="instructor_id" id="instructor_id" class="form-input">
                     @foreach ($instructors as $instructor)
-                        <option value="{{$instructor->id}}">{{$instructor->first_name}} {{$instructor->last_name}}</option>
+                        <option value="{{$instructor->id}}">{{$instructor->user->first_name}} {{$instructor->user->last_name}}</option>
                     @endforeach
                 </select>
             </div>

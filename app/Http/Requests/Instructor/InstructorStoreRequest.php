@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InstructorStoreRequest extends FormRequest
 {
@@ -24,8 +25,11 @@ class InstructorStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => ['required', 'string', 'max:255', 'min:2'],
+            'middle_name' => ['nullable','string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255', 'min:2'],
+            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')],
+            'password' => ['required', 'string'],
             'description' => 'required',
         ];
     }

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("password"),
         ]);
 
-        // STAFF SEEDER (COMMENT OUT PAG MERON NA)
+        // INSTRUCTOR SEEDER (COMMENT OUT PAG MERON NA)
         User::create([
             'first_name' => "Joel",
             'last_name' => "Garcia",
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'role_name' => 'Admin'
         ]);
         UserRoles::create([
-            'role_name' => 'Staff'
+            'role_name' => 'Instructor'
         ]);
         UserRoles::create([
             'role_name' => 'Customer'

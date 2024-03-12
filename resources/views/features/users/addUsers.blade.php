@@ -37,7 +37,7 @@
                 <select id="role" name="user_role" class="form-input">
                     <option value="" disabled selected>Choose a User Role</option>
                     <option value="1">Admin</option>
-                    <option value="2">Staff</option>
+                    {{-- <option value="2">Instructor</option> --}}
                     <option value="3">User</option>
                 </select>
             </div>

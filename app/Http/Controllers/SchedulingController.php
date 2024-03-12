@@ -27,7 +27,7 @@ class SchedulingController extends Controller
      */
     public function create()
     {
-        $instructors = Instructor::get();
+        $instructors = Instructor::with('user')->get()->all();
         return view('features.scheduling.AddSchedule', compact('instructors'));
     }
 
