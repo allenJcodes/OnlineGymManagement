@@ -310,7 +310,7 @@
                     </div>
 
                     <div class="self-end flex gap-2">
-                        <button type="button" class="outline-button" data-modal-hide="popup-modal{{ $user->id }}">
+                        <button type="button" class="outline-button" data-modal-hide="popup-modal">
                             Cancel
                         </button>
                         <button type="submit" class="primary-button">
