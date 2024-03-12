@@ -37,5 +37,11 @@ class ContactDetailSeeder extends Seeder
             'label' => 'Email',
             'content' => 'Japsgymfitness@gmail.com'
         ]);
+
+        ContactDetail::create([
+            'contact_detail_type_id' => 4,
+            'label' => 'Coordinates',
+            'content' => '14.74032719623499, 121.03986451603005'
+        ]);
     }
 }

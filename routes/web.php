@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('learn', LearnController::class);
         Route::resource('faq', FAQController::class);
         Route::resource('contact', ContactController::class);
+        Route::post("contact/updateMap", [ContactController::class, 'updateMap'])->name('contact.updateMap');
     });
 
     // EQUIPMENT TYPES

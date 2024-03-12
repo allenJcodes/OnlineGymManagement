@@ -18,9 +18,10 @@ class WelcomeController extends Controller
         $learnContent = LearnContent::all();
         $FAQs = FAQ::all();
         $contactDetails = ContactDetail::orderBy('contact_detail_type_id')->get();
+        $coordinates = ContactDetail::where('contact_detail_type_id', 4)->first();
         $instructors = Instructor::all();
         $membershipPricings = SubscriptionType::with('inclusions')->get();
         
-        return view('welcome', compact('learnContent', 'FAQs', 'contactDetails', 'instructors', 'membershipPricings'));
+        return view('welcome', compact('learnContent', 'FAQs', 'contactDetails', 'coordinates', 'instructors', 'membershipPricings'));
     }
 }

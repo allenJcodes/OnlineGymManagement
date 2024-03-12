@@ -25,5 +25,9 @@ class ContactDetailTypeSeeder extends Seeder
         ContactDetailType::create([
             'name' => 'email'
         ]);
+
+        ContactDetailType::create([
+            'name' => 'google_map'
+        ]);
     }
 }

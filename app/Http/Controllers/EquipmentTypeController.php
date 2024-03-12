@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\EquipmentType;
 use App\Http\Requests\EquipmentType\EquipmentTypeStoreRequest;
+use App\Http\Requests\EquipmentType\EquipmentTypeUpdateRequest;
 
 class EquipmentTypeController extends Controller
 {
@@ -31,7 +31,7 @@ class EquipmentTypeController extends Controller
         return view('features.equipment_types.EditEquipmentType', ['equipment_type' => $equipmentType]);
     }
 
-    public function update(EquipmentTypeStoreRequest $request, EquipmentType $equipmentType)
+    public function update(EquipmentTypeUpdateRequest $request, EquipmentType $equipmentType)
     {
         $equipmentType->update($request->validated());
 
@@ -43,5 +43,4 @@ class EquipmentTypeController extends Controller
         $equipmentType->delete();
         return redirect()->route('equipment_types.index');
     }
-
 }

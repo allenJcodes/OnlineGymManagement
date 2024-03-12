@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\EquipmentType;
+namespace App\Http\Requests\Content;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EquipmentTypeStoreRequest extends FormRequest
+class ContactMapUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +24,14 @@ class EquipmentTypeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255', Rule::unique('equipment_types', 'name')],
+            'content' => ['required', 'regex:/^[-]?(([0-8]?[0-9]|[1-8][0-9]|90)(\.\d+)?),\s*[-]?((1?[0-7]?[0-9]|180)(\.\d+)?)$/']
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'content' => 'map coordinates',
         ];
     }
 }

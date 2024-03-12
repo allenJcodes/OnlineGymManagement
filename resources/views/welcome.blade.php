@@ -284,21 +284,25 @@
                     <legend class="text-center text-4xl pb-10">Contact Information</legend>
 
                     @foreach ($contactDetails as $contactDetail)
-
-                        <div class="py-3">
-                            <span class="font-bold">{{$contactDetail->label}}: </span><span>{{$contactDetail->content}}</span>
-                        </div>
-                        <hr>
-                        
+                        @if ($contactDetail->label !== 'Coordinates')
+                            <div class="py-3">
+                                <span class="font-bold">{{ $contactDetail->label }}:
+                                </span><span>{{ $contactDetail->content }}</span>
+                            </div>
+                            <hr>
+                        @endif
                     @endforeach
 
                 </div>
                 <div class="col-span-1">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d964.6301823017375!2d121.0414033!3d14.7396675!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b04ee536f761%3A0x6d38876c38c72454!2sJap&#39;s%20Gym!5e0!3m2!1sen!2sph!4v1709828678153!5m2!1sen!2sph" width="600" height="300" style="border:0; padding-left: 2rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps?q={{ $coordinates->content }}&z=18&output=embed"
+                        width="600" height="300" style="border:0; padding-left: 2rem" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
     </section>
+
 
 
     <div class="pt-2 pb-2" style="background-color: #212529">

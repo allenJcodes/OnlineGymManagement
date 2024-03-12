@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Content\ContactMapUpdateRequest;
 use App\Http\Requests\Content\ContactStoreRequest;
 use App\Models\ContactDetail;
 use App\Models\ContactDetailType;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -17,8 +17,9 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = ContactDetail::with('ContactDetailType')->get();
+        $coordinates = ContactDetail::where('label', 'Coordinates')->first();
         
-        return view('features.contents.contact.contact', compact('contacts'));
+        return view('features.contents.contact.contact', compact('contacts', 'coordinates'));
     }
 
     /**
@@ -41,7 +42,6 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $contact)
     {
-        // dd($contact->validated());
         ContactDetail::create($contact->validated());
 
         return redirect()->route('contents.contact.index')->with('toast', [
@@ -103,6 +103,17 @@ class ContactController extends Controller
         return redirect()->route('contents.contact.index')->with('toast', [
             'status' => 'success',
             'message' => 'Contact information deleted successfully.',
+        ]);
+    }
+
+    public function updateMap(ContactMapUpdateRequest $request)
+    {
+        $contact = ContactDetail::where('label', 'Coordinates')->first();
+        $contact->update(['content'=> $request->content]);
+
+        return redirect()->route('contents.contact.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Contact Map updated successfully.',
         ]);
     }
 }
