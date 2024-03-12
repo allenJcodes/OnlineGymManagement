@@ -25,7 +25,7 @@ class MembershipStoreRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'subscription_type_id' => 'nullable',
+            'subscription_type_id' => 'required',
             'mode_of_payment' => 'required',
             'reference_number' => 'nullable',
         ];

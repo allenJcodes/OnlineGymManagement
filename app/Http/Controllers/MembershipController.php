@@ -26,9 +26,8 @@ class MembershipController extends Controller
 
     public function store(MembershipStoreRequest $request)
     {
-        dd($request->post());
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);
-
+        
         Subscription::create([
             ...$request->validated(),
             'amount_paid' => $subscriptionType->price,

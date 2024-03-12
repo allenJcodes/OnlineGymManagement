@@ -80,17 +80,17 @@
                                 </td>
                                 <td>
                                     @if ($user->subscription == null)
-                                        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal{{ $user->id }}" class="primary-button" type="button">
+                                        <button  data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="primary-button subscribe-button" type="button" data-user="{{json_encode($user)}}">
                                             Subscribe
                                         </button>
                                     @else
-                                        <button data-modal-target="popup-modal2" data-modal-toggle="popup-modal2{{ $user->id }}" class="outline-button" type="button">
+                                        <button data-modal-target="popup-modal2" data-modal-toggle="popup-modal2" class="outline-button" type="button">
                                             Unsubscribe
                                         </button>
                                     @endif
 
                                     {{-- subscribe modal --}}
-                                    <div id="popup-modal{{ $user->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+                                    {{-- <div id="popup-modal{{ $user->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
                                         <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
                                             
@@ -155,10 +155,10 @@
                                         </div>
 
 
-                                    </div>
+                                    </div> --}}
         
                                     {{-- Unsubscribe modal --}}
-                                    <div id="popup-modal2{{ $user->id }}" tabindex="-1"
+                                    {{-- <div id="popup-modal2{{ $user->id }}" tabindex="-1"
                                         class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                         <div class="relative w-full max-w-md max-h-full">
                                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -238,7 +238,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
         
                                 </td>
                             </tr>
@@ -257,4 +257,85 @@
             </div>
         </div>
     </div>
+
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+
+        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
+            
+            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100" height="100"></div>
+
+            <div class="flex flex-col gap-5">
+                <h2 class="text-lg font-bold">New Subscription</h2>
+
+                <div class="form-field-container">
+                    <p class="form-label">Subscriber's Name</p>
+                    <h2 id="modal-fullname">-</h2>
+                </div>
+                
+                <form action="{{route('membership.store')}}" method="POST" class="w-full flex flex-col gap-3">
+                    @csrf
+
+                    <input id="user_id" name="user_id" type="hidden">
+
+                    <div class="form-field-container">
+                        <p class="form-label">Choose Subscription</p>
+                        <div class="grid w-full gap-6 md:grid-cols-2">
+                            @foreach ($subscriptions as $key => $subscription)
+                                <label for="membership{{$key}}" class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
+                                    <input type="radio" id="membership{{$key}}" name="subscription_type_id" value="{{$subscription->id}}" class="hidden">
+                                    <div class="flex flex-col">
+                                        <p class="w-full text-base font-semibold">
+                                            {{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}
+                                        </p>
+                                        <p>P{{$subscription->price}}</p>
+                                        <p class="text-xs text-dark-gray-800">{{$subscription->description}}</p>
+                                    </div>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="form-field-container">
+                        <label for="mode_of_payment" class="form-label">Mode of Payment</label>
+                        <select id="mode_of_payment" name="mode_of_payment" class="form-input"> 
+                            <option value="" selected disabled>Select mode of payment</option>
+                            <option value="cash">Cash</option>
+                            <option value="gcash">GCash</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field-container">
+                        <label for="reference_number" class="form-label">Reference Number <span class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
+                        <input id="reference_number" name="reference_number" type="text" class="form-input">
+                    </div>
+
+                    <div class="self-end flex gap-2">
+                        <button type="button" class="outline-button" data-modal-hide="popup-modal{{ $user->id }}">
+                            Cancel
+                        </button>
+                        <button type="submit" class="primary-button">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+                                              
+        </div>
+    </div>
+
+    <script>
+        const subscribeButtons = document.querySelectorAll('.subscribe-button');
+
+        const modalFullname = document.querySelector('#modal-fullname');
+        const userIdField = document.querySelector('#user_id');
+
+        subscribeButtons.forEach(button => {
+            const user = JSON.parse(button.dataset.user); 
+            button.addEventListener('click', () => {
+                modalFullname.innerText = user.full_name;
+                userIdField.value = user.id
+            });
+        })
+
+    </script>
 @endsection
