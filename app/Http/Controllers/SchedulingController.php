@@ -53,6 +53,7 @@ class SchedulingController extends Controller
             return back()->with('message', 'Overlapping Schedule');
         }
         
+        
         Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
         return redirect()->route('scheduling.index');
     }
