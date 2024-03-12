@@ -7,6 +7,22 @@ export default {
     ],
     theme: {
         extend: {
+            animation: {
+                toast: 'toast 4s ease-in-out forwards'
+            },
+            keyframes: {
+                toast: {
+                    '0%': { display: 'flex', opacity: 0 },
+                    '25%, 75%': { opacity: 1 },
+                    '100%': { display: 'none', opacity: 0 },
+                },
+                ping: {
+                    '75%, 100%': {
+                    transform: 'scale(1.5)',
+                    opacity: 0,
+                    }
+                }
+            },
             fontFamily: {
                 'red-hat-display': ['Red Hat Display', 'sans-serif']
             },
