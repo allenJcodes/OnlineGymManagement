@@ -51,7 +51,7 @@
                                     @if ($user->subscription == null)
                                         --
                                     @else
-                                        {{ $user->subscription->date_started }}
+                                        {{ $user->subscription->start_date }}
                                     @endif
         
                                 </td>
@@ -59,7 +59,7 @@
                                     @if ($user->subscription == null)
                                         --
                                     @else
-                                        {{ $user->subscription->date_ended }}
+                                        {{ $user->subscription->end_date }}
                                     @endif
                                 </td>
                                 <td class="py-2">
@@ -68,7 +68,7 @@
                                             Unsubscribed
                                         @else
                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                                            @if ($user->subscription->date_ended == now()->format('Y-m-d'))
+                                            @if ($user->subscription->end_date == now()->format('Y-m-d'))
                                                 Subscription Expired
                                             @else
                                                 Subscribed
