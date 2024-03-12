@@ -47,7 +47,10 @@ class LearnController extends Controller
 
         LearnContent::create([...$request->validated(), 'image' => $newImage ?? '']);
 
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully added learn content.');
+        return redirect()->route('contents.learn.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Learn content added successfully.',
+        ]);
     }
 
     /**
@@ -90,7 +93,10 @@ class LearnController extends Controller
 
         $learn->update([...$request->validated(), 'image' => $newImage ?? '']);
         
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully updated learn content.');
+        return redirect()->route('contents.learn.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Learn content updated successfully.',
+        ]);
     }
 
     /**
@@ -103,6 +109,9 @@ class LearnController extends Controller
     {
         $learn->delete();
 
-        return redirect()->route('contents.learn.index')->with('success', 'Successfully deleted learn content.');
+        return redirect()->route('contents.learn.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Learn content deleted successfully.',
+        ]);
     }
 }

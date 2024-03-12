@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
-
+    {{-- @dd(session('toast')) --}}
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">FAQ</h1>
             <a href="{{ route('contents.faq.create') }}" class="primary-button">

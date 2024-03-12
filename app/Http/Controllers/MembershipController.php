@@ -25,6 +25,11 @@ class MembershipController extends Controller
 
     public function createMembership(Request $request)
     {
+        // TOAST MESSAGE SAMPLE
+        // ->with('toast', [
+        //     'status' => 'success',
+        //     'message' => 'Instructor deleted successfully.',
+        // ]);
 
         dd($request->post());
         // Membership::create([

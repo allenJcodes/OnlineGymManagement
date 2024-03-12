@@ -50,11 +50,17 @@ class SchedulingController extends Controller
         })->get();
 
         if(count($checkConflicts)) {
-            return back()->with('message', 'Overlapping Schedule');
+            return back()->with('toast', [
+            'status' => 'error',
+            'message' => 'Adding of schedule failed. Please check for conflicts.',
+        ]);
         }
         
         Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
-        return redirect()->route('scheduling.index');
+        return redirect()->route('scheduling.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Schedule added successfully.',
+        ]);;
     }
 
     /**
@@ -104,11 +110,17 @@ class SchedulingController extends Controller
         ->get();
 
         if(count($checkConflicts)) {
-            return back()->with('message', 'Overlapping Schedule');
+            return back()->with('toast', [
+                'status' => 'error',
+                'message' => 'Updating of schedule failed. Please check for conflicts.',
+            ]);;
         }
 
         $scheduling->update([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
-        return redirect()->route('scheduling.index');
+        return redirect()->route('scheduling.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Schedule updated successfully.',
+        ]);
     }
 
     /**

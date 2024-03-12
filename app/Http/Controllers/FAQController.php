@@ -40,7 +40,10 @@ class FAQController extends Controller
     {
         FAQ::create($faq->validated());
 
-        return redirect()->route('contents.faq.index')->with('success', 'Successfully added a content.');
+        return redirect()->route('contents.faq.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'FAQ added successfully.',
+        ]);
     }
 
     /**
@@ -76,7 +79,10 @@ class FAQController extends Controller
     {
         $faq->update($request->validated());
 
-        return redirect()->route('contents.faq.index')->with('success', 'Successfully updated FAQ.');
+        return redirect()->route('contents.faq.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'FAQ updated successfully.',
+        ]);
     }
 
     /**
@@ -89,6 +95,9 @@ class FAQController extends Controller
     {
         $faq->delete();
 
-        return redirect()->route('contents.faq.index')->with('success', 'Successfully deleted FAQ.');
+        return redirect()->route('contents.faq.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'FAQ deleted successfully.',
+        ]);
     }
 }
