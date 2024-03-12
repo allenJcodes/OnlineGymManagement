@@ -112,23 +112,6 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-between gap-5 px-64 bg-accent h-[10vh] text-off-white">
-
-        <p class="text-lg">Need an instructor? Enter your email here</p>
-
-        <form class="flex w-1/2 rounded-lg overflow-clip">
-
-            <label for="search-dropdown" class="sr-only">Your Email</label>
-
-            <div class="flex w-full">
-                <input type="search" id="search-dropdown" class="p-2 w-full bg-off-white text-background focus:outline-none" placeholder="Email">
-                <button type="submit" class="bg-background px-4">Submit</button>
-            </div>
-
-         
-        </form>
-
-    </div>
 
     {{-- SESSION PAGE --}}
     <section id="session">
@@ -228,7 +211,7 @@
 
                 @foreach ($instructors as $instructor)
                     <x-instructor-card
-                        name="{{$instructor->first_name}} {{$instructor->last_name}}"
+                        name="{{$instructor->user->first_name}} {{$instructor->user->last_name}}"
                         description="{{$instructor->description}}"
                     />
                 @endforeach
