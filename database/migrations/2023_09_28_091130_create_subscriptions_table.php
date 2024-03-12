@@ -19,7 +19,10 @@ class CreateSubscriptionsTable extends Migration
             $table->foreignId('subscription_type_id')->nullable()->constrained('subscription_types')->nullOnDelete();
             $table->date("start_date");
             $table->date("end_date");
-            $table->tinyInteger('status')->default(1); //1 = pending, 2 = active, 3 = inactive
+            $table->string("mode_of_payment");
+            $table->string("reference_number")->nullable();
+            $table->float("amount_paid");
+            $table->tinyInteger('status')->default(2); //1 = pending, 2 = active, 3 = cancelled
             $table->timestamps();
         });
     }
