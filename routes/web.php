@@ -60,8 +60,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('getuserreservations', [ReservationController::class, 'userReservations']);
 
     // MEMBERSHIP
-    Route::get('membership', [MembershipController::class, 'index'])->name('membership');
-    Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
+    Route::resource('membership', MembershipController::class)->only(['index', 'store']);
+    // Route::get('membership', [MembershipController::class, 'index'])->name('membership');
+    // Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP
     Route::prefix('manage')->name('manage.')->group(function() {

@@ -80,8 +80,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('membership') }}"
-                        class="{{ Route::is('membership') ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
+                    <a href="{{ route('membership.index') }}"
+                        class="{{ request()->is('membership*') ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

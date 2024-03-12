@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Membership\MembershipStoreRequest;
 use App\Models\Membership;
+use App\Models\Notification;
 use App\Models\Payments;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
@@ -17,67 +19,36 @@ class MembershipController extends Controller
     //
     public function index()
     {
-        $users = User::where('user_role', 3)->get();
+        $users = User::where('user_role', 3)->with('subscription')->get();
         $subscriptions = SubscriptionType::all();
-        // $users = User::all();
         return view('features.membership.Membership', compact('users', 'subscriptions'));
     }
 
-    public function createMembership(Request $request)
+    public function store(MembershipStoreRequest $request)
     {
-        // TOAST MESSAGE SAMPLE
-        // ->with('toast', [
-        //     'status' => 'success',
-        //     'message' => 'Instructor deleted successfully.',
-        // ]);
+        $subscriptionType = SubscriptionType::find($request->subscription_type_id);
+        
+        Subscription::create([
+            ...$request->validated(),
+            'amount_paid' => $subscriptionType->price,
+            'start_date' => now(),
+            'end_date' => Carbon::parse(now())->addMonths($subscriptionType->number_of_months)
+        ]);
 
-        dd($request->post());
-        // Membership::create([
-        //     'user_id' => $request->user_id,
-        //     'date_started' => $request->date_started,
-        //     'date_ended' => $request->date_ended,
-        // ]);
+        //notif
+        
+        $adminUsers = User::where('user_role', 1)->get()->map(fn($val) => $val->id)->toArray();
+        
+        $subscribedUser = User::where('id', $request->user_id)->first();
 
-        // $dates = json_decode($request->dates);
-        // $lastDate = end($dates);
-
-        // foreach ($dates as $date) {
-        // Membership::create([
-        //     'user_id' => $request->user_id,
-        //     'date_started' => $request->date,
-        //     'date_ended' => $lastDate
-        // ]);
-        // }
-
-        // foreach (json_decode($request->dates) as $date) {
-        //     Membership::create([
-        //         'user_id' => $request->user_id,
-        //         'date_started' => $date,
-        //         'date_ended' => end(json_decode($request->dates))
-        //     ]);
-        // }
+        Notification::create([
+            'content' => $subscribedUser->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price
+        ])->users()->attach($adminUsers);
 
 
-        // $dateStarted = Carbon::create($request->date_started);
-        // $dateEnded = Carbon::create($request->date_ended);
-        // $dateDifference = $dateEnded->diffInDays($dateStarted);
-
-        // ELOQUENT WAY
-        // Membership::create([
-        //     'user_id' => $request->user_id,
-        //     'date_started' => $request->date_started,
-        //     'date_ended' => $request->date_ended,
-        // ]);
-
-        // Payments::create([
-        //     'user_id' => $request->user_id,
-        //     'payment_price' => $dateDifference == 182 ? '4200' : '8400',
-        // ]);
-
-        // query builder way
-
-        // DB::table('memberships')->insert([
-
-        // ]);
+        return redirect()->route('membership.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'User subscribed successfully.',
+        ]);
     }
 }

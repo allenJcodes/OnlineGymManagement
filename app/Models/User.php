@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasOne(Membership::class, 'user_id', "id");
     }
 
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
     public function getFullNameAttribute(){
         return $this->first_name.' '. ($this->middle_name ?? '') .' '.$this->last_name;
     }
