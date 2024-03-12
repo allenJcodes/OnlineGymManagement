@@ -46,7 +46,7 @@
                     'text-amber-700' => session('toast.status') == 'warning',
                     'text-red-700' => session('toast.status') == 'error',
                     'text-blue-700' => session('toast.status') == 'information'
-                    ])>{{ session('toast.status') }}</p>
+                    ])>{{ ucfirst(session('toast.status')) }}</p>
                 <p id="close-toast" @class([
                     'text-sm w-full',
                     'text-green-700' => session('toast.status') == 'success',
