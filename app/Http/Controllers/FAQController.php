@@ -93,11 +93,11 @@ class FAQController extends Controller
      */
     public function destroy(FAQ $faq)
     {
-        $faq->delete();
+            $faq->delete();
 
-        return redirect()->route('contents.faq.index')->with('toast', [
-            'status' => 'success',
-            'message' => 'FAQ deleted successfully.',
-        ]);
+            return redirect()->route('contents.faq.index')->with('toast', [
+                'status' => 'success',
+                'message' => 'FAQ deleted successfully.',
+            ]);
     }
 }

@@ -38,14 +38,12 @@ class LearnController extends Controller
      */
     public function store(LearnStoreRequest $request)
     {   
-        $image = $request->image;
- 
-        if (isset($image)) {
-            $extension = $image->extension();
-            $newImage = $request->image->storeAs('images/content/learn', "$request->title.$extension", 'public');
+        if ($request->image) {
+            $image = $request->title.$request->image->extension();
+            $request->image->move(public_path('image/content'), $image);
         }
 
-        LearnContent::create([...$request->validated(), 'image' => $newImage ?? '']);
+        LearnContent::create([...$request->validated(), 'image' => $image ?? '']);
 
         return redirect()->route('contents.learn.index')->with('toast', [
             'status' => 'success',
@@ -86,12 +84,12 @@ class LearnController extends Controller
     {   
         $image = $request->image;
 
-        if (isset($image)) {
-            $extension = $image->extension();
-            $newImage = $request->image->storeAs('images/content/learn', "$request->title.$extension", 'public');
+        if ($request->image) {
+            $image = $request->title.$request->image->extension();
+            $request->image->move(public_path('image/content'), $image);
         }
 
-        $learn->update([...$request->validated(), 'image' => $newImage ?? '']);
+        $learn->update([...$request->validated(), 'image' => $image ?? '']);
         
         return redirect()->route('contents.learn.index')->with('toast', [
             'status' => 'success',
