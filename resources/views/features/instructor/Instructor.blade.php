@@ -41,7 +41,7 @@
                         @forelse ($instructors as $instructor)
                             <tr class="table-row">
                                 <td class="py-2">
-                                    {{ $instructor->first_name }} {{ $instructor->last_name }}
+                                    {{ $instructor->user->first_name }} {{ $instructor->user->last_name }}
                                 </td>
                                 <td class="py-2">
                                     {{ $instructor->description }}
@@ -63,7 +63,7 @@
 
                                             <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
 
-                                                <p class="text-background/70 text-sm pt-2 px-4">Actions - {{ $instructor->first_name }} {{ $instructor->last_name }}</p>
+                                                <p class="text-background/70 text-sm pt-2 px-4">Actions - {{ $instructor->user->first_name }} {{ $instructor->user->last_name }}</p>
 
                                                 <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                                     <a href="{{route('instructor.edit', ['instructor' => $instructor])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>

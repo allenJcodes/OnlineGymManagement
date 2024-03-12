@@ -15,14 +15,12 @@ class InstructorSeeder extends Seeder
     public function run()
     {
         Instructor::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
+            'user_id' => 2,
             'description' =>  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequuntur!"
         ]);
 
         Instructor::create([
-            'first_name' => 'Jane',
-            'last_name' => 'Doe',
+            'user_id' => 3,
             'description' =>  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequuntur!"
         ]);
     }

@@ -29,12 +29,9 @@ class UsersController extends Controller
         return redirect()->route('users');
     }
 
-    public function editUser($id)
+    public function editUser(User $user)
     {
-        $user = User::find($id); 
-        return view('features.users.editUsers', [
-            'user' => $user,
-        ]);
+        return view('features.users.editUsers', compact('user'));
     }
 
     public function updateUser(UserUpdateRequest $request, $id)
@@ -62,12 +59,17 @@ class UsersController extends Controller
         return redirect()->route('users');
     }
 
-    public function deleteUser($id)
-    {
-        DB::table('users')
-            ->where('id', $id)
-            ->delete();
+    // public function deleteUser(User $user)
+    // {
+    //     DB::table('users')
+    //         ->where('id', $id)
+    //         ->delete();
 
+    //     return redirect()->route('users');
+    // }
+
+    public function destroy(User $user) {
+        $user->delete();
         return redirect()->route('users');
     }
 }

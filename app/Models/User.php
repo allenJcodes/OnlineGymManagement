@@ -62,4 +62,9 @@ class User extends Authenticatable
     public function notifications() : BelongsToMany {
         return $this->belongsToMany(Notification::class, 'user_notifications');
     }
+
+    function instructor() : BelongsTo {
+        return $this->belongsTo(Instructor::class, 'user_id', "id");
+    }
+    
 }

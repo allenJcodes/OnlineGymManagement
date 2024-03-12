@@ -10,12 +10,27 @@
 
             <div class="form-field-container">
                 <label for="first_name" class="form-label">First Name</label>
-                <input value="{{$instructor->first_name}}" id="first_name" type="text" name="first_name" class="form-input">
+                <input value="{{$instructor->user->first_name}}" id="first_name" type="text" name="first_name" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="middle_name" class="form-label">Middle Name</label>
+                <input value="{{$instructor->user->middle_name}}" id="middle_name" type="text" name="middle_name" class="form-input">
             </div>
 
             <div class="form-field-container">
                 <label for="last_name" class="form-label">Last Name</label>
-                <input value="{{$instructor->last_name}}" id="last_name" type="text" name="last_name" class="form-input">
+                <input value="{{$instructor->user->last_name}}" id="last_name" type="text" name="last_name" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="email" class="form-label">Email address</label>
+                <input value="{{$instructor->user->email}}" id="email" type="email" name="email" class="form-input">
+            </div>
+
+            <div class="form-field-container">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" name="password" class="form-input">
             </div>
 
             <div class="form-field-container">

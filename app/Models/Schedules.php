@@ -12,7 +12,7 @@ class Schedules extends Model
     protected $table = 'schedules';
     
     protected $fillable = [
-        'staff_id',
+        'instructor_id',
         'class_name',
         'date_time_start',
         'date_time_end',
@@ -22,7 +22,7 @@ class Schedules extends Model
 
     public function instructor()
     {
-        return $this->hasOne(User::class, 'id', 'staff_id');
+        return $this->hasOne(Instructor::class);
     }
 
     public function attendances()

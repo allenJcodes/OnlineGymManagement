@@ -25,7 +25,7 @@ class SchedulingStoreRequest extends FormRequest
     {
         return [
             'class_name' => 'required',
-            'staff_id' => 'required',
+            'instructor_id' => 'required',
             'date_time_start' => 'required',
             'date_time_end' => 'required',
             // 'max_clients' => 'required|numeric',

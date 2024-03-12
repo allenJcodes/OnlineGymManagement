@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Instructor\InstructorStoreRequest;
+use App\Http\Requests\Instructor\InstructorUpdateRequest;
 use App\Models\Instructor;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class InstructorController extends Controller
 {
@@ -15,7 +18,7 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        $instructors = Instructor::paginate(10);
+        $instructors = Instructor::with('user')->paginate(10);
         return view('features.instructor.Instructor', compact('instructors'));
     }
 
@@ -37,7 +40,17 @@ class InstructorController extends Controller
      */
     public function store(InstructorStoreRequest $request)
     {
-        Instructor::create($request->validated());
+        $user = User::create([
+            ...$request->safe()->except('description'),
+            'password' => bcrypt($request->password),
+            'user_role' => 2
+        ]);
+        
+        
+        $instructor = Instructor::create([
+            'user_id' => $user->id,
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('instructor.index');
     }
@@ -60,7 +73,8 @@ class InstructorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Instructor $instructor)
-    {
+    {   
+        $instructor = $instructor->with('user')->first();
         return view('features.instructor.EditInstructor', ['instructor' => $instructor]);
     }
 
@@ -71,9 +85,20 @@ class InstructorController extends Controller
      * @param  \App\Models\Instructor  $instructor
      * @return \Illuminate\Http\Response
      */
-    public function update(InstructorStoreRequest $request, Instructor $instructor)
+    public function update(InstructorUpdateRequest $request, Instructor $instructor)
     {
-        $instructor->update($request->validated());
+        $user = User::where('id', $instructor->user_id);
+
+        if ($request->password) {
+            $user->update(['password' => Hash::make($request->password)]);
+        }
+
+        $user->update([
+            ...$request->safe()->except(['description', 'password']),
+            'user_role' => 2
+        ]);
+
+        Instructor::where('id', $instructor->id)->update(['description' => $request->description]);
 
         return redirect()->route('instructor.edit', ['instructor' => $instructor]);
     }

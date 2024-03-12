@@ -15,7 +15,7 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string("staff_id");
+            $table->string("instructor_id");
             $table->string("class_name");
             $table->string("date_time_start");
             $table->string("date_time_end");

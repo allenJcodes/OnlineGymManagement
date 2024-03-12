@@ -41,7 +41,7 @@
                 <select id="role" name="user_role" class="form-input">
                     <option value="" disabled selected>Choose a country</option>
                     <option {{ $user->user_role == '1' ? 'selected' : '' }} value="1">Admin</option>
-                    <option {{ $user->user_role == '2' ? 'selected' : '' }} value="2">Staff</option>
+                    {{-- <option {{ $user->user_role == '2' ? 'selected' : '' }} value="2">Instructor</option> --}}
                     <option {{ $user->user_role == '3' ? 'selected' : '' }} value="3">User</option>
                 </select>
             </div>

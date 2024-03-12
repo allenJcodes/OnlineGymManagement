@@ -62,7 +62,7 @@ const AddSchedule = ({ trainers, isedit }) => {
             });
         } else {
             api.post("scheduling", {
-                staff_id: trainer,
+                instructor_id: trainer,
                 class_name: title,
                 date_time_start: dateTimeStart,
                 date_time_end: dateTimeEnd,
