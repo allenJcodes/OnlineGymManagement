@@ -52,7 +52,10 @@ class InstructorController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('instructor.index');
+        return redirect()->route('instructor.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Instructor created successfully.',
+        ]);;
     }
 
     /**
@@ -100,7 +103,10 @@ class InstructorController extends Controller
 
         Instructor::where('id', $instructor->id)->update(['description' => $request->description]);
 
-        return redirect()->route('instructor.edit', ['instructor' => $instructor]);
+        return redirect()->route('instructor.edit', ['instructor' => $instructor])->with('toast', [
+            'status' => 'success',
+            'message' => 'Instructor details updated.',
+        ]);
     }
 
     /**
@@ -112,6 +118,9 @@ class InstructorController extends Controller
     public function destroy(Instructor $instructor)
     {
         $instructor->delete();
-        return redirect()->route('instructor.index');
+        return redirect()->route('instructor.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Instructor deleted successfully.',
+        ]);
     }
 }

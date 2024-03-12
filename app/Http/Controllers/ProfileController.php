@@ -32,6 +32,9 @@ class ProfileController extends Controller
             'profile_image' => $newImage ?? ''
         ]);
 
-        return redirect()->back()->with('success', 'Your profile has been updated');
+        return redirect()->back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Your profile has been updated.',
+        ]);;
     }
 }

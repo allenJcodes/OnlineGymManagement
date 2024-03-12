@@ -44,7 +44,10 @@ class ContactController extends Controller
         // dd($contact->validated());
         ContactDetail::create($contact->validated());
 
-        return redirect()->route('contents.contact.index')->with('success', 'Successfully added a content.');
+        return redirect()->route('contents.contact.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Contact information added successfully.',
+        ]);
     }
 
     /**
@@ -82,7 +85,10 @@ class ContactController extends Controller
     {
         $contact->update($request->validated());
 
-        return redirect()->route('contents.contact.index')->with('success', 'Successfully updated contact information.');
+        return redirect()->route('contents.contact.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Contact information updated successfully.',
+        ]);
     }
 
     /**
@@ -94,6 +100,9 @@ class ContactController extends Controller
     public function destroy(ContactDetail $contact)
     {
         $contact->delete();
-        return redirect()->route('contents.contact.index')->with('success', 'Successfully deleted contact information.');
+        return redirect()->route('contents.contact.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Contact information deleted successfully.',
+        ]);
     }
 }

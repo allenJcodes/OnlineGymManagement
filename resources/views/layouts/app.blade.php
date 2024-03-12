@@ -33,7 +33,8 @@
 </head>
 
 <body class="font-red-hat-display">
-    <div id="app">
+    <div id="app" class="relative">
+        <x-toast />
         <header class="antialiased">
             <nav class="bg-background border-gray-200 px-4 lg:px-6 py-2.5 fixed w-full z-20 top-0 left-0">
                 <div class="flex flex-wrap justify-between items-center">

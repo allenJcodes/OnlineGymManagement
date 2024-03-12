@@ -49,7 +49,10 @@ class ManageSubscriptionController extends Controller
 
         SubscriptionType::create($request->validated())->inclusions()->saveMany($inclusions);
 
-        return redirect()->route('manage.subscription.index');
+        return redirect()->route('manage.subscription.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Subscription added successfully.',
+        ]);;
     }
 
     /**
@@ -94,7 +97,10 @@ class ManageSubscriptionController extends Controller
 
         $subscription->inclusions()->saveMany($inclusions);
 
-        return redirect()->route('manage.subscription.edit', ['subscription' => $subscription]);
+        return redirect()->route('manage.subscription.edit', ['subscription' => $subscription])->with('toast', [
+            'status' => 'success',
+            'message' => 'Subscription updated successfully.',
+        ]);;
     }
 
     /**
@@ -107,6 +113,9 @@ class ManageSubscriptionController extends Controller
     {
         $subscription->delete();
 
-        return redirect()->route('manage.subscription.index');
+        return redirect()->route('manage.subscription.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Subscription deleted successfully.',
+        ]);;
     }
 }

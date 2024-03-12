@@ -5,6 +5,7 @@
  */
 import "flowbite";
 import "react-toastify/dist/ReactToastify.css";
+import "boxicons";
 
 require("./bootstrap");
 

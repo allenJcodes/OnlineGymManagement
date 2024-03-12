@@ -32,7 +32,10 @@ class EquipmentController extends Controller
 
         Equipment::create([...$request->validated(), 'image_path' => $newImageName ?? '']);
 
-        return redirect()->route('equipment.index');
+        return redirect()->route('equipment.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment added successfully.',
+        ]);
     }
 
     public function edit(Equipment $equipment) {
@@ -49,7 +52,10 @@ class EquipmentController extends Controller
 
         $equipment->update([...$request->validated(), 'image_path' => $newImageName ?? '']);
 
-        return redirect()->route('equipment.edit', ['equipment' => $equipment]);
+        return redirect()->route('equipment.edit', ['equipment' => $equipment])->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment updated successfully.',
+        ]);
     }
 
     public function deleteEquipment(Request $request)
@@ -58,6 +64,9 @@ class EquipmentController extends Controller
             ->where('id', $request->id)
             ->delete();
 
-        return redirect('/equipment');
+        return redirect('/equipment')->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment deleted successfully.',
+        ]);
     }
 }
