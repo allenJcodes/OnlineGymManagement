@@ -23,9 +23,15 @@
                 <input id="number_of_months" type="text" name="number_of_months" class="form-input">
             </div>
 
+
             <div class="form-field-container">
                 <label for="description" class="form-label">Description</label>
                 <input id="description" type="text" name="description" class="form-input">
+            </div>
+
+            <div class="form-field-container flex-row-reverse gap-2 w-fit">
+                <label for="best_option" class="form-label">Mark as Best Option</label>
+                <input id="best_option" type="checkbox" name="best_option" class="form-input">
             </div>
 
             <div id="add-inclusions" class="flex flex-col gap-3">

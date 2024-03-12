@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // MEMBERSHIP
     Route::resource('membership', MembershipController::class)->only(['index', 'store']);
-    // Route::get('membership', [MembershipController::class, 'index'])->name('membership');
+    Route::delete('membership/{id}/cancel', [MembershipController::class, 'cancelMembership'])->name('membership.cancel');
     // Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP

@@ -17,6 +17,7 @@ class SubscriptionType extends Model
         'price',
         'number_of_months',
         'description',
+        'best_option',
     ];
 
     protected $appends = ['inclusions_string'];

@@ -7,7 +7,7 @@
 
             <h1 class="text-2xl font-bold">Equipment</h1>
 
-            @if (Auth::user()->user_role == 1 || Auth::user()->user_role == 2)
+            @if (Auth::user()->user_role == 1)
                 <div class="flex justify-end gap-2">
                     <a href="{{ route('equipment_types.index') }}" class="primary-button">
                         Manage Equipment Types

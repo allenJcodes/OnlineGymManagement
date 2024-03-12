@@ -19,6 +19,7 @@ class CreateSubscriptionTypesTable extends Migration
             $table->float('price');
             $table->integer('number_of_months');
             $table->text('description');
+            $table->tinyInteger('best_option')->default(0);
             $table->timestamps();
         });
     }

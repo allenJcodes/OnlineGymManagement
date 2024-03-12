@@ -7,10 +7,12 @@
 
             <h1 class="text-2xl font-bold">Scheduling</h1>
 
-            <a href="{{ route('scheduling.create') }}" class="primary-button">
-                Add Schedule +
-            </a>
-
+            @if (auth()->user()->user_role != 3 )
+                <a href="{{ route('scheduling.create') }}" class="primary-button">
+                    Add Schedule +
+                </a>
+            @endif
+                
         </div>
 
         <div id="schedule" data-user_role='{{ Auth::user()->user_role }}' data-user_id='{{ Auth::user()->id }}'>

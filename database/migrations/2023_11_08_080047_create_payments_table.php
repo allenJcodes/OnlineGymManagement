@@ -15,9 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('payment_price');
-            $table->string('payment_reference_no')->nullable();
+            $table->foreignId('subscription_id')->nullable()->constrained('subscriptions')->nullOnDelete();
+            $table->float('amount_paid');
+            $table->string("mode_of_payment");
+            $table->string('reference_number')->nullable();
             $table->timestamps();
         });
     }

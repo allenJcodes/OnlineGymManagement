@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ManageSubscription\ManageSubscriptionStoreRequest;
+use App\Http\Requests\ManageSubscription\ManageSubscriptionUpdateRequest;
 use App\Models\SubscriptionType;
 use App\Models\SubscriptionTypeInclusion;
 use Illuminate\Http\Request;
@@ -43,11 +44,13 @@ class ManageSubscriptionController extends Controller
      */
     public function store(ManageSubscriptionStoreRequest $request)
     {
+
+
         $inclusions = collect($request->inclusions)->map(function($inclusion) {
             return (new SubscriptionTypeInclusion(['name' => $inclusion]));
         });
 
-        SubscriptionType::create($request->validated())->inclusions()->saveMany($inclusions);
+        SubscriptionType::create([...$request->validated(), 'best_option' => $request->best_option == 'on' ? 1 : 0])->inclusions()->saveMany($inclusions);
 
         return redirect()->route('manage.subscription.index')->with('toast', [
             'status' => 'success',
@@ -85,11 +88,10 @@ class ManageSubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ManageSubscriptionStoreRequest $request, SubscriptionType $subscription)
+    public function update(ManageSubscriptionUpdateRequest $request, SubscriptionType $subscription)
     {
-
         SubscriptionTypeInclusion::where('subscription_type_id', $subscription->id)->delete();
-        $subscription->update($request->validated());
+        $subscription->update([...$request->validated(), 'best_option' => $request->best_option == 'on' ? 1 : 0]);
 
         $inclusions = collect($request->inclusions)->map(function($inclusion) {
             return (new SubscriptionTypeInclusion(['name' => $inclusion]));

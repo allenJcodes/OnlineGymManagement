@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import CustomToast from "../components/CustomToast";
 
 const Schedules = (props) => {
+    const {user_role} = props;
+
     const [events, setEvents] = useState([]);
     const [open, setOpen] = useState(false);
     const [event, setEvent] = useState(null);
@@ -76,7 +78,8 @@ const Schedules = (props) => {
 
                     <div className="flex self-end mt-auto gap-2">
                         <button onClick={() => setOpen(false)} className="outline-button">Back</button>
-                        <a className="primary-button" href={`/scheduling/${event?.id}/edit`}>Edit Schedule</a>
+
+                        {user_role != 3 && <a className="primary-button" href={`/scheduling/${event?.id}/edit`}>Edit Schedule</a>}
                     </div>
                 </div>
 

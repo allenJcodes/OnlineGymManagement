@@ -29,6 +29,13 @@
                 <input value="{{$subscription->description}}" id="description" type="text" name="description" class="form-input">
             </div>
 
+
+            <div class="form-field-container flex-row-reverse gap-2 w-fit">
+                <label for="best_option" class="form-label">Mark as Best Option</label>
+                <input {{$subscription->best_option == 1 ? 'checked' : ''}} id="best_option" type="checkbox" name="best_option" class="form-input">
+            </div>
+
+
             <div id="add-inclusions" class="flex flex-col gap-3" data-_inclusions="{{ $subscription->inclusions }}">
             </div>
 
