@@ -16,6 +16,7 @@ use App\Http\Controllers\LearnController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\EquipmentTypeController;
+use App\Http\Controllers\GymSessionController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
@@ -90,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
     // CONTENTS
     Route::prefix('contents')->name('contents.')->group(function () {
         Route::resource('', ContentController::class);
+        Route::resource('gym_session', GymSessionController::class);
         Route::resource('learn', LearnController::class);
         Route::resource('faq', FAQController::class);
         Route::resource('contact', ContactController::class);

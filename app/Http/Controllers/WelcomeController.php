@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactDetail;
 use App\Models\FAQ;
+use App\Models\GymSession;
 use App\Models\Instructor;
 use App\Models\LearnContent;
 use App\Models\SubscriptionType;
@@ -15,12 +16,13 @@ class WelcomeController extends Controller
 
     public function index() {
         
+        $gym_sessions = GymSession::all();
         $learnContent = LearnContent::all();
         $FAQs = FAQ::all();
         $contactDetails = ContactDetail::orderBy('contact_detail_type_id')->get();
         $instructors = Instructor::with('user')->get();
         $membershipPricings = SubscriptionType::with('inclusions')->get();
         
-        return view('welcome', compact('learnContent', 'FAQs', 'contactDetails', 'instructors', 'membershipPricings'));
+        return view('welcome', compact('gym_sessions', 'learnContent', 'FAQs', 'contactDetails', 'instructors', 'membershipPricings'));
     }
 }

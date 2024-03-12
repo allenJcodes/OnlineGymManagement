@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Content\FAQStoreRequest;
-use App\Models\FAQ;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\GymSession\GymSessionStoreRequest;
+use App\Models\GymSession;
 use Illuminate\Http\Request;
 
-class FAQController extends Controller
+class GymSessionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class FAQController extends Controller
      */
     public function index()
     {
-        $faqs = FAQ::all();
-        
-        return view('features.contents.faq.faq', compact('faqs'));
+        $gym_sessions = GymSession::all();
+
+        return view('features.contents.gym_session.gymSession', compact('gym_sessions'));
     }
 
     /**
@@ -27,7 +28,7 @@ class FAQController extends Controller
      */
     public function create()
     {
-        return view('features.contents.faq.addFaq');
+        return view('features.contents.gym_session.addGymSession');
     }
 
     /**
@@ -36,13 +37,13 @@ class FAQController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FAQStoreRequest $faq)
+    public function store(GymSessionStoreRequest $gym_session)
     {
-        FAQ::create($faq->validated());
+        GymSession::create($gym_session->validated());
 
-        return redirect()->route('contents.faq.index')->with('toast', [
+        return redirect()->route('contents.gym_session.index')->with('toast', [
             'status' => 'success',
-            'message' => 'FAQ added successfully.',
+            'message' => 'Successfully added a gym session.'
         ]);
     }
 
@@ -63,9 +64,9 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(FAQ $faq)
+    public function edit(GymSession $gym_session)
     {
-        return view('features.contents.faq.editFaq', compact('faq'));
+        return view('features.contents.gym_session.editGymSession', compact('gym_session'));
     }
 
     /**
@@ -75,13 +76,13 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FAQStoreRequest $request, FAQ $faq)
+    public function update(GymSessionStoreRequest $request, GymSession $gym_session)
     {
-        $faq->update($request->validated());
+        $gym_session->update($request->validated());
 
-        return redirect()->route('contents.faq.index')->with('toast', [
+        return redirect()->route('contents.gym_session.index')->with('toast', [
             'status' => 'success',
-            'message' => 'FAQ updated successfully.',
+            'message' => 'Gym session updated successfully.',
         ]);
     }
 
@@ -91,13 +92,13 @@ class FAQController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FAQ $faq)
+    public function destroy(GymSession $gym_session)
     {
-            $faq->delete();
+        $gym_session->delete();
 
-            return redirect()->route('contents.faq.index')->with('toast', [
-                'status' => 'success',
-                'message' => 'FAQ deleted successfully.',
-            ]);
+        return redirect()->route('contents.gym_session.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Gym session deleted successfully.',
+        ]);
     }
 }
