@@ -36,9 +36,9 @@ const Inclusions = ({_inclusions = '[]'}) => {
 
 const InclusionContainer = ({inclusion, index, handleInputChange}) => {
   return(
-    <div class="form-field-container">
-      <label htmlFor={`inclusion${index}`} class="form-label sr-only">Inclusion Number {index}</label>
-      <input value={inclusion.name} onInput={(e) => handleInputChange(e.target.value, index)} type="text" name={`inclusions[]`} id={`inclusion${index}`} class="form-input" />
+    <div className="form-field-container">
+      <label htmlFor={`inclusion${index}`} className="form-label sr-only">Inclusion Number {index}</label>
+      <input value={inclusion.name} onInput={(e) => handleInputChange(e.target.value, index)} type="text" name={`inclusions[]`} id={`inclusion${index}`} className="form-input" />
     </div>
   )
 }

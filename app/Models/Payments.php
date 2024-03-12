@@ -4,14 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payments extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'payment_price',
-        'payment_reference_no'
+        'subscription_id',
+        'amount_paid',
+        'reference_number',
+        'mode_of_payment'
     ];
+
+    public function subscriptions() : BelongsTo {
+        return $this->belongsTo(Subscription::class, 'subscription_id');
+    }
 }

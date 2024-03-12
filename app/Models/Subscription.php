@@ -18,13 +18,10 @@ class Subscription extends Model
         "start_date",
         "end_date",
         'status',
-        'mode_of_payment',
-        'reference_number',
-        'amount_paid',
     ];
+    
 
-
-    public function subscribedBy(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', "id");
     }

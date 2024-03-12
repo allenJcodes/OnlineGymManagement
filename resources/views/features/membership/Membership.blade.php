@@ -43,32 +43,32 @@
                             <tr class="table-row">
                                 <td class="py-2">
                                     <div class="pl-3">
-                                        <p class="font-semibold">{{ $user->getFullNameAttribute() }}</p>
+                                        <p class="font-semibold">{{ $user->full_name }}</p>
                                         <p class="font-normal text-gray-500">{{ $user->email }}</p>
                                     </div>
                                 </td>
                                 <td class="py-2">
-                                    @if ($user->subscription == null)
+                                    @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscription->start_date }}
+                                        {{ $user->subscriptions[0]->start_date }}
                                     @endif
         
                                 </td>
                                 <td class="py-2">
-                                    @if ($user->subscription == null)
+                                    @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscription->end_date }}
+                                        {{ $user->subscriptions[0]->end_date }}
                                     @endif
                                 </td>
                                 <td class="py-2">
                                     <div class="flex items-center">
-                                        @if ($user->subscription == null)
+                                        @if (count($user->subscriptions) == 0)
                                             Unsubscribed
                                         @else
                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                                            @if ($user->subscription->end_date == now()->format('Y-m-d'))
+                                            @if ($user->subscriptions[0]->end_date == now()->format('Y-m-d'))
                                                 Subscription Expired
                                             @else
                                                 Subscribed
@@ -79,83 +79,20 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if ($user->subscription == null)
+                                    @if (count($user->subscriptions) == 0)
                                         <button  data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="primary-button subscribe-button" type="button" data-user="{{json_encode($user)}}">
                                             Subscribe
                                         </button>
                                     @else
-                                        <button data-modal-target="popup-modal2" data-modal-toggle="popup-modal2" class="outline-button" type="button">
-                                            Unsubscribe
-                                        </button>
+
+                                        <form method="POST" action="{{route('membership.cancel', ['id' => $user->subscriptions[0]->id])}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="outline-button">
+                                                Unsubscribe
+                                            </button>
+                                        </form>
                                     @endif
-
-                                    {{-- subscribe modal --}}
-                                    {{-- <div id="popup-modal{{ $user->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
-
-                                        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
-                                            
-                                            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100" height="100"></div>
-
-                                            <div class="flex flex-col gap-5">
-                                                <h2 class="text-lg font-bold">New Subscription</h2>
-
-                                                <div class="form-field-container">
-                                                    <p class="form-label">Subscriber's Name</p>
-                                                    <h2>{{$user->full_name}}</h2>
-                                                </div>
-                                                
-                                                <form action="{{route('membership.store')}}" method="POST" class="w-full flex flex-col gap-3">
-                                                    @csrf
-
-                                                    <input id="user_id" name="user_id" type="hidden" value="{{$user->id}}">
-
-                                                    <div class="form-field-container">
-                                                        <p class="form-label">Choose Subscription</p>
-                                                        <div class="grid w-full gap-6 md:grid-cols-2">
-                                                            @foreach ($subscriptions as $key => $subscription)
-                                                                <label for="membership-{{$userIndex}}-{{$subscription->id}}" class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
-                                                                    <input type="radio" id="membership-{{$userIndex}}{{$subscription->id}}" name="subscription_type_id_{{$userIndex}}" value="{{$subscription->id}}" class="hidden peer/{{$key}}">
-                                                                    <div class="flex flex-col">
-                                                                        <p class="w-full text-base font-semibold">
-                                                                            {{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}
-                                                                        </p>
-                                                                        <p>P{{$subscription->price}}</p>
-                                                                        <p class="text-xs text-dark-gray-800">{{$subscription->description}}</p>
-                                                                    </div>
-                                                                </label>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-field-container">
-                                                        <label for="mode_of_payment" class="form-label">Mode of Payment</label>
-                                                        <select id="mode_of_payment" name="mode_of_payment" class="form-input"> 
-                                                            <option value="" selected disabled>Select mode of payment</option>
-                                                            <option value="cash">Cash</option>
-                                                            <option value="gcash">GCash</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-field-container">
-                                                        <label for="reference_number" class="form-label">Reference Number <span class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
-                                                        <input id="reference_number" name="reference_number" type="text" class="form-input">
-                                                    </div>
-
-                                                    <div class="self-end flex gap-2">
-                                                        <button type="button" class="outline-button" data-modal-hide="popup-modal{{ $user->id }}">
-                                                            Cancel
-                                                        </button>
-                                                        <button type="submit" class="primary-button">
-                                                            Subscribe
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                                                              
-                                        </div>
-
-
-                                    </div> --}}
         
                                     {{-- Unsubscribe modal --}}
                                     {{-- <div id="popup-modal2{{ $user->id }}" tabindex="-1"

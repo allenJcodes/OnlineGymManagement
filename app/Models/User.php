@@ -56,12 +56,12 @@ class User extends Authenticatable
         return $this->hasOne(Membership::class, 'user_id', "id");
     }
 
-    public function subscription()
+    public function subscriptions()
     {
-        return $this->hasOne(Subscription::class);
+        return $this->hasMany(Subscription::class);
     }
 
-    public function getFullNameAttribute(){
+    public function getFullNameAttribute() {
         return $this->first_name.' '. ($this->middle_name ?? '') .' '.$this->last_name;
     }
 

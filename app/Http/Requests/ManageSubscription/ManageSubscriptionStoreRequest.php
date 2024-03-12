@@ -24,11 +24,12 @@ class ManageSubscriptionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:subscription_types,name',
             'price' => 'required|numeric',
             'number_of_months' => 'required|numeric',
             'description' => 'required',
-            'inclusions' => 'required'
+            'inclusions' => 'required',
+            'best_option' => 'required',
         ];
     }
 }
