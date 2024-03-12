@@ -121,6 +121,45 @@
 
             <div class="grid grid-cols-3 gap-10">
 
+                @if (count($gym_sessions) < 1)
+                    <x-gym-session-card 
+                        title="Virtual" 
+                        content="Virtual gym classes enable individuals to engage in workouts remotely using video streaming platforms or fitness apps, offering convenience and flexibility for participants to exercie from any location."
+                    >
+
+                        @slot('icon')
+                            <svg class="w-7 h-7 text-accent mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
+                            </svg>
+                        @endslot
+
+                    </x-gym-session-card>
+
+                    <x-gym-session-card 
+                        title="Hybrid" 
+                        content="Hybrid gym classes provide a combination of virtual and in-person options, allowing participants to choose between remote or physical attendance, catering to diverse preferences and cirumstances."
+                    >   
+                        @slot('icon')
+                            <svg class="w-7 h-7 text-accent mb-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
+                            </svg>
+                        @endslot
+                    </x-gym-session-card>
+
+                    <x-gym-session-card 
+                        title="In Person" 
+                        content="Real-time guidance from
+                        qualified instructors, a motivating workout environment, and the opportunity to interact
+                        with fellow attendees."
+                    >
+                        @slot('icon')
+                            <svg class="w-7 h-7 text-accent mb-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
+                            </svg>
+                        @endslot
+                    </x-gym-session-card>  
+                @endif
+
                 @foreach ($gym_sessions as $gym_session)
                     <x-gym-session-card 
                     title="{{$gym_session->title}}" 
