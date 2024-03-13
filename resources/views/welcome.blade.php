@@ -31,41 +31,36 @@
                 @if (Route::has('login'))
                     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
                         id="navbar-sticky">
-                        <ul
-                            class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0  ">
+                        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
                             <li>
-                                <a href="#session"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Session</span></a>
+                                <a href="#session" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Session
+                                </a>
                             </li>
                             <li>
-                                <a href="#pricing"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Pricing</span></a>
+                                <a href="#pricing" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Pricing
+                                </a>
                             </li>
                             <li>
-                                <a href="#learn"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span class="text-white hover:text-yellow-300">Learn</span></a>
+                                <a href="#learn" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Learn
+                                </a>
                             </li>
                             <li>
-                                <a href="#faq"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span class="text-white hover:text-yellow-300">FAQ</span></a>
+                                <a href="#faq" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    FAQ
+                                </a>
                             </li>
                             <li>
-                                <a href="#instructor"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Instructors</span></a>
+                                <a href="#instructor" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Instructors
+                                </a>
                             </li>
                             <li>
-                                <a href="#contact"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Contact</span></a>
+                                <a href="#contact" class="block py-2 pl-3 pr-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Contact
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('login') }}"

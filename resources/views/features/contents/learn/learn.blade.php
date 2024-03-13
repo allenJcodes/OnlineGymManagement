@@ -50,19 +50,19 @@
                     <tbody>
                         @forelse ($learnContents as $learnContent)
                         <tr class="table-row">
-                            <td class="py-2">
+                            <td class="py-2 pr-2">
                                 {{ $learnContent->title }}
                             </td>
-                            <td class="py-2">
+                            <td class="py-2 pr-2">
                                 {{ $learnContent->subtitle }}
                             </td>
-                            <td class="py-2">
+                            <td class="py-2 pr-2">
                                 {{ $learnContent->content }}
                             </td>
-                            <td class="py-2">
+                            <td class="py-2 pr-2">
                                 {{ $learnContent->created_at }}
                             </td>
-                            <td class="py-2">
+                            <td class="py-2 pr-2">
                                 {{ $learnContent->updated_at }}
                             </td> 
                             <td>

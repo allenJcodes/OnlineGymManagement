@@ -83,10 +83,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/inventory/getItemType', [InventoryController::class, 'getItemType'])->name('getItemType');
 
     // ATTENDANCE
-    Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance');
-    Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
-    Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
-    Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
+    Route::resource('attendance', AttendanceController::class);
+    // Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
+    // Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
+    // Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
 
     // CONTENTS
     Route::prefix('contents')->name('contents.')->group(function () {
