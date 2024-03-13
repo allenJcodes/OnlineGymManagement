@@ -858,6 +858,9 @@ tbody .table-row:first-child{
 .h-5{
   height: 1.25rem;
 }
+.h-7{
+  height: 1.75rem;
+}
 .h-8{
   height: 2rem;
 }
@@ -885,9 +888,6 @@ tbody .table-row:first-child{
 }
 .h-screen{
   height: 100vh;
-}
-.h-7{
-  height: 1.75rem;
 }
 .max-h-0{
   max-height: 0px;
@@ -949,6 +949,9 @@ tbody .table-row:first-child{
 .w-64{
   width: 16rem;
 }
+.w-7{
+  width: 1.75rem;
+}
 .w-8{
   width: 2rem;
 }
@@ -976,9 +979,6 @@ tbody .table-row:first-child{
 }
 .w-screen{
   width: 100vw;
-}
-.w-7{
-  width: 1.75rem;
 }
 .\!min-w-\[8vw\]{
   min-width: 8vw !important;

@@ -31,15 +31,15 @@ class AttendanceController extends Controller
         ]);
     }
 
-    public function attended($id, $attendanceId)
-    {
-        Reservation::where('id', $id)
-            ->update([
-                'attended' => '1'
-            ]);
+    // public function attended($id, $attendanceId)
+    // {
+    //     Reservation::where('id', $id)
+    //         ->update([
+    //             'attended' => '1'
+    //         ]);
 
-        return redirect('/attendance/' . $attendanceId);
-    }
+    //     return redirect('/attendance/' . $attendanceId);
+    // }
 
     public function userNotification($id)
     {

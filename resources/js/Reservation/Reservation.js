@@ -69,58 +69,58 @@ const columns = [
     },
 ];
 
-const Reservation = (props) => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        console.log(props);
-        api.get(`getuserreservations?id=${props.user_id}`)
-            .then((response) => {
-                setData(response.data);
-                console.log(response.data);
-            })
-            .catch((err) => {
-                console.log(err.response);
-            });
-    }, []);
+// const Reservation = (props) => {
+//     const [data, setData] = useState([]);
+//     useEffect(() => {
+//         console.log(props);
+//         api.get(`getuserreservations?id=${props.user_id}`)
+//             .then((response) => {
+//                 setData(response.data);
+//                 console.log(response.data);
+//             })
+//             .catch((err) => {
+//                 console.log(err.response);
+//             });
+//     }, []);
 
-    return (
-        <Container sx={{ marginTop: 3 }}>
-            <CustomToast />
-            <Grid
-                container
-                direction={`row`}
-                alignItems={"center"}
-                justifyContent={`space-between`}
-                py={4}
-            >
-                <Grid item>
-                    <Typography variant="h4">Reservations</Typography>
-                </Grid>
-            </Grid>
-            <DataGrid
-                rows={data}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 5,
-                        },
-                    },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-            />
-        </Container>
-    );
-};
+//     return (
+//         <Container sx={{ marginTop: 3 }}>
+//             <CustomToast />
+//             <Grid
+//                 container
+//                 direction={`row`}
+//                 alignItems={"center"}
+//                 justifyContent={`space-between`}
+//                 py={4}
+//             >
+//                 <Grid item>
+//                     <Typography variant="h4">Reservations</Typography>
+//                 </Grid>
+//             </Grid>
+//             <DataGrid
+//                 rows={data}
+//                 columns={columns}
+//                 initialState={{
+//                     pagination: {
+//                         paginationModel: {
+//                             pageSize: 5,
+//                         },
+//                     },
+//                 }}
+//                 pageSizeOptions={[5]}
+//                 disableRowSelectionOnClick
+//             />
+//         </Container>
+//     );
+// };
 
-export default Reservation;
+// export default Reservation;
 
-if (document.getElementById("ReservationPage")) {
-    const element = document.getElementById("ReservationPage");
-    const props = Object.assign({}, element.dataset);
-    ReactDOM.render(
-        <Reservation {...props} />,
-        document.getElementById("ReservationPage")
-    );
-}
+// if (document.getElementById("ReservationPage")) {
+//     const element = document.getElementById("ReservationPage");
+//     const props = Object.assign({}, element.dataset);
+//     ReactDOM.render(
+//         <Reservation {...props} />,
+//         document.getElementById("ReservationPage")
+//     );
+// }

@@ -7,7 +7,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SchedulingController;
-use App\Http\Controllers\ReservationController;
+// use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContentController;
@@ -56,9 +56,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('getspecificschedule', [SchedulingController::class, 'getSpecificSchedule']);
 
     // RESERVATION
-    Route::get('reservation', [ReservationController::class, 'index'])->name('reservation');
-    Route::post('reserve', [ReservationController::class, 'reserve']);
-    Route::get('getuserreservations', [ReservationController::class, 'userReservations']);
+    // Route::get('reservation', [ReservationController::class, 'index'])->name('reservation');
+    // Route::post('reserve', [ReservationController::class, 'reserve']);
+    // Route::get('getuserreservations', [ReservationController::class, 'userReservations']);
 
     // MEMBERSHIP
     Route::resource('membership', MembershipController::class)->only(['index', 'store']);

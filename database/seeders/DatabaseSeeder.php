@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            GymSessionSeeder::class,
             LearnSeeder::class,
             FAQSeeder::class,
             ContactDetailTypeSeeder::class,
