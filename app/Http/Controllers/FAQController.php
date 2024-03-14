@@ -15,7 +15,7 @@ class FAQController extends Controller
      */
     public function index()
     {
-        $faqs = FAQ::all();
+        $faqs = FAQ::paginate(10);
         
         return view('features.contents.faq.faq', compact('faqs'));
     }

@@ -109,13 +109,11 @@
                 </table>
 
             </div>
-
-
-        </div>
-
-        <div class="relative overflow-x-auto shadow-md rounded-md"
-            style="background-color: rgb(247, 247, 247); max-height: 79vh">
-
+            @if($gym_sessions->hasPages())
+                <div class="card">
+                    {{$gym_sessions->links()}}
+                </div>
+            @endif
         </div>
     </div>
 @endsection
