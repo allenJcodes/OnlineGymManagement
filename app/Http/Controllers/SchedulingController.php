@@ -39,23 +39,25 @@ class SchedulingController extends Controller
      */
     public function store(SchedulingStoreRequest $request)
     {
-        // dd($request->date_time_start);
-        $checkConflicts = Schedules::where(function($query) use ($request) {
-            $query->where('date_time_start', '<=', $request->date_time_start)
-            ->where('date_time_end', '>=', $request->date_time_end);
-        })
-        ->orWhere(function($query) use ($request) {
-            $query->whereBetween('date_time_start', [$request->date_time_start, $request->date_time_end])
-            ->orWhereBetween('date_time_end', [$request->date_time_start, $request->date_time_end]);
-        })->get();
+        $checkConflicts = Schedules::where('instructor_id', $request->instructor_id)
+        ->where(function($q) use ($request) {
+            $q->where(function($query) use ($request) {
+                $query->where('date_time_start', '<=', $request->date_time_start)
+                ->where('date_time_end', '>=', $request->date_time_end);
+            })
+            ->orWhere(function($query) use ($request) {
+                $query->whereBetween('date_time_start', [$request->date_time_start, $request->date_time_end])
+                ->orWhereBetween('date_time_end', [$request->date_time_start, $request->date_time_end]);
+            });
+        }) 
+        ->get();
 
         if(count($checkConflicts)) {
             return back()->with('toast', [
-            'status' => 'error',
-            'message' => 'Adding of schedule failed. Please check for conflicts.',
-        ]);
+                'status' => 'error',
+                'message' => 'Adding of schedule failed. Please check for conflicts.',
+            ]);
         }
-        
         
         Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
         return redirect()->route('scheduling.index')->with('toast', [
@@ -97,7 +99,8 @@ class SchedulingController extends Controller
      */
     public function update(SchedulingStoreRequest $request, Schedules $scheduling)
     {
-        $checkConflicts = Schedules::where('id', '!=', $scheduling->id)
+        $checkConflicts = Schedules::where('instructor_id', $request->instructor_id)
+        ->where('id', '!=', $scheduling->id)
         ->where(function($q) use ($request) {
             $q->where(function($query) use ($request) {
                 $query->where('date_time_start', '<=', $request->date_time_start)

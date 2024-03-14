@@ -17,12 +17,7 @@ class ManageSubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = SubscriptionType::with('inclusions')->paginate(10);
-
-        foreach($subscriptions as $s) {
-            $s->getInclusionsStringAttribute();
-        }
-
+        $subscriptions = SubscriptionType::search()->with('inclusions')->paginate(10);
         return view('features.manage_subscriptions.ManageSubscriptions', compact('subscriptions'));
     }
 

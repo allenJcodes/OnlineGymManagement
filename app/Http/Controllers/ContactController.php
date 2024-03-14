@@ -16,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = ContactDetail::with('ContactDetailType')->get();
+        $contacts = ContactDetail::search()->with('ContactDetailType')->get();
         
         return view('features.contents.contact.contact', compact('contacts'));
     }

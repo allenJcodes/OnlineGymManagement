@@ -15,7 +15,7 @@ class LearnController extends Controller
      */
     public function index()
     {
-        $learnContents = LearnContent::all();
+        $learnContents = LearnContent::search()->get();
         
         return view('features.contents.learn.learn', compact('learnContents'));
     }

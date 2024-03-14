@@ -14,7 +14,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::with('equipment')->paginate(2);
+        $inventories = Inventory::search()->with('equipment')->paginate(2);
         return view('features.inventory.inventory', compact('inventories'));
     }
 
