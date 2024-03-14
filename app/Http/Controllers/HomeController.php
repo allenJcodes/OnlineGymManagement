@@ -36,9 +36,11 @@ class HomeController extends Controller
         if (Auth::check()) {
             if (Auth::user()->user_role == '1') {
                 return $this->adminIndex();
-            } else if (Auth::user()->user_role == '2') {
-                return $this->instructorIndex();
-            } else {
+            } 
+            // else if (Auth::user()->user_role == '2') {
+            //     return $this->instructorIndex();
+            // } 
+            else {
                 return $this->customerIndex();
             }
         }
@@ -66,7 +68,9 @@ class HomeController extends Controller
         return view('home', compact('user', 'recentPayments', 'availableEquipments', 'notAvailableEquipments', 'underMaintenanceEquipments', 'schedulesThisWeek'));
     }
 
-    private function instructorIndex(){}
+    private function instructorIndex(){
+        
+    }
 
     private function adminIndex()
     {

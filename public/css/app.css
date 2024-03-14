@@ -895,6 +895,9 @@ tbody .table-row:first-child{
 .h-\[22px\]{
   height: 22px;
 }
+.h-24{
+  height: 6rem;
+}
 .max-h-0{
   max-height: 0px;
 }
@@ -989,6 +992,12 @@ tbody .table-row:first-child{
 .w-\[22px\]{
   width: 22px;
 }
+.w-1\/2{
+  width: 50%;
+}
+.w-24{
+  width: 6rem;
+}
 .\!min-w-\[8vw\]{
   min-width: 8vw !important;
 }
@@ -1006,6 +1015,12 @@ tbody .table-row:first-child{
 }
 .min-w-7{
   min-width: 1.75rem;
+}
+.min-w-48{
+  min-width: 12rem;
+}
+.min-w-\[24rem\]{
+  min-width: 24rem;
 }
 .max-w-0{
   max-width: 0px;
