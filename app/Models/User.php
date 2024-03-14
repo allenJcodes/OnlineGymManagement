@@ -83,7 +83,7 @@ class User extends Authenticatable
     }
 
     function instructor() : BelongsTo {
-        return $this->belongsTo(Instructor::class, 'user_id', "id");
+        return $this->belongsTo(Instructor::class, 'user_id', 'id');
     }
     
 }

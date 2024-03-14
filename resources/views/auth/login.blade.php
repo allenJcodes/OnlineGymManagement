@@ -27,8 +27,9 @@
 <body>
     <div class="flex h-screen justify-center font-red-hat-display md:px-0 py-32">
         <div class="flex flex-col h-fit bg-white rounded-lg p-6 md:w-1/2 xl:w-1/3 gap-10">
-            <div class="flex justify-center w-full">
+            <div class="flex flex-col items-center justify-center w-full gap-2">
                 <img class="" src="{{ asset('images/logo.png') }}" alt="" height="120" width="120">
+                <p class="text-xl">Japs Online Fitness Gym</p>
             </div>
             <br>
             <form method="POST" action="{{ route('login') }}">

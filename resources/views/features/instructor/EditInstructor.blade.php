@@ -3,7 +3,6 @@
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
         <h1 class="text-2xl font-bold">Edit Instructor</h1>
-
         <form action="{{ route('instructor.update', ['instructor' => $instructor]) }}" method="POST" class="flex flex-col gap-3 card">
             @method('PUT')
             @csrf
