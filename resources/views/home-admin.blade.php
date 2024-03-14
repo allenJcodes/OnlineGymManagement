@@ -29,10 +29,9 @@
                 <div class="col-span-1 pl-2 pr-2">
                     <div
                         class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                            Instructors
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Instructors
                         </h5>
-                        <p class="text-4xl text-gray-500">{{ $instructors }}213134</p>
+                        <p class="text-4xl text-gray-500">{{ $instructors }}</p>
                     </div>
                 </div>
             </div>
