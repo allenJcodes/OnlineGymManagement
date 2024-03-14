@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Reservation;
 use App\Models\Schedules;
 use Carbon\Carbon;
@@ -19,35 +20,59 @@ class AttendanceController extends Controller
         return view('features.attendance.Attendance', compact('allAttendances'));
     }
 
-    public function viewAttendance($id)
-    {
-        $attendance = Schedules::with(['attendances.ownedBy' => function ($query) {
-            $query->get();
-        }])->with('instructor')->where('id', $id)->first();
+    public function create() {
 
-        // dd($attendance);
-        return view('features.attendance.ViewAttendance', [
-            'attendance' => $attendance
-        ]);
     }
 
-    public function attended($id, $attendanceId)
-    {
-        Reservation::where('id', $id)
-            ->update([
-                'attended' => '1'
-            ]);
+    public function store(Request $request) {
 
-        return redirect('/attendance/' . $attendanceId);
     }
 
-    public function userNotification($id)
-    {
-        $reservations = Reservation::where('user_id', $id)->with("schedule")->get();
-        $count = [];
-        foreach ($reservations as $reservation) {
-            array_push($count, $reservation->schedule->date_time_start);
-        }
-        return $count;
+    public function show(Attendance $attendance) {
+
     }
+
+    public function edit(Attendance $attendance) {
+        
+    }
+
+    public function update(Request $request, Attendance $attendance) {
+
+    }
+    
+    public function destroy(Attendance $attendance) {
+
+    }
+    
+    // public function viewAttendance($id)
+    // {
+    //     $attendance = Schedules::with(['attendances.ownedBy' => function ($query) {
+    //         $query->get();
+    //     }])->with('instructor')->where('id', $id)->first();
+
+    //     // dd($attendance);
+    //     return view('features.attendance.ViewAttendance', [
+    //         'attendance' => $attendance
+    //     ]);
+    // }
+
+    // public function attended($id, $attendanceId)
+    // {
+    //     Reservation::where('id', $id)
+    //         ->update([
+    //             'attended' => '1'
+    //         ]);
+
+    //     return redirect('/attendance/' . $attendanceId);
+    // }
+
+    // public function userNotification($id)
+    // {
+    //     $reservations = Reservation::where('user_id', $id)->with("schedule")->get();
+    //     $count = [];
+    //     foreach ($reservations as $reservation) {
+    //         array_push($count, $reservation->schedule->date_time_start);
+    //     }
+    //     return $count;
+    // }
 }

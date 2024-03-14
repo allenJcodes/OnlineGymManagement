@@ -13,13 +13,13 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id');
-            $table->string('schedule_id');
-            $table->string('attended');
-            $table->timestamps();
-        });
+        // Schema::create('reservations', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('user_id');
+        //     $table->string('schedule_id');
+        //     $table->string('attended');
+        //     $table->timestamps();
+        // });
     }
 
     /**

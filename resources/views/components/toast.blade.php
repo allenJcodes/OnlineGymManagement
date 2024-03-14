@@ -59,5 +59,3 @@
         </div>
     </div>
 @endif
-
-@vite('resources/js/components/toast.js')

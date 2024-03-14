@@ -20,63 +20,50 @@
 
 <body class="font-red-hat-display bg-background">
 
-    <nav class="bg-background fixed w-full z-20 top-0 left-0 h-16 flex items-center justify-center px-64">
-        <div class="w-full flex items-center justify-between">
+    <nav class="bg-background fixed w-full z-20 top-0 left-0 py-2 h-16 flex items-center justify-center xl:px-64">
+        <div class="w-full flex items-center justify-between px-16">
             <a href="/" class="flex items-center">
-
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><img
-                        src="{{ asset('images/logo.png') }}" alt="" width="50" height="50"></span>
+                <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50">
             </a>
-            <div class="flex md:order-2 items-center">
+            <div class="flex items-center">
                 @if (Route::has('login'))
-                    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-                        id="navbar-sticky">
-                        <ul
-                            class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0  ">
+                        <ul class="flex font-medium items-center">
                             <li>
-                                <a href="#session"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Session</span></a>
+                                <a href="#session" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Session
+                                </a>
                             </li>
                             <li>
-                                <a href="#pricing"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Pricing</span></a>
+                                <a href="#pricing" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Pricing
+                                </a>
                             </li>
                             <li>
-                                <a href="#learn"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span class="text-white hover:text-yellow-300">Learn</span></a>
+                                <a href="#learn" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Learn
+                                </a>
                             </li>
                             <li>
-                                <a href="#faq"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span class="text-white hover:text-yellow-300">FAQ</span></a>
+                                <a href="#faq" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    FAQ
+                                </a>
                             </li>
                             <li>
-                                <a href="#instructor"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Instructors</span></a>
+                                <a href="#instructor" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Instructors
+                                </a>
                             </li>
                             <li>
-                                <a href="#contact"
-                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                                    aria-current="page"><span
-                                        class="text-white hover:text-yellow-300">Contact</span></a>
+                                <a href="#contact" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
+                                    Contact
+                                </a>
                             </li>
                             <li>
-                                <a href="{{ route('login') }}"
-                                    class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"><span
-                                        class="text-black bg-yellow-400 p-2 rounded-xl hover:bg-gray-400">{{auth()->check() ? 'My Dashboard' : 'Login'}} </span></a>
+                                <a href="{{ route('login') }}" class="block py-2 px-4 text-black bg-yellow-400 p-2 rounded-xl hover:bg-gray-400 whitespace-nowrap">
+                                    {{auth()->check() ? 'My Dashboard' : 'Login'}}
+                                </a>
                             </li>
-
-
-
                         </ul>
-                    </div>
                 @endif
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -94,7 +81,7 @@
     </nav>
 
     {{-- HERO --}}
-    <div class="flex items-center px-64 gap-32 pt-16 pb-0 h-[90vh] relative">
+    <div class="flex items-center gap-32 pt-16 pb-0 h-[90vh] relative px-16 xl:px-64">
         <div class="z-10 w-3/4" >
             <h1 class="text-6xl pb-5 text-white font-bold"> Become <span class="text-yellow-300">Physically Fit</span></h1>
 
@@ -115,48 +102,26 @@
 
     {{-- SESSION PAGE --}}
     <section id="session">
-        <div class="py-20 px-64 gap-10 bg-off-white flex flex-col items-center justify-center">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
 
             <h2 class="text-5xl text-background">Gym Sessions</h2>
 
             <div class="grid grid-cols-3 gap-10">
 
-                <x-gym-session-card 
-                    title="Virtual" 
-                    content="Virtual gym classes enable individuals to engage in workouts remotely using video streaming platforms or fitness apps, offering convenience and flexibility for participants to exercie from any location."
-                >
+                @foreach ($gym_sessions as $gym_session)
+                    <x-gym-session-card 
+                    title="{{ucwords($gym_session->title)}}" 
+                    content="{{$gym_session->content}}"
+                    >
 
-                    @slot('icon')
-                        <svg class="w-7 h-7 text-accent mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-                        </svg>
-                    @endslot
+                        @slot('icon')
+                            <svg class="min-w-7 min-h-7 text-accent mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
+                            </svg>
+                        @endslot
 
-                </x-gym-session-card>
-
-                <x-gym-session-card 
-                    title="Hybrid" 
-                    content="Hybrid gym classes provide a combination of virtual and in-person options, allowing participants to choose between remote or physical attendance, catering to diverse preferences and cirumstances."
-                >   
-                    @slot('icon')
-                        <svg class="w-7 h-7 text-accent mb-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-                        </svg>
-                    @endslot
-                </x-gym-session-card>
-
-                <x-gym-session-card 
-                    title="In Person" 
-                    content="Real-time guidance from
-                    qualified instructors, a motivating workout environment, and the opportunity to interact
-                    with fellow attendees."
-                >
-                    @slot('icon')
-                        <svg class="w-7 h-7 text-accent mb-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-                        </svg>
-                    @endslot
-                </x-gym-session-card>
+                    </x-gym-session-card>
+                @endforeach
 
             </div>
 
@@ -165,7 +130,7 @@
 
     {{-- LEARN PAGE --}}
     <section id="learn">
-        <div class="py-20 px-64 gap-8 bg-off-white flex flex-col items-center justify-center">
+        <div class="py-20 gap-8 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
             @foreach ($learnContent as $index => $learn_content)
 
                 <x-learn-content 
@@ -182,7 +147,7 @@
 
     {{-- PRICING PAGE --}}
     <section id="pricing">
-        <div class="py-20 px-64 gap-10 bg-background flex flex-col items-center justify-center text-off-white">
+        <div class="py-20 gap-10 bg-background flex flex-col items-center justify-center text-off-white px-16 xl:px-64">
             <h2 class="text-5xl">Membership Pricing</h2>
 
             <div class="grid grid-cols-3 gap-10 w-full">
@@ -203,7 +168,7 @@
 
     {{-- INSTRUCTOR --}}
     <section id="instructor">
-        <div class="py-20 px-64 gap-10 bg-off-white flex flex-col items-center justify-center">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64">
 
             <h2 class="text-5xl text-background">Our Instructors</h2>
 
@@ -223,7 +188,7 @@
 
     {{-- FAQ --}}
     <section id="faq">
-        <div class="py-20 px-64 gap-10 bg-off-white flex flex-col items-center justify-center">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64">
             <h2 class="text-5xl text-background">Frequently Asked Questions</h2>
 
             <div class="w-full" id="accordion-collapse" data-accordion="collapse">
@@ -261,7 +226,7 @@
 
     {{-- CONTACT PAGE --}}
     <section id="contact">
-        <div class="pl-36 pr-36 pb-20 pt-20 bg-off-white">
+        <div class="py-20 bg-off-white px-16 xl:px-64">
             <div class="grid grid-cols-2">
                 <div class="col-span-1">
                     <legend class="text-center text-4xl pb-10">Contact Information</legend>
@@ -278,7 +243,7 @@
 
                 </div>
                 <div class="col-span-1">
-                    <iframe src="https://www.google.com/maps?q={{ $coordinates->content }}&z=18&output=embed"
+                    <iframe class="max-w-full" src="https://www.google.com/maps?q={{ $coordinates->content }}&z=18&output=embed"
                         width="600" height="300" style="border:0; padding-left: 2rem" allowfullscreen=""
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>

@@ -54,7 +54,7 @@
 
                         <div class="absolute top-2 left-2">
                             <div @class([
-                                'flex py-1 px-2 text-xs text-off-white rounded-full ring-1', 
+                                'flex py-1 px-2 text-xs rounded-full ring-1', 
                                 'bg-green-100 ring-green-500 text-green-500' => $equipment->status == 'available',
                                 'bg-red-100 ring-red-500 text-red-500' => $equipment->status == 'not_available',
                                 'bg-orange-100 ring-orange-500 text-orange-500' => $equipment->status == 'under_maintenance',

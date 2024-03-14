@@ -5,8 +5,8 @@
 
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">Attendance</h1>
-            <a href="{{ route('contents.contact.create') }}" class="primary-button">
-                Add Attendance ?
+            <a href="{{ route('attendance.create') }}" class="primary-button">
+                Add Attendance
             </a>
         </div>
         
