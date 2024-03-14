@@ -47,10 +47,11 @@ class EquipmentController extends Controller
         if ($request->hasFile('image')) {
             $newImageName = time() . '-' . $request->equipment_name . '.' . $request->image->extension();
             $request->image->move(public_path('image/equipment'), $newImageName);
+        } else {
+            $newImageName = $equipment->image_path;
         }
 
-
-        $equipment->update([...$request->validated(), 'image_path' => $newImageName ?? '']);
+        $equipment->update([...$request->validated(), 'image_path' => $newImageName]);
 
         return redirect()->route('equipment.edit', ['equipment' => $equipment])->with('toast', [
             'status' => 'success',
