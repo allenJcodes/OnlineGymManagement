@@ -24,7 +24,7 @@ textarea {
   }
 
   .form-input {
-    @apply focus:outline-none bg-off-white border border-border py-2 px-2 rounded-md text-sm text-background/90
+    @apply focus:outline-none bg-white border border-border py-2 px-2 rounded-md text-sm text-background/90
   }
 
   .card {

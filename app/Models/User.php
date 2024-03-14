@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -50,6 +51,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeSearch(Builder $query) {
+        $query->whereRaw('CONCAT(first_name, " ", middle_name, " ", last_name) like ?', [request()->search."%"])
+        ->orWhereRaw('CONCAT(first_name, " ", last_name) like ?', [request()->search."%"])
+        ->orWhere('first_name', 'like', request()->search . '%')
+        ->orWhere('middle_name', 'like', request()->search . '%')
+        ->orWhere('last_name', 'like', request()->search . '%')
+        ->orWhere('email', 'like', request()->search . '%');
+    }
     
     public function membership()
     {
