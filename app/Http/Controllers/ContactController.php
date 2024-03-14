@@ -16,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = ContactDetail::search()->with('ContactDetailType')->get();
+        $contacts = ContactDetail::search()->with('ContactDetailType')->paginate(10);
         $coordinates = ContactDetail::where('label', 'Coordinates')->first();
         
         return view('features.contents.contact.contact', compact('contacts', 'coordinates'));

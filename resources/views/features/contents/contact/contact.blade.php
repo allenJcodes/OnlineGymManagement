@@ -112,6 +112,11 @@
                     </tbody>
                 </table>
             </div>
+            @if($contacts->hasPages())
+                <div class="card">
+                    {{$contacts->links()}}
+                </div>
+            @endif
             <div class="card">
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Edit Google Map</h2>

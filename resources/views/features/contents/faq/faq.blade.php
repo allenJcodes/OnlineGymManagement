@@ -93,6 +93,11 @@
                     </tbody>
                 </table>
             </div>
+            @if($faqs->hasPages())
+                <div class="card">
+                    {{$faqs->links()}}
+                </div>
+            @endif
         </div>
     </div>
 @endsection

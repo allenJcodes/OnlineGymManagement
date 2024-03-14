@@ -15,7 +15,7 @@ class FAQController extends Controller
      */
     public function index()
     {
-        $faqs = FAQ::search()->get();
+        $faqs = FAQ::search()->paginate(10);
         
         return view('features.contents.faq.faq', compact('faqs'));
     }
