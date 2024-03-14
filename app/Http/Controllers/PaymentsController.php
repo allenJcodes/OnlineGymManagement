@@ -9,15 +9,13 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->user_role == 1) {
-            $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])->get();
-        }
-        else {
-            $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
-            ->whereHas('subscriptions', function($query) {
-                $query->where('subscriptions.user_id', auth()->user()->id);
-            })->get();
-        }
+        $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
+        ->when(auth()->user()->user_role != 1, function($whenQuery) {
+            $whenQuery->whereHas('subscriptions', function($whereHas) {
+                $whereHas->where('subscriptions.user_id', auth()->user()->id);
+            });
+        })->paginate(10);
+
         return view('features.payment.Payment', compact('payments'));
     }
 
@@ -32,4 +30,16 @@ class PaymentsController extends Controller
             'payment_reference_no' => $request->referenceNo
         ]);
     }
+
+    public function printReports() {
+        $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
+        ->when(auth()->user()->user_role != 1, function($whenQuery) {
+            $whenQuery->whereHas('subscriptions', function($whereHas) {
+                $whereHas->where('subscriptions.user_id', auth()->user()->id);
+            });
+        })->get();
+
+        return view('features.payment.Report', compact('payments'));
+    }
+    
 }

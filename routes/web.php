@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // PAYMENTS
+    Route::get('/payments/report', [PaymentsController::class, 'printReports'])->name('payments.print');
     Route::resource('payments', PaymentsController::class)->only(['index', 'show']);
 
     // EQUIPMENT
