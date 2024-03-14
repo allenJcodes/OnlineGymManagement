@@ -55,7 +55,7 @@ class InstructorController extends Controller
         return redirect()->route('instructor.index')->with('toast', [
             'status' => 'success',
             'message' => 'Instructor created successfully.',
-        ]);;
+        ]);
     }
 
     /**
@@ -77,8 +77,8 @@ class InstructorController extends Controller
      */
     public function edit(Instructor $instructor)
     {   
-        $instructor = $instructor->with('user')->first();
-        return view('features.instructor.EditInstructor', ['instructor' => $instructor]);
+        $instructor = $instructor->with('user')->where('user_id', '=' , $instructor->user_id)->first();
+        return view('features.instructor.EditInstructor', compact('instructor'));
     }
 
     /**

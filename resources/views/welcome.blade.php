@@ -21,7 +21,7 @@
 <body class="font-red-hat-display bg-background">
 
     <nav class="bg-background fixed w-full z-20 top-0 left-0 py-2 h-16 flex items-center justify-center xl:px-64">
-        <div class="w-full flex items-center justify-between px-16">
+        <div class="w-full flex items-center justify-between">
             <a href="/" class="flex items-center">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50">
             </a>
@@ -97,6 +97,7 @@
         <div class="absolute right-0 bottom-0 flex-1 h-fit self-end justify-self-end" >
             <img src="{{ asset('images/home-image.png') }}" alt="">
         </div>
+        <div class="absolute top-0 left-0 w-full h-full bg-background/70"></div>
     </div>
 
 
