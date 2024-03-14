@@ -8,7 +8,6 @@ use App\Models\Payments;
 use App\Models\Schedules;
 use App\Models\Subscription;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -105,7 +104,8 @@ class HomeController extends Controller
             ->whereMonth('created_at', $this_month)
             ->count('amount_paid');
 
-        $recentPayments = Payments::with('subscriptions.user')->orderBy('payments.created_at', 'desc')->take(3)->get();
+        // Recent Subscribers
+        $subscribers = Subscription::orderBy('subscriptions.created_at', 'desc')->take(3)->get();
 
         $equipments = Equipment::all();
         $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
@@ -120,7 +120,8 @@ class HomeController extends Controller
             'payment_price',
             'payment_month',
             'payment_price_month',
-            'recentPayments', 'availableEquipments', 'notAvailableEquipments', 'underMaintenanceEquipments',
+            'subscribers',
+            'availableEquipments', 'notAvailableEquipments', 'underMaintenanceEquipments',
         ));
     }
 }
