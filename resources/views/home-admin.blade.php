@@ -6,7 +6,7 @@
             <div class="grid grid-cols-3">
                 <div class="col-span-1 pl-2 pr-2">
                     <div
-                        class="w-full h-[130px] max-h-40 text-left block p-6 bg-background border border-gray-200 rounded-lg shadow hover:bg-zinc-700">
+                        class="w-full h-[130px] text-left block p-6 bg-background border border-gray-200 rounded-lg shadow hover:bg-zinc-700">
                         <h5 class="mb-2 text-1xl tracking-tight text-white">
                             Welcome back,
                         </h5>

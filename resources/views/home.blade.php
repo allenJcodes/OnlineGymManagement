@@ -80,7 +80,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <a class="outline-button mt-auto ml-auto text-xs" href="{{route('payments')}}">See all payments ></a>
+                        <a class="outline-button mt-auto ml-auto text-xs" href="{{route('payments.index')}}">See all payments ></a>
                     </div>
 
                     <div class="card">
