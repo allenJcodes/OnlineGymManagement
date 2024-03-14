@@ -71,9 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // PAYMENTS
-    Route::get("payments", [PaymentsController::class, 'index'])->name('payments');
-    Route::get("getuserpayments", [PaymentsController::class, 'getUserPayments']);
-    Route::post("updatereferencenumber", [PaymentsController::class, 'updateReferenceNumber']);
+    Route::resource('payments', PaymentsController::class)->only(['index', 'show']);
 
     // EQUIPMENT
     Route::resource('equipment', EquipmentController::class);

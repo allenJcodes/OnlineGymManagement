@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Subscription extends Model
 {
@@ -26,4 +27,8 @@ class Subscription extends Model
         return $this->belongsTo(User::class, 'user_id', "id");
     }
 
+    public function subscriptionTypes(): HasOne
+    {
+        return $this->HasOne(SubscriptionType::class, 'id', 'subscription_type_id');
+    }
 }

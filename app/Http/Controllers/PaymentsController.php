@@ -9,12 +9,21 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        return view('features.payment.Payment');
+        if (auth()->user()->user_role == 1) {
+            $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])->get();
+        }
+        else {
+            $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
+            ->whereHas('subscriptions', function($query) {
+                $query->where('subscriptions.user_id', auth()->user()->id);
+            })->get();
+        }
+        return view('features.payment.Payment', compact('payments'));
     }
 
-    public function getUserPayments(Request $request)
+    public function show($id)
     {
-        return Payments::where('user_id', $request->id)->get();
+
     }
 
     public function updateReferenceNumber(Request $request)
