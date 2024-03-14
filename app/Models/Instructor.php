@@ -24,7 +24,10 @@ class Instructor extends Model
         ->orWhere('users.first_name', 'like', request()->search . '%')
         ->orWhere('users.middle_name', 'like', request()->search . '%')
         ->orWhere('users.last_name', 'like', request()->search . '%')
-        ->orWhere('instructors.description', 'like', request()->search . '%');
+        ->orWhere('instructors.description', 'like', request()->search . '%')
+        ->select([
+            '*', 'instructors.id as id'
+        ]);
     }
 
     public function user() : HasOne {

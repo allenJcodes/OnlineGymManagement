@@ -13,9 +13,11 @@
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Payments List</h2>
                     {{-- form actions here --}}
-                    <form class="w-[30%]">
-                        <input id="search" type="text" class="form-input text-sm w-full h-fit p-1.5" placeholder="Search something">
-                    </form>
+
+                    <div class="flex gap-2 self-end">
+                        <a target="_blank" href="{{route('payments.print')}}" class="primary-button">Print Reports</a>
+                        <x-table-search />
+                    </div>
                 </div>
 
                 <table class="table">
