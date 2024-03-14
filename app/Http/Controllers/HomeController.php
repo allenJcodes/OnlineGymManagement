@@ -101,10 +101,7 @@ class HomeController extends Controller
             ->whereMonth('created_at', $this_month)
             ->count('amount_paid');
 
-        $recentPayments = Payments::whereHas('subscriptions.user', function($q) {
-            $q->where('users.id', auth()->user()->id);
-        })->with('subscriptions.user')->orderBy('payments.created_at', 'desc')->take(3)->get();
-
+        $recentPayments = Payments::with('subscriptions.user')->orderBy('payments.created_at', 'desc')->take(3)->get();
 
         $equipments = Equipment::all();
         $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
