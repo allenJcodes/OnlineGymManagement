@@ -16,7 +16,7 @@ class GymSessionController extends Controller
      */
     public function index()
     {
-        $gym_sessions = GymSession::search()->get();
+        $gym_sessions = GymSession::search()->paginate(10);
 
         return view('features.contents.gym_session.gymSession', compact('gym_sessions'));
     }
