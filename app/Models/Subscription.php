@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -18,7 +19,13 @@ class Subscription extends Model
         "subscription_type_id",
         "start_date",
         "end_date",
-        'status',
+        "qr_code",
+        "status",
+    ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
     ];
     
 
@@ -30,5 +37,9 @@ class Subscription extends Model
     public function subscriptionTypes(): HasOne
     {
         return $this->HasOne(SubscriptionType::class, 'id', 'subscription_type_id');
+    }
+
+    public function endingSoon() {
+        return Carbon::parse($this->end_date)->subWeek() <= Carbon::parse(now()->format('Y-m-d'));
     }
 }

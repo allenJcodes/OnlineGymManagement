@@ -5,13 +5,19 @@
         @if (Auth::user()->user_role == '1')
             <div class="grid grid-cols-3">
                 <div class="col-span-1 pl-2 pr-2">
-                    <div
-                        class="w-full h-[130px] max-h-40 text-left block p-6 bg-background border border-gray-200 rounded-lg shadow hover:bg-zinc-700">
-                        <h5 class="mb-2 text-1xl tracking-tight text-white">
-                            Welcome back,
-                        </h5>
-                        <p class="text-3xl font-semibold text-white">{{ Auth::user()->full_name }}</p>
+                    <div class="w-full flex gap-2 h-[130px] max-h-40 text-left p-6 bg-background border border-gray-200 rounded-lg shadow hover:bg-zinc-700">
+                        <div class="flex h-full bg-dashboard-accent-base aspect-square rounded-full overflow-clip">
+                            <img src="{{ asset('/images/user/' . auth()->user()->profile_image) }}" alt="Profile Image" class="object-cover w-full">
 
+                            {{-- add default user image --}}
+                        </div>
+
+                        <div class="flex flex-col">
+                            <h5 class="mb-2 text-1xl tracking-tight text-white">
+                                Welcome back,
+                            </h5>
+                            <p class="text-3xl font-semibold text-white">{{ Auth::user()->full_name }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-1 pl-2 pr-2">
