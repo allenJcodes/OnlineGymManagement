@@ -4,22 +4,29 @@
 
 
     <div class="flex flex-col pt-16 gap-5 text-background">
+            <div class="flex flex-col gap-3">
 
+                <div class="card flex-row min-w-[20rem] items-center bg-gradient-to-r from-background via-background to-background/90 relative overflow-clip text-off-white">
+                    
+                    <div class="flex items-center justify-center h-28 w-28 bg-dashboard-accent-base aspect-square rounded-full overflow-clip">
+                        @if(auth()->user()->profile_image)
+                            <img src="{{ asset('/images/user/' . auth()->user()->profile_image) }}" alt="Profile Image" class="object-cover w-full">
+                        @else
+                            <box-icon class="h-20 w-20 fill-white" type="solid" name='user' ></box-icon>
+                        @endif
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="whitespace-nowrap font-bold text-2xl text-dashboard-accent-base">{{$user->full_name}} </p>
+                        <p class="whitespace-nowrap text-sm text-dashboard-background/70">{{$user->email}}</p>
+                        <p class="whitespace-nowrap text-sm text-dashboard-background/70">{{$user->role->role_name}}</p>
+                    </div>
 
-        @if (Auth::user()->user_role != '3')
-            <div class="flex gap-3">
-
-                <div class="card h-fit min-w-[24rem] items-center">
-                    <div class="flex h-24 w-24 min-h-24 min-w-24 bg-dashboard-accent-base aspect-square rounded-full"></div>
-                    <p class="whitespace-nowrap">{{$user->full_name}}</p>
-                    <p class="whitespace-nowrap">{{$user->email}}</p>
-                    <p class="whitespace-nowrap">{{$user->role->role_name}}</p>
+                    <img class="absolute top-6 right-0 w-[18rem] opacity-50" src="{{ asset('images/home-image.png') }}" alt="">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3 w-full">
 
                     @if(auth()->user()->user_role == 3)
-                
                         <div class="card">
                             <div class="flex w-full justify-between">
                                 <h2>Subscription Status</h2>
@@ -27,14 +34,17 @@
                                     Unsubscribed
                                 @else
                                     <div class="flex items-center gap-2 text-sm">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-400"></div>
-                                        @if ($user->subscriptions[0]->end_date == now()->format('Y-m-d'))
-                                            Subscription Expired
+
+                                        @if ($user->subscriptions[0]->endingSoon())
+                                            <div class="py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">Subscription ending soon</div>
+                                        @elseif ($user->subscriptions[0]->end_date < now()->format('Y-m-d'))
+                                            <div class="py-1 px-3 text-sm bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">Subscription ended</div>
                                         @else
-                                            Subscribed
+                                            <div class="py-1 px-3 text-sm bg-green-100 ring-1 ring-green-500 text-green-500 rounded-full">Subscribed</div>
                                         @endif
                                     </div>
                                 @endif
+
                             </div>
 
                             <hr>
@@ -44,12 +54,27 @@
                                     $oneMonthFromNow = now()->addMonth();
                                     $dueDate = $oneMonthFromNow > $user->subscriptions[0]->end_date ? $user->subscriptions[0]->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
                                 @endphp
+
+                                <div class="flex flex-col gap-3">
+
+                                    <div class="form-field-container gap-0">
+                                        <p class="form-label">Name</p>
+                                        <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->name}}</p>
+                                    </div>
+
+                                    <div class="form-field-container gap-0">
+                                        <p class="form-label">Price</p>
+                                        <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->price}}</p>
+                                    </div>
+                                </div>
                                     
-                                <div class="flex flex-col">
-                                    <p class="text-sm text-dark-gray-800">Next due date</p>
+                                <div class="form-field-container gap-0">
+                                    <p class="form-label">Next due date</p>
                                     <p class="font-medium">{{$dueDate}}</p>
                                 </div>
                             @endif
+
+
                         </div>
                     @endif
 
@@ -68,7 +93,7 @@
                                 @forelse ($recentPayments as $recentPayment)
                                     <tr class="table-row">
                                         <td class="py-2">{{$recentPayment->created_at->format('F d, Y')}}</td>
-                                        <td class="py-2">{{$recentPayment->mode_of_payment}}</td>
+                                        <td class="py-2">{{ucfirst($recentPayment->mode_of_payment)}}</td>
                                         <td class="py-2">P {{$recentPayment->amount_paid}}</td>                                        
                                     </tr>
                                 @empty
@@ -143,68 +168,6 @@
                 </div>
 
             </div>
-        @endif
-
-        @if (Auth::user()->user_role == '1')
-            <div class="pl-10 pr-10 pt-5">
-
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1">
-                        <legend class="text-center pb-5 text-xl">Daily</legend>
-                        <div class="grid grid-cols-2">
-                            <div class="col-span-1 pl-4 pr-4">
-                                <div
-                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                                        Customer
-                                    </h5>
-                                    {{-- <p class="text-4xl text-gray-600">{{ $payment }}</p> --}}
-
-                                </div>
-
-                            </div>
-                            <div class="col-span-1 pl-4 pr-4">
-                                <div
-                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                                        Sales
-                                    </h5>
-                                    {{-- <p class="text-4xl text-gray-600">₱{{ $payment_price }}</p> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-span-1">
-                        <legend class="text-center pb-5 text-xl">Monthly</legend>
-                        <div class="grid grid-cols-2">
-                            <div class="col-span-1 pl-4 pr-4">
-                                <div
-                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                                        Customer
-                                    </h5>
-                                    {{-- <p class="text-4xl text-gray-600">{{ $payment_month }}</p> --}}
-
-                                </div>
-
-                            </div>
-                            <div class="col-span-1 pl-4 pr-4">
-                                <div
-                                    class="w-full text-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                                        Sales
-                                    </h5>
-                                    {{-- <p class="text-4xl text-gray-600">₱{{ $payment_price_month }}</p> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        @endif
-
         
     </div>
 @endsection

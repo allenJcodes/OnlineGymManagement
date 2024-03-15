@@ -36,12 +36,18 @@ class UsersController extends Controller
             $user->update(['password' => Hash::make($request->password)]);
         }
 
+        if ($request->profile_image) {
+            $newImage = time() . auth()->user()->first_name . '.' . $request->profile_image->extension();
+            $request->profile_image->move(public_path('images/user'), $newImage);
+            $user->update(['profile_image' => $newImage]);
+
+        }
+
         $user->update([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name ?? '',
             'last_name' => $request->last_name,
             'email' => $request->email,
-            // 'profile_image' => $newImage ?? '',
             'user_role' => $request->user_role,
         ]);
 

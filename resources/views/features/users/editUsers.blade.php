@@ -39,11 +39,20 @@
             <div class="form-field-container">
                 <label for="role" class="form-label">Role</label>
                 <select id="role" name="user_role" class="form-input">
-                    <option value="" disabled selected>Choose a country</option>
+                    <option value="" disabled selected>Choose role</option>
                     <option {{ $user->user_role == '1' ? 'selected' : '' }} value="1">Admin</option>
-                    {{-- <option {{ $user->user_role == '2' ? 'selected' : '' }} value="2">Instructor</option> --}}
+                    <option {{ $user->user_role == '2' ? 'selected' : '' }} value="2">Instructor</option>
                     <option {{ $user->user_role == '3' ? 'selected' : '' }} value="3">User</option>
                 </select>
+            </div>
+
+            @if ($user->profile_image != '')
+                <img src="{{ asset('/images/user/' . $user->profile_image) }}" alt="Profile Image" width="140px" height="140px">
+            @endif
+
+            <div class="form-field-container">
+                <label for="profile_image" class="form-label">Change Profile Image</label>
+                <input value="{{ old('profile_image', $user->profile_image) }}" id="profile_image" type="file" name="profile_image" class="form-input">
             </div>
 
 

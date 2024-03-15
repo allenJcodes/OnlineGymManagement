@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Membership\MembershipStoreRequest;
-use App\Models\Membership;
 use App\Models\Notification;
 use App\Models\Payments;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use App\Models\User;
+use App\Services\MembershipService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class MembershipController extends Controller
 {
@@ -27,14 +26,18 @@ class MembershipController extends Controller
         return view('features.membership.Membership', compact('users', 'subscriptions'));
     }
 
-    public function store(MembershipStoreRequest $request)
+    public function store(MembershipStoreRequest $request, MembershipService $membershipService)
     {
+        $jsonRequest = json_encode($request->validated());
+        $filePath = $membershipService->generateUserQR($jsonRequest);
+
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);
         
         $subscription = Subscription::create([
             ...$request->validated(),
             'start_date' => now(),
-            'end_date' => Carbon::parse(now())->addMonths($subscriptionType->number_of_months)
+            'end_date' => Carbon::parse(now())->addMonths($subscriptionType->number_of_months),
+            'qr_code' => $filePath,
         ]);
 
         Payments::create([
