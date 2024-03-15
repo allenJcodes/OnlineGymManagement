@@ -76,8 +76,7 @@
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </button> --}}
-                        <span class="text-sm font-semibold whitespace-nowrap text-white">
-                            {{ date('D, M-d-Y h:i A') }}</span>
+                        <span id="datetime" class="text-sm mx-2 font-semibold whitespace-nowrap text-white"></span>
 
                         <!-- Notifications -->
                         <button type="button" data-dropdown-toggle="notification-dropdown"
@@ -144,7 +143,7 @@
                                         class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-
+                                            
                                             <button type="submit" class="w-full">Logout</button>
                                         </form>
                                     </a>
@@ -163,5 +162,19 @@
 
     </div>
 </body>
+<script>
+   
+function updateDateTime() {
+    let dateTimeElement = document.getElementById('datetime');
+    let currentDate = new Date();
 
+    let formattedDateTime = currentDate.toLocaleString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+    dateTimeElement.innerText = formattedDateTime;
+}
+
+updateDateTime();
+
+setInterval(updateDateTime, 60000); 
+
+</script>
 </html>
