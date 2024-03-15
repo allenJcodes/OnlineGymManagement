@@ -80,7 +80,7 @@ class RegisterController extends Controller
 
     public function registerUser(array $data)
     {
-        dd($data);
+
         User::create([
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'] ?? '',
@@ -89,7 +89,6 @@ class RegisterController extends Controller
             'password' => $data['password'],
             'user_role' => $data['user_role'],
         ]);
-
 
         return redirect('/users');
     }

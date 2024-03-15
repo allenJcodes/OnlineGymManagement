@@ -26,44 +26,41 @@
 
 <body>
     <div class="flex h-screen justify-center font-red-hat-display md:px-0 py-32">
-        <div class="flex flex-col h-fit bg-white rounded-lg p-6 md:w-1/2 xl:w-1/3 gap-10">
-            <div class="flex flex-col items-center justify-center w-full gap-2">
+        <div class="flex flex-col h-fit bg-white rounded-lg p-6 md:w-1/2 xl:w-1/3">
+            <div class="flex flex-col items-center justify-center w-full gap-2 mb-10">
                 <img class="" src="{{ asset('images/logo.png') }}" alt="" height="120" width="120">
-                <p class="text-xl">Japs Online Fitness Gym</p>
+                <p class="text-xl">Japs Fitness Gym</p>
             </div>
-            <br>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" autocomplete="on">
                 @csrf
                 <div class="form-field-container">
                     <label for="email" class="form-label">Email</label>
-                    <input id="email" type="text" name="email" class="form-input rounded-lg" value="{{ old('email')}}" placeholder="" autocomplete="email" required>
+                    <input id="email" type="email" name="email" class="form-input rounded-lg"  placeholder="" value="{{ old('email') }}" required>
                 </div>
-                <div class="form-field-container mt-2">
+                <div class="form-field-container mt-3">
                     <label for="password" class="form-label">Password</label>
-                    <input id="password" type="password" name="password" class="form-input rounded-lg" value="{{ old('email')}}" placeholder="" autocomplete="current-password" required>
+                    <input id="password" type="password" name="password" class="form-input rounded-lg" placeholder="" required>
                 </div>
                 <div class="flex justify-between items-center mt-2 mb-6">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input id="remember" type="checkbox" value="" name="remember" {{ old('remember') ? 'checked' : '' }} class="w-4 h-4 border border-gray-600 rounded">
+                            <input id="remember" type="checkbox" value="" name="remember" class="w-4 h-4 border border-gray-600 rounded" {{ old('remember') ? 'checked' : '' }}>
                         </div>
                         <label for="remember" class="ml-2 text-sm text-background/80">Remember me</label>
                     </div>
                     <a class="text-sm text-background/80 hover:text-gray-400" href="{{ route('password.request') }}">
-                        Forget your password?
+                        Forgot your password?
                     </a>
                 </div>
                 <div class="flex justify-center">
                     <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login</button>
-
-
-                </div>
-                <div class="flex justify-center pt-2">
-                    <a class="btn btn-link text-background/80 hover:text-gray-400 text-center" href="{{ route('register') }}">
-                        Register here!
-                    </a>
                 </div>
             </form>
+            <div class="flex justify-center pt-2">
+                <a class="btn btn-link text-background/80 hover:text-gray-400 text-center" href="{{ route('register') }}">
+                    Register here!
+                </a>
+            </div>
         </div>
     </div>
 </body>
