@@ -26,8 +26,8 @@
 </style>
 
 <body>
-    <div class="flex h-screen justify-center font-red-hat-display md:px-0 py-32">
-        <div class="flex flex-col h-fit bg-white rounded-lg p-6 md:w-1/2 xl:w-1/3">
+    <div class="flex h-full justify-center font-red-hat-display md:px-0">
+        <div class="flex flex-col h-fit bg-white rounded-lg p-6 md:w-1/2 xl:w-1/3 my-32">
             <div class="flex flex-col items-center justify-center w-full gap-2 mb-10">
                 <img class="" src="{{ asset('images/logo.png') }}" alt="" height="120" width="120">
                 <p class="text-xl">Japs Fitness Gym</p>
@@ -67,6 +67,9 @@
                 <a class="btn btn-link text-background/80 hover:text-gray-400 text-center" href="{{ route('login') }}">
                     Already have an account?
                 </a>
+            </div>
+            <div class="flex justify-center mt-4">
+                <a href="{{route('welcome')}}" class="hover:text-gray-400 text-background/80">Return to home page</a>
             </div>
         </div>
     </div>

@@ -2,13 +2,6 @@
 
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
-
-        <div class="flex items-start w-full justify-between">
-            <h1 class="text-2xl font-bold">Attendance</h1>
-            <a href="{{ route('attendance.create') }}" class="primary-button">
-                Add Attendance
-            </a>
-        </div>
         
         <div class="flex flex-col gap-2">
 
@@ -38,9 +31,6 @@
                                 Date Start
                             </td>
                             <td class="py-2">
-                                Date End
-                            </td>
-                            <td class="py-2">
                                 Actions
                             </td>
                         </tr>
@@ -61,9 +51,6 @@
                             <td class="py-2">
                                 {{ $item->date_time_start }} 
                             </td>
-                            <td class="py-2">
-                                {{ $item->date_time_end }}
-                            </td> 
                             <td>
                                 <div class="flex items-center w-full">
                                     <div class="text-left">
