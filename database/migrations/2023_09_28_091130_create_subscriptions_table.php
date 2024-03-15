@@ -20,6 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->date("start_date");
             $table->date("end_date");
             $table->tinyInteger('status')->default(2); //1 = pending, 2 = active, 3 = cancelled
+            $table->string('qr_code')->nullable();
             $table->timestamps();
         });
     }

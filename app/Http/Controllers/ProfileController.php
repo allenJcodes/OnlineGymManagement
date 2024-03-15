@@ -20,8 +20,9 @@ class ProfileController extends Controller
         }
 
         if ($request->profile_image) {
-            $extension = $request->profile_image->extension();
-            $newImage = $request->profile_image->storeAs('images/user/', auth()->user()->id . '.' . $extension, 'public');
+            $newImage = time() . auth()->user()->first_name . '.' . $request->profile_image->extension();
+            $request->profile_image->move(public_path('images/user'), $newImage);
+            auth()->user()->update(['profile_image' => $newImage]);
         }
 
         auth()->user()->update([
@@ -29,7 +30,6 @@ class ProfileController extends Controller
             'middle_name' => $request->middle_name ?? '',
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'profile_image' => $newImage ?? ''
         ]);
 
         return redirect()->back()->with('toast', [
