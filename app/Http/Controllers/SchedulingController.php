@@ -63,7 +63,7 @@ class SchedulingController extends Controller
         return redirect()->route('scheduling.index')->with('toast', [
             'status' => 'success',
             'message' => 'Schedule added successfully.',
-        ]);;
+        ]);
     }
 
     /**

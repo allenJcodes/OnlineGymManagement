@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Attendance extends Model
 {
@@ -11,13 +13,14 @@ class Attendance extends Model
 
     public $fillable = [
         'user_id',
+        'schedule_id',
         'attendance_date',
         'attendance_time_in',
         'attendance_time_out',
     ];
 
-    public function attendanceBy()
+    public function schedule(): HasOne
     {
-        return $this->belongsTo(User::class, 'user_id', "id");
+        return $this->hasOne(Schedules::class, 'user_id', "id");
     }
 }
