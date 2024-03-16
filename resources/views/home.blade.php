@@ -58,12 +58,12 @@
                                 <div class="flex flex-col gap-3">
 
                                     <div class="form-field-container gap-0">
-                                        <p class="form-label">Name</p>
+                                        <p class="form-label">Type</p>
                                         <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->name}}</p>
                                     </div>
 
                                     <div class="form-field-container gap-0">
-                                        <p class="form-label">Price</p>
+                                        <p class="form-label">Amount</p>
                                         <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->price}}</p>
                                     </div>
                                 </div>
@@ -72,9 +72,9 @@
                                     <p class="form-label">Next due date</p>
                                     <p class="font-medium">{{$dueDate}}</p>
                                 </div>
+
+                                <a class="outline-button mt-auto ml-auto text-xs" href="{{route('subscription.index')}}">See all subscriptions ></a>
                             @endif
-
-
                         </div>
                     @endif
 

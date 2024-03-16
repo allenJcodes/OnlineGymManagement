@@ -38,7 +38,7 @@
                             </td>
                         </tr>
                     </thead>
-        
+
                     <tbody>
                         @forelse ($users as $userIndex => $user)
                             <tr class="table-row">
@@ -52,15 +52,15 @@
                                     @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->start_date }}
+                                        {{ $user->subscriptions[0]->start_date->format('Y-m-d') }}
                                     @endif
-        
+
                                 </td>
                                 <td class="py-2">
                                     @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->end_date }}
+                                        {{ $user->subscriptions[0]->end_date->format('Y-m-d') }}
                                     @endif
                                 </td>
                                 <td class="py-2">
@@ -75,21 +75,23 @@
                                                 Subscribed
                                             @endif
                                         @endif
-        
-        
+
+
                                     </div>
                                 </td>
                                 <td>
-                                    <img src="{{asset($user->subscriptions[0]->qr_code ?? 'No QR Code')}}" alt="">
+                                    <img src="{{ asset($user->subscriptions[0]->qr_code ?? 'No QR Code') }}" alt="">
                                 </td>
                                 <td>
                                     @if (count($user->subscriptions) == 0)
-                                        <button  data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="primary-button subscribe-button" type="button" data-user="{{json_encode($user)}}">
+                                        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                            class="primary-button subscribe-button" type="button"
+                                            data-user="{{ json_encode($user) }}">
                                             Subscribe
                                         </button>
                                     @else
-
-                                        <form method="POST" action="{{route('membership.cancel', ['id' => $user->subscriptions[0]->id])}}">
+                                        <form method="POST"
+                                            action="{{ route('membership.cancel', ['id' => $user->subscriptions[0]->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="outline-button">
@@ -97,34 +99,36 @@
                                             </button>
                                         </form>
                                     @endif
-        
+
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                No Members
-                            </td>
-                        </tr>
-
+                            <tr>
+                                <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                                    No Members
+                                </td>
+                            </tr>
                         @endforelse
-        
+
                     </tbody>
                 </table>
-                @if($users->hasPages())
-                <div class="card">
-                    {{$users->links()}}
-                </div>
-            @endif
+                @if ($users->hasPages())
+                    <div class="card">
+                        {{ $users->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
-    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+    <div id="popup-modal" tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
-        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
-            
-            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100" height="100"></div>
+        <div
+            class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
+
+            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100"
+                    height="100"></div>
 
             <div class="flex flex-col gap-5">
                 <h2 class="text-lg font-bold">New Subscription</h2>
@@ -133,8 +137,8 @@
                     <p class="form-label">Subscriber's Name</p>
                     <h2 id="modal-fullname">-</h2>
                 </div>
-                
-                <form action="{{route('membership.store')}}" method="POST" class="w-full flex flex-col gap-3">
+
+                <form action="{{ route('membership.store') }}" method="POST" class="w-full flex flex-col gap-3">
                     @csrf
 
                     <input id="user_id" name="user_id" type="hidden">
@@ -143,14 +147,17 @@
                         <p class="form-label">Choose Subscription</p>
                         <div class="grid w-full gap-6 md:grid-cols-2">
                             @foreach ($subscriptions as $key => $subscription)
-                                <label for="membership{{$key}}" class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
-                                    <input type="radio" id="membership{{$key}}" name="subscription_type_id" value="{{$subscription->id}}" class="hidden">
+                                <label for="membership{{ $key }}"
+                                    class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
+                                    <input type="radio" id="membership{{ $key }}" name="subscription_type_id"
+                                        value="{{ $subscription->id }}" class="hidden">
                                     <div class="flex flex-col">
                                         <p class="w-full text-base font-semibold">
-                                            {{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}
+                                            {{ $subscription->number_of_months }}
+                                            Month{{ $subscription->number_of_months > 1 ? 's' : '' }}
                                         </p>
-                                        <p>P{{$subscription->price}}</p>
-                                        <p class="text-xs text-dark-gray-800">{{$subscription->description}}</p>
+                                        <p>P{{ $subscription->price }}</p>
+                                        <p class="text-xs text-dark-gray-800">{{ $subscription->description }}</p>
                                     </div>
                                 </label>
                             @endforeach
@@ -159,7 +166,7 @@
 
                     <div class="form-field-container">
                         <label for="mode_of_payment" class="form-label">Mode of Payment</label>
-                        <select id="mode_of_payment" name="mode_of_payment" class="form-input"> 
+                        <select id="mode_of_payment" name="mode_of_payment" class="form-input">
                             <option value="" selected disabled>Select mode of payment</option>
                             <option value="cash">Cash</option>
                             <option value="gcash">GCash</option>
@@ -167,7 +174,8 @@
                     </div>
 
                     <div class="form-field-container">
-                        <label for="reference_number" class="form-label">Reference Number <span class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
+                        <label for="reference_number" class="form-label">Reference Number <span
+                                class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
                         <input id="reference_number" name="reference_number" type="text" class="form-input">
                     </div>
 
@@ -181,7 +189,7 @@
                     </div>
                 </form>
             </div>
-                                              
+
         </div>
     </div>
 
@@ -192,12 +200,11 @@
         const userIdField = document.querySelector('#user_id');
 
         subscribeButtons.forEach(button => {
-            const user = JSON.parse(button.dataset.user); 
+            const user = JSON.parse(button.dataset.user);
             button.addEventListener('click', () => {
                 modalFullname.innerText = user.full_name;
                 userIdField.value = user.id
             });
         })
-
     </script>
 @endsection

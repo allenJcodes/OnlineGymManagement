@@ -86,6 +86,14 @@
                 </li>
             @endif
 
+            @if (Auth::user()->user_role == '3')
+                <a href="{{ route('subscription.index') }}"
+                    class="{{ request()->is('subscription*') ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
+                    <box-icon name='id-card' type='solid' ></box-icon>
+                    <span class="whitespace-nowrap text-sm">Subscriptions</span>
+                </a>
+            @endif
+
             @if (Auth::user()->user_role != '2')
                 <li>
                     <a href="{{ route('payments.index') }}"

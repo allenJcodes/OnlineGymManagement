@@ -1,26 +1,27 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FAQController;
+use App\Http\Controllers\LearnController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\GymSessionController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SchedulingController;
-// use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ContentController;
-use App\Http\Controllers\FAQController;
-use App\Http\Controllers\LearnController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\EquipmentTypeController;
-use App\Http\Controllers\GymSessionController;
 use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ManageSubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,4 +103,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // INSTRUCTOR
     Route::resource('instructor', InstructorController::class);
+
+    // CUSTOMER SUBSCRIPTIONS
+    Route::resource('subscription', SubscriptionController::class);
+   
 });
