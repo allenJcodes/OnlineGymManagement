@@ -17,7 +17,6 @@ class ContactDetailTypeSeeder extends Seeder
         ContactDetailType::create([
             'name' => 'address'
         ]);
-        
 
         ContactDetailType::create([
             'name' => 'contact_number'
