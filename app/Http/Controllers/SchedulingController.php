@@ -59,7 +59,12 @@ class SchedulingController extends Controller
             ]);
         }
         
-        Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
+        $schedule = Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
+        //create attendance pag ka gawa ng schedule
+        Attendance::create([
+            'schedule_id' => $schedule->id
+        ]);
+
         return redirect()->route('scheduling.index')->with('toast', [
             'status' => 'success',
             'message' => 'Schedule added successfully.',

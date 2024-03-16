@@ -10,6 +10,9 @@ class UserAttendance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id' => 'user_id',
+        'user_id',
+        'attendance_id',
+        'time_in',
+        'time_out',
     ];
 }

@@ -15,11 +15,8 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->foreignId('schedule_id');
-            $table->string('attendance_date');
-            $table->string('attendance_time_in');
-            $table->string('attendance_time_out');
+            // $table->bigInteger('user_id'); di na need to since magiging user_attendance na
+            $table->foreignId('schedule_id')->nullable()->constrained('schedules')->cascadeOnDelete();
             $table->timestamps();
         });
     }

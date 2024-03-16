@@ -12,11 +12,7 @@ class Attendance extends Model
     use HasFactory;
 
     public $fillable = [
-        'user_id',
         'schedule_id',
-        'attendance_date',
-        'attendance_time_in',
-        'attendance_time_out',
     ];
 
     public function schedule(): HasOne

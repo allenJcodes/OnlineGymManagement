@@ -15,8 +15,10 @@ class UserAttendances extends Migration
     {
         Schema::create('user_attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('attendance_id');
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('attendance_id')->nullable()->constrained('attendances')->cascadeOnDelete();
+            $table->date('time_in');
+            $table->date('time_out')->nullable();
         });
     }
 
