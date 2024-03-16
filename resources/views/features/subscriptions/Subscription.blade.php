@@ -27,7 +27,7 @@
                                 Start Date
                             </td>
                             <td class="py-2">
-                                End Date
+                                Next Due Date
                             </td>
                             <td class="py-2">
                                 Amount
@@ -62,15 +62,15 @@
 
                                     @if ($sub->endingSoon())
                                         <div
-                                            class="py-1 px-3 text-sm w-min text-nowrap bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">
+                                            class="py-1 px-3 text-sm w-fit bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">
                                             Subscription ending soon</div>
                                     @elseif ($user->subscriptions[0]->end_date < now()->format('Y-m-d'))
                                         <div
-                                            class="py-1 px-3 text-sm w-min text-nowrap bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
+                                            class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
                                             Subscription ended</div>
                                     @else
                                         <div
-                                            class="py-1 px-3 text-sm w-min text-nowrap bg-green-100 ring-1 ring-green-500 text-green-500 rounded-full">
+                                            class="py-1 px-3 text-sm w-fit bg-green-100 ring-1 ring-green-500 text-green-500 rounded-full">
                                             Subscribed</div>
                                     @endif
                                 </td>
