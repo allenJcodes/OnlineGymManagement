@@ -13,11 +13,8 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        // $allAttendances = Schedules::with(['attendances.ownedBy' => function ($query) {
-        //     $query->get();
-        // }])->with('instructor')->get();
-        $allAttendances = Schedules::with('instructor')->get();
-        return view('features.attendance.Attendance', compact('allAttendances'));
+        $attendances = Schedules::with(['instructor'])->get();
+        return view('features.attendance.attendance', compact('attendances'));
     }
 
     public function create() {
@@ -25,11 +22,12 @@ class AttendanceController extends Controller
     }
 
     public function store(Request $request) {
-
+    
     }
 
     public function show(Attendance $attendance) {
-
+        $attendance = Attendance::with(['schedule', 'userAttendances.user'])->first();
+        return view('features.attendance.showAttendance', compact(['attendance']));
     }
 
     public function edit(Attendance $attendance) {

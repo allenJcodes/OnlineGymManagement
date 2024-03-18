@@ -26,8 +26,8 @@ class Schedules extends Model
         return $this->belongsTo(Instructor::class);
     }
 
-    // public function attendances()
-    // {
-    //     return $this->hasMany(Reservation::class, 'schedule_id', 'id');
-    // }
+    public function attendance(): BelongsTo
+    {
+        return $this->BelongsTo(Attendance::class, 'schedule_id', 'id');
+    }
 }

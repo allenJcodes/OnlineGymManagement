@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserAttendance extends Model
 {
@@ -15,4 +16,12 @@ class UserAttendance extends Model
         'time_in',
         'time_out',
     ];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
+    public function attendance() : BelongsTo {
+        return $this->BelongsTo(Attendance::class);
+    }
 }

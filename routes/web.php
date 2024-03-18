@@ -22,6 +22,7 @@ use App\Http\Controllers\modules\UsersController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\ManageSubscriptionController;
+use App\Http\Controllers\UserAttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,5 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // CUSTOMER SUBSCRIPTIONS
     Route::resource('subscription', SubscriptionController::class);
+
+    // USER_ATTENDANCE
+    Route::resource('user_attendance', UserAttendanceController::class);
    
 });

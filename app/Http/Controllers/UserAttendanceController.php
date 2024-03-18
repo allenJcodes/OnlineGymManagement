@@ -36,7 +36,16 @@ class UserAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        UserAttendance::insert([
+            'user_id' => 4,
+            'attendance_id' => $request->attendance_id,
+            'time_in' => now(),
+        ]);
+
+        return redirect()->back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Successfully timed in.'
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Scheduling\SchedulingStoreRequest;
+use App\Models\Attendance;
 use App\Models\Instructor;
 use App\Models\Schedules;
 use App\Models\User;

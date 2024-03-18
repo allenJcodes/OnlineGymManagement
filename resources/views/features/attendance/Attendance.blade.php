@@ -22,9 +22,6 @@
                                 Class Name
                             </td>
                             <td class="py-2">
-                                Instructor Name
-                            </td>
-                            <td class="py-2">
                                 Attendees
                             </td>
                             <td class="py-2">
@@ -37,24 +34,21 @@
                     </thead>
                     <tbody>
                         
-                        @forelse ($allAttendances as $item)
+                        @forelse ($attendances as $attendance)
                         <tr class="table-row">
                             <td class="py-2">
-                                {{ $item->class_name }}
+                                {{ $attendance->class_name }}
                             </td>
                             <td class="py-2">
-                                {{ $item->user->full_name }}
+                                {{ $attendance->number_of_attendees }}
                             </td>
                             <td class="py-2">
-                                {{ $item->number_of_attendees }}
-                            </td>
-                            <td class="py-2">
-                                {{ $item->date_time_start }} 
+                                {{ $attendance->date_time_start }} 
                             </td>
                             <td>
-                                <div class="flex items-center w-full">
+                                <div class="flex attendances-center w-full">
                                     <div class="text-left">
-                                        <button id="dropdownButton" data-dropdown-toggle="toggle{{ $item->id }}" class="" type="button">
+                                        <button id="dropdownButton" data-dropdown-toggle="toggle{{ $attendance->id }}" class="" type="button">
                                             <span class="sr-only">Open dropdown</span>
                                             <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor" viewBox="0 0 16 3">
@@ -64,23 +58,23 @@
                                         </button>
                                     </div>
     
-                                    <div id="toggle{{ $item->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
+                                    <div id="toggle{{ $attendance->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
     
                                         <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
     
-                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$item->class_name}}</p>
+                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$attendance->class_name}}</p>
                                             
 
                                             {{-- di ko pa alam actions neto --}}
-                                            {{-- <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
-                                                <a href="{{route('contents.contact.edit', ['contact' => $item])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
+                                            <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
+                                                <a href="{{route('attendance.show', ['attendance' => $attendance])}}" class="py-2 px-4 hover:bg-off-white transition-all">View</a>
 
-                                                <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0" action="{{route('contents.contact.destroy', ['contact' => $item])}}" method="POST">
+                                                {{-- <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0" action="{{route('contents.contact.destroy', ['contact' => $item])}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="w-full text-left">Delete</button>
-                                                </form>
-                                            </div> --}}
+                                                </form> --}}
+                                            </div>
                                         </div>
     
                                     </div>
