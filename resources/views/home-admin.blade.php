@@ -1,20 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-16 gap-4 text-background">
+    <div class="flex flex-col pt-16 gap-2 text-background">
         @if (Auth::user()->user_role == '1')
             <div class="grid grid-cols-3">
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] max-h-40 text-left block p-6 bg-background border border-gray-200 rounded-lg shadow hover:bg-zinc-700">
-                        <h5 class="mb-2 text-1xl tracking-tight text-white">
-                            Welcome back,
-                        </h5>
-                        <p class="text-3xl font-semibold text-white">{{ Auth::user()->full_name }}</p>
+                        class="w-full flex gap-3 h-[130px] text-left p-6 bg-gradient-to-r from-background via-background to-background/90 border border-gray-200 rounded-lg shadow">
 
+                        <div class="flex h-full bg-dashboard-accent-base aspect-square rounded-full overflow-clip">
+                            @if (auth()->user()->profile_image)
+                                <img src="{{ asset('/images/user/' . auth()->user()->profile_image) }}" alt="Profile Image"
+                                    class="object-cover w-full">
+                            @else
+                                <box-icon class="h-20 w-20 fill-white" type="solid" name='user'></box-icon>
+                            @endif
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <p class="mb-2 text-1x text-white tracking-tight">
+                                Welcome back,
+                            </p>
+                            <p class="text-3xl font-semibold text-white leading-5 whitespace-nowrap">
+                                {{ Auth::user()->full_name }}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
                         class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
@@ -26,9 +37,9 @@
 
                     </div>
                 </div>
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-full min-h-[130px] max-h-[200px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Instructors
                         </h5>
                         <p class="text-4xl text-gray-500">{{ $instructors }}</p>
@@ -36,9 +47,9 @@
                 </div>
             </div>
             <div class="grid grid-cols-4">
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-full min-h-[130px] max-h-[200px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Today New Members
                         </h5>
                         <p class="text-4xl text-gray-500">{{ $payment }}</p>
@@ -46,18 +57,18 @@
                     </div>
 
                 </div>
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-full min-h-[130px] max-h-[200px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Today Sales
                         </h5>
                         <p class="text-4xl text-gray-500">₱{{ $payment_price }}</p>
                     </div>
                 </div>
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-full min-h-[130px] max-h-[200px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Monthly New
                             Members
                         </h5>
@@ -66,9 +77,9 @@
                     </div>
 
                 </div>
-                <div class="col-span-1 pl-2 pr-2">
+                <div class="col-span-1 px-1">
                     <div
-                        class="w-full h-[130px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        class="w-full min-h-[130px] max-h-[200px] text-center block py-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Monthly
                             Sales
                         </h5>
@@ -77,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-4 pl-2 pr-2">
+            <div class="grid grid-cols-2 gap-2 px-1">
                 <div class="card border border-gray-200 shadow">
                     <h2 class="font-bold">Recent Memberships</h2>
                     <hr>

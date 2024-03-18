@@ -76,8 +76,7 @@
                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </button> --}}
-                        <span class="text-sm font-semibold whitespace-nowrap text-white">
-                            {{ date('D, M-d-Y h:i A') }}</span>
+                        <span id="datetime" class="text-sm mx-2 font-semibold whitespace-nowrap text-white"></span>
 
                         <!-- Notifications -->
                         <button type="button" data-dropdown-toggle="notification-dropdown"
@@ -105,12 +104,15 @@
                         <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdowns">
                             <span class="sr-only">Open user menu</span>
 
-
-                            @if (auth()->user()->profile_image != '')
-                                <img src="{{ url('storage/' . auth()->user()->profile_image) }}" alt="Profile Image" class="w-8 h-8 rounded-full">
-                            @else
-                                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                            @endif
+                            <div class="h-8 w-8 flex items-center justify-center rounded-full aspect-square overflow-clip bg-dashboard-accent-base">
+                                
+                                @if(auth()->user()->profile_image)
+                                    <img src="{{ asset('/images/user/' . auth()->user()->profile_image) }}" alt="Profile Image" class="object-contain w-full h-full">
+                                @else
+                                    <box-icon class="object-contain h-4 w-4 fill-white" type="solid" name='user' ></box-icon>
+                                @endif
+                                {{-- add default user photo here --}}
+                            </div>
                         </button>
 
                         <!-- Dropdown menu -->
@@ -141,7 +143,7 @@
                                         class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
-
+                                            
                                             <button type="submit" class="w-full">Logout</button>
                                         </form>
                                     </a>
@@ -160,5 +162,19 @@
 
     </div>
 </body>
+<script>
+   
+function updateDateTime() {
+    let dateTimeElement = document.getElementById('datetime');
+    let currentDate = new Date();
 
+    let formattedDateTime = currentDate.toLocaleString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+    dateTimeElement.innerText = formattedDateTime;
+}
+
+updateDateTime();
+
+setInterval(updateDateTime, 60000); 
+
+</script>
 </html>

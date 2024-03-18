@@ -5,7 +5,7 @@
 
         <div class="flex items-start w-full justify-between ">
 
-            <h1 class="text-2xl font-bold">Equipment</h1>
+            <h1 class="text-2xl font-bold">Equipments</h1>
 
             @if (Auth::user()->user_role == 1)
                 <div class="flex justify-end gap-2">

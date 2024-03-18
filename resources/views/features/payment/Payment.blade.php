@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
-    {{-- @dd(session('toast')) --}}
+        {{-- @dd(session('toast')) --}}
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">Payments</h1>
         </div>
@@ -15,7 +15,7 @@
                     {{-- form actions here --}}
 
                     <div class="flex gap-2 self-end">
-                        <a target="_blank" href="{{route('payments.print')}}" class="primary-button">Print Reports</a>
+                        <a target="_blank" href="{{ route('payments.print') }}" class="primary-button">Print Reports</a>
                         <x-table-search />
                     </div>
                 </div>
@@ -24,7 +24,10 @@
                     <thead>
                         <tr class="table-row">
                             <td class="py-2">
-                                User
+                                Date
+                            </td>
+                            <td class="py-2">
+                                Customer
                             </td>
                             <td class="py-2">
                                 Subscription Type
@@ -38,39 +41,32 @@
                             <td class="py-2">
                                 Reference Number
                             </td>
-                            <td class="py-2">
-                                Start Date
-                            </td>
-                            <td class="py-2">
-                                End Date
-                            </td>
+
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($payments as $payment)
-                        <tr class="table-row">
-                            <td class="py-2">
-                                {{ $payment->subscriptions->user->full_name }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->subscriptions->subscriptionTypes->name }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->amount_paid }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->mode_of_payment }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->reference_number }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->subscriptions->start_date }}
-                            </td>
-                            <td class="py-2">
-                                {{ $payment->subscriptions->end_date }}
-                            </td> 
-                        </tr>
+                            <tr class="table-row">
+                                <td class="py-2">
+                                    {{ $payment->created_at->format('Y-m-d H:i A') }}
+                                </td>
+                                <td class="py-2">
+                                    {{ $payment->subscriptions->user->full_name }}
+                                </td>
+                                <td class="py-2">
+                                    {{ $payment->subscriptions->subscriptionTypes->name }}
+                                </td>
+                                <td class="py-2">
+                                    {{ $payment->amount_paid }}
+                                </td>
+                                <td class="py-2">
+                                    {{ $payment->mode_of_payment }}
+                                </td>
+                                <td class="py-2">
+                                    {{ $payment->reference_number }}
+                                </td>
+
+                            </tr>
                         @empty
                         @endforelse
                     </tbody>

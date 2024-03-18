@@ -49,11 +49,11 @@ class HomeController extends Controller
         //FOR CUSTOMER HOME
         $user = User::where('id', auth()->user()->id)->with(['subscriptions' => function($q) {
             $q->where('subscriptions.status', 2);
-        }])->first();
+        }, 'subscriptions.subscriptionTypes'])->first();
 
         $recentPayments = Payments::whereHas('subscriptions.user', function($q) {
             $q->where('users.id', auth()->user()->id);
-        })->with('subscriptions.user')->orderBy('payments.created_at', 'desc')->take(3)->get();
+        })->with('subscriptions.user', 'subscriptions.subscriptionTypes')->orderBy('payments.created_at', 'desc')->take(3)->get();
 
         $equipments = Equipment::all();
 

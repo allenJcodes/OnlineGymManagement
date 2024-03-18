@@ -31,11 +31,14 @@
                                 Status
                             </td>
                             <td class="py-2">
+                                Image
+                            </td>
+                            <td class="py-2">
                                 Action
                             </td>
                         </tr>
                     </thead>
-        
+
                     <tbody>
                         @forelse ($users as $userIndex => $user)
                             <tr class="table-row">
@@ -49,15 +52,15 @@
                                     @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->start_date }}
+                                        {{ $user->subscriptions[0]->start_date->format('Y-m-d') }}
                                     @endif
-        
+
                                 </td>
                                 <td class="py-2">
                                     @if (count($user->subscriptions) == 0)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->end_date }}
+                                        {{ $user->subscriptions[0]->end_date->format('Y-m-d') }}
                                     @endif
                                 </td>
                                 <td class="py-2">
@@ -72,18 +75,23 @@
                                                 Subscribed
                                             @endif
                                         @endif
-        
-        
+
+
                                     </div>
                                 </td>
                                 <td>
+                                    <img src="{{ asset($user->subscriptions[0]->qr_code ?? 'No QR Code') }}" alt="">
+                                </td>
+                                <td>
                                     @if (count($user->subscriptions) == 0)
-                                        <button  data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="primary-button subscribe-button" type="button" data-user="{{json_encode($user)}}">
+                                        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                            class="primary-button subscribe-button" type="button"
+                                            data-user="{{ json_encode($user) }}">
                                             Subscribe
                                         </button>
                                     @else
-
-                                        <form method="POST" action="{{route('membership.cancel', ['id' => $user->subscriptions[0]->id])}}">
+                                        <form method="POST"
+                                            action="{{ route('membership.cancel', ['id' => $user->subscriptions[0]->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="outline-button">
@@ -91,117 +99,36 @@
                                             </button>
                                         </form>
                                     @endif
-        
-                                    {{-- Unsubscribe modal --}}
-                                    {{-- <div id="popup-modal2{{ $user->id }}" tabindex="-1"
-                                        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                        <div class="relative w-full max-w-md max-h-full">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <button type="button"
-                                                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    data-modal-hide="popup-modal">
-        
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
-                                                <div class="p-6 text-center">
-        
-                                                    <div class="flex justify-center "> <img src="{{ asset('images/logo.png') }}"
-                                                            alt="" width="250" height="250"></div>
-                                                    <h3
-                                                        class="mb-5 text-lg font-medium text-gray-900 dark:text-white pt-10 flex justify-center">
-                                                        Name: {{ $user->name }}</h4>
-        
-        
-                                                        <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
-                                                            Subscription
-                                                            Details:</h3>
-                                                        <ul class="grid w-full gap-6 md:grid-cols-2">
-                                                            <li class="flex justify-center items-center space-x-4">
-                                                                <input type="radio" id="hosting-small"
-                                                                    name="membership{{ $user->id }}" value="6 months"
-                                                                    class=" peer" required>
-                                                                <label for="hosting-small"
-                                                                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                                                    <div class="block">
-                                                                        <div class="w-full text-lg font-semibold">0-6 Months
-                                                                        </div>
-                                                                        <div class="w-full">P4200</div>
-                                                                        <div class="w-full">zzzzz</div>
-                                                                    </div>
-                                                                    <svg class="w-5 h-5 ml-3" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 14 10">
-                                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                                                    </svg>
-                                                                </label>
-                                                            </li>
-                                                            <li class="flex justify-center items-center space-x-4">
-                                                                <input type="radio" id="hosting-big"
-                                                                    name="membership{{ $user->id }}" value="12 months"
-                                                                    class=" peer">
-                                                                <label for="hosting-big"
-                                                                    class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                                                    <div class="block">
-                                                                        <div class="w-full text-lg font-semibold">6-12
-                                                                            Months</div>
-                                                                        <div class="w-full">P8400</div>
-                                                                        <div class="w-full">Good for REGULARS</div>
-                                                                    </div>
-                                                                    <svg class="w-5 h-5 ml-3" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 14 10">
-                                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                                                    </svg>
-                                                                </label>
-                                                            </li>
-                                                        </ul>
-        
-        
-                                                    </h3>
-                                                    <button data-modal-hide="popup-modal2{{ $user->id }}" type="button"
-                                                        id="submitMembership{{ $user->id }}"
-                                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mt-10">
-                                                        Submit
-                                                    </button>
-                                                    <button data-modal-hide="popup-modal2{{ $user->id }}" type="button"
-                                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                                                        Cancel</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-        
+
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                No Members
-                            </td>
-                        </tr>
-
+                            <tr>
+                                <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                                    No Members
+                                </td>
+                            </tr>
                         @endforelse
-        
+
                     </tbody>
                 </table>
-                @if($users->hasPages())
-                <div class="card">
-                    {{$users->links()}}
-                </div>
-            @endif
+                @if ($users->hasPages())
+                    <div class="card">
+                        {{ $users->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
-    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+    <div id="popup-modal" tabindex="-1"
+        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
-        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
-            
-            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100" height="100"></div>
+        <div
+            class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
+
+            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100"
+                    height="100"></div>
 
             <div class="flex flex-col gap-5">
                 <h2 class="text-lg font-bold">New Subscription</h2>
@@ -210,8 +137,8 @@
                     <p class="form-label">Subscriber's Name</p>
                     <h2 id="modal-fullname">-</h2>
                 </div>
-                
-                <form action="{{route('membership.store')}}" method="POST" class="w-full flex flex-col gap-3">
+
+                <form action="{{ route('membership.store') }}" method="POST" class="w-full flex flex-col gap-3">
                     @csrf
 
                     <input id="user_id" name="user_id" type="hidden">
@@ -220,14 +147,17 @@
                         <p class="form-label">Choose Subscription</p>
                         <div class="grid w-full gap-6 md:grid-cols-2">
                             @foreach ($subscriptions as $key => $subscription)
-                                <label for="membership{{$key}}" class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
-                                    <input type="radio" id="membership{{$key}}" name="subscription_type_id" value="{{$subscription->id}}" class="hidden">
+                                <label for="membership{{ $key }}"
+                                    class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
+                                    <input type="radio" id="membership{{ $key }}" name="subscription_type_id"
+                                        value="{{ $subscription->id }}" class="hidden">
                                     <div class="flex flex-col">
                                         <p class="w-full text-base font-semibold">
-                                            {{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}
+                                            {{ $subscription->number_of_months }}
+                                            Month{{ $subscription->number_of_months > 1 ? 's' : '' }}
                                         </p>
-                                        <p>P{{$subscription->price}}</p>
-                                        <p class="text-xs text-dark-gray-800">{{$subscription->description}}</p>
+                                        <p>P{{ $subscription->price }}</p>
+                                        <p class="text-xs text-dark-gray-800">{{ $subscription->description }}</p>
                                     </div>
                                 </label>
                             @endforeach
@@ -236,7 +166,7 @@
 
                     <div class="form-field-container">
                         <label for="mode_of_payment" class="form-label">Mode of Payment</label>
-                        <select id="mode_of_payment" name="mode_of_payment" class="form-input"> 
+                        <select id="mode_of_payment" name="mode_of_payment" class="form-input">
                             <option value="" selected disabled>Select mode of payment</option>
                             <option value="cash">Cash</option>
                             <option value="gcash">GCash</option>
@@ -244,7 +174,8 @@
                     </div>
 
                     <div class="form-field-container">
-                        <label for="reference_number" class="form-label">Reference Number <span class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
+                        <label for="reference_number" class="form-label">Reference Number <span
+                                class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
                         <input id="reference_number" name="reference_number" type="text" class="form-input">
                     </div>
 
@@ -258,7 +189,7 @@
                     </div>
                 </form>
             </div>
-                                              
+
         </div>
     </div>
 
@@ -269,12 +200,11 @@
         const userIdField = document.querySelector('#user_id');
 
         subscribeButtons.forEach(button => {
-            const user = JSON.parse(button.dataset.user); 
+            const user = JSON.parse(button.dataset.user);
             button.addEventListener('click', () => {
                 modalFullname.innerText = user.full_name;
                 userIdField.value = user.id
             });
         })
-
     </script>
 @endsection
