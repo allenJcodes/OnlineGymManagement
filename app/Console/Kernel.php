@@ -26,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //change to every week
         $schedule->command('notifyCustomer:weekly')->everyMinute();
+        
+        //change to every day
+        $schedule->command('unsubscribe:customer')->everyMinute();
     }
 
     /**

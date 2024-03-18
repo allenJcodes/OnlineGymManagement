@@ -42,6 +42,15 @@
                     <label for="password" class="form-label">Password</label>
                     <input id="password" type="password" name="password" class="form-input rounded-lg" value="{{ old('email')}}" placeholder="" autocomplete="current-password" required>
                 </div>
+
+                @if ($errors->any())
+                    <div class="flex flex-col gap-1 mt-1">
+                        @foreach ($errors->all() as $error)
+                            <p class="text-red-500 text-xs">{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="flex justify-between items-center mt-2 mb-6">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
