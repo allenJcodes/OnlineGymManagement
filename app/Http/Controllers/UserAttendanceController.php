@@ -6,6 +6,7 @@ use App\Models\UserAttendance;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use UserAttendances;
 
 class UserAttendanceController extends Controller
 {
@@ -54,12 +55,32 @@ class UserAttendanceController extends Controller
                 'message' => "$user->full_name's subscription has expired."
             ]);
         }
+        
+        $userExists = UserAttendance::where('user_id', $request->user_id)->where('attendance_id', $request->attendance_id)->first();
+        if ($userExists) {
+            if ($userExists->time_out) {
+                return redirect()->back()->with('toast', [
+                    'status' => 'error',
+                    'message' => "$user->full_name has attended this class already."
+                ]);
+            }
+            $userExists->update([
+                'time_out' => now(),
+            ]);
+            
+            return redirect()->back()->with('toast', [
+                'status' => 'success',
+                'message' => "$user->full_name has timed out successfully."
+            ]);
+        }
 
         UserAttendance::insert([
             'user_id' => $request->user_id,
             'attendance_id' => $request->attendance_id,
             'time_in' => now(),
         ]);
+        
+
         return redirect()->back()->with('toast', [
             'status' => 'success',
             'message' => "$user->full_name has timed in successfully."
