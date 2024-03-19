@@ -36,8 +36,12 @@ class UserAttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function store(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->with(['subscriptions' => function($q) {
+            $q->where('subscriptions.status', 2);
+        }, 'subscriptions.subscriptionTypes'])->first();
 
-    private function checkSubscription(User $user) {
         if ($user->subscriptions->count() == 0) {
             return redirect()->back()->with('toast', [
                 'status' => 'error',
@@ -51,11 +55,8 @@ class UserAttendanceController extends Controller
                 'message' => "$user->full_name's subscription has expired."
             ]);
         }
-    }
-
-    private function checkUserAttendance(User $user) {
-        $userExists = UserAttendance::where('user_id', request()->user_id)->where('attendance_id', request()->attendance_id)->first();
-
+        
+        $userExists = UserAttendance::where('user_id', $request->user_id)->where('attendance_id', $request->attendance_id)->first();
         if ($userExists) {
             if ($userExists->time_out) {
                 return redirect()->back()->with('toast', [
@@ -63,7 +64,6 @@ class UserAttendanceController extends Controller
                     'message' => "$user->full_name has attended this class already."
                 ]);
             }
-            
             $userExists->update([
                 'time_out' => now(),
             ]);
@@ -73,24 +73,13 @@ class UserAttendanceController extends Controller
                 'message' => "$user->full_name has timed out successfully."
             ]);
         }
-    }
-    
-
-    public function store(Request $request)
-    {
-        $user = User::where('id', request()->user_id)->with(['subscriptions' => function($q) {
-            $q->where('subscriptions.status', 2);
-        }, 'subscriptions.subscriptionTypes'])->first();
-
-        $this->checkSubscription($user);
-
-        $this->checkUserAttendance($user);
 
         UserAttendance::insert([
             'user_id' => $request->user_id,
             'attendance_id' => $request->attendance_id,
             'time_in' => now(),
         ]);
+        
 
         return redirect()->back()->with('toast', [
             'status' => 'success',
