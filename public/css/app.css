@@ -663,6 +663,9 @@ tbody .table-row:first-child{
 .relative{
   position: relative;
 }
+.inset-0{
+  inset: 0px;
+}
 .-right-\[3em\]{
   right: -3em;
 }
@@ -906,6 +909,9 @@ tbody .table-row:first-child{
 .max-h-\[90vh\]{
   max-height: 90vh;
 }
+.max-h-\[70vh\]{
+  max-height: 70vh;
+}
 .min-h-7{
   min-height: 1.75rem;
 }
@@ -1023,6 +1029,12 @@ tbody .table-row:first-child{
 }
 .max-w-full{
   max-width: 100%;
+}
+.max-w-\[30vw\]{
+  max-width: 30vw;
+}
+.max-w-\[40vw\]{
+  max-width: 40vw;
 }
 .flex-1{
   flex: 1 1 0%;
@@ -1385,6 +1397,9 @@ tbody .table-row:first-child{
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
+.bg-gray-900\/50{
+  background-color: rgb(17 24 39 / 0.5);
+}
 .bg-gradient-to-r{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -1553,6 +1568,9 @@ tbody .table-row:first-child{
 .pl-10{
   padding-left: 2.5rem;
 }
+.pl-2{
+  padding-left: 0.5rem;
+}
 .pl-3{
   padding-left: 0.75rem;
 }
@@ -1580,8 +1598,8 @@ tbody .table-row:first-child{
 .pt-4{
   padding-top: 1rem;
 }
-.pl-2{
-  padding-left: 0.5rem;
+.pl-12{
+  padding-left: 3rem;
 }
 .text-left{
   text-align: left;
@@ -2309,6 +2327,10 @@ textarea {
   .dark\:bg-red-600{
     --tw-bg-opacity: 1;
     background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-900\/80{
+    background-color: rgb(17 24 39 / 0.8);
   }
 
   .dark\:text-gray-400{

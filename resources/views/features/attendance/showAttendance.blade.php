@@ -3,15 +3,9 @@
 @section('content')
     <div class="flex flex-col pt-14 gap-5 text-background">
         <div class="flex items-start w-full justify-between">
-            <h1 class="text-2xl font-bold">Attendees</h1>
-            <form action="{{route('user_attendance.store')}}" method="POST">
-                @csrf
-                <input type="hidden" name="attendance_id" value="{{$attendance->id}}">
-                <button class="primary-button"> Scan QR</button>
-            </form>
+            <h1 class="text-2xl font-bold">View Attendance</h1>
+            <button id="scan-qr-button" class="primary-button"> Scan QR</button>
         </div>
-
-        <h1 class="text-2xl font-bold">View Attendance</h1>
 
         <div class="flex flex-col gap-3 card">
             <div class="form-field-container">
@@ -27,6 +21,11 @@
             <div class="form-field-container">
                 <label for="content" class="form-label">Attendees Count</label>
                 <span class="text-sm pl-2">{{$attendance->userAttendances->count()}}</span>
+            </div>
+
+            <div class="form-field-container">
+                <label for="content" class="form-label">Schedule Date</label>
+                <span class="text-sm pl-2">{{$attendance->schedule->date_time_start->format('M d, Y')}}</span>
             </div>
         </div>
 
@@ -65,10 +64,10 @@
                                 {{ $userAttendance->user->email}}
                             </td>
                             <td class="py-2">
-                                {{ $userAttendance->time_in }}
+                                {{ $userAttendance->time_in->format('h:i A') }}
                             </td>
                             <td class="py-2">
-                                {{ $userAttendance->time_out ?? '--' }}
+                                {{ $userAttendance->time_out ? $userAttendance->time_out->format('h:i A') : '--' }}
                             </td> 
                         </tr>
                         @empty
@@ -84,70 +83,32 @@
             @endif --}}
         </div>
     </div>
-    <div id="popup-modal" tabindex="-1"
+    <div id="scan-qr-modal" tabindex="-1"
         class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
         <div
-            class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
-
-            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100"
-                    height="100"></div>
+            class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[70vh] max-w-[40vw] gap-5'>
 
             <div class="flex flex-col gap-5">
-                <h2 class="text-lg font-bold">New Subscription</h2>
+                <h2 class="text-lg font-bold">Scan or Upload QR</h2>
 
                 <div class="form-field-container">
                     <p class="form-label">Subscriber's Name</p>
-                    <h2 id="modal-fullname">-</h2>
+                    <h2 id="modal-fullname"></h2>
                 </div>
 
-                <form action="{{ route('membership.store') }}" method="POST" class="w-full flex flex-col gap-3">
+                <form id="qr-form" action="{{ route('user_attendance.store') }}" method="POST" class="w-full flex flex-col gap-3">
                     @csrf
-
-                    <input id="user_id" name="user_id" type="hidden">
-
+                    <input id="modal-user-id" type="hidden" name="user_id">
+                    <input id="modal-attendance-id" type="hidden" name="attendance_id" value="{{$attendance->id}}">
                     <div class="form-field-container">
-                        <p class="form-label">Choose Subscription</p>
-                        <div class="grid w-full gap-6 md:grid-cols-2">
-                            @foreach ($subscriptions as $key => $subscription)
-                                <label for="membership{{ $key }}"
-                                    class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
-                                    <input type="radio" id="membership{{ $key }}" name="subscription_type_id"
-                                        value="{{ $subscription->id }}" class="hidden">
-                                    <div class="flex flex-col">
-                                        <p class="w-full text-base font-semibold">
-                                            {{ $subscription->number_of_months }}
-                                            Month{{ $subscription->number_of_months > 1 ? 's' : '' }}
-                                        </p>
-                                        <p>P{{ $subscription->price }}</p>
-                                        <p class="text-xs text-dark-gray-800">{{ $subscription->description }}</p>
-                                    </div>
-                                </label>
-                            @endforeach
-                        </div>
+                        <label for="mode_of_payment" class="form-label">Scan QR Code</label>
+                        <video id="qr-video"></video>
                     </div>
-
-                    <div class="form-field-container">
-                        <label for="mode_of_payment" class="form-label">Mode of Payment</label>
-                        <select id="mode_of_payment" name="mode_of_payment" class="form-input">
-                            <option value="" selected disabled>Select mode of payment</option>
-                            <option value="cash">Cash</option>
-                            <option value="gcash">GCash</option>
-                        </select>
-                    </div>
-
-                    <div class="form-field-container">
-                        <label for="reference_number" class="form-label">Reference Number <span
-                                class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
-                        <input id="reference_number" name="reference_number" type="text" class="form-input">
-                    </div>
-
+                    
                     <div class="self-end flex gap-2">
-                        <button type="button" class="outline-button" data-modal-hide="popup-modal">
+                        <button id="close-qr-modal" type="button" class="outline-button">
                             Cancel
-                        </button>
-                        <button type="submit" class="primary-button">
-                            Subscribe
                         </button>
                     </div>
                 </form>

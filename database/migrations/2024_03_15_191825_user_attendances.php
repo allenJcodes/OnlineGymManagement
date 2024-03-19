@@ -17,8 +17,8 @@ class UserAttendances extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('attendance_id')->nullable()->constrained('attendances')->cascadeOnDelete();
-            $table->date('time_in');
-            $table->date('time_out')->nullable();
+            $table->dateTime('time_in');
+            $table->dateTime('time_out')->nullable();
         });
     }
 

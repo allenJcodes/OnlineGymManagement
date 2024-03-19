@@ -17,6 +17,11 @@ class UserAttendance extends Model
         'time_out',
     ];
 
+    protected $casts = [
+        'time_in' => 'datetime',
+        'time_out' => 'datetime',
+    ];
+
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }

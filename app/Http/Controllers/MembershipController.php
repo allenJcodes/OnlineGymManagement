@@ -28,7 +28,8 @@ class MembershipController extends Controller
 
     public function store(MembershipStoreRequest $request, MembershipService $membershipService)
     {
-        $jsonRequest = json_encode($request->validated());
+        $user = User::find($request->user_id);
+        $jsonRequest = json_encode([...$request->validated(), 'full_name' => $user->full_name]);
         $filePath = $membershipService->generateUserQR($jsonRequest);
 
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);

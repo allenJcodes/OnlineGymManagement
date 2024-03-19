@@ -26,7 +26,9 @@ class AttendanceController extends Controller
     }
 
     public function show(Attendance $attendance) {
-        $attendance = Attendance::with(['schedule', 'userAttendances.user'])->first();
+        $attendance = Attendance::with(['schedule', 'userAttendances.user', 'userAttendances' => function ($q) {
+            $q->orderBy('user_attendances.time_in', 'desc');
+        }])->first();
         return view('features.attendance.showAttendance', compact(['attendance']));
     }
 
@@ -43,7 +45,7 @@ class AttendanceController extends Controller
     }
     
     // public function viewAttendance($id)
-    // {
+        // {
     //     $attendance = Schedules::with(['attendances.ownedBy' => function ($query) {
     //         $query->get();
     //     }])->with('instructor')->where('id', $id)->first();

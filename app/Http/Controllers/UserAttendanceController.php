@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserAttendance;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserAttendanceController extends Controller
@@ -36,15 +37,32 @@ class UserAttendanceController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::where('id', $request->user_id)->with(['subscriptions' => function($q) {
+            $q->where('subscriptions.status', 2);
+        }, 'subscriptions.subscriptionTypes'])->first();
+
+        if ($user->subscriptions->count() == 0) {
+            return redirect()->back()->with('toast', [
+                'status' => 'error',
+                'message' => "$user->full_name has no active subscription."
+            ]);
+        }
+
+        if ($user->subscriptions[0]->status != 2) {
+            return redirect()->back()->with('toast', [
+                'status' => 'error',
+                'message' => "$user->full_name's subscription has expired."
+            ]);
+        }
+
         UserAttendance::insert([
-            'user_id' => 4,
+            'user_id' => $request->user_id,
             'attendance_id' => $request->attendance_id,
             'time_in' => now(),
         ]);
-
         return redirect()->back()->with('toast', [
             'status' => 'success',
-            'message' => 'Successfully timed in.'
+            'message' => "$user->full_name has timed in successfully."
         ]);
     }
 
