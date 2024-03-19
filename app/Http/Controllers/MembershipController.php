@@ -44,7 +44,8 @@ class MembershipController extends Controller
             'subscription_id' => $subscription->id,
             'amount_paid' => $subscriptionType->price,
             'mode_of_payment' => $request->mode_of_payment,
-            'reference_number' => $request->reference_number
+            'reference_number' => $request->reference_number,
+            'status' => 'Paid'
         ]);
 
         //notif

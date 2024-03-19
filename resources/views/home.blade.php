@@ -31,7 +31,9 @@
                             <div class="flex w-full justify-between">
                                 <h2>Subscription Status</h2>
                                 @if (count($user->subscriptions) == 0)
-                                    Unsubscribed
+                                    <div
+                                            class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
+                                            Unsubscribed</div>
                                 @else
                                     <div class="flex items-center gap-2 text-sm">
 

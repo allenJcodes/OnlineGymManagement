@@ -19,6 +19,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EquipmentTypeController;
 use App\Http\Controllers\modules\UsersController;
+use App\Http\Controllers\ManagePaymentModeController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\ManageSubscriptionController;
@@ -73,7 +74,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // PAYMENTS
     Route::get('/payments/report', [PaymentsController::class, 'printReports'])->name('payments.print');
+    Route::post('/payments/updateStatus', [PaymentsController::class, 'updateStatus'])->name('payments.updateStatus');
     Route::resource('payments', PaymentsController::class)->only(['index', 'show']);
+
+    // MANAGE PAYMENTS
+    Route::prefix('manage')->name('manage.')->group(function() {
+        Route::resource('payment_modes', ManagePaymentModeController::class);
+    });
 
     // EQUIPMENT
     Route::resource('equipment', EquipmentController::class);
@@ -105,6 +112,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('instructor', InstructorController::class);
 
     // CUSTOMER SUBSCRIPTIONS
-    Route::resource('subscription', SubscriptionController::class);
-   
+    Route::resource('subscription', SubscriptionController::class)->only('index', 'store');
 });
