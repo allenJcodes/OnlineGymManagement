@@ -48,10 +48,9 @@ class PaymentsController extends Controller
     public function updateStatus(Request $request, MembershipService $membershipService)
     {
         $payment = Payments::find($request->payment_id);
-        // dd($payment->subscriptions->user_id);
 
         // Paid, Verifying, Failed
-        if (($payment->status != 'Paid' ) && $request->status == 'Paid') {
+        if (($payment->status !== 'Paid' ) && $request->status === 'Paid') {
 
             $data = [
                 'user_id' => $payment->subscriptions->user_id,
@@ -70,6 +69,12 @@ class PaymentsController extends Controller
                 'status' => 2
             ]);  
         } 
+        
+        if (($payment->status !== 'Paid' ) && $request->status === 'Failed') {
+            Subscription::where('id', $payment->subscription_id)->update([
+                'status' => 3
+            ]);
+        }
 
         $payment->status = $request->status;
         $payment->save();
