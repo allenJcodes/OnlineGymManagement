@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserAttendance;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use UserAttendances;
 
@@ -58,12 +59,20 @@ class UserAttendanceController extends Controller
         
         $userExists = UserAttendance::where('user_id', $request->user_id)->where('attendance_id', $request->attendance_id)->first();
         if ($userExists) {
+            if (Carbon::parse($userExists->time_in)->addMinutes(2) >= now()) {
+                return redirect()->back()->with('toast', [
+                    'status' => 'error',
+                    'message' => "$user->full_name recently timed in. Please wait for 2 mins."
+                ]);
+            }
+
             if ($userExists->time_out) {
                 return redirect()->back()->with('toast', [
                     'status' => 'error',
                     'message' => "$user->full_name has attended this class already."
                 ]);
             }
+
             $userExists->update([
                 'time_out' => now(),
             ]);
