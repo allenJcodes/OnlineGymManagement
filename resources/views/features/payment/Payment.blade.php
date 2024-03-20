@@ -68,13 +68,13 @@
                                     {{ $payment->subscriptions->subscriptionTypes->name }}
                                 </td>
                                 <td class="py-2">
-                                    {{ $payment->amount_paid }}
+                                    ₱{{ $payment->amount_paid }}
                                 </td>
                                 <td class="py-2">
                                     {{ $payment->mode_of_payment }}
                                 </td>
                                 <td class="py-2">
-                                    {{ $payment->reference_number }}
+                                    {{ $payment->reference_number ?? '--' }}
                                 </td>
                                 <td class="py-2">
                                     {{ $payment->status }}

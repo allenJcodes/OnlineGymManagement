@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
 {
     public function index()
     {
-        $subs = Subscription::search()->where('user_id', auth()->user()->id)->with('subscriptionTypes')->paginate(10);
+        $subs = Subscription::search()->where('user_id', auth()->user()->id)->with('subscriptionTypes')->orderBy('subscriptions.created_at', 'desc')->paginate(10);
         $isActive = Subscription::where('user_id', auth()->user()->id)->where('status', 2)->orWhere('status', 1)->count() > 0 ? true : false;
         $subscriptions = SubscriptionType::all();
 
@@ -42,7 +42,7 @@ class SubscriptionController extends Controller
         $adminUsers = User::where('user_role', 1)->get()->map(fn($val) => $val->id)->toArray();
 
         Notification::create([
-            'content' => '(TO VERIFY)' . auth()->user()->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price
+            'content' => '(TO VERIFY) ' . auth()->user()->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price
         ])->users()->attach($adminUsers);
 
         return redirect()->route('subscription.index')->with('toast', [
