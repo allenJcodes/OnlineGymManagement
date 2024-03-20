@@ -21,13 +21,18 @@ class Schedules extends Model
         'number_of_attendees',
     ];
 
+    protected $casts = [
+        'date_time_start' => 'datetime',
+        'date_time_end' => 'datetime',
+    ];
+
     public function instructor(): BelongsTo
     {
         return $this->belongsTo(Instructor::class);
     }
 
-    // public function attendances()
-    // {
-    //     return $this->hasMany(Reservation::class, 'schedule_id', 'id');
-    // }
+    public function attendance(): BelongsTo
+    {
+        return $this->BelongsTo(Attendance::class, 'schedule_id', 'id');
+    }
 }

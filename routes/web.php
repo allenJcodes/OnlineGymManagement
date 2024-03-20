@@ -23,6 +23,7 @@ use App\Http\Controllers\ManagePaymentModeController;
 use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\ManageSubscriptionController;
+use App\Http\Controllers\UserAttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,5 +113,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('instructor', InstructorController::class);
 
     // CUSTOMER SUBSCRIPTIONS
-    Route::resource('subscription', SubscriptionController::class)->only('index', 'store');
+    Route::resource('subscription', SubscriptionController::class);
+
+    // USER_ATTENDANCE
+    Route::resource('user_attendance', UserAttendanceController::class);
+   
 });

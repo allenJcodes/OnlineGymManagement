@@ -4,7 +4,7 @@
     <div class="pt-16 flex flex-col gap-5 text-background">
         <h1 class="text-2xl font-bold">Add Instructor</h1>
 
-        <form method="POST" action="{{ route('instructor.store') }}" class="flex flex-col gap-3">
+        <form method="POST" action="{{ route('instructor.store') }}" class="flex flex-col gap-3 card">
 
             @csrf
 
@@ -48,9 +48,16 @@
                 </div>
             @endif
 
-            <button type="submit"
-                class="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                Instructor</button>
+            <div class="self-end flex gap-2">
+                <a href="{{ route('instructor.index') }}" class="outline-button">
+                    Cancel
+                </a>
+                
+                <button type="submit" class="primary-button">
+                    Add Item
+                </button>
+            </div>
+
 
         </form>
 

@@ -15,6 +15,7 @@ require("./bootstrap");
  */
 
 require("./components/Example");
+require("./components/QRScanner");
 require("./Scheduling/Schedules");
 // require("./Scheduling/AddSchedule");
 // require("./Reservation/Reservation");
