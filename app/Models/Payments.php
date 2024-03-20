@@ -14,7 +14,8 @@ class Payments extends Model
         'subscription_id',
         'amount_paid',
         'reference_number',
-        'mode_of_payment'
+        'mode_of_payment',
+        'status'
     ];
 
     public function subscriptions() : BelongsTo {

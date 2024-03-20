@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->float('amount_paid');
             $table->string("mode_of_payment");
             $table->string('reference_number')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
