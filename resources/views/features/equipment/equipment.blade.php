@@ -45,7 +45,11 @@
                                         
                                         <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                             <a href="{{route('equipment.edit', ['equipment' => $equipment])}}" class="py-2 px-4 hover:bg-off-white transition-all text-sm">Edit</a>
-                                            <a href="" id="delete{{ $equipment->id }}" class="py-2 px-4 hover:bg-off-white transition-all text-sm">Delete</a>
+                                            <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0" action="{{ route('equipment.destroy', ['equipment' => $equipment]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="w-full text-left">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

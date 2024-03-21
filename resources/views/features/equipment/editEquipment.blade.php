@@ -24,6 +24,7 @@
             
                 {{-- @dd($equipment->equipment_type_id, $equipmentTypes[0]->id) --}}
                 <select name="equipment_type_id" id="equipment_type_id" class="form-input">
+                    <option {{!$equipment->equipment_type_id  ? 'selected' : ''}} value="" disabled>Select Equipment Type</option>
                     @foreach ($equipmentTypes as $equipmentType)
                         <option {{$equipment->equipment_type_id == $equipmentType->id ? 'selected' : ''}} value="{{ $equipmentType->id }}">{{ $equipmentType->name }}</option>
                     @endforeach

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
+        <h1 class="text-2xl font-bold">Attendance</h1>
         
         <div class="flex flex-col gap-2">
 

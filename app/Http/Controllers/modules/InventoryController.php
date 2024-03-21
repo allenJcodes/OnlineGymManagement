@@ -26,7 +26,10 @@ class InventoryController extends Controller
 
     public function store(InventoryStoreRequest $request) {
         Inventory::create($request->validated());
-        return redirect()->route('inventory.index');
+        return redirect()->route('inventory.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Item added successfully.',
+        ]);
     }
 
     public function edit(Inventory $inventory) {
@@ -36,12 +39,18 @@ class InventoryController extends Controller
 
     public function update(InventoryUpdateRequest $request, Inventory $inventory) {
         $inventory->update($request->validated());
-        return redirect()->route('inventory.edit', ['inventory' => $inventory]);
+        return redirect()->route('inventory.edit', ['inventory' => $inventory])->with('toast', [
+            'status' => 'success',
+            'message' => 'Item updated successfully.',
+        ]);
     }
 
     public function destroy(Inventory $inventory) {
         $inventory->delete();
-        return redirect()->route('inventory.index');
+        return redirect()->route('inventory.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Item deleted successfully.',
+        ]);
     }
 
     public function getItemType(Request $request)

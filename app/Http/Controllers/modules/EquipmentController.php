@@ -59,13 +59,10 @@ class EquipmentController extends Controller
         ]);
     }
 
-    public function deleteEquipment(Request $request)
+    public function destroy(Equipment $equipment)
     {
-        DB::table('equipment')
-            ->where('id', $request->id)
-            ->delete();
-
-        return redirect('/equipment')->with('toast', [
+        $equipment->delete();
+        return redirect()->route('equipment.index')->with('toast', [
             'status' => 'success',
             'message' => 'Equipment deleted successfully.',
         ]);

@@ -15,7 +15,7 @@ class CreateInventoryTable extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('equipment_id')->nullable()->constrained('equipment')->nullOnDelete();
+            $table->foreignId('equipment_id')->nullable()->constrained('equipment')->cascadeOnDelete();
             $table->string('quantity');
             $table->string('purchase_date');
             $table->string('warranty_information');

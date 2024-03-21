@@ -23,7 +23,10 @@ class EquipmentTypeController extends Controller
     {
         EquipmentType::create($request->validated());
 
-        return redirect()->route('equipment_types.index');
+        return redirect()->route('equipment_types.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment Type added successfully.',
+        ]);
     }
 
     public function edit(EquipmentType $equipmentType)
@@ -35,12 +38,18 @@ class EquipmentTypeController extends Controller
     {
         $equipmentType->update($request->validated());
 
-        return redirect()->route('equipment_types.edit', ['equipment_type' => $equipmentType]);
+        return redirect()->route('equipment_types.edit', ['equipment_type' => $equipmentType])->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment Type updated successfully.',
+        ]);
     }
 
     public function destroy(EquipmentType $equipmentType)
     {
         $equipmentType->delete();
-        return redirect()->route('equipment_types.index');
+        return redirect()->route('equipment_types.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment Type deleted successfully.',
+        ]);
     }
 }
