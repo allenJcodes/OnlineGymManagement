@@ -17,7 +17,7 @@ class PaymentsController extends Controller
             $whenQuery->whereHas('subscriptions', function($whereHas) {
                 $whereHas->where('subscriptions.user_id', auth()->user()->id);
             });
-        })->paginate(10);
+        })->orderBy('payments.created_at', 'desc')->paginate(10);
 
         return view('features.payment.Payment', compact('payments'));
     }
