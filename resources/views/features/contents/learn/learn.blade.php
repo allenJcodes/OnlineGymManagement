@@ -107,9 +107,9 @@
                 </table>
 
             </div>
-            @if($gym_sessions->hasPages())
+            @if($learnContents->hasPages())
                 <div class="card">
-                    {{$gym_sessions->links()}}
+                    {{$learnContents->links()}}
                 </div>
             @endif
         </div>

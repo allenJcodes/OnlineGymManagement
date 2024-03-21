@@ -19,8 +19,6 @@ class CreateSchedulesTable extends Migration
             $table->string("class_name");
             $table->string("date_time_start");
             $table->string("date_time_end");
-            $table->string("max_clients");
-            $table->string("number_of_attendees");
             $table->timestamps();
         });
     }

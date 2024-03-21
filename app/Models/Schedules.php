@@ -17,8 +17,6 @@ class Schedules extends Model
         'class_name',
         'date_time_start',
         'date_time_end',
-        'max_clients',
-        'number_of_attendees',
     ];
 
     protected $casts = [

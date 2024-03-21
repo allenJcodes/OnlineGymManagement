@@ -20,7 +20,7 @@
 
             <div class="form-field-container">
                 <label for="content" class="form-label">Content</label>
-                <textarea id="content" name="content" class="form-input">{{$learn->content}}</textarea>
+                <textarea id="content" name="content" class="form-input resize-y">{{$learn->content}}</textarea>
             </div>
 
             <div class="form-field-container">

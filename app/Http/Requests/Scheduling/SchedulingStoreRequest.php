@@ -27,9 +27,14 @@ class SchedulingStoreRequest extends FormRequest
             'class_name' => 'required',
             'instructor_id' => 'required',
             'date_time_start' => 'required',
-            'date_time_end' => 'required',
-            // 'max_clients' => 'required|numeric',
-            'number_of_attendees' => 'required|numeric',
+            'date_time_end' => 'required|date|after:date_time_start',
+        ];
+    }
+
+    public function messages ()
+    {
+        return [
+            'date_time_end.after' => 'The date and time end should be after date and time start.'
         ];
     }
 }
