@@ -24,19 +24,18 @@
                     <img class="absolute top-6 right-0 w-[18rem] opacity-50" src="{{ asset('images/home-image.png') }}" alt="">
                 </div>
 
-                <div class="grid grid-cols-2 gap-3 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
 
                     @if(auth()->user()->user_role == 3)
                         <div class="card">
                             <div class="flex w-full justify-between">
                                 <h2>Subscription Status</h2>
                                 @if (count($user->subscriptions) == 0)
-                                    <div
-                                            class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
-                                            Unsubscribed</div>
+                                    <div class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
+                                        Unsubscribed
+                                    </div>
                                 @else
                                     <div class="flex items-center gap-2 text-sm">
-
                                         @if ($user->subscriptions[0]->endingSoon())
                                             <div class="py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">Subscription ending soon</div>
                                         @elseif ($user->subscriptions[0]->end_date < now()->format('Y-m-d'))
@@ -57,23 +56,32 @@
                                     $dueDate = $oneMonthFromNow > $user->subscriptions[0]->end_date ? $user->subscriptions[0]->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
                                 @endphp
 
-                                <div class="flex flex-col gap-3">
-
-                                    <div class="form-field-container gap-0">
-                                        <p class="form-label">Type</p>
-                                        <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->name}}</p>
-                                    </div>
-
-                                    <div class="form-field-container gap-0">
-                                        <p class="form-label">Amount</p>
-                                        <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->price}}</p>
-                                    </div>
-                                </div>
+                                <div class="flex gap-3">
+                                    <div class="flex flex-1 flex-col">
+                                        <div class="flex flex-col gap-3">
+                                            <div class="form-field-container gap-0">
+                                                <p class="form-label">Type</p>
+                                                <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->name}}</p>
+                                            </div>
+                                            <div class="form-field-container gap-0">
+                                                <p class="form-label">Amount</p>
+                                                <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->price}}</p>
+                                            </div>
+                                        </div>
                                     
-                                <div class="form-field-container gap-0">
-                                    <p class="form-label">Next due date</p>
-                                    <p class="font-medium">{{$dueDate}}</p>
+                                        <div class="form-field-container gap-0">
+                                            <p class="form-label">Next due date</p>
+                                            <p class="font-medium">{{$dueDate}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <p class="form-label">Your QR Code</p>
+                                        <img class="h-[10rem]" src="{{ asset($user->subscriptions[0]->qr_code ?? 'No QR Code') }}" alt="">
+                                        <a class="primary-button" target="_blank" href="{{asset($user->subscriptions[0]->qr_code)}}" download="{{$user->full_name}}_QRCODE">Download QR Code</a>
+                                    </div>
                                 </div>
+
 
                                 <a class="outline-button mt-auto ml-auto text-xs" href="{{route('subscription.index')}}">See all subscriptions ></a>
                             @endif
@@ -89,6 +97,7 @@
                                     <td class="py-2">Date</td>
                                     <td class="py-2">Mode of Payment</td>
                                     <td class="py-2">Amount Paid</td>
+                                    <td class="py-2">Status</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,6 +106,7 @@
                                         <td class="py-2">{{$recentPayment->created_at->format('F d, Y')}}</td>
                                         <td class="py-2">{{ucfirst($recentPayment->mode_of_payment)}}</td>
                                         <td class="py-2">P {{$recentPayment->amount_paid}}</td>                                        
+                                        <td class="py-2">P {{$recentPayment->status}}</td>                                        
                                     </tr>
                                 @empty
                                     <tr>
@@ -156,7 +166,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                            No classes this week!
+                                            No classes this week
                                         </td>
                                     </tr>
                                 @endforelse

@@ -130,9 +130,7 @@
     </div>
 
 
-    <div id="popup-modal" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
-
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
         <div
             class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
             <h2 class="text-lg font-bold">Update Payment Status</h2>
@@ -169,14 +167,17 @@
         const editButtons = document.querySelectorAll('.edit-button');
         const paymentIdField = document.querySelector('#payment_id');
         const statusField = document.querySelector('#status');
-
+        
         editButtons.forEach(button => {
             const payment = JSON.parse(button.dataset.payment);
-            // console.log(payment);
-
+            
             button.addEventListener('click', () => {
                 paymentIdField.value = payment.id;
                 statusField.value = payment.status;
+
+                // statusField.querySelectorAll('option').forEach(option => {
+                //     option.selected = option.value == payment.status
+                // })
             });
         })
     </script>

@@ -17,7 +17,10 @@
             <thead>
                 <tr class="table-row">
                     <td class="py-2">
-                        User
+                        Date Paid
+                    </td>
+                    <td class="py-2">
+                        Customer
                     </td>
                     <td class="py-2">
                         Subscription Type
@@ -32,10 +35,7 @@
                         Reference Number
                     </td>
                     <td class="py-2">
-                        Start Date
-                    </td>
-                    <td class="py-2">
-                        End Date
+                        Status
                     </td>
                 </tr>
             </thead>
@@ -43,28 +43,74 @@
                 @forelse ($payments as $payment)
                 <tr class="table-row">
                     <td class="py-2">
+                        {{ $payment->created_at->format('Y-m-d H:i A') }}
+                    </td>
+                    <td class="py-2">
                         {{ $payment->subscriptions->user->full_name }}
                     </td>
                     <td class="py-2">
                         {{ $payment->subscriptions->subscriptionTypes->name }}
                     </td>
                     <td class="py-2">
-                        {{ $payment->amount_paid }}
+                        ₱{{ $payment->amount_paid }}
                     </td>
                     <td class="py-2">
                         {{ $payment->mode_of_payment }}
                     </td>
                     <td class="py-2">
-                        {{ $payment->reference_number }}
+                        {{ $payment->reference_number ?? '--' }}
                     </td>
                     <td class="py-2">
-                        {{ $payment->subscriptions->start_date }}
+                        {{ $payment->status }}
                     </td>
-                    <td class="py-2">
-                        {{ $payment->subscriptions->end_date }}
-                    </td> 
+                    @if (Auth::user()->user_role == '1')
+                        <td class="py-2">
+                            <div class="flex items-center w-full">
+                                <div class="text-left">
+                                    <button id="dropdownButton" data-dropdown-toggle="toggle{{ $payment->id }}"
+                                        class="" type="button">
+                                        <span class="sr-only">Open dropdown</span>
+                                        <svg class="h-4 w-4" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                            viewBox="0 0 16 3">
+                                            <path
+                                                d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div id="toggle{{ $payment->id }}"
+                                    class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
+
+                                    <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
+
+                                        <p class="text-background/70 text-sm pt-2 px-4 text-center">Actions</p>
+
+                                        <div class="flex flex-col divide-y divide-light-gray-background"
+                                            aria-labelledby="dropdownButton">
+
+                                            <button data-modal-target="popup-modal"
+                                                data-modal-toggle="popup-modal"
+                                                class="py-2 px-4 hover:bg-off-white transition-all edit-button
+                                                "
+                                                data-payment="{{ json_encode($payment) }}"
+                                                @if ($payment->status == 'Paid') disabled @endif>
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+                    @endif
                 </tr>
                 @empty
+                <tr>
+                    <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                        No items
+                    </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>

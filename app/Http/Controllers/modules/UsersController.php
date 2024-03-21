@@ -24,7 +24,10 @@ class UsersController extends Controller
 
     public function store(UserStoreRequest $request) {
         User::create($request->validated());
-        return redirect()->route('users');
+        return redirect()->route('user.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'User added successfully.',
+        ]);;
     }
 
     public function edit(User $user) {
@@ -51,12 +54,25 @@ class UsersController extends Controller
             'user_role' => $request->user_role,
         ]);
 
-        return redirect()->route('users');
+        return redirect()->route('user.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'User updated successfully.',
+        ]);;
     }
 
     public function destroy(User $user) {
+        if($user->user_role == 1) {
+            return back()->with('toast', [
+                'status' => 'error',
+                'message' => 'Cannot delete user with admin role.',
+            ]);
+        }
+
         $user->delete();
-        return redirect()->route('users');
+        return redirect()->route('user.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'User deleted successfully.',
+        ]);
     }
 
     // end

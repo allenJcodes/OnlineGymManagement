@@ -33,7 +33,6 @@ class UserUpdateRequest extends FormRequest
             'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users', 'email')->ignore($id)],
             'password' => ['nullable', 'string'],
             'user_role' => ['required'],
-            'description' => ['required', 'string'],
             'profile_image' => ['nullable']
         ];
     }

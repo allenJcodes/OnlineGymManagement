@@ -12,7 +12,7 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        $payments = Payments::with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
+        $payments = Payments::search()->with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
         ->when(auth()->user()->user_role != 1, function($whenQuery) {
             $whenQuery->whereHas('subscriptions', function($whereHas) {
                 $whereHas->where('subscriptions.user_id', auth()->user()->id);
@@ -50,6 +50,14 @@ class PaymentsController extends Controller
         $payment = Payments::find($request->payment_id);
 
         // Paid, Verifying, Failed
+
+        if(($payment->status === 'Failed' ) && $request->status === 'Paid') {
+            return redirect()->route('payments.index')->with('toast', [
+                'status' => 'error',
+                'message' => 'Failed status cannot be updated to paid status.',
+            ]);
+        }
+
         if (($payment->status !== 'Paid' ) && $request->status === 'Paid') {
 
             $data = [
