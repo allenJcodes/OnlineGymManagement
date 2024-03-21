@@ -25,11 +25,18 @@ class ManageSubscriptionStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:subscription_types,name',
-            'price' => 'required|numeric',
-            'number_of_months' => 'required|numeric',
+            'price' => 'required|numeric|min:1',
+            'number_of_months' => 'required|numeric|min:1',
             'description' => 'required',
             'inclusions' => 'required',
-            'best_option' => 'required',
+        ];
+    }
+
+    public function messages ()
+    {
+        return [
+            'price.min' => 'The subscription price should be at least 1 peso.',
+            'number_of_months.min' => 'The duration should be at least 1 month.'
         ];
     }
 }

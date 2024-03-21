@@ -32,11 +32,6 @@
                 <input value="{{$schedule->date_time_end}}" id="date_time_end" type="datetime-local" name="date_time_end" class="form-input">
             </div>
 
-            <div class="form-field-container">
-                <label for="number_of_attendees" class="form-label">Number of Attendees</label>
-                <input value="{{$schedule->number_of_attendees}}" id="number_of_attendees" type="text" name="number_of_attendees" class="form-input">
-            </div>
-
             @if ($errors->any())
                 <div class="flex flex-col gap-1">
                     @foreach ($errors->all() as $error)

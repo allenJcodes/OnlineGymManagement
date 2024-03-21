@@ -29,4 +29,11 @@ class ContactStoreRequest extends FormRequest
             'content' => 'required|string',
         ];
     }
+
+    public function messages ()
+    {
+        return [
+            'contact_detail_type_id.required' => 'The contact detail type is required.'
+        ];
+    }
 }

@@ -15,7 +15,7 @@
 
             <div class="form-field-container">
                 <label for="content" class="form-label">Content</label>
-                <textarea id="content" name="content" class="form-input">{{$gym_session->content}}</textarea>
+                <textarea id="content" name="content" class="form-input resize-y">{{$gym_session->content}}</textarea>
             </div>
 
             @if ($errors->any())
