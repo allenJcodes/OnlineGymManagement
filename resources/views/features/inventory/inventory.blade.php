@@ -59,7 +59,7 @@
                                         {{ $inventory->quantity }}
                                     </td>
                                     <td class="py-2">
-                                        {{ $inventory->equipment->equipmentType->name }}
+                                        {{ $inventory->equipment->equipmentType->name ?? '--' }}
                                     </td>
                                     <td class="py-2">
                                         {{ $inventory->purchase_date }}
@@ -91,7 +91,13 @@
 
                                                     <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                                         <a href="{{route('inventory.edit', ['inventory' => $inventory])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
-                                                        <a href="" id="delete{{ $inventory->id }}" class="py-2 px-4 hover:bg-off-white transition-all">Delete</a>
+                                                        <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0"
+                                                        action="{{ route('inventory.destroy', ['inventory' => $inventory]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="w-full text-left">Delete</button>
+                                                    </form>
                                                     </div>
                                                 </div>
         
