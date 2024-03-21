@@ -5,15 +5,14 @@
         <div class="flex items-start w-full justify-between">
 
             <h1 class="text-2xl font-bold">Subscriptions</h1>
-            <button class="primary-button subscribe-button" @if ($isActive) disabled @endif type="button"
-                data-modal-target="sub-popup-modal" data-modal-toggle="sub-popup-modal">
-                Subscribe
-            </button>
+            @if (!$isActive)
+                <button class="primary-button disabled:outline-button subscribe-button" @if ($isActive) disabled @endif type="button" data-modal-target="sub-popup-modal" data-modal-toggle="sub-popup-modal">
+                    Subscribe
+                </button>
+            @endif
         </div>
 
         <div class="flex flex-col gap-2">
-
-
             <div class="card">
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Subscription List</h2>
@@ -68,12 +67,12 @@
                                 <td class="py-2">
                                     <div class="flex items-center">
                                        
-                                        @if ($sub->status == 1)
+                                        @if ($sub->status == 'Pending')
                                             <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
-                                            Subscription pending
-                                        @elseif (($sub->end_date < now()->format('Y-m-d')) | ($sub->status == 3))
+                                            {{$sub->status}}
+                                        @elseif (($sub->end_date < now()->format('Y-m-d')) | ($sub->status == 'Subscription Ended') || $sub->status == 'Cancelled' || $sub->status == 'Cancelled')
                                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-                                            Subscription ended
+                                            {{$sub->status}}
                                         @elseif ($sub->endingSoon())
                                             <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
                                             Subscription ending soon
@@ -81,6 +80,8 @@
                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
                                             Subscribed
                                         @endif
+
+                                    </div>
                                 </td>
                                 <td class="py-2">
                                     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"

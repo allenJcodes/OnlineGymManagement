@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Payments;
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\MembershipService;
 
@@ -48,13 +49,12 @@ class PaymentsController extends Controller
     public function updateStatus(Request $request, MembershipService $membershipService)
     {
         $payment = Payments::find($request->payment_id);
-
         // Paid, Verifying, Failed
 
-        if(($payment->status === 'Failed' ) && $request->status === 'Paid') {
+        if (($payment->status === 'Failed' ) && $request->status !== 'Failed') {
             return redirect()->route('payments.index')->with('toast', [
                 'status' => 'error',
-                'message' => 'Failed status cannot be updated to paid status.',
+                'message' => 'Failed payments cannot be updated.',
             ]);
         }
 
@@ -74,13 +74,13 @@ class PaymentsController extends Controller
                 'start_date' => now(),
                 'end_date' => Carbon::parse(now())->addMonths($payment->subscriptions->subscriptionTypes->number_of_months),
                 'qr_code' => $filePath,
-                'status' => 2
+                'status' => 'Active'
             ]);  
         } 
         
         if (($payment->status !== 'Paid' ) && $request->status === 'Failed') {
             Subscription::where('id', $payment->subscription_id)->update([
-                'status' => 3
+                'status' => 'Failed'
             ]);
         }
 

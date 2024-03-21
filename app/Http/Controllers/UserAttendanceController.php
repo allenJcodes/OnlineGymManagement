@@ -40,7 +40,7 @@ class UserAttendanceController extends Controller
     public function store(Request $request)
     {
         $user = User::where('id', $request->user_id)->with(['subscriptions' => function($q) {
-            $q->where('subscriptions.status', 2);
+            $q->where('subscriptions.status', 'Active');
         }, 'subscriptions.subscriptionTypes'])->first();
 
         if ($user->subscriptions->count() == 0) {

@@ -14,7 +14,7 @@ class SubscriptionController extends Controller
     public function index()
     {
         $subs = Subscription::search()->where('user_id', auth()->user()->id)->with('subscriptionTypes')->orderBy('subscriptions.created_at', 'desc')->paginate(10);
-        $isActive = Subscription::where('user_id', auth()->user()->id)->where('status', 2)->orWhere('status', 1)->count() > 0 ? true : false;
+        $isActive = Subscription::where('user_id', auth()->user()->id)->where('status', 'Active')->orWhere('status', 'Pending')->count() > 0 ? true : false;
         $subscriptions = SubscriptionType::all();
 
 
@@ -27,7 +27,7 @@ class SubscriptionController extends Controller
         
         $subscription = Subscription::create([
             ...$request->validated(),
-            'status' => 1
+            'status' => 'Pending'
         ]);
 
         Payments::create([

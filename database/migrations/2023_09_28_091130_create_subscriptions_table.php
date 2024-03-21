@@ -19,7 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->foreignId('subscription_type_id')->nullable()->constrained('subscription_types')->nullOnDelete();
             $table->date("start_date")->nullable();;
             $table->date("end_date")->nullable();;
-            $table->tinyInteger('status')->default(2); //1 = pending, 2 = active, 3 = cancelled
+            $table->string('status')->default('Active'); //pending, active, subscription ended, cancelled, failed
             $table->string('qr_code')->nullable();
             $table->timestamps();
         });
