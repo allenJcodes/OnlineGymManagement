@@ -6,7 +6,7 @@
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">Payments</h1>
             @if (Auth::user()->user_role == '1')
-                <a href="{{ route('manage.payment_modes.index') }}" class="primary-button  hidden">
+                <a href="{{ route('manage.payment_modes.index') }}" class="primary-button">
                     Manage Payment Modes</a>
             @endif
         </div>

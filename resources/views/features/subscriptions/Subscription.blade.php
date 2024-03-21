@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="form-field-container">
-                            <label for="mode_of_payment" class="form-label">Mode of Payment</label>
+                            <label for="mode_of_payment" class="form-label">Select Mode of Payment</label>
                             <select id="mode_of_payment" name="mode_of_payment" class="form-input">
                                 <option value="gcash" selected>GCash</option>
                             </select>

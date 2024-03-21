@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             ContactDetailSeeder::class,
             SubscriptionTypeSeeder::class,
             EquipmentTypeSeeder::class,
-            InstructorSeeder::class
+            InstructorSeeder::class,
+            PaymentModeSeeder::class
         ]);
 
         //GENERATE 10 RANDOM CUSTOMERS
