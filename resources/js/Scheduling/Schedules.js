@@ -68,13 +68,14 @@ const Schedules = (props) => {
                         <h2>{event?.instructor?.user?.full_name}</h2>
                     </div>
                     
-                    <h2>
-                        {event && moment(event.date_time_start).format("LL | hh:mmA")}
-                    </h2>
-
-                    <h2>
-                        {event && moment(event.date_time_end).format("LL | hh:mmA")}
-                    </h2>
+                    <div className="flex flex-col">
+                        <p className="text-dark-gray-800 text-xs">Start Date</p>
+                        <h2>{event && moment(event.date_time_start).format("LL | hh:mmA")}</h2>
+                    </div>
+                    <div className="flex flex-col">
+                        <p className="text-dark-gray-800 text-xs">End Date</p>
+                        <h2>{event && moment(event.date_time_end).format("LL | hh:mmA")}</h2>
+                    </div>
 
                     <div className="flex self-end mt-auto gap-2">
                         <button onClick={() => setOpen(false)} className="outline-button">Back</button>
@@ -91,7 +92,7 @@ const Schedules = (props) => {
                     plugins={[dayGridPlugin, timeGridPlugin]}
                     initialView="dayGridMonth"
                     headerToolbar={{ start: "title", center: "", right: "today,prev,next,dayGridMonth,timeGridDay" }}
-                    titleFormat={{ year: "numeric", month: "short" }}
+                    titleFormat={{ year: "numeric", month: "short", day: "numeric" }}
                     events={events}
                     eventClick={handleClickEvent}
                 />

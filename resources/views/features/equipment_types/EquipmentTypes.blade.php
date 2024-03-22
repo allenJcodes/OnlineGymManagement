@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
 
-        <a href="{{ route('equipment.index') }}" class="w-fit">< Back to Equipments</a>
+        <a href="{{ route('equipment.index') }}" class="w-fit outline-button">< Back to Equipments</a>
 
         <div class="flex items-start w-full justify-between">
 

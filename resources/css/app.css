@@ -13,6 +13,7 @@ textarea {
 }
 
 
+
 @layer components {
   
   .form-field-container {
@@ -49,5 +50,9 @@ textarea {
 
   .outline-button {
     @apply py-2 px-4 bg-transparent ring-1 ring-gray-400 text-gray-400 rounded-md hover:bg-gray-50 text-sm transition-[filter]
+  }
+
+  .primary-button:disabled {
+    @apply bg-background/20 text-background/40 cursor-not-allowed
   }
 }

@@ -75,12 +75,15 @@
                                                 Subscribed
                                             @endif
                                         @endif
-
-
                                     </div>
                                 </td>
-                                <td>
-                                    <img src="{{ asset($user->subscriptions[0]->qr_code ?? 'No QR Code') }}" alt="">
+                                <td class="py-2">
+                                    <button data-modal-target="qr-popup-modal" data-modal-toggle="qr-popup-modal"
+                                        class="primary-button qr-button" type="button" data-user="{{ json_encode($user) }}"
+                                        @empty($user->subscriptions[0]->qr_code) disabled @endempty
+                                        >
+                                        View QR
+                                    </button>
                                 </td>
                                 <td>
                                     @if (count($user->subscriptions) == 0)
@@ -194,6 +197,32 @@
         </div>
     </div>
 
+    {{-- QR MODAL --}}
+    <div id="qr-popup-modal" tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+
+    @isset($user)
+    <div
+        class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
+        <div class="flex justify-center ">
+            <img id="qr-image" src="" alt="">
+        </div>
+        <div class="flex flex-col gap-5">
+            <div class="self-end flex gap-2">
+                <button type="button" class="outline-button" data-modal-hide="qr-popup-modal">
+                    Close
+                </button>
+
+                <a id="qr-download-link" href="" download="qr_code.png" class="primary-button" disabled>
+                    Download
+                </a>
+            </div>
+        </div>
+    </div>
+    @endisset
+    </div>
+
+
     <script>
         const subscribeButtons = document.querySelectorAll('.subscribe-button');
 
@@ -207,5 +236,25 @@
                 userIdField.value = user.id
             });
         })
+
+        const viewQRButtons = document.querySelectorAll('.qr-button');
+
+        viewQRButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const user = JSON.parse(button.dataset.user);
+                const qrImage = document.querySelector('#qr-image');
+                const qrDownloadLink = document.querySelector('#qr-download-link');
+
+                if (user.subscriptions.length > 0 && user.subscriptions[0].qr_code) {
+                    qrImage.src = user.subscriptions[0].qr_code;
+                    qrDownloadLink.href = user.subscriptions[0].qr_code;
+                    qrDownloadLink.removeAttribute('disabled');
+                } else {
+                    qrImage.src = 'No QR Code';
+                    qrDownloadLink.href = 'javascript:void(0);';
+                    qrDownloadLink.setAttribute('disabled', 'disabled');
+                }
+            });
+        });
     </script>
 @endsection

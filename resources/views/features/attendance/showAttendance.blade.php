@@ -2,9 +2,11 @@
 
 @section('content')
     <div class="flex flex-col pt-14 gap-5 text-background">
+        <a href="{{ route('attendance.index') }}" class="w-fit outline-button">< Back to Attendance</a>
+
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">View Attendance</h1>
-            <button id="scan-qr-button" class="primary-button"> Scan QR</button>
+            {{-- <button id="scan-qr-button" class="primary-button"> Scan QR</button> --}}
         </div>
 
         <div class="flex flex-col gap-3 card">
@@ -83,7 +85,7 @@
             @endif --}}
         </div>
     </div>
-    <div id="scan-qr-modal" tabindex="-1"
+    {{-- <div id="scan-qr-modal" tabindex="-1"
         class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
         <div
@@ -115,7 +117,7 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
 
     <script>
         const subscribeButtons = document.querySelectorAll('.subscribe-button');
