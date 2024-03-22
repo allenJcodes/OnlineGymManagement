@@ -8,6 +8,7 @@ use App\Models\Notification;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use App\Http\Requests\Membership\MembershipStoreRequest;
+use App\Models\PaymentMode;
 
 class SubscriptionController extends Controller
 {
@@ -16,9 +17,9 @@ class SubscriptionController extends Controller
         $subs = Subscription::search()->where('user_id', auth()->user()->id)->with('subscriptionTypes')->orderBy('subscriptions.created_at', 'desc')->paginate(10);
         $isActive = Subscription::where('user_id', auth()->user()->id)->where('status', 'Active')->orWhere('status', 'Pending')->count() > 0 ? true : false;
         $subscriptions = SubscriptionType::all();
+        $paymentModes = PaymentMode::all();
 
-
-        return view('features.subscriptions.Subscription', compact('subs', 'isActive', 'subscriptions'));
+        return view('features.subscriptions.Subscription', compact('subs', 'isActive', 'subscriptions', 'paymentModes'));
     }
 
     public function store(MembershipStoreRequest $request)

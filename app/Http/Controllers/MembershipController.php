@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Membership\MembershipStoreRequest;
 use App\Models\Notification;
+use App\Models\PaymentMode;
 use App\Models\Payments;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
@@ -21,9 +22,10 @@ class MembershipController extends Controller
         $users = User::search()->where('user_role', 3)->with(['subscriptions' => function($q) {
             $q->where('subscriptions.status', 2);
         }])->paginate(10);
-
         $subscriptions = SubscriptionType::all();
-        return view('features.membership.Membership', compact('users', 'subscriptions'));
+        $paymentModes = PaymentMode::all();
+
+        return view('features.membership.Membership', compact('users', 'subscriptions', 'paymentModes'));
     }
 
     public function store(MembershipStoreRequest $request, MembershipService $membershipService)

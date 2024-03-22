@@ -168,8 +168,9 @@
                         <label for="mode_of_payment" class="form-label">Mode of Payment</label>
                         <select id="mode_of_payment" name="mode_of_payment" class="form-input">
                             <option value="" selected disabled>Select mode of payment</option>
-                            <option value="cash">Cash</option>
-                            <option value="gcash">GCash</option>
+                            @foreach ($paymentModes as $paymentMode)
+                                <option value="{{$paymentMode->name}}">{{$paymentMode->name}}</option>  
+                            @endforeach
                         </select>
                     </div>
 
