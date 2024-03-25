@@ -10,7 +10,7 @@ class EquipmentTypeController extends Controller
 {
     public function index()
     {
-        $model = EquipmentType::paginate(10);
+        $model = EquipmentType::search()->paginate(10);
         return view('features.equipment_types.EquipmentTypes', compact('model'));
     }
 
