@@ -74,6 +74,10 @@ class User extends Authenticatable
         return $this->first_name.' '. ($this->middle_name ?? '') .' '.$this->last_name;
     }
 
+    public function getActiveSubscriptionAttribute() {
+        return $this->subscriptions[0];
+    }
+
     public function notifications() : BelongsToMany {
         return $this->belongsToMany(Notification::class, 'user_notifications');
     }
@@ -82,7 +86,7 @@ class User extends Authenticatable
         return $this->belongsTo(UserRoles::class, 'user_role');
     }
 
-    function instructor() : BelongsTo {
+    public function instructor() : BelongsTo {
         return $this->belongsTo(Instructor::class, 'user_id', 'id');
     }
     
