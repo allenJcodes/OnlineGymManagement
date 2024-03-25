@@ -20,8 +20,9 @@ class MembershipController extends Controller
     public function index()
     {
         $users = User::search()->where('user_role', 3)->with(['subscriptions' => function($q) {
-            $q->where('subscriptions.status', 2);
+            $q->where('subscriptions.status', 'Active');
         }])->paginate(10);
+
         $subscriptions = SubscriptionType::all();
         $paymentModes = PaymentMode::all();
 

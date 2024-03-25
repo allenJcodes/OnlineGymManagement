@@ -44,11 +44,11 @@ class NotifyCustomer extends Command
         $users = User::where('user_role', 3)->get();
 
         foreach($users as $user) {
-            if(!count($user->subscriptions)) {
+            if(!$user->active_subscription) {
                 continue;
             }
             
-            if(Carbon::parse($user->subscriptions[0]->end_date)->subWeek() == Carbon::parse(now()->format('Y-m-d'))) {
+            if(Carbon::parse($user->active_subscription->end_date)->subWeek() == Carbon::parse(now()->format('Y-m-d'))) {
                 Notification::create([
                     'content' => 'Your subscription will end next week.'
                 ])->users()->attach($user->id);

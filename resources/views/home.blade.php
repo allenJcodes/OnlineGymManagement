@@ -30,15 +30,15 @@
                         <div class="card">
                             <div class="flex w-full justify-between">
                                 <h2>Subscription Status</h2>
-                                @if (count($user->subscriptions) == 0)
+                                @if (!$user->active_subscription)
                                     <div class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
                                         Unsubscribed
                                     </div>
                                 @else
                                     <div class="flex items-center gap-2 text-sm">
-                                        @if ($user->subscriptions[0]->endingSoon())
+                                        @if ($user->active_subscription->endingSoon())
                                             <div class="py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">Subscription ending soon</div>
-                                        @elseif ($user->subscriptions[0]->end_date < now()->format('Y-m-d'))
+                                        @elseif ($user->active_subscription->end_date < now()->format('Y-m-d'))
                                             <div class="py-1 px-3 text-sm bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">Subscription ended</div>
                                         @else
                                             <div class="py-1 px-3 text-sm bg-green-100 ring-1 ring-green-500 text-green-500 rounded-full">Subscribed</div>
@@ -47,13 +47,13 @@
                                 @endif
 
                             </div>
-
+                            
                             <hr>
 
-                            @if (count($user->subscriptions) != 0)
+                            @if ($user->active_subscription)
                                 @php
                                     $oneMonthFromNow = now()->addMonth();
-                                    $dueDate = $oneMonthFromNow > $user->subscriptions[0]->end_date ? $user->subscriptions[0]->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
+                                    $dueDate = $oneMonthFromNow > $user->active_subscription->end_date ? $user->active_subscription->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
                                 @endphp
 
                                 <div class="flex gap-3">
@@ -61,11 +61,11 @@
                                         <div class="flex flex-col gap-3">
                                             <div class="form-field-container gap-0">
                                                 <p class="form-label">Type</p>
-                                                <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->name}}</p>
+                                                <p class="font-medium">{{$user->active_subscription->subscriptionTypes->name}}</p>
                                             </div>
                                             <div class="form-field-container gap-0">
                                                 <p class="form-label">Amount</p>
-                                                <p class="font-medium">{{$user->subscriptions[0]->subscriptionTypes->price}}</p>
+                                                <p class="font-medium">{{$user->active_subscription->subscriptionTypes->price}}</p>
                                             </div>
                                         </div>
                                     
@@ -77,8 +77,8 @@
 
                                     <div class="flex flex-col">
                                         <p class="form-label">Your QR Code</p>
-                                        <img class="h-[10rem]" src="{{ asset($user->subscriptions[0]->qr_code ?? 'No QR Code') }}" alt="">
-                                        <a class="primary-button" target="_blank" href="{{asset($user->subscriptions[0]->qr_code)}}" download="{{$user->full_name}}_QRCODE">Download QR Code</a>
+                                        <img class="h-[10rem]" src="{{ asset($user->active_subscription->qr_code ?? 'No QR Code') }}" alt="">
+                                        <a class="primary-button" target="_blank" href="{{asset($user->active_subscription->qr_code)}}" download="{{$user->full_name}}_QRCODE">Download QR Code</a>
                                     </div>
                                 </div>
 

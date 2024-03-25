@@ -38,7 +38,6 @@
                             </td>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse ($users as $userIndex => $user)
                             <tr class="table-row">
@@ -49,27 +48,27 @@
                                     </div>
                                 </td>
                                 <td class="py-2">
-                                    @if (count($user->subscriptions) == 0)
+                                    @if (!$user->active_subscription)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->start_date->format('Y-m-d') }}
+                                        {{ $user->active_subscription->start_date->format('Y-m-d') }}
                                     @endif
 
                                 </td>
                                 <td class="py-2">
-                                    @if (count($user->subscriptions) == 0)
+                                    @if (!$user->active_subscription)
                                         --
                                     @else
-                                        {{ $user->subscriptions[0]->end_date->format('Y-m-d') }}
+                                        {{ $user->active_subscription->end_date->format('Y-m-d') }}
                                     @endif
                                 </td>
                                 <td class="py-2">
                                     <div class="flex items-center">
-                                        @if (count($user->subscriptions) == 0)
+                                        @if (!$user->active_subscription)
                                             Unsubscribed
                                         @else
                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                                            @if ($user->subscriptions[0]->end_date == now()->format('Y-m-d'))
+                                            @if ($user->active_subscription->end_date == now()->format('Y-m-d'))
                                                 Subscription Expired
                                             @else
                                                 Subscribed
@@ -80,13 +79,13 @@
                                 <td class="py-2">
                                     <button data-modal-target="qr-popup-modal" data-modal-toggle="qr-popup-modal"
                                         class="primary-button qr-button" type="button" data-user="{{ json_encode($user) }}"
-                                        @empty($user->subscriptions[0]->qr_code) disabled @endempty
+                                        @empty($user->active_subscription->qr_code) disabled @endempty
                                         >
                                         View QR
                                     </button>
                                 </td>
                                 <td>
-                                    @if (count($user->subscriptions) == 0)
+                                    @if (!$user->active_subscription)
                                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                                             class="primary-button subscribe-button" type="button"
                                             data-user="{{ json_encode($user) }}">
@@ -94,7 +93,7 @@
                                         </button>
                                     @else
                                         <form method="POST"
-                                            action="{{ route('membership.cancel', ['id' => $user->subscriptions[0]->id]) }}">
+                                            action="{{ route('membership.cancel', ['id' => $user->active_subscription->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="outline-button">

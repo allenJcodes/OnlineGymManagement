@@ -43,14 +43,14 @@ class UserAttendanceController extends Controller
             $q->where('subscriptions.status', 'Active');
         }, 'subscriptions.subscriptionTypes'])->first();
 
-        if ($user->subscriptions->count() == 0) {
+        if (!$user->active_subscription) {
             return redirect()->back()->with('toast', [
                 'status' => 'error',
                 'message' => "$user->full_name has no active subscription."
             ]);
         }
 
-        if ($user->subscriptions[0]->status != 2) {
+        if ($user->active_subscription->status != 2) {
             return redirect()->back()->with('toast', [
                 'status' => 'error',
                 'message' => "$user->full_name's subscription has expired."

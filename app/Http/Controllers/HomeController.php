@@ -48,7 +48,7 @@ class HomeController extends Controller
     private function customerIndex(){
         //FOR CUSTOMER HOME
         $user = User::where('id', auth()->user()->id)->with(['subscriptions' => function($q) {
-            $q->where('subscriptions.status', 2);
+            $q->where('subscriptions.status', 'Active');
         }, 'subscriptions.subscriptionTypes'])->first();
 
         $recentPayments = Payments::whereHas('subscriptions.user', function($q) {
@@ -78,7 +78,7 @@ class HomeController extends Controller
 
         // Total Active Members
         $active_users = User::join('subscriptions', 'users.id', '=', 'subscriptions.user_id')
-            ->where('subscriptions.status', 2)
+            ->where('subscriptions.status', 'Active')
             ->count();
 
         // Total Instructors

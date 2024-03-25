@@ -42,12 +42,12 @@ class UnsubscribeCustomer extends Command
         $users = User::where('user_role', 3)->get();
 
         foreach($users as $user) {
-            if(!count($user->subscriptions)) {
+            if(!$user->active_subscription) {
                 continue;
             }
             
-            if(Carbon::parse($user->subscriptions[0]->end_date)->addDay() >= Carbon::parse(now()->format('Y-m-d'))) {
-                $user->subscriptions[0]->update(['status' => 3]);
+            if(Carbon::parse($user->active_subscription->end_date)->addDay() >= Carbon::parse(now()->format('Y-m-d'))) {
+                $user->active_subscription->update(['status' => 3]);
             }
         }
     }

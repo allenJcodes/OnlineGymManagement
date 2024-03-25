@@ -30,7 +30,7 @@ class User extends Authenticatable
         'profile_image'
     ];
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'active_subscription'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -64,7 +64,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Membership::class, 'user_id', "id");
     }
-
+    
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
@@ -75,7 +75,7 @@ class User extends Authenticatable
     }
 
     public function getActiveSubscriptionAttribute() {
-        return $this->subscriptions[0];
+        return $this->subscriptions[0] ?? null;
     }
 
     public function notifications() : BelongsToMany {
