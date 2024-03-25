@@ -13,7 +13,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $attendances = Schedules::with(['instructor'])->get();
+        $attendances = Attendance::with(['schedule', 'userAttendances', 'schedule.instructor'])->get();
         return view('features.attendance.attendance', compact('attendances'));
     }
 
