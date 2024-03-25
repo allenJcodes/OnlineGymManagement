@@ -34,17 +34,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {{-- @dd($attendances) --}}
                         @forelse ($attendances as $attendance)
                         <tr class="table-row">
                             <td class="py-2">
-                                {{ $attendance->class_name }}
+                                {{ $attendance->schedule->class_name }}
                             </td>
                             <td class="py-2">
-                                {{ $attendance->number_of_attendees }}
+                                {{ $attendance->userAttendances->count() }}
                             </td>
                             <td class="py-2">
-                                {{ $attendance->date_time_start }} 
+                                {{ $attendance->schedule->date_time_start }} 
                             </td>
                             <td>
                                 <div class="flex attendances-center w-full">
@@ -63,7 +63,7 @@
     
                                         <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
     
-                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$attendance->class_name}}</p>
+                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$attendance->schedule->class_name}}</p>
                                             
 
                                             {{-- di ko pa alam actions neto --}}
