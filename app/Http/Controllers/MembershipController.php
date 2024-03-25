@@ -68,7 +68,7 @@ class MembershipController extends Controller
 
     public function cancelMembership($id) {
         Subscription::where('id', $id)->update([
-            'status' => 3
+            'status' => 'Cancelled'
         ]);
 
         return redirect()->back()->with('toast', [

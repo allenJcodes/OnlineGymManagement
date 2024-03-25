@@ -89,13 +89,14 @@
                                     <td class="py-2">{{ $subscriber->user->full_name }}</td>
                                     <td class="py-2">{{ $subscriber->subscriptionTypes->name }}</td>
                                     <td class="py-2 pl-4">
-                                        @if ($subscriber->status != 'Active')
-                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-                                            
-                                        @elseif($subscriber->end_date <= now()->format('Y-m-d'))
-                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+                                        @if ($subscriber->status == 'Pending')
+                                            <div class="w-fit py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">{{$subscriber->status}}</div>
+                                        @elseif (($subscriber->end_date < now()->format('Y-m-d')) | ($subscriber->status == 'Subscription Ended') || $subscriber->status == 'Cancelled' || $subscriber->status == 'Cancelled')
+                                            <div class="w-fit py-1 px-3 text-sm bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">{{$subscriber->status}}</div> 
+                                        @elseif ($subscriber->endingSoon())
+                                            <div class="w-fit py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">Subscription ending soon</div>
                                         @else
-                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                            <div class="w-fit py-1 px-3 text-sm bg-green-100 ring-1 ring-green-500 text-green-500 rounded-full">Subscribed</div>
                                         @endif
                                     </td>
                                 </tr>
