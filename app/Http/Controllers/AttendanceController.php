@@ -14,7 +14,7 @@ class AttendanceController extends Controller
     public function index()
     {
         $attendances = Attendance::with(['schedule', 'userAttendances', 'schedule.instructor'])->get();
-        return view('features.attendance.attendance', compact('attendances'));
+        return view('features.attendance.Attendance', compact('attendances'));
     }
 
     public function create() {
