@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const DEV_URL = "http://127.0.0.1:8000/";
-export const PROD_URL = "https://www.japsgym.online/";
+export const PROD_URL = "https://japsgym.online/";
 
 
 export const api = axios.create({
