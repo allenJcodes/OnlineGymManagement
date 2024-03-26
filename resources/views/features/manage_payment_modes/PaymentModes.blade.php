@@ -47,9 +47,8 @@
                             <tr class="table-row">
                                 <td class="py-2">{{ $mode->name }}</td>
                                 <td class="py-2">{{ $mode->account_no }}</td>
-                                <td class="py-2"> <img src="{{ asset('image/payment_mode/' . $mode->image ?? '--') }}"
-                                        alt="QR Image" width="140px" height="140px">
-
+                                <td class="py-2"> @if($mode->image) <img src="{{ asset('image/payment_mode/' . $mode->image) }}"
+                                        alt="QR Image" width="140px" height="140px">@endif
                                 </td>
 
                                 <td>
