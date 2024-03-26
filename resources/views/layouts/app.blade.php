@@ -156,7 +156,7 @@
         </header>
 
         @extends('layouts.sidebar')
-        <div class="p-4 ml-64 min-h-screen bg-dashboard-background">
+        <div class="p-4 sm:ml-64 min-h-screen bg-dashboard-background">
             @yield('content')
         </div>
 

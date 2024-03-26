@@ -5,11 +5,9 @@
         <div class="flex items-start w-full justify-between">
 
             <h1 class="text-2xl font-bold">Subscriptions</h1>
-            @if (!$isActive)
-                <button class="primary-button disabled:outline-button subscribe-button" @if ($isActive) disabled @endif type="button" data-modal-target="sub-popup-modal" data-modal-toggle="sub-popup-modal">
-                    Subscribe
-                </button>
-            @endif
+            <button class="primary-button disabled:outline-button subscribe-button" @if($isActive) disabled @endif type="button" data-modal-target="sub-popup-modal" data-modal-toggle="sub-popup-modal">
+                Subscribe
+            </button>
         </div>
 
         <div class="flex flex-col gap-2">
@@ -84,9 +82,9 @@
                                     </div>
                                 </td>
                                 <td class="py-2">
-                                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                        class="primary-button subscribe-button" type="button"
-                                        data-id="{{ json_encode($sub) }}"
+                                    <button data-modal-target="qr-popup-modal" data-modal-toggle="qr-popup-modal"
+                                        class="primary-button qr-button" type="button"
+                                        data-user="{{ json_encode($sub) }}"
                                         @if(!$sub->qr_code) disabled @endif
                                         >
                                         View QR
@@ -114,31 +112,30 @@
     </div>
     </div>
 
-    {{-- QR MODAL --}}
-        <div id="popup-modal" tabindex="-1"
+            {{-- QR MODAL --}}
+            <div id="qr-popup-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
             @isset($sub)
             <div
                 class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
-
-                <div class="flex justify-center "> <img src="{{ asset($sub->qr_code ?? 'No QR Code') }}" alt=""> </div>
-                
-
+                <div class="flex justify-center ">
+                    <img id="qr-image" src="" alt="">
+                </div>
                 <div class="flex flex-col gap-5">
                     <div class="self-end flex gap-2">
-                        <button type="button" class="outline-button" data-modal-hide="popup-modal">
+                        <button type="button" class="outline-button" data-modal-hide="qr-popup-modal">
                             Close
                         </button>
 
-                        <a href="{{ asset($sub->qr_code) ?? 'javascript:void(0);' }}" download="qr_code.png" class="primary-button">
-                            Download</a>
+                        <a id="qr-download-link" href="" download="qr_code.png" class="primary-button" disabled>
+                            Download
+                        </a>
                     </div>
                 </div>
-                @endisset
             </div>
-        </div>
-
+            @endisset
+            </div>
 
 
         {{-- SUBSCRIBE MODAL --}}
@@ -186,6 +183,7 @@
                             <select id="mode_of_payment" name="mode_of_payment" class="form-input">
                                 <option value="" selected disabled>Select mode of payment</option>
                                 @foreach ($paymentModes as $paymentMode)
+                                    @if($paymentMode->name == 'Cash') @continue @endif
                                     <option value="{{$paymentMode->name}}">{{$paymentMode->name}}</option>  
                                 @endforeach
                             </select>
@@ -209,4 +207,26 @@
 
             </div>
         </div>
+
+        <script>
+            const viewQRButtons = document.querySelectorAll('.qr-button');
+    
+            viewQRButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const user = JSON.parse(button.dataset.user);
+                    const qrImage = document.querySelector('#qr-image');
+                    const qrDownloadLink = document.querySelector('#qr-download-link');
+    
+                    if (user.qr_code) {
+                        qrImage.src = user.qr_code;
+                        qrDownloadLink.href = user.qr_code;
+                        qrDownloadLink.removeAttribute('disabled');
+                    } else {
+                        qrImage.src = 'No QR Code';
+                        qrDownloadLink.href = 'javascript:void(0);';
+                        qrDownloadLink.setAttribute('disabled', 'disabled');
+                    }
+                });
+            });
+        </script>
     @endsection

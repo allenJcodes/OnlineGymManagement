@@ -16,7 +16,6 @@ use Carbon\Carbon;
 
 class MembershipController extends Controller
 {
-    //
     public function index()
     {
         $users = User::search()->where('user_role', 3)->with(['subscriptions' => function($q) {
