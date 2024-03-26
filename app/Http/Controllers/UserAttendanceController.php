@@ -50,7 +50,7 @@ class UserAttendanceController extends Controller
             ]);
         }
 
-        if ($user->active_subscription->status != 2) {
+        if ($user->active_subscription->status != 'Active') {
             return redirect()->back()->with('toast', [
                 'status' => 'error',
                 'message' => "$user->full_name's subscription has expired."

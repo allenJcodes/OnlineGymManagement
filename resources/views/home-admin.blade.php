@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col pt-16 gap-2 text-background">
+    <div class="flex flex-col pt-24 sm:pt-16 gap-2 text-background">
         @if (Auth::user()->user_role == '1')
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
 
@@ -88,7 +88,7 @@
                                     <td class="py-2">{{ $subscriber->created_at->format('F d, Y') }}</td>
                                     <td class="py-2">{{ $subscriber->user->full_name }}</td>
                                     <td class="py-2">{{ $subscriber->subscriptionTypes->name }}</td>
-                                    <td class="py-2 pl-4">
+                                    <td class="py-2">
                                         @if ($subscriber->status == 'Pending')
                                             <div class="w-fit py-1 px-3 text-sm bg-orange-100 ring-1 ring-orange-500 text-orange-500 rounded-full">{{$subscriber->status}}</div>
                                         @elseif (($subscriber->end_date < now()->format('Y-m-d')) | ($subscriber->status == 'Subscription Ended') || $subscriber->status == 'Cancelled' || $subscriber->status == 'Cancelled')
