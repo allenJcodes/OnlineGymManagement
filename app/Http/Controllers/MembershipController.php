@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Membership\MembershipStoreRequest;
+use App\Models\Membership;
 use App\Models\Notification;
 use App\Models\PaymentMode;
 use App\Models\Payments;
@@ -16,6 +17,11 @@ use Carbon\Carbon;
 
 class MembershipController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Membership::class, 'membership');
+    }
+
     public function index()
     {
         $users = User::search()->where('user_role', 3)->with(['subscriptions' => function($q) {

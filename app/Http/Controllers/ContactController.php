@@ -9,6 +9,10 @@ use App\Models\ContactDetailType;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(ContactDetail::class, 'content');
+    }
     /**
      * Display a listing of the resource.
      *

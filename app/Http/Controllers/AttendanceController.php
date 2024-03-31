@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Attendance::class, 'attendance');
+    }
+
     public function index()
     {
         $attendances = Attendance::with(['schedule', 'userAttendances', 'schedule.instructor'])->get();

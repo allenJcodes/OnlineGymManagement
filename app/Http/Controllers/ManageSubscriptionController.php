@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ManageSubscription\ManageSubscriptionStoreRequest;
 use App\Http\Requests\ManageSubscription\ManageSubscriptionUpdateRequest;
+use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use App\Models\SubscriptionTypeInclusion;
 use Illuminate\Http\Request;
 
 class ManageSubscriptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subscription::class, 'subscription');    
+    }
     /**
      * Display a listing of the resource.
      *

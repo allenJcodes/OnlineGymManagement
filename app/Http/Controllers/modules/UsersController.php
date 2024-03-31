@@ -12,6 +12,11 @@ use App\Http\Requests\Users\UserUpdateRequest;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     public function index()
     {
         $users = User::search()->with('role')->paginate(10);

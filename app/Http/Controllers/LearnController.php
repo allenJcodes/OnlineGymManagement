@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class LearnController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(LearnContent::class, 'content');
+    }
     /**
      * Display a listing of the resource.
      *

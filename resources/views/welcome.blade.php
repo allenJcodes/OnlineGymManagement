@@ -158,7 +158,7 @@
                         type="{{$membershipPricing->name}}" 
                         price="{{$membershipPricing->price}}" 
                         :inclusions="$membershipPricing->inclusions" 
-                        :bestOffer="($index == count($membershipPricings)-1)"
+                        :bestOffer="$membershipPricing->best_option"
                     />
                     
                 @endforeach

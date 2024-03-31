@@ -11,6 +11,11 @@ use App\Services\MembershipService;
 
 class PaymentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Payments::class, 'payments');
+    }
+    
     public function index()
     {
         $payments = Payments::search()->with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])

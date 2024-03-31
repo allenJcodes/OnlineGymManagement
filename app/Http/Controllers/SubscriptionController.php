@@ -12,6 +12,11 @@ use App\Models\PaymentMode;
 
 class SubscriptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subscription::class, 'subscription');    
+    }
+
     public function index()
     {
         $subs = Subscription::search()->where('user_id', auth()->user()->id)->with('subscriptionTypes')->orderBy('subscriptions.created_at', 'desc')->paginate(10);

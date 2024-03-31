@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactDetail;
+use App\Models\FAQ;
+use App\Models\GymSession;
+use App\Models\LearnContent;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource([GymSession::class, LearnContent::class, FAQ::class, ContactDetail::class], 'content');
+    }
     /**
      * Display a listing of the resource.
      *

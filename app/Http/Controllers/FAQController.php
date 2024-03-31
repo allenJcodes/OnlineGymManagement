@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class FAQController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(FAQ::class, 'content');
+    }
     /**
      * Display a listing of the resource.
      *

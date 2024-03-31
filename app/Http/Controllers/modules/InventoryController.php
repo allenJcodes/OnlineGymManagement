@@ -12,6 +12,11 @@ use App\Http\Requests\Inventory\InventoryUpdateRequest;
 
 class InventoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Inventory::class, 'inventory');
+    }
+
     public function index()
     {
         $inventories = Inventory::search()->with('equipment')->paginate(2);

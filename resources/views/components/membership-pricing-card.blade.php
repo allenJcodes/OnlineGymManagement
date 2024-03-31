@@ -1,5 +1,5 @@
-<div @class(['flex flex-col gap-5 divide-off-white/40 bg-[#1B1F23] w-full rounded-lg text-off-white p-5 relative', 'bg-accent shadow-2xl shadow-accent/20' => $bestOffer])>
-    @if ($bestOffer)
+<div @class(['flex flex-col gap-5 divide-off-white/40 bg-[#1B1F23] w-full rounded-lg text-off-white p-5 relative', 'bg-accent shadow-2xl shadow-accent/20' => $bestOffer == 1])>
+    @if ($bestOffer == 1)
         <p class="bg-off-white/90 flex text-background py-2 px-4 absolute -right-[3em] -top-[1em] rounded-md font-bold">
             Best Offer!
         </p>

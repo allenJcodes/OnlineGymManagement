@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class InstructorController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Instructor::class, 'instructor');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class SchedulingController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Schedules::class, 'schedules');
+    }
     /**
      * Display a listing of the resource.
      *

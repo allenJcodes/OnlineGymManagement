@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class GymSessionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(GymSession::class, 'content');
+    }
     /**
      * Display a listing of the resource.
      *

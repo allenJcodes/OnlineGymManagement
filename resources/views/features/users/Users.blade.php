@@ -31,9 +31,6 @@
                                 Email
                             </td>
                             <td class="py-2">
-                                Subscription
-                            </td>
-                            <td class="py-2">
                                 Role
                             </td>
                             <td class="py-2">
@@ -49,9 +46,6 @@
                                 </td>
                                 <td class="py-2">
                                     {{ $user->email }}
-                                </td>
-                                <td class="py-2">
-                                    Sample
                                 </td>
                                 <td class="py-2">
                                     {{-- @if ($user->user_role == 1)
