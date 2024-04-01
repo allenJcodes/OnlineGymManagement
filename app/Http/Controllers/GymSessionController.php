@@ -11,7 +11,7 @@ class GymSessionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(GymSession::class, 'content');
+        $this->authorizeResource(GymSession::class, 'gym_session');
     }
     /**
      * Display a listing of the resource.
