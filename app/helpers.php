@@ -9,9 +9,8 @@ function checkPermission($user, $roleId) {
 }
 
 function checkAndCreatePublicDir($directory) {
-    dd(public_path('/'));
-    if(!is_dir($_SERVER['DOCUMENT_ROOT'] . $directory)) {
-        mkdir($_SERVER['DOCUMENT_ROOT'] . $directory);
+    if(!is_dir(public_path('/') . $directory)) {
+        mkdir(public_path('/') . $directory);
     }
 }
 
