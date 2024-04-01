@@ -15,11 +15,6 @@ class InstructorSeeder extends Seeder
     public function run()
     {
         Instructor::create([
-            'user_id' => 2,
-            'description' =>  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequuntur!"
-        ]);
-
-        Instructor::create([
             'user_id' => 3,
             'description' =>  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequuntur!"
         ]);
