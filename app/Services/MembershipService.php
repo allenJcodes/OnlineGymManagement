@@ -31,11 +31,11 @@ class MembershipService {
         ->validateResult(false)
         ->build();
 
-        $filePath = '/images/qr/' . time() . '_' . request()->user_id . "_qr_code.png";
+        $filePath = 'images/qr/' . time() . '_' . request()->user_id . "_qr_code.png";
 
         checkAndCreatePublicDir('images/qr/');
 
-        $result->saveToFile($_SERVER['DOCUMENT_ROOT'] . $filePath);
+        $result->saveToFile(public_path('/') . $filePath);
 
         return $filePath;
     }
