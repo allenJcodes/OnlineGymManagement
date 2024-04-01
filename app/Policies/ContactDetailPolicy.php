@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\ContactDetail;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Symfony\Component\Console\Helper\Helper;
 
-class UserPolicy
+class ContactDetailPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ContactDetail  $contactDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, ContactDetail $contactDetail)
     {
         return $user->user_role == 1;
     }
@@ -48,10 +48,10 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ContactDetail  $contactDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, ContactDetail $contactDetail)
     {
         return $user->user_role == 1;
     }
@@ -60,10 +60,10 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ContactDetail  $contactDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, ContactDetail $contactDetail)
     {
         return $user->user_role == 1;
     }
@@ -72,10 +72,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ContactDetail  $contactDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, ContactDetail $contactDetail)
     {
         return $user->user_role == 1;
     }
@@ -84,10 +84,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\ContactDetail  $contactDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, ContactDetail $contactDetail)
     {
         return $user->user_role == 1;
     }

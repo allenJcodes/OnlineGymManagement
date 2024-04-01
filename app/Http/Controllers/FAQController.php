@@ -10,7 +10,7 @@ class FAQController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(FAQ::class, 'content');
+        $this->authorizeResource(FAQ::class, 'faq');
     }
     /**
      * Display a listing of the resource.

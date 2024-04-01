@@ -18,11 +18,8 @@ class SubscriptionPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->user_role == 1 || $user->user_role == 3) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
+        return ($user->user_role == 1 || $user->user_role == 3);
     }
 
     /**
@@ -34,11 +31,7 @@ class SubscriptionPolicy
      */
     public function view(User $user, Subscription $subscription)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -49,11 +42,7 @@ class SubscriptionPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -65,11 +54,7 @@ class SubscriptionPolicy
      */
     public function update(User $user, Subscription $subscription)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -81,11 +66,7 @@ class SubscriptionPolicy
      */
     public function delete(User $user, Subscription $subscription)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -97,11 +78,7 @@ class SubscriptionPolicy
      */
     public function restore(User $user, Subscription $subscription)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -113,10 +90,6 @@ class SubscriptionPolicy
      */
     public function forceDelete(User $user, Subscription $subscription)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 }

@@ -18,11 +18,7 @@ class MembershipPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -34,11 +30,7 @@ class MembershipPolicy
      */
     public function view(User $user, Membership $membership)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -49,11 +41,7 @@ class MembershipPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -65,11 +53,7 @@ class MembershipPolicy
      */
     public function update(User $user, Membership $membership)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -81,11 +65,7 @@ class MembershipPolicy
      */
     public function delete(User $user, Membership $membership)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -97,11 +77,7 @@ class MembershipPolicy
      */
     public function restore(User $user, Membership $membership)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -113,10 +89,6 @@ class MembershipPolicy
      */
     public function forceDelete(User $user, Membership $membership)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 }

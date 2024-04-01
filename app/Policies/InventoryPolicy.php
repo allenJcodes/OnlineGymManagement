@@ -18,11 +18,7 @@ class InventoryPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -34,11 +30,7 @@ class InventoryPolicy
      */
     public function view(User $user, Inventory $inventory)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -49,11 +41,7 @@ class InventoryPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -65,11 +53,7 @@ class InventoryPolicy
      */
     public function update(User $user, Inventory $inventory)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -81,11 +65,7 @@ class InventoryPolicy
      */
     public function delete(User $user, Inventory $inventory)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -97,11 +77,7 @@ class InventoryPolicy
      */
     public function restore(User $user, Inventory $inventory)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -113,10 +89,6 @@ class InventoryPolicy
      */
     public function forceDelete(User $user, Inventory $inventory)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 }
