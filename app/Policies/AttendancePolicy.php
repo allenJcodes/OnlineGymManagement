@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Attendance;
 use App\Models\Payments;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -28,7 +29,7 @@ class AttendancePolicy
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Payments $payments)
+    public function view(User $user, Attendance $attendance)
     {
         return $user->user_role == 1;
     }
@@ -51,7 +52,7 @@ class AttendancePolicy
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Payments $payments)
+    public function update(User $user, Attendance $attendance)
     {
         return $user->user_role == 1;
     }
@@ -63,7 +64,7 @@ class AttendancePolicy
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Payments $payments)
+    public function delete(User $user, Attendance $attendance)
     {
         return $user->user_role == 1;
     }
@@ -75,7 +76,7 @@ class AttendancePolicy
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Payments $payments)
+    public function restore(User $user, Attendance $attendance)
     {
         return $user->user_role == 1;
     }
@@ -87,7 +88,7 @@ class AttendancePolicy
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Payments $payments)
+    public function forceDelete(User $user, Attendance $attendance)
     {
         return $user->user_role == 1;
     }
