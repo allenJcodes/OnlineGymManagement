@@ -19,7 +19,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::search()->with('role')->paginate(10);
+        $users = User::search()->with('role')->where('user_role', '!=', 2)->paginate(10);
         return view('features.users.Users', compact('users'));
     }
 
