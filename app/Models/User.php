@@ -75,7 +75,8 @@ class User extends Authenticatable
     }
 
     public function getActiveSubscriptionAttribute() {
-        return $this->subscriptions[0] ?? null;
+        $subscriptions = Subscription::where('user_id', $this->id)->latest()->get();
+        return $subscriptions[0] ?? null;
     }
 
     public function notifications() : BelongsToMany {

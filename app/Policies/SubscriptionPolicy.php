@@ -42,7 +42,7 @@ class SubscriptionPolicy
      */
     public function create(User $user)
     {
-        return $user->user_role == 1;
+        return ($user->user_role == 1 || $user->user_role == 3);
     }
 
     /**

@@ -47,8 +47,9 @@
                                         <p class="font-normal text-gray-500">{{ $user->email }}</p>
                                     </div>
                                 </td>
+                        
                                 <td class="py-2">
-                                    @if (!$user->active_subscription)
+                                    @if (!$user->active_subscription || !$user->active_subscription || ($user->active_subscription->end_date < now()->format('Y-m-d')) || ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
                                         --
                                     @else
                                         {{ $user->active_subscription->start_date->format('Y-m-d') }}
@@ -56,7 +57,7 @@
 
                                 </td>
                                 <td class="py-2">
-                                    @if (!$user->active_subscription)
+                                    @if (!$user->active_subscription || !$user->active_subscription || ($user->active_subscription->end_date < now()->format('Y-m-d')) || ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
                                         --
                                     @else
                                         {{ $user->active_subscription->end_date->format('Y-m-d') }}
@@ -64,15 +65,21 @@
                                 </td>
                                 <td class="py-2">
                                     <div class="flex items-center">
-                                        @if (!$user->active_subscription)
+                                        @if(!$user->active_subscription)
+                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
                                             Unsubscribed
+                                        @elseif ($user->active_subscription->status == 'Pending')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
+                                            {{$user->active_subscription->status}}
+                                        @elseif (($user->active_subscription->end_date < now()->format('Y-m-d')) | ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+                                            {{$user->active_subscription->status}}
+                                        @elseif ($user->active_subscription->endingSoon())
+                                            <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
+                                            Subscription ending soon
                                         @else
                                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                                            @if ($user->active_subscription->end_date == now()->format('Y-m-d'))
-                                                Subscription Expired
-                                            @else
-                                                Subscribed
-                                            @endif
+                                            Subscribed
                                         @endif
                                     </div>
                                 </td>
@@ -85,7 +92,9 @@
                                     </button>
                                 </td>
                                 <td>
-                                    @if (!$user->active_subscription)
+                                    @if ($user->active_subscription && $user->active_subscription->status == 'Pending')
+                                        <a class="primary-button" href="{{route('payments.index')}}">Verify Payment</a>
+                                    @elseif (!$user->active_subscription || ($user->active_subscription->end_date < now()->format('Y-m-d')) || ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
                                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                                             class="primary-button subscribe-button" type="button"
                                             data-user="{{ json_encode($user) }}">
