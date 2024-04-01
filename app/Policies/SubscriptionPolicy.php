@@ -49,11 +49,7 @@ class SubscriptionPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return ($user->user_role == 1 || $user->user_role == 3);
     }
 
     /**
