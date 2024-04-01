@@ -18,11 +18,7 @@ class PaymentsPolicy
      */
     public function viewAny(User $user)
     {
-        if ($user->user_role == 1 || $user->user_role == 3) {
-            return true;
-        }
-    
-        return false;
+        return ($user->user_role == 1 || $user->user_role == 3);
     }
 
     /**
@@ -34,11 +30,7 @@ class PaymentsPolicy
      */
     public function view(User $user, Payments $payments)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -49,11 +41,7 @@ class PaymentsPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -65,11 +53,7 @@ class PaymentsPolicy
      */
     public function update(User $user, Payments $payments)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -81,11 +65,7 @@ class PaymentsPolicy
      */
     public function delete(User $user, Payments $payments)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -97,11 +77,7 @@ class PaymentsPolicy
      */
     public function restore(User $user, Payments $payments)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -113,10 +89,6 @@ class PaymentsPolicy
      */
     public function forceDelete(User $user, Payments $payments)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 }

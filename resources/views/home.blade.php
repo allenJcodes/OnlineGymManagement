@@ -87,7 +87,7 @@
                             @endif
                         </div>
                     @endif
-
+                    @if(auth()->user()->user_role == 3)
                     <div class="card">
                         <h2>Recent Payments</h2>
                         <hr>
@@ -119,7 +119,7 @@
                         </table>
                         <a class="outline-button mt-auto ml-auto text-xs" href="{{route('payments.index')}}">See all payments ></a>
                     </div>
-
+                    @endif
                     <div class="card">
                         <h2>Equipments Status</h2>
                         <hr>

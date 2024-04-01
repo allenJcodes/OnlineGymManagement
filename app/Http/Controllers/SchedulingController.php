@@ -60,7 +60,7 @@ class SchedulingController extends Controller
         if(count($checkConflicts)) {
             return back()->with('toast', [
                 'status' => 'error',
-                'message' => 'Adding of schedule failed. Please check for conflicts.',
+                'message' => 'Adding of schedule failed. Please check for schedule conflicts.',
             ]);
         }
         

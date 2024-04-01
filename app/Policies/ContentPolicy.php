@@ -16,12 +16,9 @@ class ContentPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
-    {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+    {   
+        dd($user->user_role);
+        return $user->user_role == 1;
     }
 
     /**
@@ -33,11 +30,8 @@ class ContentPolicy
      */
     public function view(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        dd($user->user_role);
+        return $user->user_role == 1;
     }
 
     /**
@@ -48,11 +42,7 @@ class ContentPolicy
      */
     public function create(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -64,11 +54,7 @@ class ContentPolicy
      */
     public function update(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -80,11 +66,7 @@ class ContentPolicy
      */
     public function delete(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -96,11 +78,7 @@ class ContentPolicy
      */
     public function restore(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 
     /**
@@ -112,10 +90,6 @@ class ContentPolicy
      */
     public function forceDelete(User $user)
     {
-        if ($user->user_role == 1) {
-            return true;
-        }
-    
-        return false;
+        return $user->user_role == 1;
     }
 }
