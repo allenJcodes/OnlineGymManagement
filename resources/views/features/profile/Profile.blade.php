@@ -55,7 +55,7 @@
                 @endif
                 
                 <div class="self-end flex gap-2">
-                    <a href="#" class="outline-button">
+                    <a href={{ route('home') }} class="outline-button">
                         Cancel
                     </a>
                     

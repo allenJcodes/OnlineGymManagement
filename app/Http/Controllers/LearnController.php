@@ -10,7 +10,7 @@ class LearnController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(LearnContent::class, 'learnContent');
+        $this->authorizeResource(LearnContent::class, 'learn');
     }
     /**
      * Display a listing of the resource.
