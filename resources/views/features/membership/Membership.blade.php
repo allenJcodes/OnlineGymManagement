@@ -123,13 +123,13 @@
 
                     </tbody>
                 </table>
-                @if ($users->hasPages())
-                    <div class="card">
-                        {{ $users->links() }}
-                    </div>
-                @endif
             </div>
         </div>
+        @if ($users->hasPages())
+            <div class="card">
+                {{ $users->links() }}
+            </div>
+        @endif
     </div>
 
     <div id="popup-modal" tabindex="-1"

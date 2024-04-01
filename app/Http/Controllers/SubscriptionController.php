@@ -48,7 +48,8 @@ class SubscriptionController extends Controller
         $adminUsers = User::where('user_role', 1)->get()->map(fn($val) => $val->id)->toArray();
 
         Notification::create([
-            'content' => '(TO VERIFY) ' . auth()->user()->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price
+            'content' => '(TO VERIFY) ' . auth()->user()->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price,
+            'type' => 'Pending Subscription'
         ])->users()->attach($adminUsers);
 
         return redirect()->route('subscription.index')->with('toast', [

@@ -50,7 +50,8 @@ class NotifyCustomer extends Command
             
             if(Carbon::parse($user->active_subscription->end_date)->subWeek() == Carbon::parse(now()->format('Y-m-d'))) {
                 Notification::create([
-                    'content' => 'Your subscription will end next week.'
+                    'content' => 'Your subscription will end next week.',
+                    'type' => 'Reminder'
                 ])->users()->attach($user->id);
             }
         }

@@ -16,7 +16,7 @@ class UserNotification extends Component
     
     public function __construct()
     {
-        $this->userNotifications = Notifications::with('notification')->where('user_id', auth()->user()->id)->get();
+        $this->userNotifications = Notifications::with('notification')->where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
     }
 
     /**
