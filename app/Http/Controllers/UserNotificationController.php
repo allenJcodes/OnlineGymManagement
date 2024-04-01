@@ -82,4 +82,12 @@ class UserNotificationController extends Controller
     {
         //
     }
+
+    public function clearNotifications() {
+        UserNotification::where('user_id', auth()->user()->id)
+        ->where('deleted_at', null)
+        ->delete();
+
+        return back();
+    }
 }

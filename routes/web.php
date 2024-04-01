@@ -24,6 +24,7 @@ use App\Http\Controllers\modules\EquipmentController;
 use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\UserAttendanceController;
+use App\Http\Controllers\UserNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('attendance/{id}', [AttendanceController::class, 'viewAttendance']);
     // Route::get('attendance/attended/{id}/{attendanceId}', [AttendanceController::class, 'attended']);
     // Route::get('usernotification/{id}', [AttendanceController::class, 'userNotification']);
+    Route::get('/user_notifications/clear', [UserNotificationController::class, 'clearNotifications'])->name('clearNotifications');
 
     // CONTENTS
     Route::prefix('contents')->name('contents.')->group(function () {

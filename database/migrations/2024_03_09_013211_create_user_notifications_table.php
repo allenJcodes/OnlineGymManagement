@@ -17,7 +17,7 @@ class CreateUserNotificationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('notification_id')->nullable()->constrained('notifications')->nullOnDelete();
-            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

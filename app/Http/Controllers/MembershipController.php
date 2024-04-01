@@ -60,7 +60,8 @@ class MembershipController extends Controller
         $subscribedUser = User::where('id', $request->user_id)->first();
 
         Notification::create([
-            'content' => $subscribedUser->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price
+            'content' => $subscribedUser->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price,
+            'type' => 'New Subscription'
         ])->users()->attach($adminUsers);
 
         return redirect()->route('membership.index')->with('toast', [
