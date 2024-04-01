@@ -106,7 +106,7 @@
                                         <td class="py-2">{{$recentPayment->created_at->format('F d, Y')}}</td>
                                         <td class="py-2">{{ucfirst($recentPayment->mode_of_payment)}}</td>
                                         <td class="py-2">P {{$recentPayment->amount_paid}}</td>                                        
-                                        <td class="py-2">P {{$recentPayment->status}}</td>                                        
+                                        <td class="py-2">{{$recentPayment->status}}</td>                                        
                                     </tr>
                                 @empty
                                     <tr>
@@ -161,7 +161,7 @@
                                     <tr class="table-row">
                                         <td class="py-2">{{$schedule->created_at->format('F d, Y')}}</td>
                                         <td class="py-2">{{$schedule->class_name}}</td>
-                                        <td class="py-2">P {{$schedule->instructor->user->full_name}}</td>                                        
+                                        <td class="py-2">{{$schedule->instructor->user->full_name}}</td>                                        
                                     </tr>
                                 @empty
                                     <tr>
