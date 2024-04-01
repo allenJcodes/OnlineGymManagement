@@ -34,7 +34,7 @@ class Payments extends Model
         ->orWhere('payments.mode_of_payment', 'like', request()->search . '%')
         ->orWhere('payments.reference_number', 'like', request()->search . '%')
         ->select([
-            '*', 'payments.id as id', 'payments.status as status'
+            '*', 'payments.id as id', 'payments.status as status', 'payments.created_at as created_at'
         ]);
     }
 

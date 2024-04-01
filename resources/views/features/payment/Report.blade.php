@@ -43,7 +43,7 @@
                 @forelse ($payments as $payment)
                 <tr class="table-row">
                     <td class="py-2">
-                        {{ $payment->created_at->format('Y-m-d H:i A') }}
+                        {{ $payment->created_at->format('Y-m-d h:i A') }}
                     </td>
                     <td class="py-2">
                         {{ $payment->subscriptions->user->full_name }}
