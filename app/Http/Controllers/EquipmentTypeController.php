@@ -8,6 +8,10 @@ use App\Http\Requests\EquipmentType\EquipmentTypeUpdateRequest;
 
 class EquipmentTypeController extends Controller
 {
+    public function __construct() {
+       $this->authorizeResource(EquipmentType::class, 'equipment_type'); 
+    }
+
     public function index()
     {
         $model = EquipmentType::search()->paginate(10);

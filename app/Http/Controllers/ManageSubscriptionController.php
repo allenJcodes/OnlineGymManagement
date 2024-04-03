@@ -13,7 +13,7 @@ class ManageSubscriptionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Subscription::class, 'subscription');    
+        $this->authorizeResource(SubscriptionType::class, 'subscription');    
     }
     /**
      * Display a listing of the resource.
@@ -77,7 +77,7 @@ class ManageSubscriptionController extends Controller
      */
     public function edit(SubscriptionType $subscription)
     {
-        $_subscription = SubscriptionType::find($subscription->id)->with('inclusions')->first();
+        $subscription = SubscriptionType::find($subscription->id)->with('inclusions')->first();
         return view('features.manage_subscriptions.EditSubscription', compact('subscription'));
     }
 
