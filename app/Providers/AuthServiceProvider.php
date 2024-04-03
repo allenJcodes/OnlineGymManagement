@@ -13,6 +13,7 @@ use App\Models\Membership;
 use App\Models\Payments;
 use App\Models\Schedules;
 use App\Models\Subscription;
+use App\Models\SubscriptionType;
 use App\Models\User;
 use App\Policies\AttendancePolicy;
 use App\Policies\ContactDetailPolicy;
@@ -25,6 +26,7 @@ use App\Policies\MembershipPolicy;
 use App\Policies\PaymentsPolicy;
 use App\Policies\SchedulesPolicy;
 use App\Policies\SubscriptionPolicy;
+use App\Policies\SubscriptionTypePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -42,6 +44,7 @@ class AuthServiceProvider extends ServiceProvider
         Membership::class => MembershipPolicy::class,
         Instructor::class => InstructorPolicy::class,
         Subscription::class => SubscriptionPolicy::class,
+        SubscriptionType::class => SubscriptionTypePolicy::class,
         Inventory::class => InventoryPolicy::class,
         Schedules::class => SchedulesPolicy::class,
         Payments::class => PaymentsPolicy::class,

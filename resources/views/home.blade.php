@@ -50,41 +50,43 @@
                             
                             <hr>
 
-                            @if ($user->active_subscription->status == 'Active')
-                                @php
-                                    $oneMonthFromNow = now()->addMonth();
-                                    $dueDate = $oneMonthFromNow > $user->active_subscription->end_date ? $user->active_subscription->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
-                                @endphp
+                            @isset($user->active_subscription->status)
+                                @if ($user->active_subscription->status == 'Active')
+                                    @php
+                                        $oneMonthFromNow = now()->addMonth();
+                                        $dueDate = $oneMonthFromNow > $user->active_subscription->end_date ? $user->active_subscription->end_date->format('F d, Y') : $oneMonthFromNow->format('F d, Y');
+                                    @endphp
 
-                                <div class="flex gap-3">
-                                    <div class="flex flex-1 flex-col">
-                                        <div class="flex flex-col gap-3">
-                                            <div class="form-field-container gap-0">
-                                                <p class="form-label">Type</p>
-                                                <p class="font-medium">{{$user->active_subscription->subscriptionTypes->name}}</p>
+                                    <div class="flex gap-3">
+                                        <div class="flex flex-1 flex-col">
+                                            <div class="flex flex-col gap-3">
+                                                <div class="form-field-container gap-0">
+                                                    <p class="form-label">Type</p>
+                                                    <p class="font-medium">{{$user->active_subscription->subscriptionTypes->name}}</p>
+                                                </div>
+                                                <div class="form-field-container gap-0">
+                                                    <p class="form-label">Amount</p>
+                                                    <p class="font-medium">{{$user->active_subscription->subscriptionTypes->price}}</p>
+                                                </div>
                                             </div>
+                                        
                                             <div class="form-field-container gap-0">
-                                                <p class="form-label">Amount</p>
-                                                <p class="font-medium">{{$user->active_subscription->subscriptionTypes->price}}</p>
+                                                <p class="form-label">Next due date</p>
+                                                <p class="font-medium">{{$dueDate}}</p>
                                             </div>
                                         </div>
-                                    
-                                        <div class="form-field-container gap-0">
-                                            <p class="form-label">Next due date</p>
-                                            <p class="font-medium">{{$dueDate}}</p>
+
+                                        <div class="flex flex-col">
+                                            <p class="form-label">Your QR Code</p>
+                                            <img class="h-[10rem]" src="{{ asset($user->active_subscription->qr_code ?? 'No QR Code') }}" alt="">
+                                            <a class="primary-button" target="_blank" href="{{asset($user->active_subscription->qr_code)}}" download="{{$user->full_name}}_QRCODE">Download QR Code</a>
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col">
-                                        <p class="form-label">Your QR Code</p>
-                                        <img class="h-[10rem]" src="{{ asset($user->active_subscription->qr_code ?? 'No QR Code') }}" alt="">
-                                        <a class="primary-button" target="_blank" href="{{asset($user->active_subscription->qr_code)}}" download="{{$user->full_name}}_QRCODE">Download QR Code</a>
-                                    </div>
-                                </div>
 
-
-                                <a class="outline-button mt-auto ml-auto text-xs" href="{{route('subscription.index')}}">See all subscriptions ></a>
-                            @endif
+                                    <a class="outline-button mt-auto ml-auto text-xs" href="{{route('subscription.index')}}">See all subscriptions ></a>
+                                @endif
+                            @endisset
                         </div>
                     @endif
                     @if(auth()->user()->user_role == 3)

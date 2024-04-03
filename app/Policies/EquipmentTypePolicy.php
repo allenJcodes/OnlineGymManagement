@@ -2,13 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Schedules;
+use App\Models\EquipmentType;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SchedulesPolicy
+class EquipmentTypePolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,19 +18,19 @@ class SchedulesPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->user_role == 1 || $user->user_role == 2 || $user->user_role == 3);
+        return $user->user_role == 1;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Schedules  $schedules
+     * @param  \App\Models\EquipmentType  $equipmentType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Schedules $schedules)
+    public function view(User $user, EquipmentType $equipmentType)
     {
-        // return $user->user_role == 1;
+        return $user->user_role == 1;
     }
 
     /**
@@ -40,57 +41,55 @@ class SchedulesPolicy
      */
     public function create(User $user)
     {
-        // return ($user->user_role == 1 || $user->user_role == 2);
+        return $user->user_role == 1;
     }
-
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Schedules  $schedules
+     * @param  \App\Models\EquipmentType  $equipmentType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Schedules $schedules)
+    public function update(User $user, EquipmentType $equipmentType)
     {
-        // dd($user->user_role);
-        // return ($user->user_role == 1 || $user->user_role == 2);
+        // dd($user);
+        return $user->user_role == 1;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Schedules  $schedules
+     * @param  \App\Models\EquipmentType  $equipmentType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Schedules $schedules)
+    public function delete(User $user, EquipmentType $equipmentType)
     {
-        // return $user->user_role == 1;
+        return $user->user_role == 1;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Schedules  $schedules
+     * @param  \App\Models\EquipmentType  $equipmentType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Schedules $schedules)
+    public function restore(User $user, EquipmentType $equipmentType)
     {
-        // return $user->user_role == 1;
+        return $user->user_role == 1;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Schedules  $schedules
+     * @param  \App\Models\EquipmentType  $equipmentType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Schedules $schedules)
+    public function forceDelete(User $user, EquipmentType $equipmentType)
     {
-        
-        // return $user->user_role == 1;
+        return $user->user_role == 1;
     }
 }

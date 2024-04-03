@@ -13,7 +13,7 @@ class SchedulingController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Schedules::class, 'schedules');
+        // $this->authorizeResource(Schedules::class, 'schedules');
     }
     /**
      * Display a listing of the resource.
