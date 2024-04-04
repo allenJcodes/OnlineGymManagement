@@ -6,6 +6,7 @@
 import "flowbite";
 import "react-toastify/dist/ReactToastify.css";
 import "boxicons";
+import QrScanner from 'qr-scanner';
 
 require("./bootstrap");
 /**
@@ -23,3 +24,5 @@ require("./Payments/Payments");
 require("./Attendance/Attendance");
 require("./components/CustomQRCode");
 require("./Subscription/Inclusions");
+
+export { QrScanner };

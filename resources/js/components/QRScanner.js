@@ -1,4 +1,4 @@
-import QrScanner from 'qr-scanner';
+import { QrScanner } from '../app';
 import { Modal } from 'flowbite';
 
 const scanQrButton = document.querySelector('#scan-qr-button');
