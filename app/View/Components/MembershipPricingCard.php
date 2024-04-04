@@ -14,13 +14,15 @@ class MembershipPricingCard extends Component
 
     public $type;
     public $price;
+    public $description;
     public $inclusions;
     public $bestOffer;
 
-    public function __construct($type = 'Type', $price = '0.00', $inclusions = '', $bestOffer = false)
+    public function __construct($type = 'Type', $price = '0.00', $description='', $inclusions = '', $bestOffer = false)
     {
         $this->type = $type;
         $this->price = $price;
+        $this->description = $description;
         $this->inclusions = $inclusions;
         $this->bestOffer = $bestOffer;
     }

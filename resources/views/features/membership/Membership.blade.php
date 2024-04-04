@@ -132,14 +132,13 @@
         @endif
     </div>
 
-    <div id="popup-modal" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
 
-        <div
-            class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5'>
+        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-[30vw] min-h-[30vh] max-h-[90vh] max-w-[60vw] gap-5 overflow-x-hidden overflow-y-auto'>
 
-            <div class="flex justify-center "><img src="{{ asset('images/logo.png') }}" alt="" width="100"
-                    height="100"></div>
+            <div class="flex justify-center ">
+                <img src="{{ asset('images/logo.png') }}" alt="" width="100" height="100">
+            </div>
 
             <div class="flex flex-col gap-5">
                 <h2 class="text-lg font-bold">New Subscription</h2>
@@ -158,11 +157,13 @@
                         <p class="form-label">Choose Subscription</p>
                         <div class="grid w-full gap-6 md:grid-cols-2">
                             @foreach ($subscriptions as $key => $subscription)
+
                                 <label for="membership{{ $key }}"
                                     class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
                                     <input type="radio" id="membership{{ $key }}" name="subscription_type_id"
                                         value="{{ $subscription->id }}" class="hidden">
                                     <div class="flex flex-col">
+                                        <p class="text-xs text-gray-400">{{ $subscription->name }} Subscription</p>
                                         <p class="w-full text-base font-semibold">
                                             {{ $subscription->number_of_months }}
                                             Month{{ $subscription->number_of_months > 1 ? 's' : '' }}
@@ -171,6 +172,7 @@
                                         <p class="text-xs text-dark-gray-800">{{ $subscription->description }}</p>
                                     </div>
                                 </label>
+
                             @endforeach
                         </div>
                     </div>

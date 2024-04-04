@@ -10,6 +10,8 @@
         <h3 class="text-xl font-bold">P {{$price}}</h3>
     </div>
 
+    <p class="text-xs text-justify text-off-white/40">{{$description}}</p>
+
     <hr>
 
     <ul class="list-disc list-inside text-sm p-2">
