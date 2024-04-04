@@ -656,8 +656,14 @@ tbody .table-row:first-child{
   white-space: nowrap;
   border-width: 0;
 }
+.visible{
+  visibility: visible;
+}
 .collapse{
   visibility: collapse;
+}
+.static{
+  position: static;
 }
 .fixed{
   position: fixed;
@@ -858,6 +864,10 @@ tbody .table-row:first-child{
   width: 1.25rem;
   height: 1.25rem;
 }
+.size-1{
+  width: 0.25rem;
+  height: 0.25rem;
+}
 .h-10{
   height: 2.5rem;
 }
@@ -916,14 +926,20 @@ tbody .table-row:first-child{
 .max-h-0{
   max-height: 0px;
 }
-.max-h-\[45vh\]{
-  max-height: 45vh;
+.max-h-7{
+  max-height: 1.75rem;
+}
+.max-h-\[30vh\]{
+  max-height: 30vh;
 }
 .max-h-\[70vh\]{
   max-height: 70vh;
 }
 .max-h-\[90vh\]{
   max-height: 90vh;
+}
+.max-h-\[45vh\]{
+  max-height: 45vh;
 }
 .min-h-7{
   min-height: 1.75rem;
@@ -1001,6 +1017,9 @@ tbody .table-row:first-child{
 .\!min-w-\[8vw\]{
   min-width: 8vw !important;
 }
+.min-w-3{
+  min-width: 0.75rem;
+}
 .min-w-7{
   min-width: 1.75rem;
 }
@@ -1018,6 +1037,9 @@ tbody .table-row:first-child{
 }
 .max-w-0{
   max-width: 0px;
+}
+.max-w-7{
+  max-width: 1.75rem;
 }
 .max-w-\[20vw\]{
   max-width: 20vw;
@@ -1050,6 +1072,10 @@ tbody .table-row:first-child{
   --tw-translate-x: -100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+.rotate-180{
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -1080,6 +1106,9 @@ tbody .table-row:first-child{
 }
 .resize-y{
   resize: vertical;
+}
+.resize{
+  resize: both;
 }
 .list-inside{
   list-style-position: inside;
@@ -1141,9 +1170,6 @@ tbody .table-row:first-child{
 .gap-10{
   gap: 2.5rem;
 }
-.gap-16{
-  gap: 4rem;
-}
 .gap-2{
   gap: 0.5rem;
 }
@@ -1161,6 +1187,12 @@ tbody .table-row:first-child{
 }
 .gap-6{
   gap: 1.5rem;
+}
+.gap-8{
+  gap: 2rem;
+}
+.gap-16{
+  gap: 4rem;
 }
 .divide-y > :not([hidden]) ~ :not([hidden]){
   --tw-divide-y-reverse: 0;
@@ -1195,9 +1227,6 @@ tbody .table-row:first-child{
 }
 .justify-self-end{
   justify-self: end;
-}
-.\!overflow-auto{
-  overflow: auto !important;
 }
 .overflow-auto{
   overflow: auto;
@@ -1291,10 +1320,6 @@ tbody .table-row:first-child{
 .border-l-dashboard-accent-base{
   --tw-border-opacity: 1;
   border-left-color: rgb(255 111 97 / var(--tw-border-opacity));
-}
-.bg-\[\#1877F2\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(24 119 242 / var(--tw-bg-opacity));
 }
 .bg-\[\#1B1F23\]{
   --tw-bg-opacity: 1;
@@ -1411,6 +1436,10 @@ tbody .table-row:first-child{
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
+.bg-\[\#1877F2\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 119 242 / var(--tw-bg-opacity));
+}
 .bg-gradient-to-r{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -1425,9 +1454,6 @@ tbody .table-row:first-child{
 }
 .to-background\/90{
   --tw-gradient-to: rgb(33 37 41 / 0.9) var(--tw-gradient-to-position);
-}
-.fill-accent{
-  fill: #DC3545;
 }
 .fill-amber-500{
   fill: #f59e0b;
@@ -1447,14 +1473,8 @@ tbody .table-row:first-child{
 .fill-gray-500{
   fill: #6b7280;
 }
-.fill-gray-600{
-  fill: #4b5563;
-}
 .fill-green-600{
   fill: #16a34a;
-}
-.fill-off-white{
-  fill: #FAFAFA;
 }
 .fill-red-500{
   fill: #ef4444;
@@ -1464,6 +1484,15 @@ tbody .table-row:first-child{
 }
 .fill-white{
   fill: #fff;
+}
+.fill-accent{
+  fill: #DC3545;
+}
+.fill-gray-600{
+  fill: #4b5563;
+}
+.fill-off-white{
+  fill: #FAFAFA;
 }
 .object-contain{
   -o-object-fit: contain;
@@ -1479,9 +1508,6 @@ tbody .table-row:first-child{
 }
 .p-0{
   padding: 0px;
-}
-.p-0\.5{
-  padding: 0.125rem;
 }
 .p-1{
   padding: 0.25rem;
@@ -1500,6 +1526,9 @@ tbody .table-row:first-child{
 }
 .p-6{
   padding: 1.5rem;
+}
+.p-0\.5{
+  padding: 0.125rem;
 }
 .px-1{
   padding-left: 0.25rem;
@@ -1565,19 +1594,22 @@ tbody .table-row:first-child{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
-.py-6{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.py-6{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 .pb-0{
   padding-bottom: 0px;
 }
 .pb-10{
   padding-bottom: 2.5rem;
+}
+.pb-2{
+  padding-bottom: 0.5rem;
 }
 .pb-4{
   padding-bottom: 1rem;
@@ -1879,6 +1911,13 @@ tbody .table-row:first-child{
 .ring-red-600{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(220 38 38 / var(--tw-ring-opacity));
+}
+.invert{
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .backdrop-blur-sm{
   --tw-backdrop-blur: blur(4px);
@@ -2376,6 +2415,11 @@ textarea {
   .xl\:w-1\/3{
     width: 33.333333%;
   }
+
+  .xl\:px-64{
+    padding-left: 16rem;
+    padding-right: 16rem;
+  }
 }
 
 
@@ -2416,6 +2460,11 @@ textarea {
   .dark\:bg-gray-800{
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-900{
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
   }
 
   .dark\:bg-red-600{
