@@ -22,7 +22,7 @@
 
 <body class="font-red-hat-display bg-background">
 
-    <nav class="bg-background fixed w-full z-20 top-0 left-0 py-2 h-16 flex items-center justify-center xl:px-64">
+    <nav class="bg-background fixed w-full z-20 top-0 left-0 py-2 h-16 flex items-center justify-center 2xl:px-64">
         <div class="w-full flex items-center justify-between">
             <a href="/" class="flex items-center">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50">
@@ -83,7 +83,7 @@
     </nav>
 
     {{-- HERO --}}
-    <div class="flex items-center gap-32 pt-16 pb-0 h-[90vh] relative px-16 xl:px-64 text-justify">
+    <div class="flex items-center gap-32 pt-16 pb-0 h-[90vh] relative px-16 2xl:px-64 text-justify">
         <div class="z-10 w-3/4" >
             <h1 class="text-6xl pb-5 text-white font-bold"> Become <span class="text-yellow-300">Physically Fit</span></h1>
 
@@ -105,7 +105,7 @@
 
     {{-- SESSION PAGE --}}
     <section id="session">
-        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 2xl:px-64 ">
 
             <h2 class="text-5xl text-background">Gym Sessions</h2>
 
@@ -151,7 +151,7 @@
 
     {{-- LEARN PAGE --}}
     <section id="learn">
-        <div class="py-20 gap-16 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
+        <div class="py-20 gap-16 bg-off-white flex flex-col items-center justify-center px-16 2xl:px-64 ">
             @foreach ($learnContent as $index => $learn_content)
 
                 <x-learn-content 
@@ -168,7 +168,7 @@
 
     {{-- PRICING PAGE --}}
     <section id="pricing">
-        <div class="py-20 gap-10 bg-background flex flex-col items-center justify-center text-off-white px-16 xl:px-64">
+        <div class="py-20 gap-10 bg-background flex flex-col items-center justify-center text-off-white px-16 2xl:px-64">
             <h2 class="text-5xl">Membership Pricing</h2>
 
             <div class="grid grid-cols-3 gap-10 w-full">
@@ -190,7 +190,7 @@
 
     {{-- INSTRUCTOR --}}
     <section id="instructor">
-        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 2xl:px-64">
 
             <h2 class="text-5xl text-background">Our Instructors</h2>
 
@@ -210,7 +210,7 @@
 
     {{-- FAQ --}}
     <section id="faq">
-        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64">
+        <div class="py-20 gap-10 bg-off-white flex flex-col items-center justify-center px-16 2xl:px-64">
             <h2 class="text-5xl text-background">Frequently Asked Questions</h2>
 
             <div class="w-full" id="accordion-collapse" data-accordion="collapse">
@@ -249,7 +249,7 @@
 
     {{-- CONTACT PAGE --}}
     <section id="contact">
-        <div class="py-20 bg-off-white px-16 xl:px-64">
+        <div class="py-20 bg-off-white px-16 2xl:px-64">
             <div class="grid grid-cols-2">
                 <div class="col-span-1">
                     <legend class="text-center text-4xl pb-10">Contact Information</legend>
