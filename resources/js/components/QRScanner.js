@@ -1,4 +1,4 @@
-import QrScanner from './qr-scanner.min';
+import QrScanner from 'qr-scanner';
 import { Modal } from 'flowbite';
 
 const scanQrButton = document.querySelector('#scan-qr-button');
@@ -24,7 +24,7 @@ if (popUp) {
     
     const scanner = new QrScanner(videoElem, result => setResult(result), {
         onDecodeError: error => {
-            // console.log(error);
+            
         },
         highlightScanRegion: true,
         highlightCodeOutline: true,

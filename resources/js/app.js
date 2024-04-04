@@ -6,7 +6,6 @@
 import "flowbite";
 import "react-toastify/dist/ReactToastify.css";
 import "boxicons";
-// import QrScanner from 'qr-scanner';
 
 require("./bootstrap");
 /**
