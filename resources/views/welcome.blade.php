@@ -280,7 +280,7 @@
         <div class="flex flex-col gap-2 items-center">
 
             {{-- <box-icon name='facebook-circle' type='logo' ></box-icon> --}}
-            <a href="https://www.facebook.com/japsgymolympus" class="flex items-center gap-2">
+            <a target="_blank" href="https://www.facebook.com/japsgymolympus" class="flex items-center gap-2">
                 <div class="flex items-center justify-center p-0.5 bg-[#1877F2] rounded-md">
                     <box-icon class="size-5" type='logo' name='facebook'></box-icon>
                 </div>
