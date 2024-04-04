@@ -11,18 +11,18 @@
     </div>
 </div> --}}
 
-<div @class(['flex w-full bg-border/20 ring-1 ring-border rounded-lg overflow-clip max-h-[30vh]', 'flex-row-reverse' => $flipped])>
+<div @class(['flex w-full bg-border/20 ring-1 ring-border rounded-lg overflow-clip max-h-[45vh] text-justify', 'flex-row-reverse' => $flipped])>
     
     <div class="w-[55%]">
         <img class="h-full w-full object-cover object-left-top" src="{{ asset('image/content/'.$image) }}" alt="image of {{$title}}">
     </div>
 
-    <div class="flex flex-col gap-5 divide-y-2 divide-border py-5 px-10 w-[45%]">
+    <div class="flex flex-col gap-5 divide-y-2 divide-border py-5 px-10 w-[45%] overflow-auto">
         <div class="flex flex-col">
             <h3 class="font-bold text-2xl text-dark-gray-950">{{$title}}</h3>
             <p class="text-base text-dark-gray-900">{{$subtitle}}</p>
         </div>
 
-    <p class="text-sm text-dark-gray-800">{{$content}}</p>
+        <p class="text-sm text-dark-gray-800">{{$content}}</p>
     </div>
 </div>

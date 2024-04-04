@@ -139,14 +139,11 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                        class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        <form action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            
-                                            <button type="submit" class="w-full">Logout</button>
-                                        </form>
-                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        @csrf
+                                        
+                                        <button type="submit" class="w-full">Logout</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>

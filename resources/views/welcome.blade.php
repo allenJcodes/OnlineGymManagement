@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     {{-- FLOWBITE --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
@@ -81,7 +83,7 @@
     </nav>
 
     {{-- HERO --}}
-    <div class="flex items-center gap-32 pt-16 pb-0 h-[90vh] relative px-16 xl:px-64">
+    <div class="flex items-center gap-32 pt-16 pb-0 h-[90vh] relative px-16 xl:px-64 text-justify">
         <div class="z-10 w-3/4" >
             <h1 class="text-6xl pb-5 text-white font-bold"> Become <span class="text-yellow-300">Physically Fit</span></h1>
 
@@ -109,16 +111,34 @@
 
             <div class="grid grid-cols-3 gap-10">
 
-                @foreach ($gym_sessions as $gym_session)
+                @foreach ($gym_sessions as $index => $gym_session)
                     <x-gym-session-card 
                     title="{{ucwords($gym_session->title)}}" 
                     content="{{$gym_session->content}}"
                     >
 
                         @slot('icon')
-                            <svg class="min-w-7 min-h-7 text-accent mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            @switch($index)
+                                @case(0)
+                                    <box-icon name='laptop' class="fill-accent size-10" ></box-icon>
+                                    @break
+
+                                @case(1)
+                                    <box-icon name='user-pin'  class="fill-accent size-10" ></box-icon>
+                                    @break
+                                
+                                @case(2)
+                                    <box-icon name='group' class="fill-accent size-10" ></box-icon>
+                                    @break
+                            
+                                @default
+                                    <box-icon name='dumbbell' class="fill-accent size-10" ></box-icon>
+                                    
+                            @endswitch
+
+                            {{-- <svg class="min-w-7 min-h-7 text-accent mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-                            </svg>
+                            </svg> --}}
                         @endslot
 
                     </x-gym-session-card>
@@ -131,7 +151,7 @@
 
     {{-- LEARN PAGE --}}
     <section id="learn">
-        <div class="py-20 gap-8 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
+        <div class="py-20 gap-16 bg-off-white flex flex-col items-center justify-center px-16 xl:px-64 ">
             @foreach ($learnContent as $index => $learn_content)
 
                 <x-learn-content 
@@ -157,6 +177,7 @@
                     <x-membership-pricing-card 
                         type="{{$membershipPricing->name}}" 
                         price="{{$membershipPricing->price}}" 
+                        description="{{$membershipPricing->description}}"
                         :inclusions="$membershipPricing->inclusions" 
                         :bestOffer="$membershipPricing->best_option"
                     />
@@ -205,16 +226,17 @@
                             data-accordion-target="#accordion-collapse-body-{{$index+1}}" aria-expanded="true"
                             aria-controls="accordion-collapse-body-{{$index+1}}">
                             <span>{{$faq->title}}</span>
-                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                            <box-icon data-accordion-icon name='chevron-down' class="size-5 fill-gray-600"></box-icon>
+                            {{-- <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M9 5 5 1 1 5" />
-                            </svg>
+                            </svg> --}}
                         </button>
                     </h2>
                     <div id="accordion-collapse-body-{{$index+1}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$index+1}}">
-                        <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                            <p class="mb-2 text-gray-500 dark:text-gray-400">{{$faq->content}}</p>
+                        <div class="p-5 border border-b-0 border-gray-200">
+                            <p class="text-gray-500 dark:text-gray-400">{{$faq->content}}</p>
                         </div>
                     </div>
                 @endforeach
@@ -254,8 +276,20 @@
 
 
 
-    <div class="pt-2 pb-2" style="background-color: #212529">
-        <legend class="text-white text-center">Copyright</legend>
+    <div class="flex flex-col py-6 gap-4 items-center text-off-white fill-off-white">
+        <div class="flex flex-col gap-2 items-center">
+
+            {{-- <box-icon name='facebook-circle' type='logo' ></box-icon> --}}
+            <a href="https://www.facebook.com/japsgymolympus" class="flex items-center gap-2">
+                <div class="flex items-center justify-center p-0.5 bg-[#1877F2] rounded-md">
+                    <box-icon class="size-5" type='logo' name='facebook'></box-icon>
+                </div>
+                Japs Gym Olympus
+            </a>
+     
+        </div>
+
+        <p>©2024 Japs Fitness Gym. All rights reserved.</p>
     </div>
 
 </body>

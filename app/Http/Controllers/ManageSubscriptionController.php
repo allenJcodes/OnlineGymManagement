@@ -77,7 +77,7 @@ class ManageSubscriptionController extends Controller
      */
     public function edit(SubscriptionType $subscription)
     {
-        $subscription = SubscriptionType::find($subscription->id)->with('inclusions')->first();
+        $subscription = SubscriptionType::where('id', $subscription->id)->with('inclusions')->first();
         return view('features.manage_subscriptions.EditSubscription', compact('subscription'));
     }
 
