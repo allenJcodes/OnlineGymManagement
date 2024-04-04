@@ -24,7 +24,7 @@ if (popUp) {
     
     const scanner = new QrScanner(videoElem, result => setResult(result), {
         onDecodeError: error => {
-            
+            console.log(error);
         },
         highlightScanRegion: true,
         highlightCodeOutline: true,
