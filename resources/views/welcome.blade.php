@@ -282,7 +282,7 @@
             {{-- <box-icon name='facebook-circle' type='logo' ></box-icon> --}}
             <a target="_blank" href="https://www.facebook.com/japsgymolympus" class="flex items-center gap-2">
                 <div class="flex items-center justify-center p-0.5 bg-[#1877F2] rounded-md">
-                    <box-icon class="size-5" type='logo' name='facebook'></box-icon>
+                    <box-icon class="size-5" type='logo' name='facebook' class="fill-white"></box-icon>
                 </div>
                 Japs Gym Olympus
             </a>
