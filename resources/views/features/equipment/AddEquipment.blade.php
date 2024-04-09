@@ -13,8 +13,12 @@
             </div>
 
             <div class="form-field-container">
-                <label for="description" class="form-label">Description</label>
-                <input id="description" type="text" name="description" class="form-input">
+                <label for="description_id" class="form-label">Description</label>
+                <select name="description_id" id="description_id" class="form-input">
+                    @foreach ($equipmentDescriptions as $equipmentDescription)
+                        <option value="{{ $equipmentDescription->id }}">{{ $equipmentDescription->content }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-field-container">

@@ -26,7 +26,7 @@ class EquipmentStoreRequest extends FormRequest
     {
         return [
             'equipment_name' => ['required','string','max:255', Rule::unique('equipment', 'equipment_name')],
-            'description' => 'required|string|max:255',
+            'description_id' => 'required|string|max:255',
             'equipment_type_id' => 'required|integer',
             'status' => 'required|string|max:255',
             'image' => 'nullable|mimes:png,jpg,jpeg|max:5048',
