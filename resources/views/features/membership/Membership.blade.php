@@ -187,9 +187,11 @@
                         </select>
                     </div>
 
-                    <div class="form-field-container">
-                        <label for="reference_number" class="form-label">Reference Number <span
-                                class="text-dark-gray-800 text-xs italic ml-2">optional</span></label>
+                    <div class="form-field-container hidden">
+                        <label for="reference_number" class="form-label">Reference Number 
+                            {{-- <span
+                                class="text-dark-gray-800 text-xs italic ml-2">optional</span> --}}
+                            </label>
                         <input id="reference_number" name="reference_number" type="text" class="form-input">
                     </div>
 
@@ -265,6 +267,19 @@
                     qrDownloadLink.setAttribute('disabled', 'disabled');
                 }
             });
+        });
+
+        // Hide reference no field if mode of payment is cash
+        const modeOfPaymentField = document.querySelector('#mode_of_payment');
+        const referenceNumberField = document.querySelector('#reference_number');
+
+        modeOfPaymentField.addEventListener('change', () => {
+            if (modeOfPaymentField.value === 'Cash' || modeOfPaymentField.value === 'cash') {
+                referenceNumberField.parentElement.classList.add('hidden');
+            } else {
+                referenceNumberField.parentElement.classList.remove('hidden');
+                referenceNumberField.required = true;
+            }
         });
     </script>
 @endsection
