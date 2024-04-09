@@ -44,8 +44,6 @@ class ManageSubscriptionController extends Controller
      */
     public function store(ManageSubscriptionStoreRequest $request)
     {
-
-
         $inclusions = collect($request->inclusions)->map(function($inclusion) {
             return (new SubscriptionTypeInclusion(['name' => $inclusion]));
         });

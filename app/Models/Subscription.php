@@ -41,7 +41,7 @@ class Subscription extends Model
         ->orWhere('subscriptions.end_date', 'like', request()->search . '%')
         ->orWhere('subscription_types.name', 'like', request()->search . '%')
         ->orWhere('subscription_types.price', 'like', request()->search . '%')
-        ->orWhere('subscription_types.number_of_months', 'like', request()->search . '%')
+        ->orWhere('subscription_types.duration', 'like', request()->search . '%')
         ->select([
             '*', 'subscriptions.id as id'
         ]);

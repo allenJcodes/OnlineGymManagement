@@ -55,7 +55,7 @@
                                 <tr class="table-row">
                                     <td class="py-2">{{$subscription->name}}</td>
                                     <td class="py-2">{{$subscription->price}}</td>
-                                    <td class="py-2">{{$subscription->number_of_months}} Month{{$subscription->number_of_months>1 ? 's' : ''}}</td>
+                                    <td class="py-2">{{ $subscription->duration }} {{$subscription->duration_type}}{{ $subscription->duration > 1 ? 's' : '' }}</td>
                                     <td class="my-2 max-w-[25vw] line-clamp-1" title="{{$subscription->description}}">{{$subscription->description}}</td>
                                     <td class="py-2" title="{{implode(', ', $subscription->inclusions->map(fn($inclusion) => $inclusion->name)->toArray()) }}">{{$subscription->inclusions_string}}</td>
                                     <td>
