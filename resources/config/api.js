@@ -5,7 +5,7 @@ export const PROD_URL = "https://japsgym.online/";
 
 
 export const api = axios.create({
-    baseURL: PROD_URL,
+    baseURL: DEV_URL,
 });
 
 api.defaults.timeout = 60000;

@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col pt-14 gap-5 text-background">
         <a href="{{ route('attendance.index') }}" class="w-fit outline-button">< Back to Attendance</a>
-
+        
         <div class="flex items-start w-full justify-between">
             <h1 class="text-2xl font-bold">View Attendance</h1>
             <button id="scan-qr-button" class="primary-button"> Scan QR</button>
