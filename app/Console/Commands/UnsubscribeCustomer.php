@@ -50,5 +50,7 @@ class UnsubscribeCustomer extends Command
                 $user->active_subscription->update(['status' => 3]);
             }
         }
+
+        echo 'Automatic Unsubscribe Customers finished running';
     }
 }

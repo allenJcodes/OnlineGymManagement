@@ -12,7 +12,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class MembershipService {
 
-    public function generateUserQR($content) {
+    public function generateUserQR($content, $user) {
         $result = Builder::create()
         ->writer(new PngWriter())
         ->writerOptions([])
@@ -25,9 +25,10 @@ class MembershipService {
         // ->logoPath(__DIR__.'/assets/symfony.png')
         // ->logoResizeToWidth(50)
         // ->logoPunchoutBackground(true)
-        // ->labelText('This is the label')
-        // ->labelFont(new NotoSans(20))
-        // ->labelAlignment(LabelAlignment::Center)
+        
+        ->labelText("$user->full_name")
+        ->labelFont(new NotoSans(20))
+        ->labelAlignment(LabelAlignment::Center)
         ->validateResult(false)
         ->build();
 

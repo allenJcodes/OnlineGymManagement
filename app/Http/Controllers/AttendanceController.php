@@ -33,7 +33,7 @@ class AttendanceController extends Controller
     public function show(Attendance $attendance) {
         $attendance = Attendance::with(['schedule', 'userAttendances.user', 'userAttendances' => function ($q) {
             $q->orderBy('user_attendances.time_in', 'desc');
-        }])->first();
+        }])->first(); 
         return view('features.attendance.showAttendance', compact(['attendance']));
     }
 
