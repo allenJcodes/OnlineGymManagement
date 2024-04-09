@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Membership\MembershipStoreRequest;
+use App\Mail\SendQRMail;
 use App\Models\Membership;
 use App\Models\Notification;
 use App\Models\PaymentMode;
@@ -13,7 +14,7 @@ use App\Models\SubscriptionType;
 use App\Models\User;
 use App\Services\MembershipService;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Mail;
 
 class MembershipController extends Controller
 {
@@ -40,10 +41,16 @@ class MembershipController extends Controller
 
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);
         
+        if($subscriptionType->duration_type == 'day') {
+            $endDate = Carbon::parse(now())->addDays($subscriptionType->duration);
+        }else {
+            $endDate = Carbon::parse(now())->addMonths($subscriptionType->duration);
+        }
+
         $subscription = Subscription::create([
             ...$request->validated(),
             'start_date' => now(),
-            'end_date' => Carbon::parse(now())->addMonths($subscriptionType->number_of_months),
+            'end_date' => $endDate,
             'qr_code' => $filePath,
         ]);
 
@@ -63,6 +70,8 @@ class MembershipController extends Controller
             'content' => $subscribedUser->full_name . ' subscribed to ' . $subscriptionType->name . 'Membership for P' . $subscriptionType->price,
             'type' => 'New Subscription'
         ])->users()->attach($adminUsers);
+
+        Mail::to($subscribedUser->email)->send(new SendQRMail($subscribedUser->full_name, $filePath));
 
         return redirect()->route('membership.index')->with('toast', [
             'status' => 'success',

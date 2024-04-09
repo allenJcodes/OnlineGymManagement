@@ -18,11 +18,20 @@
                 <input id="price" type="text" name="price" class="form-input">
             </div>
 
-            <div class="form-field-container">
-                <label for="number_of_months" class="form-label">Duration (Months)</label>
-                <input id="number_of_months" type="text" name="number_of_months" class="form-input">
-            </div>
+            <div class="flex gap-1 items-end">
+                <div class="form-field-container w-1/4">
+                    <label for="duration" class="form-label">Duration</label>
+                    <input id="duration" type="text" name="duration" class="form-input">
+                </div>
 
+                <div class="form-field-container w-1/4">
+                    {{-- <label for="duration_type" class="form-label"></label> --}}
+                    <select name="duration_type" id="duration_type" class="form-input">
+                        <option value="day">Day/s</option>
+                        <option value="month">Month/s</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="form-field-container">
                 <label for="description" class="form-label">Description</label>
