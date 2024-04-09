@@ -20,7 +20,7 @@
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Payment Mode List</h2>
                     {{-- form actions here --}}
-                    <x-table-search />
+                    <x-table-search model="Payment Mode" />
                 </div>
 
                 <table class="table">

@@ -16,7 +16,7 @@
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">FAQs List</h2>
                     {{-- form actions here --}}
-                    <x-table-search />
+                    <x-table-search model="FAQ" />
                 </div>
 
                 <table class="table">

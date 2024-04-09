@@ -16,11 +16,12 @@ class CreateEquipmentTable extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('equipment_name');
-            $table->string('description'); 
+            $table->foreignId('equipment_description_id')->nullable()->constrained('equipment_descriptions')->nullOnDelete(); 
             $table->foreignId('equipment_type_id')->nullable()->constrained('equipment_types')->nullOnDelete();
             $table->string('status');
             $table->string('image_path');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

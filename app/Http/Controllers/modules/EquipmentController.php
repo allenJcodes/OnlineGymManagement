@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Equipment\EquipmentStoreRequest;
 use App\Http\Requests\Equipment\EquipmentUpdateRequest;
 use App\Models\Equipment;
+use App\Models\EquipmentDescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\EquipmentType;
@@ -21,7 +22,8 @@ class EquipmentController extends Controller
 
     public function create() {
         $equipmentTypes = EquipmentType::all();
-        return view('features.equipment.AddEquipment', compact('equipmentTypes'));
+        $equipmentDescriptions = EquipmentDescription::all();
+        return view('features.equipment.AddEquipment', compact('equipmentTypes', 'equipmentDescriptions'));
     }
 
     public function store(EquipmentStoreRequest $request) {

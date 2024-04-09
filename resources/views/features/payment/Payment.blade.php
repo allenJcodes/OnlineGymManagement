@@ -20,7 +20,7 @@
 
                     <div class="flex gap-2 self-end">
                         <a target="_blank" href="{{ route('payments.print') }}" class="primary-button">Print Reports</a>
-                        <x-table-search />
+                        <x-table-search model="Payment" />
                     </div>
                 </div>
 

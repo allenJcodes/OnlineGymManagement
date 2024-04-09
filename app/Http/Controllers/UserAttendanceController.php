@@ -56,6 +56,13 @@ class UserAttendanceController extends Controller
                 'message' => "$user->full_name's subscription has expired."
             ]);
         }
+
+        if ($user->active_subscription->end_date < now()) {
+            return redirect()->back()->with('toast', [
+                'status' => 'error',
+                'message' => "$user->full_name's subscription has expired."
+            ]);
+        }
         
         $userExists = UserAttendance::where('user_id', $request->user_id)->where('attendance_id', $request->attendance_id)->first();
         if ($userExists) {
