@@ -30,7 +30,7 @@
 
             <div class="form-field-container">
                 <label for="password" class="form-label">Password</label>
-                <input id="password" type="password" name="password" class="form-input">
+                <input id="password" name="password" class="form-input">
             </div>
 
             {{-- <input id="user_role" type="text" name="user_role" value="2" hidden> --}}
@@ -54,7 +54,7 @@
                 </a>
                 
                 <button type="submit" class="primary-button">
-                    Add Item
+                    Add Instructor
                 </button>
             </div>
 
