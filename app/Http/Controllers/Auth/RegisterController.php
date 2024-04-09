@@ -55,7 +55,16 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', function ($attribute, $value, $fail) {
+                $user = User::withTrashed()->where($attribute, $value)->first();
+                if ($user) {
+                    if ($user->trashed()) {
+                        $fail("The $attribute is associated with a deactivated account. Please contact admin to reactivate your account.");
+                    } else {
+                        $fail("The $attribute is already in use.");
+                    }
+                }
+            }],            
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

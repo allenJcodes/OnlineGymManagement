@@ -59,6 +59,14 @@
                     <input id="password_confirmation" type="password" name="password_confirmation" class="form-input rounded-lg" placeholder="">
                 </div>
 
+                @if ($errors->any())
+                <div class="flex flex-col gap-1 mt-1">
+                    @foreach ($errors->all() as $error)
+                        <p class="text-red-500 text-xs">{{ $error }}</p>
+                    @endforeach
+                </div>
+                @endif
+
                 <div class="flex justify-center mt-4">
                     <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
                 </div>
