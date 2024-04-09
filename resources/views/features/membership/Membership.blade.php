@@ -276,6 +276,7 @@
         modeOfPaymentField.addEventListener('change', () => {
             if (modeOfPaymentField.value === 'Cash' || modeOfPaymentField.value === 'cash') {
                 referenceNumberField.parentElement.classList.add('hidden');
+                referenceNumberField.required = false;
             } else {
                 referenceNumberField.parentElement.classList.remove('hidden');
                 referenceNumberField.required = true;

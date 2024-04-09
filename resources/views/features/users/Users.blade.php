@@ -48,6 +48,13 @@
                                     {{ $user->email }}
                                 </td>
                                 <td class="py-2">
+                                    <span @class([
+                                        'flex py-1 px-2 w-fit text-xs rounded-full ring-1', 
+                                        'bg-sky-100 ring-sky-500 text-sky-500' => $user->user_role == 1,
+                                        'bg-orange-100 ring-orange-500 text-orange-500' => $user->user_role == 3,
+                                    ])>
+                                        {{$user->role->role_name}}
+                                    </span>
                                     {{-- @if ($user->user_role == 1)
                                         <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span
                                                 class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>Admin</span>
@@ -60,10 +67,8 @@
                                         <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span
                                                 class="flex w-2.5 h-2.5 bg-yellow-300  rounded-full mr-1.5 flex-shrink-0"></span>Customer</span>
                                     @endif --}}
-                                    {{$user->role->role_name}}
                                 </td>
                                 <td>
-                                    
                                     <div class="flex items-center w-full">
                                         <div class="text-left">
                                             <button id="dropdownButton" data-dropdown-toggle="toggle{{ $user->id }}" class="" type="button">
