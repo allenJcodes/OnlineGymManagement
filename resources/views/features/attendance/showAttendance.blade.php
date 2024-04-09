@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Attendees List</h2>
-                    <x-table-search />
+                    <x-table-search model="Attendee" />
                 </div>
 
                 <table class="table">

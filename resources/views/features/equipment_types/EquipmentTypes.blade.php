@@ -21,7 +21,7 @@
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Equipment Type List</h2>
                     {{-- form actions here --}}
-                    <x-table-search/>
+                    <x-table-search model="Equipment Type"/>
                 </div>
 
                 <table class="table">

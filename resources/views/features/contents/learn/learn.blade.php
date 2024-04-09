@@ -19,7 +19,7 @@
                 <div class="flex w-full justify-between">
                     <h2 class="text-xl font-medium">Learn Contents List</h2>
                     {{-- form actions here --}}
-                    <x-table-search/>
+                    <x-table-search model="Learn Content"/>
                 </div>
 
                 <table class="table">
