@@ -49,8 +49,8 @@
                                 </td>
                                 <td class="py-2">
                                     <span @class([
-                                        'flex py-1 px-2 w-min text-xs rounded-full ring-1', 
-                                        'bg-blue-100 ring-blue-500 text-blue-500' => $user->user_role == 1,
+                                        'flex py-1 px-2 w-fit text-xs rounded-full ring-1', 
+                                        'bg-sky-100 ring-sky-500 text-sky-500' => $user->user_role == 1,
                                         'bg-orange-100 ring-orange-500 text-orange-500' => $user->user_role == 3,
                                     ])>
                                         {{$user->role->role_name}}
