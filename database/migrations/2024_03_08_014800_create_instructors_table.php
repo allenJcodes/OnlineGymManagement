@@ -18,6 +18,7 @@ class CreateInstructorsTable extends Migration
             $table->foreignId('user_id');
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

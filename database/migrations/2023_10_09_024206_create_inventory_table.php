@@ -21,6 +21,7 @@ class CreateInventoryTable extends Migration
             $table->string('warranty_information');
             $table->string('maintenance_history');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

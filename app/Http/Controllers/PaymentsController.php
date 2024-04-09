@@ -73,7 +73,9 @@ class PaymentsController extends Controller
             ];
 
             $jsonRequest = json_encode($data);
-            $filePath = $membershipService->generateUserQR($jsonRequest);
+
+            $user = User::find($payment->subscriptions->user_id);
+            $filePath = $membershipService->generateUserQR($jsonRequest, $user);
 
             Subscription::where('id', $payment->subscription_id)->update([
                 'start_date' => now(),
