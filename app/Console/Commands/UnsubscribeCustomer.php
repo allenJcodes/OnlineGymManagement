@@ -46,7 +46,7 @@ class UnsubscribeCustomer extends Command
                 continue;
             }
             
-            if(Carbon::parse($user->active_subscription->end_date)->addDay() >= Carbon::parse(now()->format('Y-m-d'))) {
+            if(Carbon::parse($user->active_subscription->end_date)->addDay() <= Carbon::parse(now()->format('Y-m-d'))) {
                 $user->active_subscription->update(['status' => 'Subscription Ended']);
             }
         }
