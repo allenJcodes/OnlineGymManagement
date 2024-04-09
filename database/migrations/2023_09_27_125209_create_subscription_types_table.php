@@ -21,6 +21,7 @@ class CreateSubscriptionTypesTable extends Migration
             $table->text('description');
             $table->tinyInteger('best_option')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

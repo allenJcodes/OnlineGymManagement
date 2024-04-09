@@ -36,7 +36,7 @@ class MembershipController extends Controller
     {
         $user = User::find($request->user_id);
         $jsonRequest = json_encode([...$request->validated(), 'full_name' => $user->full_name]);
-        $filePath = $membershipService->generateUserQR($jsonRequest);
+        $filePath = $membershipService->generateUserQR($jsonRequest, $user);
 
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);
         

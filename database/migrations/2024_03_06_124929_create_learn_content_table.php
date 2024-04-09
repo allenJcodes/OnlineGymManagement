@@ -20,6 +20,7 @@ class CreateLearnContentTable extends Migration
             $table->text('content');
             $table->text('image');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
