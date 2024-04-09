@@ -18,7 +18,8 @@ class SubscriptionType extends Model
     protected $fillable = [
         'name',
         'price',
-        'number_of_months',
+        'duration',
+        'duration_type',
         'description',
         'best_option',
     ];
@@ -28,7 +29,7 @@ class SubscriptionType extends Model
     public function scopeSearch(Builder $query) {
         $query->where('subscription_types.name', 'like', request()->search . '%')
         ->orWhere('price', 'like', request()->search . '%')
-        ->orWhere('number_of_months', 'like', request()->search . '%')
+        ->orWhere('duration', 'like', request()->search . '%')
         ->orWhere('description', 'like', '%'. request()->search . '%');
     }
 

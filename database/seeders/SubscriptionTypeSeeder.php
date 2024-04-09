@@ -16,21 +16,37 @@ class SubscriptionTypeSeeder extends Seeder
     public function run()
     {
         SubscriptionType::create([
-            'name' => 'Monthly',
-            'price' => 2400.00,
-            'number_of_months' => 1,
+            'name' => 'Walk-in',
+            'price' => 60.00,
+            'duration' => 1,
+            'duration_type' => 'day',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus ullam mollitia similique. Eligendi nulla temporibus assumenda delectus expedita, repellendus non.'
         ])->inclusions()->saveMany([
-            new SubscriptionTypeInclusion(['name' => 'Inclusion 1']),
-            new SubscriptionTypeInclusion(['name' => 'Inclusion 2']),
+            new SubscriptionTypeInclusion(['name' => 'Inclusion WI1']),
+            new SubscriptionTypeInclusion(['name' => 'Inclusion WI2']),
+        ]);
+
+        SubscriptionType::create([
+            'name' => 'Monthly',
+            'price' => 2400.00,
+            'duration' => 1,
+            'duration_type' => 'month',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus ullam mollitia similique. Eligendi nulla temporibus assumenda delectus expedita, repellendus non.'
+        ])->inclusions()->saveMany([
+            new SubscriptionTypeInclusion(['name' => 'Inclusion M1']),
+            new SubscriptionTypeInclusion(['name' => 'Inclusion M2']),
         ]);
         
 
         SubscriptionType::create([
             'name' => 'Yearly',
             'price' => 3600.00,
-            'number_of_months' => 12,
+            'duration' => 12,
+            'duration_type' => 'month',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus ullam mollitia similique. Eligendi nulla temporibus assumenda delectus expedita, repellendus non.'
+        ])->inclusions()->saveMany([
+            new SubscriptionTypeInclusion(['name' => 'Inclusion Y1']),
+            new SubscriptionTypeInclusion(['name' => 'Inclusion Y2']),
         ]);
     }
 }
