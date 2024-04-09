@@ -86,7 +86,7 @@
                                 <td class="py-2">
                                     <button data-modal-target="qr-popup-modal" data-modal-toggle="qr-popup-modal"
                                         class="primary-button qr-button" type="button" data-user="{{ json_encode($user) }}"
-                                        @empty($user->active_subscription->qr_code) disabled @endempty
+                                        @if(!$user->active_subscription || $user->active_subscription->status != 'Active') disabled @endif
                                         >
                                         View QR
                                     </button>
