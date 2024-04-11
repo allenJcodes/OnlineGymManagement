@@ -25,7 +25,12 @@ class InventoryController extends Controller
 
     public function create() {
         $equipmentTypes = EquipmentType::all();
-        $equipments = Equipment::all();
+        // $equipments = Equipment::all();
+
+        // Get equipments excluding those in existing inventory
+        $filterExistingId = Inventory::select('equipment_id')->pluck('equipment_id');
+        $equipments = Equipment::whereNotIn('id', $filterExistingId)->get();
+
         return view('features.inventory.addItem', compact('equipmentTypes', 'equipments'));
     }
 

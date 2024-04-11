@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipment;
+use App\Models\EquipmentStatus;
 use App\Models\Membership;
 use App\Models\Payments;
 use App\Models\Schedules;
@@ -107,10 +108,14 @@ class HomeController extends Controller
         // Recent Subscribers
         $subscribers = Subscription::orderBy('subscriptions.created_at', 'desc')->take(3)->get();
 
-        $equipments = Equipment::all();
-        $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
-        $notAvailableEquipments = $equipments->filter(fn($val) => $val->status == 'not_available');
-        $underMaintenanceEquipments = $equipments->filter(fn($val) => $val->status == 'under_maintenance');
+        $equipments = EquipmentStatus::all();
+        // $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
+        // $notAvailableEquipments = $equipments->filter(fn($val) => $val->status == 'not_available');
+        // $underMaintenanceEquipments = $equipments->filter(fn($val) => $val->status == 'under_maintenance');
+
+        $availableEquipments = $equipments->where('status', 'available')->sum('quantity');
+        $notAvailableEquipments = $equipments->where('status', 'not_available')->sum('quantity');
+        $underMaintenanceEquipments = $equipments->where('status', 'under_maintenance')->sum('quantity');
 
 
         return view('home-admin', compact(

@@ -24,7 +24,6 @@ class InventoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|numeric',
             'purchase_date' => 'required',
             'warranty_information' => 'required|string|max:255',
             'maintenance_history' => 'required|string|max:255',

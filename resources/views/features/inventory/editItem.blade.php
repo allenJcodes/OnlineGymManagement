@@ -14,15 +14,10 @@
                 <input value="{{$inventory->equipment->equipment_name}}" id="equipment_id" type="text" name="equipment_id" class="form-input" readonly>
             </div>
 
-            <div class="form-field-container">
-                <label for="quantity" class="form-label">Quantity</label>
-                <input value="{{$inventory->quantity}}" id="quantity" type="number" min="0" name="quantity" class="form-input">
-            </div>
-
             <div class="flex gap-3 w-full">
                 <div class="form-field-container">
                     <label for="equipment_type_id" class="form-label">Equipment Type</label>
-                    <input value="{{$inventory->equipment->equipmentType->name}}" id="equipment_type_id" type="text" name="equipment_type_id" class="form-input" readonly>
+                    <input value="{{$inventory->equipment->equipmentType->name ?? '--'}}" id="equipment_type_id" type="text" name="equipment_type_id" class="form-input" readonly>
                 </div>
                 <div class="form-field-container">
                     <label for="purchase_date" class="form-label">Purchase Date</label>
@@ -45,7 +40,18 @@
                         <option {{$inventory->maintenance_history == 'annually' ? 'selected' : ''}} value="annually">Annually</option>
                     </select>
                 </div>
-            </div>        
+            </div>
+            
+            <div class="flex gap-3 w-full">
+                <div class="form-field-container">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input value="{{$inventory->quantity}}" id="quantity" class="form-input" disabled>
+                </div>
+                <div class="form-field-container">
+                    <label for="availableQty" class="form-label">Available Quantity</label>
+                    <input value="{{$inventory->availableQty}}" id="availableQty" class="form-input" disabled>
+                </div>
+            </div>
 
             @if ($errors->any())
                 <div class="flex flex-col gap-1">

@@ -16,14 +16,32 @@ class Inventory extends Model
 
     protected $fillable = [
         'equipment_id',
-        "quantity",
         'purchase_date',
         'warranty_information',
         'maintenance_history',
     ];
 
+    protected $appends = ['quantity', 'availableQty'];
+
+    public function getQuantityAttribute()
+    {
+        $equipmentStatuses =  $this->equipment->equipmentStatus;
+        $totalQuantity = 0;
+
+        foreach ($equipmentStatuses as $status) {
+        $totalQuantity += $status->quantity;
+        }
+
+        return $totalQuantity;
+    }
+
+    public function getAvailableQtyAttribute()
+    {
+       return $this->equipment->equipmentStatus[0]->quantity;
+    }
+
     public function scopeSearch(Builder $query) {
-        $query->select('inventory.id', 'inventory.equipment_id', 'inventory.quantity', 'inventory.purchase_date', 'inventory.warranty_information', 'inventory.maintenance_history', 'inventory.created_at', 'inventory.updated_at', 'equipment.equipment_name', 'equipment.description', 'equipment.equipment_type_id', 'equipment.status', 'equipment.image_path', 'equipment_types.name')
+        $query->select('inventory.id', 'inventory.equipment_id', 'inventory.purchase_date', 'inventory.warranty_information', 'inventory.maintenance_history', 'equipment.equipment_name', 'equipment.equipment_description_id', 'equipment.equipment_type_id', 'equipment_types.name')
             ->leftJoin('equipment', 'equipment.id', 'inventory.equipment_id')
             ->leftJoin('equipment_types', 'equipment_types.id', 'equipment.equipment_type_id')
             ->where(function ($query) {

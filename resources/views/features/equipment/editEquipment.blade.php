@@ -15,14 +15,17 @@
             </div>
 
             <div class="form-field-container">
-                <label for="description" class="form-label">Description</label>
-                <input value="{{$equipment->description}}" id="description" type="text" name="description" class="form-input">
+                <label for="equipment_description_id" class="form-label">Description</label>
+                <select name="equipment_description_id" id="equipment_description_id" class="form-input">
+                    <option {{!$equipment->equipment_description_id  ? 'selected' : ''}} value="" disabled>Select Description</option>
+                    @foreach ($equipmentDescriptions as $equipmentDescription)
+                        <option {{$equipment->equipment_description_id == $equipmentDescription->id ? 'selected' : ''}}  value="{{ $equipmentDescription->id }}">{{ $equipmentDescription->content }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-field-container">
                 <label for="equipment_type_id" class="form-label">Equipment Type</label>
-            
-                {{-- @dd($equipment->equipment_type_id, $equipmentTypes[0]->id) --}}
                 <select name="equipment_type_id" id="equipment_type_id" class="form-input">
                     <option {{!$equipment->equipment_type_id  ? 'selected' : ''}} value="" disabled>Select Equipment Type</option>
                     @foreach ($equipmentTypes as $equipmentType)
@@ -31,15 +34,23 @@
                 </select>
             </div>
 
-            <div class="form-field-container">
-                <label for="status" class="form-label">Status</label>
-            
-                <select name="status" id="status" class="form-input">
-                    <option value="" disabled>Select status</option>
-                    <option {{$equipment->status == 'available' ? 'selected' : ''}} value="available">Available</option>
-                    <option {{$equipment->status == 'not_available' ? 'selected' : ''}} value="not_available">Not Available</option>
-                    <option {{$equipment->status == 'under_maintenance' ? 'selected' : ''}} value="under_maintenance">Under Maintenance</option>
-                </select>
+            <div class="flex gap-3 w-full">
+                <div class="form-field-container">
+                    <label for="available" class="form-label">Quantity (Available)</label>
+                    <input value="{{$equipment->equipmentStatus[0]->quantity}}"id="available" class="form-input" type="number" name="available" min="0" placeholder="0">
+                </div>
+
+                <div class="form-field-container">
+                    <label for="not_available" class="form-label">Quantity (Not Available)</label>
+                    <input value="{{$equipment->equipmentStatus[1]->quantity}}" id="not_available" class="form-input" type="number" name="not_available" min="0"
+                        placeholder="0">
+                </div>
+
+                <div class="form-field-container">
+                    <label for="under_maintenance" class="form-label">Quantity (Under Maintenance)</label>
+                    <input value="{{$equipment->equipmentStatus[2]->quantity}}" id="under_maintenance" class="form-input" type="number" name="under_maintenance" min="0"
+                        placeholder="0">
+                </div>
             </div>
 
 

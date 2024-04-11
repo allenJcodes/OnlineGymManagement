@@ -29,9 +29,6 @@
                                 Item name
                             </td>
                             <td class="py-2">
-                                Quantity
-                            </td>
-                            <td class="py-2">
                                 Equipment Type
                             </td>
                             <td class="py-2">
@@ -42,6 +39,12 @@
                             </td>
                             <td class="py-2">
                                 Maintenance History
+                            </td>
+                            <td class="py-2">
+                                Quantity
+                            </td>
+                            <td class="py-2">
+                                Available
                             </td>
                             <td class="py-2">
                                 Actions
@@ -56,9 +59,6 @@
                                         {{ $inventory->equipment->equipment_name }}
                                     </td>
                                     <td class="py-2">
-                                        {{ $inventory->quantity }}
-                                    </td>
-                                    <td class="py-2">
                                         {{ $inventory->equipment->equipmentType->name ?? '--' }}
                                     </td>
                                     <td class="py-2">
@@ -69,6 +69,12 @@
                                     </td>
                                     <td class="py-2">
                                         {{ $inventory->maintenance_history }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->quantity }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->availableQty }}
                                     </td>
                                     <td class="py-2">
                                         <div class="flex items-center w-full">

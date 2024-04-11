@@ -57,13 +57,20 @@
                         @endif
 
                         <div class="absolute top-2 left-2">
-                            <div @class([
+                            {{-- <div @class([
                                 'flex py-1 px-2 text-xs rounded-full ring-1', 
                                 'bg-green-100 ring-green-500 text-green-500' => $equipment->status == 'available',
                                 'bg-red-100 ring-red-500 text-red-500' => $equipment->status == 'not_available',
                                 'bg-orange-100 ring-orange-500 text-orange-500' => $equipment->status == 'under_maintenance',
                             ])>
                                 {{str_replace('_', ' ', $equipment->status)}}
+                            </div> --}}
+                            <div @class([
+                                'flex py-1 px-2 text-xs rounded-full ring-1', 
+                                'bg-green-100 ring-green-500 text-green-500' => $equipment->isAvailable == 'available',
+                                'bg-red-100 ring-red-500 text-red-500' => $equipment->isAvailable == 'unavailable',
+                            ])>
+                                {{str_replace('_', ' ', $equipment->isAvailable)}}
                             </div>
                         </div>
 
@@ -73,7 +80,31 @@
                             </div>
                             <div class="flex flex-col w-full p-4 border-t border-border">
                                 <h2 class="text-lg font-medium"> {{$equipment->equipment_name}} </h2>
-                                <p> {{$equipment->description}} </p>
+                                <p> {{$equipment->equipmentDescription->content}} </p>
+                                <div class="flex">
+                                    @foreach($equipment->equipmentStatus as $status)
+                                    @switch($status->status)
+                                        @case('available')
+                                            <div class="mr-4 flex items-center">
+                                              <box-icon type="solid" name="check-circle" color="#22c55e" class="w-5"></box-icon>
+                                              <span class="text-sm ml-1">{{$status->quantity}}</span>
+                                            </div>
+                                            @break
+                                        @case('not_available')
+                                            <div class="mr-4 flex items-center">
+                                              <box-icon type="solid" name="error" color="#eab308" class="w-5"></box-icon>
+                                              <span class="text-sm ml-1">{{$status->quantity}}</span>
+                                            </div>
+                                            @break
+                                        @case('under_maintenance')
+                                            <div class="flex items-center">
+                                              <box-icon type="solid" name="x-circle" color="#ef4444" class="w-5"></box-icon>
+                                              <span class="text-sm ml-1">{{$status->quantity}}</span>
+                                            </div>
+                                            @break
+                                    @endswitch
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>

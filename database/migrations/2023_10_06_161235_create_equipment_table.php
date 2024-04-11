@@ -18,7 +18,6 @@ class CreateEquipmentTable extends Migration
             $table->string('equipment_name');
             $table->foreignId('equipment_description_id')->nullable()->constrained('equipment_descriptions')->nullOnDelete(); 
             $table->foreignId('equipment_type_id')->nullable()->constrained('equipment_types')->nullOnDelete();
-            $table->string('status');
             $table->string('image_path');
             $table->timestamps();
             $table->softDeletes();

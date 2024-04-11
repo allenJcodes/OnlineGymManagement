@@ -18,11 +18,6 @@
                 </select>
             </div>
 
-            <div class="form-field-container">
-                <label for="quantity" class="form-label">Quantity</label>
-                <input id="quantity" type="number" min="0" name="quantity" class="form-input">
-            </div>
-
             <div class="flex gap-3 w-full">
                 <div class="form-field-container">
                     <label for="equipment_type_id" class="form-label">Equipment Type</label>

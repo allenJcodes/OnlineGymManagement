@@ -127,17 +127,17 @@
                         <hr>
                         <div class="form-field-container">
                             <p class="form-label">Available</p>
-                            <p class="text-base font-medium">{{count($availableEquipments)}}</p>
+                            <p class="text-base font-medium">{{$availableEquipments}}</p>
                         </div>
 
                         <div class="form-field-container">
                             <p class="form-label">Unavailable</p>
-                            <p class="text-base font-medium">{{count($notAvailableEquipments)}}</p>
+                            <p class="text-base font-medium">{{$notAvailableEquipments}}</p>
                         </div>
 
                         <div class="form-field-container">
                             <p class="form-label">Under Maintenance</p>
-                            <p class="text-base font-medium">{{count($underMaintenanceEquipments)}}</p>
+                            <p class="text-base font-medium">{{$underMaintenanceEquipments}}</p>
                         </div>
 
                         <a class="outline-button mt-auto ml-auto text-xs" href="{{route('equipment.index')}}">See all Equipments ></a>
