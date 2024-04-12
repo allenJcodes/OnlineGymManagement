@@ -14,7 +14,7 @@
 
             <div class="form-field-container">
                 <label for="instructor_id" class="form-label">Instructor</label>
-                {{-- @dd($instructors) --}}
+             
                 <select name="instructor_id" id="instructor_id" class="form-input">
                     @foreach ($instructors as $instructor)
                         <option value="{{$instructor->id}}">{{$instructor->user->full_name}}</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Scheduling;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SchedulingStoreRequest extends FormRequest
@@ -26,15 +27,32 @@ class SchedulingStoreRequest extends FormRequest
         return [
             'class_name' => 'required',
             'instructor_id' => 'required',
-            'date_time_start' => 'required',
-            'date_time_end' => 'required|date|after:date_time_start',
+            'date_time_start' => ['required', 'date', 'after:now', function ($attribute, $value, $fail) {
+                $this->validateBusinessHours('start time', $value, $fail);
+            }],
+            'date_time_end' => ['required', 'date', 'after:date_time_start', function ($attribute, $value, $fail) {
+                $this->validateBusinessHours('end time', $value, $fail);
+            }],
         ];
     }
+    
+    public function validateBusinessHours($attribute, $value, $fail)
+    {
+        $startTime = Carbon::parse('7:00:00');
+        $endTime = Carbon::parse('23:00:00');
+        $dateTime = Carbon::parse($value);
+    
+        if ($dateTime->lt($startTime) || $dateTime->gt($endTime)) {
+            $fail('The ' . $attribute . ' is only allowed between ' .  $startTime->format('h:i A') . ' and ' . $endTime->format('h:i A') . '.');
+        }
+    }    
 
-    public function messages ()
+    public function messages()
     {
         return [
-            'date_time_end.after' => 'The date and time end should be after date and time start.'
+            'date_time_end.after' => 'The end date and time must be after the start date and time.',
+            'date_time_start.after' => 'The start date and time must be a future date and time.',
         ];
     }
+    
 }
