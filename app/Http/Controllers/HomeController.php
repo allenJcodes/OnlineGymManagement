@@ -56,11 +56,15 @@ class HomeController extends Controller
             $q->where('users.id', auth()->user()->id);
         })->with('subscriptions.user', 'subscriptions.subscriptionTypes')->orderBy('payments.created_at', 'desc')->take(3)->get();
 
-        $equipments = Equipment::all();
+        // $equipments = Equipment::all();
+        // $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
+        // $notAvailableEquipments = $equipments->filter(fn($val) => $val->status == 'not_available');
+        // $underMaintenanceEquipments = $equipments->filter(fn($val) => $val->status == 'under_maintenance');
+        $equipments = EquipmentStatus::all();
+        $availableEquipments = $equipments->where('status', 'available')->sum('quantity');
+        $notAvailableEquipments = $equipments->where('status', 'not_available')->sum('quantity');
+        $underMaintenanceEquipments = $equipments->where('status', 'under_maintenance')->sum('quantity');
 
-        $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
-        $notAvailableEquipments = $equipments->filter(fn($val) => $val->status == 'not_available');
-        $underMaintenanceEquipments = $equipments->filter(fn($val) => $val->status == 'under_maintenance');
 
         $schedulesThisWeek = Schedules::with('instructor.user')->where('date_time_start', '>=', now()->startOfWeek())
         ->where('date_time_start', '<=', now()->endOfWeek())->take(3)->get();
@@ -109,9 +113,6 @@ class HomeController extends Controller
         $subscribers = Subscription::orderBy('subscriptions.created_at', 'desc')->take(3)->get();
 
         $equipments = EquipmentStatus::all();
-        // $availableEquipments = $equipments->filter(fn($val) => $val->status == 'available');
-        // $notAvailableEquipments = $equipments->filter(fn($val) => $val->status == 'not_available');
-        // $underMaintenanceEquipments = $equipments->filter(fn($val) => $val->status == 'under_maintenance');
 
         $availableEquipments = $equipments->where('status', 'available')->sum('quantity');
         $notAvailableEquipments = $equipments->where('status', 'not_available')->sum('quantity');
