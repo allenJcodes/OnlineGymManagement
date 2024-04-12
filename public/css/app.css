@@ -938,6 +938,9 @@ tbody .table-row:first-child{
 .min-h-7{
   min-height: 1.75rem;
 }
+.min-h-\[10vh\]{
+  min-height: 10vh;
+}
 .min-h-\[30vh\]{
   min-height: 30vh;
 }
@@ -1023,8 +1026,15 @@ tbody .table-row:first-child{
 .min-w-\[30vw\]{
   min-width: 30vw;
 }
+.min-w-\[40vw\]{
+  min-width: 40vw;
+}
 .min-w-\[50vw\]{
   min-width: 50vw;
+}
+.min-w-fit{
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 .max-w-0{
   max-width: 0px;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Scheduling\SchedulingStoreRequest;
 use App\Models\Attendance;
+use App\Models\ClassName;
 use App\Models\Instructor;
 use App\Models\Schedules;
 use App\Models\User;
@@ -32,8 +33,9 @@ class SchedulingController extends Controller
      */
     public function create()
     {
+        $classNames = ClassName::get();
         $instructors = Instructor::with('user')->get();
-        return view('features.scheduling.AddSchedule', compact('instructors'));
+        return view('features.scheduling.AddSchedule', compact('instructors', 'classNames'));
     }
 
     /**
@@ -95,9 +97,10 @@ class SchedulingController extends Controller
      */
     public function edit($id)
     {   
+        $classNames = ClassName::get();
         $schedule = Schedules::find($id);
         $instructors = Instructor::with('user')->get();
-        return view('features.scheduling.EditSchedule', compact('instructors', 'schedule'));
+        return view('features.scheduling.EditSchedule', compact('instructors', 'schedule', 'classNames'));
     }
 
     /**

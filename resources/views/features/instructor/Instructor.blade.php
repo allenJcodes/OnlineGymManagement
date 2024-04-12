@@ -64,11 +64,12 @@
                                                 <p class="text-background/70 text-sm pt-2 px-4">Actions - {{ $instructor->user->full_name}}
                                                 <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                                     <a href="{{route('instructor.edit', ['instructor' => $instructor])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
-                                                    <form class="w-full py-2 px-4 hover:bg-off-white transition-all m-0" action="{{route('instructor.destroy', ['instructor' => $instructor])}}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="w-full text-left">Delete</button>
-                                                    </form>
+                                                <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                                    class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
+                                                    data-instructor="{{ json_encode($instructor) }}"
+                                                    data-url="{{ route('instructor.destroy', ['instructor' => $instructor]) }}">
+                                                    Delete
+                                                </button>
                                                 </div>
                                             </div>
 
@@ -98,4 +99,44 @@
 
     </div>
 
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-fit min-h-[10vh] max-h-[90vh] max-w-[60vw] gap-5 overflow-x-hidden overflow-y-auto'>
+            <p id="modal-text"></p>
+            <form method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="modal_id" name="instructor_id">
+                <div class="w-full flex justify-end gap-2">
+                    <button type="button" class="outline-button" data-modal-hide="popup-modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="primary-button">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        const modalText = document.querySelector('#modal-text');
+        const modalIdField = document.querySelector('#modal_id');
+
+        deleteButtons.forEach(button => {
+            const instructor = JSON.parse(button.dataset.instructor);
+            button.addEventListener('click', () => {
+                modalText.innerText = "Are you sure you want to delete instructor \"" + instructor.user.full_name + "\" ?";
+                modalIdField.value = instructor.id
+
+                const modalForm = modalIdField.parentElement;
+                modalForm.action = button.dataset.url;
+                
+                const submitButton = modalIdField.nextElementSibling.querySelector('button[type="submit"]');
+                submitButton.addEventListener('click', () => {
+                    modalForm.submit();
+                });
+            });
+        })
+    </script>
 @endsection

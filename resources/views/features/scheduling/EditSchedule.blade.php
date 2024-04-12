@@ -9,7 +9,11 @@
 
             <div class="form-field-container">
                 <label for="class_name" class="form-label">Name of Class</label>
-                <input value="{{$schedule->class_name}}" id="class_name" type="text" name="class_name" class="form-input">
+                <select name="class_name" id="class_name" class="form-input">
+                    @foreach ($classNames as $className)
+                        <option value="{{$className->name}}" {{$schedule->class_name == $className->name ? 'selected' : ''}}>{{$className->name}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-field-container">

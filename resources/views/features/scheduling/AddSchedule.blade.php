@@ -9,7 +9,12 @@
 
             <div class="form-field-container">
                 <label for="class_name" class="form-label">Name of Class</label>
-                <input id="class_name" type="text" name="class_name" class="form-input">
+                <select name="class_name" id="class_name" class="form-input">
+                    <option value="" disabled selected>--Select a class--</option>
+                    @foreach ($classNames as $className)
+                        <option value="{{$className->name}}">{{$className->name}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-field-container">
