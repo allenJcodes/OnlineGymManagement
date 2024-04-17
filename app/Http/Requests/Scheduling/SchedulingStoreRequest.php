@@ -38,15 +38,17 @@ class SchedulingStoreRequest extends FormRequest
     
     public function validateBusinessHours($attribute, $value, $fail)
     {
-        $startTime = Carbon::parse('7:00:00');
+        $startTime = Carbon::parse('07:00:00');
         $endTime = Carbon::parse('23:00:00');
-        $dateTime = Carbon::parse($value);
-    
-        if ($dateTime->lt($startTime) || $dateTime->gt($endTime)) {
-            $fail('The ' . $attribute . ' is only allowed between ' .  $startTime->format('h:i A') . ' and ' . $endTime->format('h:i A') . '.');
-        }
-    }    
 
+        $timeString = Carbon::parse($value)->format('H:i:s'); 
+        $time = Carbon::parse($timeString);
+
+        if ($time->lt($startTime) || $time->gt($endTime)) {
+            $fail('The ' . $attribute . ' is only allowed between ' . $startTime->format('h:i A') . ' and ' . $endTime->format('h:i A') . '.');
+        }
+    }
+    
     public function messages()
     {
         return [
