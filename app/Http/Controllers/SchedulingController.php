@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Scheduling\SchedulingStoreRequest;
-use App\Models\Attendance;
+use Carbon\Carbon;
 use App\Models\ClassName;
-use App\Models\Instructor;
 use App\Models\Schedules;
-use App\Models\User;
+use App\Models\Attendance;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
+use App\Http\Requests\Scheduling\SchedulingStoreRequest;
 
 class SchedulingController extends Controller
 {
@@ -46,15 +46,19 @@ class SchedulingController extends Controller
      */
     public function store(SchedulingStoreRequest $request)
     {
+        // Check Schedule Conflicts
+        $time_start = Carbon::parse($request->date_time_start)->toDateTimeString();
+        $time_end = Carbon::parse($request->date_time_end)->toDateTimeString();
+
         $checkConflicts = Schedules::where('instructor_id', $request->instructor_id)
-        ->where(function($q) use ($request) {
-            $q->where(function($query) use ($request) {
-                $query->where('date_time_start', '<=', $request->date_time_start)
-                ->where('date_time_end', '>=', $request->date_time_end);
+        ->where(function($q) use ($time_start, $time_end) {
+            $q->where(function($subQ) use ($time_start, $time_end) {
+                $subQ->where('date_time_start', '<=', $time_start)
+                ->where('date_time_end', '>=', $time_end);
             })
-            ->orWhere(function($query) use ($request) {
-                $query->whereBetween('date_time_start', [$request->date_time_start, $request->date_time_end])
-                ->orWhereBetween('date_time_end', [$request->date_time_start, $request->date_time_end]);
+            ->orWhere(function($subQ) use ($time_start, $time_end) {
+                $subQ->whereBetween('date_time_start', [$time_start, $time_end])
+                ->orWhereBetween('date_time_end', [$time_start, $time_end]);
             });
         }) 
         ->get();
@@ -66,11 +70,10 @@ class SchedulingController extends Controller
             ]);
         }
         
+        // Create Schedule and Attendance record
         $schedule = Schedules::create([...$request->validated(), 'max_clients' =>  $request->number_of_attendees]);
-        //create attendance pag ka gawa ng schedule
-        Attendance::create([
-            'schedule_id' => $schedule->id
-        ]);
+        
+        Attendance::create(['schedule_id' => $schedule->id]);
 
         return redirect()->route('scheduling.index')->with('toast', [
             'status' => 'success',
@@ -160,8 +163,6 @@ class SchedulingController extends Controller
     {
         return Schedules::with('instructor.user')->find($request->id);
     }
-
-
 
     public function deleteSchedule(Request $request)
     {
