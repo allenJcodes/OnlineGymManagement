@@ -24,6 +24,13 @@
                     </div>
                 </div>
 
+                <form action="" id="date_filter_form" class="flex gap-2 h-fit w-fit items-end">
+                    <div class="form-field-container mt-3">
+                        <label for="date" class="form-label">Date Filter</label>
+                        <input id="date" type="date" name="date" class="form-input rounded-lg" value="{{request()->date ?? ''}}">
+                    </div>
+                </form>
+
                 <table class="table">
                     <thead>
                         <tr class="table-row">
@@ -167,6 +174,8 @@
         const editButtons = document.querySelectorAll('.edit-button');
         const paymentIdField = document.querySelector('#payment_id');
         const statusField = document.querySelector('#status');
+        const filterForm = document.querySelector('#date_filter_form');
+        const filterInputForm = document.querySelector('input#date');
         
         editButtons.forEach(button => {
             const payment = JSON.parse(button.dataset.payment);
@@ -179,6 +188,11 @@
                 //     option.selected = option.value == payment.status
                 // })
             });
+        });
+
+        filterInputForm.addEventListener('change', () => {
+            filterForm.submit();
         })
+
     </script>
 @endsection

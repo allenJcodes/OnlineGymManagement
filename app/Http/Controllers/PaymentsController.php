@@ -18,12 +18,20 @@ class PaymentsController extends Controller
     
     public function index()
     {
+        // dd(request()->query());
         $payments = Payments::search()->with(['subscriptions', 'subscriptions.user', 'subscriptions.subscriptionTypes'])
         ->when(auth()->user()->user_role != 1, function($whenQuery) {
             $whenQuery->whereHas('subscriptions', function($whereHas) {
                 $whereHas->where('subscriptions.user_id', auth()->user()->id);
             });
-        })->orderBy('payments.created_at', 'desc')->paginate(10);
+        })
+        ->when(request()->date, function($q){
+            $q->where('payments.created_at', '>=', request()->date . ' 00:00:00')
+            ->where('payments.created_at', '<=', request()->date . ' 23:59:59');
+        })
+        ->orderBy('payments.created_at', 'desc')
+        ->paginate(10)
+        ->appends(request()->query());
 
         return view('features.payment.Payment', compact('payments'));
     }
