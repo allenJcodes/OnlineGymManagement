@@ -60,7 +60,7 @@ class InventoryController extends Controller
 
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Item deleted successfully.',
+            'message' => 'Item archived successfully.',
         ]);
     }
 

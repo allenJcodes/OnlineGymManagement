@@ -101,7 +101,7 @@ class FAQController extends Controller
 
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'FAQ deleted successfully.',
+            'message' => 'FAQ archived successfully.',
         ]);
     }
 

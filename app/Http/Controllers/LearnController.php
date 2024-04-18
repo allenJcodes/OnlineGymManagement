@@ -113,7 +113,7 @@ class LearnController extends Controller
 
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Learn content deleted successfully.',
+            'message' => 'Learn content archived successfully.',
         ]);
     }
 

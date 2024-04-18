@@ -87,7 +87,7 @@
                     </div>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No Items yet</td>
+                        <td colspan="5" class="text-center">No archived equipments yet</td>
                     </tr>
                 @endforelse
             </div>

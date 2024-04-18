@@ -79,7 +79,7 @@
                                                     class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
                                                     data-faq="{{ json_encode($faq) }}"
                                                     data-url="{{ route('contents.faq.destroy', ['faq' => $faq]) }}">
-                                                    Delete
+                                                   Archive
                                                 </button>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                       Archive
                     </button>
                 </div>
             </form>
@@ -133,7 +133,7 @@
         deleteButtons.forEach(button => {
             const faq = JSON.parse(button.dataset.faq);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete FAQ \"" + faq.title + "\" ?";
+                modalText.innerText = "Are you sure you want to archive FAQ \"" + faq.title + "\" ?";
                 modalIdField.value = faq.id
 
                 const modalForm = modalIdField.parentElement;
