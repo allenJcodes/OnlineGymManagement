@@ -3,65 +3,77 @@
 @section('content')
     <div class="flex flex-col pt-16 gap-5 text-background">
 
-        
-        <div class="flex items-start w-full justify-between ">
-
-            <h1 class="text-2xl font-bold">Subscriptions</h1>
-
-            <a href="{{ route('manage.subscription.create') }}" class="primary-button">
-                Add Subscription +
-            </a>
-
+        <div class="flex items-start w-full justify-between">
+            <h1 class="text-2xl font-bold">Inventory Archives</h1>
         </div>
 
         <div class="flex flex-col gap-2">
-
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Subscription List</h2>
+                    <h2 class="text-xl font-medium">Inventory Archives List</h2>
                     {{-- form actions here --}}
-                    <x-table-search model="Subscription"/>
-                </div>
+                    <x-table-search model="Inventory"/>
 
+                </div>
+            
                 <table class="table">
-                    <thead >
+                    <thead>
                         <tr class="table-row">
                             <td class="py-2">
-                                Subscription Name
+                                Item name
                             </td>
                             <td class="py-2">
-                                Price
+                                Equipment Type
                             </td>
                             <td class="py-2">
-                                Duration
+                                Purchase Date
                             </td>
                             <td class="py-2">
-                                Description
+                                Warranty Information
                             </td>
                             <td class="py-2">
-                                Inclusions
+                                Maintenance History
                             </td>
                             <td class="py-2">
-                                Action
+                                Quantity
+                            </td>
+                            <td class="py-2">
+                                Available
+                            </td>
+                            <td class="py-2">
+                                Actions
                             </td>
                         </tr>
                     </thead>
-        
                     <tbody>
-                        
-                        @if(count($subscriptions))
-                            @foreach($subscriptions as $subscription) 
-
+                        @if (count($inventories))
+                            @foreach ($inventories as $inventory)
                                 <tr class="table-row">
-                                    <td class="py-2">{{$subscription->name}}</td>
-                                    <td class="py-2">{{$subscription->price}}</td>
-                                    <td class="py-2">{{ $subscription->duration }} {{$subscription->duration_type}}{{ $subscription->duration > 1 ? 's' : '' }}</td>
-                                    <td class="my-2 max-w-[25vw] line-clamp-1" title="{{$subscription->description}}">{{$subscription->description}}</td>
-                                    <td class="py-2" title="{{implode(', ', $subscription->inclusions->map(fn($inclusion) => $inclusion->name)->toArray()) }}">{{$subscription->inclusions_string}}</td>
-                                    <td>
+                                    <td class="py-2">
+                                        {{ $inventory->equipment->equipment_name }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->equipment->equipmentType->name ?? '--' }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->purchase_date }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->warranty_information }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->maintenance_history }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->quantity }}
+                                    </td>
+                                    <td class="py-2">
+                                        {{ $inventory->availableQty }}
+                                    </td>
+                                    <td class="py-2">
                                         <div class="flex items-center w-full">
                                             <div class="text-left">
-                                                <button id="dropdownButton" data-dropdown-toggle="toggle{{ $subscription->id }}" class="" type="button">
+                                                <button id="dropdownButton" data-dropdown-toggle="toggle{{ $inventory->id }}" class="" type="button">
                                                     <span class="sr-only">Open dropdown</span>
                                                     <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         fill="currentColor" viewBox="0 0 16 3">
@@ -71,49 +83,43 @@
                                                 </button>
                                             </div>
     
-                                            <div id="toggle{{ $subscription->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
+                                            <div id="toggle{{ $inventory->id }}" class="z-10 hidden bg-white border border-light-gray-background text-background rounded-md !min-w-[8vw]">
 
                                                 <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
 
-                                                    <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$subscription->name}}</p>
+                                                    <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$inventory->equipment->equipment_name}}</p>
 
                                                     <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
-                                                        <a href="{{route('manage.subscription.edit', ['subscription' => $subscription])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
                                                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                            class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
-                                                            data-manage_subscription="{{ json_encode($subscription) }}"
-                                                            data-url="{{ route('manage.subscription.destroy', ['subscription' => $subscription]) }}">
-                                                            Delete
+                                                            class="restore-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-green-600 transition-all m-0" type="button"
+                                                            data-inventory="{{ json_encode($inventory) }}"
+                                                            data-url="{{ route('archive.inventory.restore', ['inventory' => $inventory]) }}">
+                                                            Restore
                                                         </button>
                                                     </div>
                                                 </div>
         
                                             </div>
                                         </div>
-
                                     </td>
                                 </tr>
-
                             @endforeach
                         @else
                             <tr>
                                 <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                    No subscriptions
+                                    No items
                                 </td>
                             </tr>
                         @endif
-
                     </tbody>
                 </table>
-
             </div>
 
-            @if($subscriptions->hasPages())
+            @if($inventories->hasPages())
                 <div class="card">
-                    {{$subscriptions->links()}}
+                    {{$inventories->links()}}
                 </div>
             @endif
-
         </div>
 
     </div>
@@ -123,14 +129,14 @@
             <p id="modal-text"></p>
             <form method="POST">
                 @csrf
-                @method('DELETE')
-                <input type="hidden" id="modal_id" name="manage_subscription_id">
+                @method('PUT')
+                <input type="hidden" id="modal_id" name="inventory_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                        Restore
                     </button>
                 </div>
             </form>
@@ -138,15 +144,15 @@
     </div>
 
     <script>
-        const deleteButtons = document.querySelectorAll('.delete-button');
+        const restoreButtons = document.querySelectorAll('.restore-button');
         const modalText = document.querySelector('#modal-text');
         const modalIdField = document.querySelector('#modal_id');
 
-        deleteButtons.forEach(button => {
-            const subscription = JSON.parse(button.dataset.manage_subscription);
+        restoreButtons.forEach(button => {
+            const inventory = JSON.parse(button.dataset.inventory);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete subscription \"" + subscription.name + "\" ?";
-                modalIdField.value = subscription.id
+                modalText.innerText = "Are you sure you want to restore item \"" + inventory.equipment.equipment_name + "\" ?";
+                modalIdField.value = inventory.id
 
                 const modalForm = modalIdField.parentElement;
                 modalForm.action = button.dataset.url;

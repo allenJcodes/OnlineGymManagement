@@ -19,7 +19,7 @@ class InventoryController extends Controller
 
     public function index()
     {
-        $inventories = Inventory::search()->with('equipment')->paginate(2);
+        $inventories = Inventory::search()->with('equipment')->paginate(10);
         return view('features.inventory.inventory', compact('inventories'));
     }
 
@@ -57,9 +57,19 @@ class InventoryController extends Controller
 
     public function destroy(Inventory $inventory) {
         $inventory->delete();
-        return redirect()->route('inventory.index')->with('toast', [
+
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'Item deleted successfully.',
+        ]);
+    }
+
+    public function restore() {
+        Inventory::withTrashed()->find(request()->inventory_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Item restored successfully.',
         ]);
     }
 

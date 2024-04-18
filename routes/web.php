@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchiveController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FAQController;
@@ -119,5 +120,28 @@ Route::group(['middleware' => ['auth']], function () {
 
     // USER_ATTENDANCE
     Route::resource('user_attendance', UserAttendanceController::class);
+
+    Route::prefix('archive')->name('archive.')->group(function () {
+        Route::resource('', ArchiveController::class);
+        Route::get('users', [ArchiveController::class, 'usersIndex'])->name('users.index');
+        Route::get('instructors', [ArchiveController::class, 'instructorsIndex'])->name('instructors.index');
+        Route::get('gym_session', [ArchiveController::class, 'gymSessionIndex'])->name('gym_session.index');
+        Route::get('learn', [ArchiveController::class, 'learnIndex'])->name('learn.index');
+        Route::get('faq', [ArchiveController::class, 'faqIndex'])->name('faq.index');
+        Route::get('contact', [ArchiveController::class, 'contactIndex'])->name('contact.index');
+        Route::get('equipments', [ArchiveController::class, 'equipmentsIndex'])->name('equipments.index');
+        Route::get('inventory', [ArchiveController::class, 'inventoryIndex'])->name('inventory.index');
+        Route::get('manage_subscriptions', [ArchiveController::class, 'manageSubscriptionsIndex'])->name('manage_subscriptions.index');
+        
+        Route::put('users/restore', [UsersController::class, 'restore'])->name('users.restore');
+        Route::put('instructors/restore', [InstructorController::class, 'restore'])->name('instructors.restore');
+        Route::put('gym_session/restore', [GymSessionController::class, 'restore'])->name('gym_session.restore');
+        Route::put('learn/restore', [LearnController::class, 'restore'])->name('learn.restore');
+        Route::put('faq/restore', [FAQController::class, 'restore'])->name('faq.restore');
+        Route::put('contact/restore', [ContactController::class, 'restore'])->name('contact.restore');
+        Route::put('equipments/restore', [EquipmentController::class, 'restore'])->name('equipments.restore');
+        Route::put('inventory/restore', [InventoryController::class, 'restore'])->name('inventory.restore');
+        Route::put('manage_subscriptions/restore', [ManageSubscriptionController::class, 'restore'])->name('manage_subscriptions.restore');
+    });
    
 });

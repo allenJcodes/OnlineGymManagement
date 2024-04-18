@@ -123,9 +123,20 @@ class InstructorController extends Controller
     public function destroy(Instructor $instructor)
     {
         $instructor->delete();
-        return redirect()->route('instructor.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'Instructor deleted successfully.',
+        ]);
+    }
+
+    public function restore() {
+        $instructor = Instructor::withTrashed()->find(request()->instructor_id);
+        $user = User::withTrashed()->find($instructor->user_id)->restore();
+        $instructor->restore();
+        
+        return redirect()->route('archive.instructors.index')->with('toast', [
+            'status' => 'success',
+            'message' => 'Instructor restored successfully.',
         ]);
     }
 }

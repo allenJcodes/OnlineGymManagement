@@ -5,20 +5,14 @@
 
         
         <div class="flex items-start w-full justify-between ">
-
-            <h1 class="text-2xl font-bold">Subscriptions</h1>
-
-            <a href="{{ route('manage.subscription.create') }}" class="primary-button">
-                Add Subscription +
-            </a>
-
+            <h1 class="text-2xl font-bold">Subscriptions Archives</h1>
         </div>
 
         <div class="flex flex-col gap-2">
 
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Subscription List</h2>
+                    <h2 class="text-xl font-medium">Subscription Archives List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="Subscription"/>
                 </div>
@@ -78,12 +72,11 @@
                                                     <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$subscription->name}}</p>
 
                                                     <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
-                                                        <a href="{{route('manage.subscription.edit', ['subscription' => $subscription])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
                                                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                            class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
+                                                            class="restore-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-green-600 transition-all m-0" type="button"
                                                             data-manage_subscription="{{ json_encode($subscription) }}"
-                                                            data-url="{{ route('manage.subscription.destroy', ['subscription' => $subscription]) }}">
-                                                            Delete
+                                                            data-url="{{ route('archive.manage_subscriptions.restore', ['subscription' => $subscription]) }}">
+                                                            Restore
                                                         </button>
                                                     </div>
                                                 </div>
@@ -123,14 +116,14 @@
             <p id="modal-text"></p>
             <form method="POST">
                 @csrf
-                @method('DELETE')
+                @method('PUT')
                 <input type="hidden" id="modal_id" name="manage_subscription_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                        Restore
                     </button>
                 </div>
             </form>
@@ -138,14 +131,14 @@
     </div>
 
     <script>
-        const deleteButtons = document.querySelectorAll('.delete-button');
+        const restoreButtons = document.querySelectorAll('.restore-button');
         const modalText = document.querySelector('#modal-text');
         const modalIdField = document.querySelector('#modal_id');
 
-        deleteButtons.forEach(button => {
+        restoreButtons.forEach(button => {
             const subscription = JSON.parse(button.dataset.manage_subscription);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete subscription \"" + subscription.name + "\" ?";
+                modalText.innerText = "Are you sure you want to restore subscription \"" + subscription.name + "\" ?";
                 modalIdField.value = subscription.id
 
                 const modalForm = modalIdField.parentElement;

@@ -100,9 +100,19 @@ class GymSessionController extends Controller
     {
         $gym_session->delete();
 
-        return redirect()->route('contents.gym_session.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'Gym session deleted successfully.',
+        ]);
+    }
+
+    public function restore()
+    {
+        GymSession::withTrashed()->find(request()->gym_session_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Gym session restored successfully.',
         ]);
     }
 }

@@ -4,17 +4,14 @@
     <div class="flex flex-col pt-16 gap-5 text-background">
 
         <div class="flex items-start w-full justify-between">
-            <h1 class="text-2xl font-bold">Contacts</h1>
-            <a href="{{ route('contents.contact.create') }}" class="primary-button">
-                Add Contact +
-            </a>
+            <h1 class="text-2xl font-bold">Contacts Archives</h1>
         </div>
 
         <div class="flex flex-col gap-2">
 
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Contacts List</h2>
+                    <h2 class="text-xl font-medium">Contacts Archives List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="Contact"/>
                 </div>
@@ -89,13 +86,11 @@
 
                                                 <div class="flex flex-col divide-y divide-light-gray-background"
                                                     aria-labelledby="dropdownButton">
-                                                    <a href="{{ route('contents.contact.edit', ['contact' => $contact]) }}"
-                                                        class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
                                                     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                        class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
+                                                        class="restore-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-green-600 transition-all m-0" type="button"
                                                         data-contact="{{ json_encode($contact) }}"
-                                                        data-url="{{ route('contents.contact.destroy', ['contact' => $contact]) }}">
-                                                        Delete
+                                                        data-url="{{ route('archive.contact.restore', ['contact' => $contact]) }}">
+                                                        Restore
                                                     </button>
                                                 </div>
                                             </div>
@@ -119,38 +114,6 @@
                     {{$contacts->links()}}
                 </div>
             @endif
-            <div class="card">
-                <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Edit Google Map</h2>
-                </div>
-                <form action="{{ route('contents.contact.updateMap') }}" method="POST" class="grid grid-cols-2 gap-3">
-                    @csrf
-
-                    <div class="form-field-container">
-                        <label for="content" class="form-label">Location Coordinates</label>
-                        <input id="content" name="content" class="form-input" placeholder="latitude, longitude"></input>
-                    </div>
-
-                    <div class="self-end flex gap-2">
-                        <button class="primary-button">Save Changes</button>
-                    </div>
-                </form>
-                @if ($errors->any())
-                    <div class="flex flex-col gap-1">
-                        @foreach ($errors->all() as $error)
-                            <p class="text-red-500 text-xs">{{ $error }}</p>
-                        @endforeach
-                    </div>
-                @endif
-                <iframe src="https://www.google.com/maps?q={{ $coordinates->content }}&z=18&output=embed" width="600"
-                    height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div class="relative overflow-x-auto shadow-md rounded-md"
-                style="background-color: rgb(247, 247, 247); max-height: 79vh">
-            </div>
-
         </div>
 
         <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
@@ -159,14 +122,14 @@
                 <p id="modal-text"></p>
                 <form method="POST">
                     @csrf
-                    @method('DELETE')
+                    @method('PUT')
                     <input type="hidden" id="modal_id" name="contact_id">
                     <div class="w-full flex justify-end gap-2">
                         <button type="button" class="outline-button" data-modal-hide="popup-modal">
                             Cancel
                         </button>
                         <button type="submit" class="primary-button">
-                            Delete
+                            Restore
                         </button>
                     </div>
                 </form>
@@ -174,14 +137,14 @@
         </div>
     
         <script>
-            const deleteButtons = document.querySelectorAll('.delete-button');
+            const restoreButtons = document.querySelectorAll('.restore-button');
             const modalText = document.querySelector('#modal-text');
             const modalIdField = document.querySelector('#modal_id');
     
-            deleteButtons.forEach(button => {
+            restoreButtons.forEach(button => {
                 const contact = JSON.parse(button.dataset.contact);
                 button.addEventListener('click', () => {
-                    modalText.innerText = "Are you sure you want to delete contact detail \"" + contact.label + "\" ?";
+                    modalText.innerText = "Are you sure you want to restore contact detail \"" + contact.label + "\" ?";
                     modalIdField.value = contact.id
 
                     const modalForm = modalIdField.parentElement;

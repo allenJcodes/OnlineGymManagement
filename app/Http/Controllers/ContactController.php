@@ -110,6 +110,16 @@ class ContactController extends Controller
         ]);
     }
 
+    public function restore()
+    {
+        ContactDetail::withTrashed()->find(request()->contact_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Contact information restored successfully.',
+        ]);
+    }
+
     public function updateMap(ContactMapUpdateRequest $request)
     {
         $contact = ContactDetail::where('label', 'Coordinates')->first();

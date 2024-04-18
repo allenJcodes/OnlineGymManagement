@@ -32,7 +32,7 @@ class UsersController extends Controller
         return redirect()->route('user.index')->with('toast', [
             'status' => 'success',
             'message' => 'User added successfully.',
-        ]);;
+        ]);
     }
 
     public function edit(User $user) {
@@ -74,12 +74,20 @@ class UsersController extends Controller
         }
 
         $user->delete();
-        return redirect()->route('user.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'User deleted successfully.',
         ]);
     }
 
+    public function restore() {
+        User::withTrashed()->find(request()->user_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'User restored successfully.',
+        ]);
+    }
     // end
 
 }

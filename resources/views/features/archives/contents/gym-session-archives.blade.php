@@ -5,11 +5,7 @@
 
         
         <div class="flex items-start w-full justify-between ">
-            <h1 class="text-2xl font-bold">Gym Sessions</h1>
-
-            <a href="{{ route('contents.gym_session.create') }}" class="primary-button">
-                Add Gym Session +
-            </a>
+            <h1 class="text-2xl font-bold">Gym Sessions Archives</h1>
         </div>
 
         <div class="flex flex-col gap-2">
@@ -17,7 +13,7 @@
             <div class="card">
 
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Gym Sessions List</h2>
+                    <h2 class="text-xl font-medium">Gym Sessions Archives List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="Gym Session" />
                 </div>
@@ -77,12 +73,11 @@
                                             <p class="text-background/70 text-sm pt-2 px-4">Actions - {{ $gym_session->title }}</p>
 
                                             <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
-                                                <a href="{{route('contents.gym_session.edit', ['gym_session' => $gym_session])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
                                                 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                    class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
+                                                    class="restore-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-green-600 transition-all m-0" type="button"
                                                     data-gym_session="{{ json_encode($gym_session) }}"
-                                                    data-url="{{ route('contents.gym_session.destroy', ['gym_session' => $gym_session]) }}">
-                                                    Delete
+                                                    data-url="{{ route('archive.gym_session.restore', ['gym_session' => $gym_session]) }}">
+                                                    Restore
                                                 </button>
                                             </div>
                                         </div>
@@ -114,14 +109,14 @@
             <p id="modal-text"></p>
             <form method="POST">
                 @csrf
-                @method('DELETE')
+                @method('PUT')
                 <input type="hidden" id="modal_id" name="gym_session_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                        Restore
                     </button>
                 </div>
             </form>
@@ -129,14 +124,14 @@
     </div>
 
     <script>
-        const deleteButtons = document.querySelectorAll('.delete-button');
+        const restoreButtons = document.querySelectorAll('.restore-button');
         const modalText = document.querySelector('#modal-text');
         const modalIdField = document.querySelector('#modal_id');
 
-        deleteButtons.forEach(button => {
+        restoreButtons.forEach(button => {
             const gym_session = JSON.parse(button.dataset.gym_session);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete gym session \"" + gym_session.title + "\" ?";
+                modalText.innerText = "Are you sure you want to restore gym session \"" + gym_session.title + "\" ?";
                 modalIdField.value = gym_session.id;
                 
                 const modalForm = modalIdField.parentElement;

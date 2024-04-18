@@ -14,7 +14,7 @@
 
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">FAQs List</h2>
+                    <h2 class="text-xl font-medium">FAQ List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="FAQ" />
                 </div>
@@ -71,7 +71,7 @@
     
                                         <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
     
-                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$faq->label}}</p>
+                                            <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$faq->title}}</p>
     
                                             <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                                 <a href="{{route('contents.faq.edit', ['faq' => $faq])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
@@ -89,6 +89,11 @@
                             </td>
                         </tr>
                         @empty
+                        <tr>
+                            <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
+                                No FAQ
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -107,7 +112,7 @@
             <form method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="hidden" id="modal_id" name="learn-content_id">
+                <input type="hidden" id="modal_id" name="faq_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel

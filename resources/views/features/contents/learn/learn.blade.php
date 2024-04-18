@@ -5,7 +5,7 @@
 
         
         <div class="flex items-start w-full justify-between ">
-            <h1 class="text-2xl font-bold">Learn Content</h1>
+            <h1 class="text-2xl font-bold">Learn Contents</h1>
 
             <a href="{{ route('contents.learn.create') }}" class="primary-button">
                 Add Learn Content +
@@ -122,7 +122,7 @@
             <form method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="hidden" id="modal_id" name="learn-content_id">
+                <input type="hidden" id="modal_id" name="learn_content_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel

@@ -86,9 +86,20 @@ class EquipmentController extends Controller
     public function destroy(Equipment $equipment)
     {
         $equipment->delete();
-        return redirect()->route('equipment.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'Equipment deleted successfully.',
+        ]);
+    }
+
+    public function restore() {
+        $equipment = Equipment::withTrashed()->find(request()->equipment_id);
+        $equipmentStatus = EquipmentStatus::withTrashed()->where('equipment_id', '=', $equipment->id)->restore();
+        $equipment->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Equipment restored successfully.',
         ]);
     }
 }
