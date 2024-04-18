@@ -53,7 +53,7 @@ class EquipmentTypeController extends Controller
         $equipmentType->delete();
         return redirect()->route('equipment_types.index')->with('toast', [
             'status' => 'success',
-            'message' => 'Equipment Type deleted successfully.',
+            'message' => 'Equipment type archived successfully.',
         ]);
     }
 }

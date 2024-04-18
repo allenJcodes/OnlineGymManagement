@@ -12,7 +12,7 @@
 
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Subscription Archives List</h2>
+                    <h2 class="text-xl font-medium">Subscriptions Archives List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="Subscription"/>
                 </div>
@@ -91,7 +91,7 @@
                         @else
                             <tr>
                                 <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                    No subscriptions
+                                    No archived subscriptions
                                 </td>
                             </tr>
                         @endif

@@ -88,7 +88,7 @@
                                                     class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
                                                     data-learn_content="{{ json_encode($learnContent) }}"
                                                     data-url="{{ route('contents.learn.destroy', ['learn' => $learnContent]) }}">
-                                                    Delete
+                                                   Archive
                                                 </button>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                         @empty
                         <tr>
                             <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                No instructors
+                                No learn content
                             </td>
                         </tr>
                         @endforelse
@@ -128,7 +128,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                       Archive
                     </button>
                 </div>
             </form>
@@ -143,7 +143,7 @@
         deleteButtons.forEach(button => {
             const learn_content = JSON.parse(button.dataset.learn_content);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete content \"" + learn_content.title + "\" ?";
+                modalText.innerText = "Are you sure you want to archive content \"" + learn_content.title + "\" ?";
                 modalIdField.value = learn_content.id;
 
                 const modalForm = modalIdField.parentElement;

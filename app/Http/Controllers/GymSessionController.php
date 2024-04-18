@@ -102,7 +102,7 @@ class GymSessionController extends Controller
 
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Gym session deleted successfully.',
+            'message' => 'Gym session archived successfully.',
         ]);
     }
 

@@ -115,7 +115,7 @@ class ManageSubscriptionController extends Controller
 
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Subscription type deleted successfully.',
+            'message' => 'Subscription type archived successfully.',
         ]);
     }
 

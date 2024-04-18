@@ -13,7 +13,7 @@
         <div class="flex flex-col gap-2">
             <div class="card">
                 <div class="flex w-full justify-between">
-                    <h2 class="text-xl font-medium">Subscription List</h2>
+                    <h2 class="text-xl font-medium">Subscriptions List</h2>
                     {{-- form actions here --}}
                     <x-table-search model="Subscription" />
                 </div>

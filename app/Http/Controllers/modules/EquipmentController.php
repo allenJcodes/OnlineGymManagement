@@ -88,7 +88,7 @@ class EquipmentController extends Controller
         $equipment->delete();
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Equipment deleted successfully.',
+            'message' => 'Equipment archived successfully.',
         ]);
     }
 

@@ -125,7 +125,7 @@ class InstructorController extends Controller
         $instructor->delete();
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Instructor deleted successfully.',
+            'message' => 'Instructor archived successfully.',
         ]);
     }
 

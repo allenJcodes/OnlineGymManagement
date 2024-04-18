@@ -76,7 +76,7 @@ class UsersController extends Controller
         $user->delete();
         return back()->with('toast', [
             'status' => 'success',
-            'message' => 'User deleted successfully.',
+            'message' => 'User archived successfully.',
         ]);
     }
 
