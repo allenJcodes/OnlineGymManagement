@@ -21,7 +21,7 @@
 
             <div class="form-field-container">
                 <label for="number_of_months" class="form-label">Duration (Months)</label>
-                <input value="{{$subscription->number_of_months}}" id="number_of_months" type="text" name="number_of_months" class="form-input">
+                <input value="{{$subscription->number_of_months}}" id="number_of_months" type="number" name="number_of_months" class="form-input">
             </div>
 
             <div class="form-field-container">

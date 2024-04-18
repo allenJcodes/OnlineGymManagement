@@ -21,7 +21,7 @@
             <div class="flex gap-1 items-end">
                 <div class="form-field-container w-1/4">
                     <label for="duration" class="form-label">Duration</label>
-                    <input id="duration" type="text" name="duration" class="form-input">
+                    <input id="duration" type="number" name="duration" class="form-input">
                 </div>
 
                 <div class="form-field-container w-1/4">
