@@ -42,7 +42,7 @@ class UserAttendanceController extends Controller
         $user = User::where('id', $request->user_id)->with(['subscriptions' => function($q) {
             $q->where('subscriptions.status', 'Active');
         }, 'subscriptions.subscriptionTypes'])->first();
-
+        
         if (!$user->active_subscription) {
             return redirect()->back()->with('toast', [
                 'status' => 'error',
@@ -99,7 +99,7 @@ class UserAttendanceController extends Controller
 
         return redirect()->back()->with('toast', [
             'status' => 'success',
-            'message' => "$user->full_name has timed in successfully."
+            'message' => "Welcome $user->full_name (Subscription Type: " . $user->subscriptions[0]->subscriptionTypes->name . ").",
         ]);
     }
 
