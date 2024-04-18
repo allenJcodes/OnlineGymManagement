@@ -111,9 +111,19 @@ class LearnController extends Controller
     {
         $learn->delete();
 
-        return redirect()->route('contents.learn.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
             'message' => 'Learn content deleted successfully.',
+        ]);
+    }
+
+    public function restore()
+    {
+        LearnContent::withTrashed()->find(request()->learn_content_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Learn content restored successfully.',
         ]);
     }
 }

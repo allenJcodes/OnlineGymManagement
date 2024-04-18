@@ -115,7 +115,7 @@
             <form method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="hidden" id="modal_id" name="gym-session_id">
+                <input type="hidden" id="modal_id" name="gym_session_id">
                 <div class="w-full flex justify-end gap-2">
                     <button type="button" class="outline-button" data-modal-hide="popup-modal">
                         Cancel

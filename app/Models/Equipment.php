@@ -43,7 +43,7 @@ class Equipment extends Model
 
     public function equipmentStatus() : HasMany
     {
-        return $this->hasMany(EquipmentStatus::class);
+        return $this->hasMany(EquipmentStatus::class)->withTrashed();
     }
 
     protected static function booted()

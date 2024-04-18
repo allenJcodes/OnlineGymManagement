@@ -113,9 +113,18 @@ class ManageSubscriptionController extends Controller
     {
         $subscription->delete();
 
-        return redirect()->route('manage.subscription.index')->with('toast', [
+        return back()->with('toast', [
             'status' => 'success',
-            'message' => 'Subscription deleted successfully.',
-        ]);;
+            'message' => 'Subscription type deleted successfully.',
+        ]);
+    }
+
+    public function restore() {
+        SubscriptionType::withTrashed()->find(request()->manage_subscription_id)->restore();
+        
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'Subscription type restored successfully.',
+        ]);
     }
 }

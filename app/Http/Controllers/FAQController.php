@@ -97,11 +97,20 @@ class FAQController extends Controller
      */
     public function destroy(FAQ $faq)
     {
-            $faq->delete();
+        $faq->delete();
 
-            return redirect()->route('contents.faq.index')->with('toast', [
-                'status' => 'success',
-                'message' => 'FAQ deleted successfully.',
-            ]);
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'FAQ deleted successfully.',
+        ]);
+    }
+
+    public function restore(){
+        FAQ::withTrashed()->find(request()->faq_id)->restore();
+
+        return back()->with('toast', [
+            'status' => 'success',
+            'message' => 'FAQ restored successfully.',
+        ]);
     }
 }
