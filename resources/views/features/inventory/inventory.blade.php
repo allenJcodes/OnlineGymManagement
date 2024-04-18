@@ -101,7 +101,7 @@
                                                             class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
                                                             data-inventory="{{ json_encode($inventory) }}"
                                                             data-url="{{ route('inventory.destroy', ['inventory' => $inventory]) }}">
-                                                            Delete
+                                                           Archive
                                                         </button>
                                                     </div>
                                                 </div>
@@ -143,7 +143,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                       Archive
                     </button>
                 </div>
             </form>
@@ -158,7 +158,7 @@
         deleteButtons.forEach(button => {
             const inventory = JSON.parse(button.dataset.inventory);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete item \"" + inventory.equipment.equipment_name + "\" ?";
+                modalText.innerText = "Are you sure you want to archive item \"" + inventory.equipment.equipment_name + "\" ?";
                 modalIdField.value = inventory.id
 
                 const modalForm = modalIdField.parentElement;

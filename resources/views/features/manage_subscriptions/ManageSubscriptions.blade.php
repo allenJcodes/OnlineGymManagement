@@ -83,7 +83,7 @@
                                                             class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
                                                             data-manage_subscription="{{ json_encode($subscription) }}"
                                                             data-url="{{ route('manage.subscription.destroy', ['subscription' => $subscription]) }}">
-                                                            Delete
+                                                           Archive
                                                         </button>
                                                     </div>
                                                 </div>
@@ -130,7 +130,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                       Archive
                     </button>
                 </div>
             </form>
@@ -145,7 +145,7 @@
         deleteButtons.forEach(button => {
             const subscription = JSON.parse(button.dataset.manage_subscription);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete subscription \"" + subscription.name + "\" ?";
+                modalText.innerText = "Are you sure you want to archive subscription \"" + subscription.name + "\" ?";
                 modalIdField.value = subscription.id
 
                 const modalForm = modalIdField.parentElement;

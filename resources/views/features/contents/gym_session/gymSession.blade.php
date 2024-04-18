@@ -82,7 +82,7 @@
                                                     class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
                                                     data-gym_session="{{ json_encode($gym_session) }}"
                                                     data-url="{{ route('contents.gym_session.destroy', ['gym_session' => $gym_session]) }}">
-                                                    Delete
+                                                   Archive
                                                 </button>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                         Cancel
                     </button>
                     <button type="submit" class="primary-button">
-                        Delete
+                       Archive
                     </button>
                 </div>
             </form>
@@ -136,7 +136,7 @@
         deleteButtons.forEach(button => {
             const gym_session = JSON.parse(button.dataset.gym_session);
             button.addEventListener('click', () => {
-                modalText.innerText = "Are you sure you want to delete gym session \"" + gym_session.title + "\" ?";
+                modalText.innerText = "Are you sure you want to archive gym session \"" + gym_session.title + "\" ?";
                 modalIdField.value = gym_session.id;
                 
                 const modalForm = modalIdField.parentElement;
