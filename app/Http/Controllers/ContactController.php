@@ -106,7 +106,7 @@ class ContactController extends Controller
         $contact->delete();
         return redirect()->route('contents.contact.index')->with('toast', [
             'status' => 'success',
-            'message' => 'Contact information deleted successfully.',
+            'message' => 'Contact information archived successfully.',
         ]);
     }
 

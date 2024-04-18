@@ -74,7 +74,7 @@
                         @empty
                             <tr>
                                 <td colspan="100%" class="text-center h-[10vh] bg-gray-100">
-                                    No instructors
+                                    No archived instructors
                                 </td>
                             </tr>
                         @endforelse
