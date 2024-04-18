@@ -105,7 +105,7 @@
                 </li>
             @endif
 
-            @if (Auth::user()->user_role != '2')
+            @if (Auth::user()->user_role == '1')
                 <li>
                     <a href="{{ route('archive.index') }}"
                         class=" {{ (request()->is('archive*') || request()->is('manage/payment_modes')) ? 'font-medium bg-dashboard-accent-light text-dashboard-accent-base fill-dashboard-accent-base border-l-2 border-l-dashboard-accent-base' : 'text-gray-500 fill-gray-500' }} flex gap-3 items-center py-3 px-2 hover:text-dashboard-accent-base hover:bg-dashboard-accent-light transition-all">
