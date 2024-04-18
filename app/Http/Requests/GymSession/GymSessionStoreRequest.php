@@ -25,7 +25,7 @@ class GymSessionStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required|max:255'
         ];
     }
 }
