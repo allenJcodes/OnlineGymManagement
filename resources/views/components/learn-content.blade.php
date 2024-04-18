@@ -23,6 +23,6 @@
             <p class="text-base text-dark-gray-900">{{$subtitle}}</p>
         </div>
 
-        <p class="text-sm text-dark-gray-800">{{$content}}</p>
+        <p class="text-sm text-dark-gray-800">{!!$content!!}</p>
     </div>
 </div>
