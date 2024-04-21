@@ -19,13 +19,13 @@
 </button>
 
 <!-- Dropdown menu -->
-<div class="hidden overflow-hidden bg-white rounded-b-md shadow-md max-w-[20vw]" id="notification-dropdown">
-    <div class="flex flex-col p-2">
+<div class="hidden overflow-hidden bg-white rounded-b-md shadow-md max-w-[30vw]" id="notification-dropdown">
+    <div class="flex flex-col p-2 overflow-y-auto max-h-[70vh]">
         <p class="text-base font-medium text-left w-full">
             Notifications
         </p>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col ">
             @forelse ($userNotifications as $userNotification)
                 <div class="flex flex-col p-2">
                     <p class="text-xs text-dark-gray-800">{{ $userNotification->notification->type }}</p>
