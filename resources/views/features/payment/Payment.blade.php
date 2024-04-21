@@ -24,13 +24,15 @@
                     </div>
                 </div>
 
-                <form action="" id="date_filter_form" class="flex gap-2 h-fit w-fit items-end">
-                    <div class="form-field-container mt-3">
-                        <label for="date" class="form-label">Date Filter</label>
-                        <input id="date" type="date" name="date" class="form-input rounded-lg" value="{{request()->date ?? ''}}">
-                    </div>
-                </form>
-
+                <div class="flex w-full justify-end">
+                    <form action="" id="date_filter_form" class="flex gap-2 h-fit w-fit items-end">
+                        <div class="form-field-container mt-3">
+                            <label for="date" class="form-label">Date Filter</label>
+                            <input id="date" type="date" name="date" class="form-input rounded-lg" value="{{request()->date ?? ''}}">
+                        </div>
+                    </form>
+                </div>
+                
                 <table class="table">
                     <thead>
                         <tr class="table-row">
