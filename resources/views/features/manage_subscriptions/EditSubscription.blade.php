@@ -19,9 +19,19 @@
                 <input value="{{$subscription->price}}" id="price" type="text" name="price" class="form-input">
             </div>
 
-            <div class="form-field-container">
-                <label for="number_of_months" class="form-label">Duration (Months)</label>
-                <input value="{{$subscription->number_of_months}}" id="number_of_months" type="number" name="number_of_months" class="form-input">
+            <div class="flex gap-1 items-end">
+                <div class="form-field-container w-1/4">
+                    <label for="duration" class="form-label">Duration</label>
+                    <input value="{{$subscription->duration}}" id="duration" type="number" name="duration" class="form-input">
+                </div>
+
+                <div class="form-field-container w-1/4">
+                    {{-- <label for="duration_type" class="form-label"></label> --}}
+                    <select name="duration_type" id="duration_type" class="form-input">
+                        <option {{$subscription->duration_type == 'day' ? 'selected' : ''}} value="day">Day/s</option>
+                        <option {{$subscription->duration_type == 'month' ? 'selected' : ''}} value="month">Month/s</option>
+                    </select>
+                </div>
             </div>
 
             <div class="form-field-container">

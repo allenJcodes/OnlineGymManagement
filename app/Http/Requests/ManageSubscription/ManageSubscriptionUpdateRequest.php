@@ -26,7 +26,8 @@ class ManageSubscriptionUpdateRequest extends FormRequest
         return [
             'name' => 'required|unique:subscription_types,name,'.$this->subscription->id,
             'price' => 'required|numeric|min:1',
-            'number_of_months' => 'required|numeric|min:1',
+            'duration' => 'required|numeric|min:1',
+            'duration_type' => 'required',
             'description' => 'required',
             'inclusions' => 'required', 
         ];

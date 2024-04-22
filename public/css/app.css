@@ -922,6 +922,9 @@ tbody .table-row:first-child{
 .h-\[90vh\]{
   height: 90vh;
 }
+.h-\[calc\(100vh-3\.5rem\)\]{
+  height: calc(100vh - 3.5rem);
+}
 .h-fit{
   height: -moz-fit-content;
   height: fit-content;
@@ -931,12 +934,6 @@ tbody .table-row:first-child{
 }
 .h-screen{
   height: 100vh;
-}
-.h-\[calc\(100vh-3\.5rem\)\]{
-  height: calc(100vh - 3.5rem);
-}
-.h-\[calc\(100vh-4rem\)\]{
-  height: calc(100vh - 4rem);
 }
 .max-h-0{
   max-height: 0px;
@@ -1054,11 +1051,11 @@ tbody .table-row:first-child{
 .max-w-0{
   max-width: 0px;
 }
-.max-w-\[20vw\]{
-  max-width: 20vw;
-}
 .max-w-\[25vw\]{
   max-width: 25vw;
+}
+.max-w-\[30vw\]{
+  max-width: 30vw;
 }
 .max-w-\[40vw\]{
   max-width: 40vw;
@@ -1071,9 +1068,6 @@ tbody .table-row:first-child{
 }
 .max-w-full{
   max-width: 100%;
-}
-.max-w-\[30vw\]{
-  max-width: 30vw;
 }
 .flex-1{
   flex: 1 1 0%;

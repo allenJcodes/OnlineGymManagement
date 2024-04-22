@@ -49,12 +49,12 @@ class Subscription extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', "id");
+        return $this->belongsTo(User::class, 'user_id', "id")->withTrashed();
     }
 
     public function subscriptionTypes(): HasOne
     {
-        return $this->HasOne(SubscriptionType::class, 'id', 'subscription_type_id');
+        return $this->HasOne(SubscriptionType::class, 'id', 'subscription_type_id')->withTrashed();;
     }
 
     public function endingSoon() {
