@@ -22,6 +22,7 @@ class DefaultUserSeeder extends Seeder
             'email' => "admin@email.com",
             'user_role' => 1,
             'password' => Hash::make("password"),
+            'email_verified_at' => now(),
         ]);
 
         User::create([
@@ -30,6 +31,7 @@ class DefaultUserSeeder extends Seeder
             'email' => "seth@email.com",
             'user_role' => 1,
             'password' => Hash::make("password"),
+            'email_verified_at' => now(),
         ]);
 
         // INSTRUCTOR
@@ -39,6 +41,7 @@ class DefaultUserSeeder extends Seeder
             'email' => "jacob@email.com",
             'user_role' => 2,
             'password' => Hash::make("password"),
+            'email_verified_at' => now(),
         ]);
 
         //CUSTOMER
@@ -48,6 +51,7 @@ class DefaultUserSeeder extends Seeder
             'email' => "joshua@email.com",
             'user_role' => 3,
             'password' => Hash::make("password"),
+            'email_verified_at' => now(),
         ]);
     }
 }
