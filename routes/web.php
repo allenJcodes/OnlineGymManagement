@@ -26,6 +26,7 @@ use App\Http\Controllers\modules\InventoryController;
 use App\Http\Controllers\ManageSubscriptionController;
 use App\Http\Controllers\UserAttendanceController;
 use App\Http\Controllers\UserNotificationController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,28 @@ use App\Http\Controllers\UserNotificationController;
 
 // TODO: create controller for welcome page
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::get('/account/verify/{user}/{code}', function ($user, $code) {
+
+    $user = User::where('id', $user)->where('verification_token', $code);
+
+    if ($user) {
+        $user->update([
+            'verification_token' => null,
+            'email_verified_at' => now()
+        ]);
+
+        return redirect()->route('login')->with('toast', [
+            'status' => 'success',
+            'message' => 'Account verified'
+        ]);
+    }
+
+    return redirect()->route('login')->with('toast', [
+        'status' => 'error',
+        'message' => 'Code expired'
+    ]);
+});
 
 Auth::routes();
 
@@ -71,7 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('membership', [MembershipController::class, 'createMembership'])->name('membership.store');
 
     // MANAGE MEMBERSHIP
-    Route::prefix('manage')->name('manage.')->group(function() {
+    Route::prefix('manage')->name('manage.')->group(function () {
         Route::resource('subscription', ManageSubscriptionController::class);
     });
 
@@ -81,7 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('payments', PaymentsController::class)->only(['index', 'show']);
 
     // MANAGE PAYMENTS
-    Route::prefix('manage')->name('manage.')->group(function() {
+    Route::prefix('manage')->name('manage.')->group(function () {
         Route::resource('payment_modes', ManagePaymentModeController::class);
     });
 
@@ -132,7 +155,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('equipments', [ArchiveController::class, 'equipmentsIndex'])->name('equipments.index');
         Route::get('inventory', [ArchiveController::class, 'inventoryIndex'])->name('inventory.index');
         Route::get('manage_subscriptions', [ArchiveController::class, 'manageSubscriptionsIndex'])->name('manage_subscriptions.index');
-        
+
         Route::put('users/restore', [UsersController::class, 'restore'])->name('users.restore');
         Route::put('instructors/restore', [InstructorController::class, 'restore'])->name('instructors.restore');
         Route::put('gym_session/restore', [GymSessionController::class, 'restore'])->name('gym_session.restore');
@@ -143,5 +166,4 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('inventory/restore', [InventoryController::class, 'restore'])->name('inventory.restore');
         Route::put('manage_subscriptions/restore', [ManageSubscriptionController::class, 'restore'])->name('manage_subscriptions.restore');
     });
-   
 });

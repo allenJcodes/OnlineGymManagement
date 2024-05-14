@@ -29,7 +29,9 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role',
-        'profile_image'
+        'profile_image',
+        'verification_token',
+        'email_verified_at',
     ];
 
     protected $appends = ['full_name', 'active_subscription'];

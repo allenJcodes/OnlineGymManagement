@@ -1,7 +1,7 @@
 <aside id="default-sidebar"
     class="fixed top-14 left-0 z-40 w-64 h-[calc(100vh-3.5rem)] transition-transform -translate-x-full sm:translate-x-0 shadow-md"
     aria-label="Sidebar">
-    <div class="h-full overflow-y-auto bg-white">
+    <div class="h-full overflow-y-auto bg-white flex flex-col gap-10">
         <ul>
             <li>
                 <a href="{{ route('home') }}"
@@ -116,6 +116,12 @@
                 </li>
             @endif
         </ul>
+
+        @if (Auth::user()->user_role != '1')
+            <a target="_blank" href="https://www.facebook.com/japsgymolympus">
+                <img src="{{asset('/images/navbar.jpg')}}" alt="">
+            </a>
+        @endif
     </div>
 </aside>
 

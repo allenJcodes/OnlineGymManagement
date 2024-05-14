@@ -28,7 +28,7 @@ class UsersController extends Controller
     }
 
     public function store(UserStoreRequest $request) {
-        User::create($request->validated());
+        User::create([...$request->validated(), 'email_verified_at' => now()]);
         return redirect()->route('user.index')->with('toast', [
             'status' => 'success',
             'message' => 'User added successfully.',

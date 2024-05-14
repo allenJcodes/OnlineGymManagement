@@ -25,6 +25,7 @@
 </style>
 
 <body>
+    <x-toast />
     <div class="flex h-full justify-center font-red-hat-display md:px-0">
         <div class="flex flex-col h-fit bg-white rounded-lg px-6 py-8 md:w-1/2 xl:w-1/3 my-32">
             <div class="flex flex-col items-center justify-center w-full gap-2 mb-10">
