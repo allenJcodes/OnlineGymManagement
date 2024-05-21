@@ -36,8 +36,7 @@ class ManageSubscriptionUpdateRequest extends FormRequest
     public function messages ()
     {
         return [
-            'price.min' => 'The subscription price should be at least 1 peso.',
-            'number_of_months.min' => 'The duration should be at least 1 month.'
+            'price.min' => 'The subscription price should be at least 1 peso.'
         ];
     }
 }

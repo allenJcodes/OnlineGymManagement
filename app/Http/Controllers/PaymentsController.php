@@ -73,11 +73,14 @@ class PaymentsController extends Controller
 
         if (($payment->status !== 'Paid' ) && $request->status === 'Paid') {
 
+            $user = User::find($payment->subscriptions->user_id);
+
             $data = [
                 'user_id' => $payment->subscriptions->user_id,
                 'subscription_type_id' => $payment->subscriptions->subscription_type_id,
                 'mode_of_payment' => $payment->mode_of_payment,
                 'reference_number' => $payment->reference_number,
+                'full_name' => $user->full_name,
             ];
 
             $jsonRequest = json_encode($data);
@@ -85,9 +88,16 @@ class PaymentsController extends Controller
             $user = User::find($payment->subscriptions->user_id);
             $filePath = $membershipService->generateUserQR($jsonRequest, $user);
 
+            $subscriptionType = $payment->subscriptions->subscriptionTypes;
+            if($subscriptionType->duration_type == 'day') {
+                $endDate = Carbon::parse(now())->addDays($subscriptionType->duration);
+            }else {
+                $endDate = Carbon::parse(now())->addMonths($subscriptionType->duration);
+            }
+
             Subscription::where('id', $payment->subscription_id)->update([
                 'start_date' => now(),
-                'end_date' => Carbon::parse(now())->addMonths($payment->subscriptions->subscriptionTypes->number_of_months),
+                'end_date' => $endDate,
                 'qr_code' => $filePath,
                 'status' => 'Active'
             ]);  

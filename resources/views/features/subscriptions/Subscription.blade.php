@@ -161,19 +161,21 @@
                             <p class="form-label">Choose Subscription</p>
                             <div class="grid w-full gap-6 md:grid-cols-2">
                                 @foreach ($subscriptions as $key => $subscription)
+    
                                     <label for="membership{{ $key }}"
                                         class="group flex rounded-lg ring-1 ring-border py-2 px-4 gap-4 has-[:checked]:bg-dashboard-accent-light has-[:checked]:ring-dashboard-accent-base cursor-pointer group">
                                         <input type="radio" id="membership{{ $key }}" name="subscription_type_id"
                                             value="{{ $subscription->id }}" class="hidden">
                                         <div class="flex flex-col">
+                                            <p class="text-xs text-gray-400">{{ $subscription->name }} Subscription</p>
                                             <p class="w-full text-base font-semibold">
-                                                {{ $subscription->number_of_months }}
-                                                Month{{ $subscription->number_of_months > 1 ? 's' : '' }}
+                                                {{ $subscription->duration }} {{$subscription->duration_type}}{{ $subscription->duration > 1 ? 's' : '' }}
                                             </p>
                                             <p>P{{ $subscription->price }}</p>
                                             <p class="text-xs text-dark-gray-800">{{ $subscription->description }}</p>
                                         </div>
                                     </label>
+    
                                 @endforeach
                             </div>
                         </div>
