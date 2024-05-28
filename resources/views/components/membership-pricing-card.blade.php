@@ -7,7 +7,7 @@
 
     <div class="flex flex-col items-center gap-1">
         <p class="text-sm text-off-white/40">{{$type}}</p>
-        <h3 class="text-xl font-bold">P {{$price}}</h3>
+        <h3 class="text-xl font-bold">₱ {{$price}}</h3>
     </div>
 
     <p class="text-xs text-justify text-off-white/40">{{$description}}</p>

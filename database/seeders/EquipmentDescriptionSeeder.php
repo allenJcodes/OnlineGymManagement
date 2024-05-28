@@ -37,5 +37,9 @@ class EquipmentDescriptionSeeder extends Seeder
         EquipmentDescription::create([
             'content' => 'For cardio workout'
         ]);
+
+        EquipmentDescription::create([
+            'content' => 'For compound workout'
+        ]);
     }
 }

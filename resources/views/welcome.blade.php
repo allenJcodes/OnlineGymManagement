@@ -168,7 +168,7 @@
 
     {{-- PRICING PAGE --}}
     <section id="pricing">
-        <div class="py-20 gap-10 bg-background flex flex-col items-center justify-center text-off-white px-16 2xl:px-64">
+        <div class="py-20 gap-10 bg-background flex flex-col items-center justify-center text-white px-16 2xl:px-64">
             <h2 class="text-5xl">Membership Pricing</h2>
 
             <div class="grid grid-cols-3 gap-10 w-full">
