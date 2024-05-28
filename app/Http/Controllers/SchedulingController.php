@@ -50,6 +50,13 @@ class SchedulingController extends Controller
         $time_start = Carbon::parse($request->date_time_start)->toDateTimeString();
         $time_end = Carbon::parse($request->date_time_end)->toDateTimeString();
 
+        if(Carbon::parse($request->date_time_end)->lt(Carbon::parse($request->date_time_start)->addHour())) {
+            return back()->with('toast', [
+                'status' => 'error',
+                'message' => 'Schedules should be at least 1 hour.',
+            ]);
+        }
+
         $checkConflicts = Schedules::where('instructor_id', $request->instructor_id)
         ->where(function($q) use ($time_start, $time_end) {
             $q->where(function($subQ) use ($time_start, $time_end) {

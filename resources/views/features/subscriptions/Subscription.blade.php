@@ -67,7 +67,7 @@
                                        
                                         @if ($sub->status == 'Pending')
                                             <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
-                                            {{$sub->status}}
+                                            Verifying
                                         @elseif (($sub->end_date < now()->format('Y-m-d')) | ($sub->status == 'Subscription Ended') || $sub->status == 'Cancelled' || $sub->status == 'Cancelled')
                                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
                                             {{$sub->status}}

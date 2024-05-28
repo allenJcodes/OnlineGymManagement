@@ -10,8 +10,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="flex flex-col">
-        <h1>Payment Reports</h1>
+    <div class="flex flex-col gap-1">
+
+        <div class=" flex gap-2 items-center mb-5">
+            <img src="{{ asset('images/logo.png') }}"  class="size-[4rem]">
+            <p class="font-bold">Japs Fitness Gym</p> 
+        </div>
+        <h1 class="font-bold">Payment Reports</h1>
 
         <table class="table">
             <thead>

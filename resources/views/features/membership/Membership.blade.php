@@ -70,7 +70,7 @@
                                             Unsubscribed
                                         @elseif ($user->active_subscription->status == 'Pending')
                                             <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
-                                            {{$user->active_subscription->status}}
+                                            Verifying
                                         @elseif (($user->active_subscription->end_date < now()->format('Y-m-d')) | ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
                                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
                                             {{$user->active_subscription->status}}
@@ -101,14 +101,20 @@
                                             Subscribe
                                         </button>
                                     @else
-                                        <form method="POST"
+                                        <button data-modal-target="cancel-popup-modal" data-modal-toggle="cancel-popup-modal"
+                                            class="outline-button cancel-button" type="button"
+                                            data-url="{{ route('membership.cancel', ['id' => $user->active_subscription->id]) }}"
+                                            data-user="{{ json_encode($user) }}">
+                                            Cancel subscription
+                                        </button>
+                                        {{-- <form method="POST"
                                             action="{{ route('membership.cancel', ['id' => $user->active_subscription->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="outline-button">
-                                                Unsubscribe
+                                                Cancel subscription
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     @endif
 
                                 </td>
@@ -233,6 +239,41 @@
     @endisset
     </div>
 
+    {{-- cancel subscription modal --}}
+    <div id="cancel-popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 md:inset-0 h-screen w-screen bg-black/20 backdrop-blur-sm">
+        <div class='flex flex-col bg-off-white p-5 h-fit rounded-lg min-w-fit min-h-[10vh] max-h-[90vh] max-w-[60vw] gap-5 overflow-x-hidden overflow-y-auto'>
+            <p id="modal-text"></p>
+
+            <form method="POST" action="">
+                @csrf
+                @method('DELETE')
+                <div class="w-full flex justify-end gap-2">
+                    <button type="button" class="outline-button" data-modal-hide="cancel-popup-modal">
+                        Cancel
+                    </button>
+                    <button class="primary-button">
+                        Cancel subscription
+                    </button>
+                </div>
+
+            </form>
+            
+            {{-- <form method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="modal_id" name="user_id">
+                <div class="w-full flex justify-end gap-2">
+                    <button type="button" class="outline-button" data-modal-hide="popup-modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="primary-button">
+                       Archive
+                    </button>
+                </div>
+            </form> --}}
+        </div>
+    </div>
+
 
     <script>
         const subscribeButtons = document.querySelectorAll('.subscribe-button');
@@ -281,5 +322,24 @@
                 referenceNumberField.required = true;
             }
         });
+
+        const cancelButtons = document.querySelectorAll('.cancel-button');
+        const modalText = document.querySelector('#modal-text');
+
+
+        cancelButtons.forEach(button => {
+            const user = JSON.parse(button.dataset.user);
+            button.addEventListener('click', () => {
+                modalText.innerText = "Are you sure you want to cancel the subscription of \"" + user.full_name + "\" ?";
+
+                const modalForm = modalText.nextElementSibling;
+                modalForm.action = button.dataset.url;
+        
+                const submitButton = modalForm.querySelector('button[type="submit"]');
+                submitButton.addEventListener('click', () => {
+                    modalForm.submit();
+                });
+            });
+        })
     </script>
 @endsection

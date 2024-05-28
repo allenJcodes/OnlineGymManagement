@@ -29,6 +29,16 @@ class SubscriptionController extends Controller
 
     public function store(MembershipStoreRequest $request)
     {
+        
+        $checkReferenceNumber = Payments::where('reference_number', $request->reference_number)->first();
+
+        if($checkReferenceNumber) {
+            return back()->with('toast', [
+                'status' => 'error',
+                'message' => 'The reference number is already used.',
+            ]);
+        }
+
         $subscriptionType = SubscriptionType::find($request->subscription_type_id);
         
         $subscription = Subscription::create([

@@ -86,11 +86,12 @@
                                             <div class="flex flex-col gap-2 divide-y divide-light-gray-background">
     
                                                 <p class="text-background/70 text-sm pt-2 px-4">Actions - {{$user->first_name}}</p>
-    
+                                                
                                                 <div class="flex flex-col divide-y divide-light-gray-background" aria-labelledby="dropdownButton">
                                                     <a href="{{route('user.edit', ['user' => $user])}}" class="py-2 px-4 hover:bg-off-white transition-all">Edit</a>
-                                                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                        class="delete-button w-full text-left py-2 px-4 hover:bg-off-white hover:text-red-500 transition-all m-0" type="button"
+
+                                                    <button {{$user->active_subscription ? 'disabled' : ''}} data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                                        class="delete-button w-full text-left py-2 px-4 {{!$user->active_subscription ? 'hover:bg-off-white hover:text-red-500 ' : 'bg-[#bebebe20] text-[#1e1e1e50]'}} transition-all m-0" type="button"
                                                         data-user="{{ json_encode($user) }}"
                                                         data-url="{{ route('user.destroy', ['user' => $user]) }}">
                                                        Archive
