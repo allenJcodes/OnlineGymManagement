@@ -25,7 +25,8 @@
 
                 <div class="card">
                     <h2>
-                        Total Active Members
+                        {{-- Total Active Members --}}
+                        Today’s Active Members
                     </h2>
                     <hr>
                     <p class="text-4xl text-gray-500">{{ $active_users }}</p>

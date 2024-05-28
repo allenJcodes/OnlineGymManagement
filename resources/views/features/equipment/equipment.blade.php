@@ -82,30 +82,46 @@
                             <div class="flex flex-col w-full p-4 border-t border-border">
                                 <h2 class="text-lg font-medium"> {{$equipment->equipment_name}} </h2>
                                 <p> {{$equipment->equipmentDescription->content}} </p>
-                                <div class="flex">
+                                <div class="flex items-center">
+                                    @php
+                                        $totalCount = 0
+                                    @endphp
                                     @foreach($equipment->equipmentStatus as $status)
                                     @switch($status->status)
                                         @case('available')
-                                            <div class="mr-4 flex items-center">
+                                            @php
+                                                $totalCount += $status->quantity
+                                            @endphp
+                                            <div class="mr-4 flex items-center" title="Available">
                                               <box-icon type="solid" name="check-circle" color="#22c55e" class="w-5"></box-icon>
                                               <span class="text-sm ml-1">{{$status->quantity}}</span>
                                             </div>
                                             @break
                                         @case('not_available')
-                                            <div class="mr-4 flex items-center">
+                                            @php
+                                                $totalCount += $status->quantity
+                                            @endphp
+                                            <div class="mr-4 flex items-center" title="Not Available">
                                               <box-icon type="solid" name="error" color="#eab308" class="w-5"></box-icon>
                                               <span class="text-sm ml-1">{{$status->quantity}}</span>
                                             </div>
                                             @break
                                         @case('under_maintenance')
-                                            <div class="flex items-center">
+                                            @php
+                                                $totalCount += $status->quantity
+                                            @endphp
+                                            <div class="flex items-center" title="Under Maintenance">
                                               <box-icon type="solid" name="x-circle" color="#ef4444" class="w-5"></box-icon>
                                               <span class="text-sm ml-1">{{$status->quantity}}</span>
                                             </div>
                                             @break
                                     @endswitch
                                     @endforeach
+
+                                    <p class="ml-5 text-sm">Total Count: {{$totalCount}}</p>
+                                    
                                 </div>
+
                             </div>
                         </div>
                     </div>

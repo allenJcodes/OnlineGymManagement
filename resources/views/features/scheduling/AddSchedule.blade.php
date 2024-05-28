@@ -29,7 +29,7 @@
 
             <div class="form-field-container">
                 <label for="date_time_start" class="form-label">Date and Time Start</label>
-                <input id="date_time_start" type="datetime-local" name="date_time_start" class="form-input">
+                <input id="date_time_start" type="datetime-local" name="date_time_start" class="form-input" >
             </div>
             
             <div class="form-field-container">

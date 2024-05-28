@@ -32,7 +32,7 @@
                                 <h2>Subscription Status</h2>
                                 @if (!$user->active_subscription || ($user->active_subscription->end_date < now()->format('Y-m-d')) || ($user->active_subscription->status == 'Subscription Ended') || $user->active_subscription->status == 'Cancelled')
                                     <div class="py-1 px-3 text-sm w-fit bg-red-100 ring-1 ring-red-500 text-red-500 rounded-full">
-                                        Unsubscribed
+                                        Non-member
                                     </div>
                                 @else
                                     <div class="flex items-center gap-2 text-sm">
