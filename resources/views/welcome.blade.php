@@ -26,7 +26,7 @@
         <div class="w-full flex items-center justify-between">
             <a href="/" class="flex items-center flex-row gap-2">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50">
-                <p>JAPS FITNESS</p>
+                <p class="text-white font-bold">JAPS FITNESS</p>
             </a>
             <div class="flex items-center">
                 @if (Route::has('login'))
