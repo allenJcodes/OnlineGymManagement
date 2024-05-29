@@ -24,8 +24,9 @@
 
     <nav class="bg-background fixed w-full z-20 top-0 left-0 py-2 h-16 flex items-center justify-center 2xl:px-64">
         <div class="w-full flex items-center justify-between">
-            <a href="/" class="flex items-center">
+            <a href="/" class="flex items-center flex-row gap-2">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50">
+                <p>JAPS FITNESS</p>
             </a>
             <div class="flex items-center">
                 @if (Route::has('login'))
