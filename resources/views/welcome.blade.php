@@ -48,7 +48,7 @@
                             </li>
                             <li>
                                 <a href="#faq" class="block py-2 px-4 rounded-md text-white hover:text-yellow-300" aria-current="page">
-                                    FAQ
+                                    FAQs
                                 </a>
                             </li>
                             <li>
