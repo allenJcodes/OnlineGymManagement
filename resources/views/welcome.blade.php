@@ -89,7 +89,7 @@
             <h1 class="text-6xl pb-5 text-white font-bold"> Become <span class="text-yellow-300">Physically Fit</span></h1>
 
             <p class="text-white/80 text-lg pb-5">
-                Welcome to Japs Fitness Gym, an online fitness advocacy dedicated to empowering students to lead healthy and active lifestyle. We understand the imporatnce of phusical well-being in achieving academic success and overall personal growth. Through our virtual platform, we aim to inspire, educate, and support students in their fitness journey, helping them become the best versions of themselves. Join us we embark on a transformative fitness adventure together!
+                Welcome to Japs Fitness Gym, an online fitness advocacy dedicated to empowering students to lead healthy and active lifestyle. We understand the imporatnce of physical well-being in achieving academic success and overall personal growth. Through our virtual platform, we aim to inspire, educate, and support students in their fitness journey, helping them become the best versions of themselves. Join us we embark on a transformative fitness adventure together!
             </p>
 
             <a href="{{ route('register') }}">
