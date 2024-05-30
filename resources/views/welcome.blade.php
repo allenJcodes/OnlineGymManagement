@@ -97,8 +97,8 @@
             </a>
         </div>
 
-        <div class="absolute flex items-center right-0 bottom-0 justify-center w-full" >
-            <img  class="aspect-video w-full" src="{{ asset('images/home-image.jpg') }}" alt="">
+        <div class="absolute flex items-center right-0 bottom-0 justify-center aspect-video w-full" >
+            <img  class="aspect-[32/18] w-full" src="{{ asset('images/home-image.jpg') }}" alt="">
         </div>
         <div class="absolute top-0 left-0 w-full h-full bg-background/70"></div>
     </div>
