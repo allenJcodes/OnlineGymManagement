@@ -67,7 +67,7 @@
                                     <div class="flex items-center">
                                         @if(!$user->active_subscription)
                                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-                                            Unsubscribed
+                                            Non-member
                                         @elseif ($user->active_subscription->status == 'Pending')
                                             <div class="h-2.5 w-2.5 rounded-full bg-orange-500 mr-2"></div>
                                             Verifying
